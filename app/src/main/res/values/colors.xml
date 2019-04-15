@@ -3,4 +3,12 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+
+    <!-- 1st Gradient color -->
+    <color name="colorPurple_A400">#41B6E6</color>
+    <color name="colorPurple_900">#4A148C</color>
+    <!-- ./ 1st Gradient color -->
+
+    <!-- Simple colors -->
+    <color name="white">#FFFFFF</color>
 </resources>
