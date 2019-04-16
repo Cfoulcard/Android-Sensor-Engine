@@ -16,7 +16,7 @@
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:fontFamily="@font/anton_regular"
-        android:text="Sensor Selection"
+        android:text="Sensor Select"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
