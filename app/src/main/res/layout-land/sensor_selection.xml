@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/drawable_gradient"
+    tools:context=".MainActivity"
+    >
+
+
+    <TextView
+        android:id="@+id/sensorselecttext"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:layout_marginRight="24dp"
+        android:fontFamily="@font/anton_regular"
+        android:text="Sensor Select"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.256" />
+
+    <ImageView
+        android:id="@+id/batteryIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/speedIcon"
+        app:layout_constraintStart_toEndOf="@+id/ramIcon"
+        app:layout_constraintTop_toTopOf="@+id/ramIcon"
+        app:srcCompat="@drawable/battery_icon" />
+
+    <ImageView
+        android:id="@+id/soundIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sensorselecttext"
+        app:srcCompat="@drawable/sound_icon" />
+
+    <ImageView
+        android:id="@+id/tempIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toStartOf="@+id/lightIcon"
+        app:layout_constraintStart_toEndOf="@+id/soundIcon"
+        app:layout_constraintTop_toTopOf="@+id/soundIcon"
+        app:srcCompat="@drawable/temp_icon" />
+
+    <ImageView
+        android:id="@+id/ramIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/soundIcon"
+        app:srcCompat="@drawable/ram_icon" />
+
+    <ImageView
+        android:id="@+id/lightIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/tempIcon"
+        app:srcCompat="@drawable/light_icon" />
+
+    <ImageView
+        android:id="@+id/speedIcon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginEnd="64dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/batteryIcon"
+        app:srcCompat="@drawable/speed_icon" />
+
+</android.support.constraint.ConstraintLayout>
