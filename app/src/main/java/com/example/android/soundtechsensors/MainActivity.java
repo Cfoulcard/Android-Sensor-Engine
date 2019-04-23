@@ -4,8 +4,8 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnContextClickListener;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -17,16 +17,12 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * When tapping the sound icon, this will open the Sound Sensor Activity
+     * Go to the sensor_selection.xml to change the onClick values
      */
 
-    /**
-    ImageView soundIcon = (ImageView) findViewById(R.id.soundIcon);
-    soundIcon.OnContextClickListener(new View.OnContextClickListener() {
-
-        public void onClick(View view) {
+    public void soundIconIntent(View view) {
         Intent soundIntent = new Intent(this, SoundActivity.class);
-        startActivity(soundIntent);
+       this.startActivity(soundIntent);
+       // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
-    }
-     */
 }
