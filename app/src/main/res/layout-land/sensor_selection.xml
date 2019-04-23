@@ -40,7 +40,7 @@
         app:srcCompat="@drawable/battery_icon" />
 
     <ImageView
-        android:id="@+id/soundIcon"
+        android:id="@+id/soundicon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="64dp"
@@ -56,8 +56,8 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toStartOf="@+id/lightIcon"
-        app:layout_constraintStart_toEndOf="@+id/soundIcon"
-        app:layout_constraintTop_toTopOf="@+id/soundIcon"
+        app:layout_constraintStart_toEndOf="@+id/soundicon"
+        app:layout_constraintTop_toTopOf="@+id/soundicon"
         app:srcCompat="@drawable/temp_icon" />
 
     <ImageView
@@ -67,7 +67,7 @@
         android:layout_marginStart="64dp"
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/soundIcon"
+        app:layout_constraintTop_toBottomOf="@+id/soundicon"
         app:srcCompat="@drawable/ram_icon" />
 
     <ImageView

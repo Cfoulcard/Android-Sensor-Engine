@@ -20,7 +20,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="52sp"
+        android:textSize="42sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -29,18 +29,19 @@
         app:layout_constraintVertical_bias="0.256" />
 
     <ImageView
-        android:id="@+id/soundIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:id="@+id/soundicon"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="32dp"
+        android:onClick="soundIconIntent"
         app:layout_constraintEnd_toStartOf="@+id/tempIcon"
         app:layout_constraintTop_toTopOf="@+id/tempIcon"
         app:srcCompat="@drawable/sound_icon" />
 
     <ImageView
         android:id="@+id/tempIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
@@ -50,8 +51,8 @@
 
     <ImageView
         android:id="@+id/lightIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toEndOf="@+id/tempIcon"
         app:layout_constraintTop_toTopOf="@+id/tempIcon"
@@ -59,8 +60,8 @@
 
     <ImageView
         android:id="@+id/ramIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginEnd="32dp"
         app:layout_constraintEnd_toStartOf="@+id/batteryIcon"
         app:layout_constraintTop_toTopOf="@+id/batteryIcon"
@@ -68,8 +69,8 @@
 
     <ImageView
         android:id="@+id/batteryIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -80,11 +81,19 @@
 
     <ImageView
         android:id="@+id/speedIcon"
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
         android:layout_marginStart="32dp"
         app:layout_constraintStart_toEndOf="@+id/batteryIcon"
         app:layout_constraintTop_toTopOf="@+id/batteryIcon"
         app:srcCompat="@drawable/speed_icon" />
+
+    <ImageView
+        android:id="@+id/hamiconblack"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ham_icon_black" />
 
 </android.support.constraint.ConstraintLayout>
