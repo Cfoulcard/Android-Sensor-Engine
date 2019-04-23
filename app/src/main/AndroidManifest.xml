@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.android.soundtechsensors">
 
+    <!--Add app intent link-->
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,6 +17,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity android:name=".SoundActivity"
+            android:label="Sound Sensor"
+            android:parentActivityName=".MainActivity">
+
         </activity>
     </application>
 
