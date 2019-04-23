@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- This gradient is for the sensor selection background -->
+    <gradient
+        android:angle="90"
+        android:endColor="@color/dark_grey"
+        android:startColor="@color/near_midnight_grey" />
+
+</shape>
