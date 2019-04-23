@@ -8,6 +8,10 @@
     <color name="sky_blue">#41B6E6</color>
     <color name="royal_purple">#4A148C</color>
 
+    <!-- Individual Sensor Gradient Color -->
+    <color name="dark_grey">#393939</color>
+    <color name="near_midnight_grey">#171717</color>
+
     <!-- Simple colors -->
     <color name="white">#FFFFFF</color>
 </resources>
