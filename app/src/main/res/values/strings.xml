@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">Sound Tech Sensors</string>
+
+    <!--Sensor Select String Infomation-->
+    <string name="sensor_select">Sensor Select</string>
+    <string name="sound_button">Sound Button</string>
+    <string name="temp_button">Temp Button</string>
+    <string name="light_button">LightButton</string>
+    <string name="ram_button">Ram Button</string>
+    <string name="battery_button">Battery Button</string>
+    <string name="speed_button">Speed Button</string>
+    <string name="ham_icon_black">Black Ham Button</string>
+    <string name="ham_icon_white">White Ham Button</string>
+
+    <!--Individual Sensor Activity String Information-->
+    <string name="sound_sensor">Sound Sensor</string>
+    <string name="sensitivity">Sensitivity</string>
+    <string name="db">0 dB</string>
+    <string name="sound">Sound</string>
+    <string name="sound_logo">Sound Logo</string>
 </resources>
