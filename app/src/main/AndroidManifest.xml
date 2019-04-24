@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.android.soundtechsensors">
 
     <!--Add app intent link-->
@@ -10,7 +11,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -19,11 +21,13 @@
             </intent-filter>
         </activity>
 
+        <!--Sound Sensor Activity-->
         <activity android:name=".SoundActivity"
             android:label="Sound Sensor"
             android:parentActivityName=".MainActivity">
 
         </activity>
     </application>
+        android:allowBackup="true">
 
 </manifest>
