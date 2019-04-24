@@ -10,13 +10,13 @@
 
 
     <TextView
-        android:id="@+id/sensorselecttext"
+        android:id="@+id/sensor_select_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="24dp"
         android:layout_marginRight="24dp"
         android:fontFamily="@font/anton_regular"
-        android:text="Sensor Select"
+        android:text="@string/sensor_select"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
@@ -29,69 +29,76 @@
         app:layout_constraintVertical_bias="0.256" />
 
     <ImageView
-        android:id="@+id/soundicon"
+        android:id="@+id/sound_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginEnd="32dp"
+        android:contentDescription="@string/sound_button"
         android:onClick="soundIconIntent"
-        app:layout_constraintEnd_toStartOf="@+id/tempIcon"
-        app:layout_constraintTop_toTopOf="@+id/tempIcon"
+        app:layout_constraintEnd_toStartOf="@+id/temp_icon"
+        app:layout_constraintTop_toTopOf="@+id/temp_icon"
         app:srcCompat="@drawable/sound_icon" />
 
     <ImageView
-        android:id="@+id/tempIcon"
+        android:id="@+id/temp_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginTop="32dp"
+        android:contentDescription="@string/temp_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sensorselecttext"
+        app:layout_constraintTop_toBottomOf="@+id/sensor_select_text"
         app:srcCompat="@drawable/temp_icon" />
 
     <ImageView
-        android:id="@+id/lightIcon"
+        android:id="@+id/light_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="32dp"
-        app:layout_constraintStart_toEndOf="@+id/tempIcon"
-        app:layout_constraintTop_toTopOf="@+id/tempIcon"
+        android:contentDescription="@string/light_button"
+        app:layout_constraintStart_toEndOf="@+id/temp_icon"
+        app:layout_constraintTop_toTopOf="@+id/temp_icon"
         app:srcCompat="@drawable/light_icon" />
 
     <ImageView
-        android:id="@+id/ramIcon"
+        android:id="@+id/ram_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginEnd="32dp"
-        app:layout_constraintEnd_toStartOf="@+id/batteryIcon"
-        app:layout_constraintTop_toTopOf="@+id/batteryIcon"
+        android:contentDescription="@string/ram_button"
+        app:layout_constraintEnd_toStartOf="@+id/battery_icon"
+        app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/ram_icon" />
 
     <ImageView
-        android:id="@+id/batteryIcon"
+        android:id="@+id/battery_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/battery_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tempIcon"
+        app:layout_constraintTop_toBottomOf="@+id/temp_icon"
         app:srcCompat="@drawable/battery_icon" />
 
     <ImageView
-        android:id="@+id/speedIcon"
+        android:id="@+id/speed_icon"
         android:layout_width="72dp"
         android:layout_height="72dp"
         android:layout_marginStart="32dp"
-        app:layout_constraintStart_toEndOf="@+id/batteryIcon"
-        app:layout_constraintTop_toTopOf="@+id/batteryIcon"
+        android:contentDescription="@string/speed_button"
+        app:layout_constraintStart_toEndOf="@+id/battery_icon"
+        app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/speed_icon" />
 
     <ImageView
-        android:id="@+id/hamiconblack"
+        android:id="@+id/ham_icon_black"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:contentDescription="@string/ham_icon_black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ham_icon_black" />
