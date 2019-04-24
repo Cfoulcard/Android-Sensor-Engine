@@ -9,83 +9,85 @@
     tools:context=".SoundActivity">
 
     <ImageView
-        android:id="@+id/imageView5"
+        android:id="@+id/sound_logo"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
+        android:contentDescription="@string/sound_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
         app:srcCompat="@drawable/sound_icon_2" />
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/white_ham_button"
         android:layout_width="72dp"
         android:layout_height="72dp"
+        android:contentDescription="@string/ham_icon_white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ham_icon_white" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/sound_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/anton_regular"
-        android:text="Sound Sensor"
+        android:text="@string/sound_sensor"
         android:textColor="@color/white"
         android:textSize="42sp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toStartOf="@+id/white_ham_button"
         app:layout_constraintHorizontal_bias="0.813"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/sensitivity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="Sensitivity"
+        android:text="@string/sensitivity"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView5" />
+        app:layout_constraintTop_toTopOf="@+id/sound_logo" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/db"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="32dp"
         android:fontFamily="@font/anton_regular"
-        android:text="0 dB"
+        android:text="@string/db"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintBottom_toBottomOf="@+id/sound_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="Sound"
+        android:text="@string/sound"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+        app:layout_constraintTop_toBottomOf="@+id/sound_logo" />
 
 </android.support.constraint.ConstraintLayout>
