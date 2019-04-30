@@ -28,6 +28,6 @@
 
         </activity>
     </application>
-        android:allowBackup="true">
+
 
 </manifest>
