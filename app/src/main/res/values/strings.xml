@@ -1,6 +1,12 @@
 <resources>
     <string name="app_name">Sound Tech Sensors</string>
 
+    <!--Navigation Menu String Information-->
+    <string name="preferences">Preferences</string>
+    <string name="about">About</string>
+    <string name="credits">Credits</string>
+    <string name="premium">Premium</string>
+
     <!--Sensor Select String Infomation-->
     <string name="sensor_select">Sensor Select</string>
     <string name="sound_button">Sound Button</string>
