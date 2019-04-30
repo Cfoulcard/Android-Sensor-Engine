@@ -94,13 +94,4 @@
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/speed_icon" />
 
-    <ImageView
-        android:id="@+id/ham_icon_black"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
-        android:contentDescription="@string/ham_icon_black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ham_icon_black" />
-
 </android.support.constraint.ConstraintLayout>

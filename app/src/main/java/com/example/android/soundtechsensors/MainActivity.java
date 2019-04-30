@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
+//TODO: Make going into other Activities responsive
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
