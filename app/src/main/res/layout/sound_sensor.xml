@@ -81,4 +81,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sound_logo" />
 
+    <Button
+        android:id="@+id/change_sound"
+        style="@android:style/Widget.Material.Button"
+        android:layout_width="200dp"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="playSound"
+        android:text="Fire!"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/sound" />
+
 </android.support.constraint.ConstraintLayout>
