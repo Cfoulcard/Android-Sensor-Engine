@@ -8,6 +8,7 @@
     android:background="@drawable/drawable_gradient_dark"
     tools:context=".SoundActivity">
 
+
     <ImageView
         android:id="@+id/sound_logo"
         android:layout_width="300dp"
