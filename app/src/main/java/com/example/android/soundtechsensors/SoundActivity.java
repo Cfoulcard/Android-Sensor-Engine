@@ -3,18 +3,23 @@ package com.example.android.soundtechsensors;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
+import android.widget.Toast;
 
 public class SoundActivity extends AppCompatActivity {
 
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
     SoundDetector soundDetector;
+
+    //Used for record audio permission
+    private int AUDIO_RECORD_REQUEST_CODE;
 
 
 /* Here, this is the current activity
@@ -49,6 +54,40 @@ if (ContextCompat.checkSelfPermission(this,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
+
+        //Used to test request audio recording permission
+        if(!isRecordAudioPermissionGranted())
+        {
+            Toast.makeText(getApplicationContext(), "Need to request permission", Toast.LENGTH_SHORT).show();
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    //Upon opening this activity user will be promoted to allow audio recording
+    //TODO Update Build Version
+    private boolean isRecordAudioPermissionGranted()
+    {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
+                    PackageManager.PERMISSION_GRANTED) {
+                // put your code for Version>=Marshmallow
+                return true;
+            } else {
+                if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
+                    Toast.makeText(this,
+                            "App required access to audio", Toast.LENGTH_SHORT).show();
+                }
+                requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO
+                },AUDIO_RECORD_REQUEST_CODE);
+                return false;
+            }
+
+        } else {
+            // put your code for Version < Marshmallow
+            return true;
+        }
     }
 
     //This will add functionality to the menu button within the action bar
@@ -58,18 +97,10 @@ if (ContextCompat.checkSelfPermission(this,
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
     }
-
-
-
+    
     //Sound Test
     public void playSound(View v) {
         mp.start();
-    }
-
-    {
-        if (soundDetector != null) {
-            soundDetector.start();
-        }
     }
 
 }
