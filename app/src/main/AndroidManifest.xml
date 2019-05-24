@@ -31,6 +31,7 @@
             </intent-filter>
         </activity>
 
+        <!-- TODO: Add other sensor activities -->
         <!--Sound Sensor Activity-->
         <activity
             android:name=".SoundActivity"
