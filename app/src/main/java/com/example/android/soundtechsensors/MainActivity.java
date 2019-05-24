@@ -33,7 +33,37 @@ public class MainActivity extends AppCompatActivity {
 
     public void soundIconIntent(View view) {
         Intent soundIntent = new Intent(this, SoundActivity.class);
-       this.startActivity(soundIntent);
-       // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void tempIconIntent(View view) {
+        Intent soundIntent = new Intent(this, SoundActivity.class);
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void lightIconIntent(View view) {
+        Intent soundIntent = new Intent(this, SoundActivity.class);
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void ramIconIntent(View view) {
+        Intent soundIntent = new Intent(this, SoundActivity.class);
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void batteryIconIntent(View view) {
+        Intent soundIntent = new Intent(this, SoundActivity.class);
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void speedIconIntent(View view) {
+        Intent soundIntent = new Intent(this, SoundActivity.class);
+        this.startActivity(soundIntent);
+        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 }
