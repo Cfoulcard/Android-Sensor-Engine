@@ -45,6 +45,7 @@
         android:layout_height="72dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/temp_button"
+        android:onClick="tempIconIntent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -57,6 +58,7 @@
         android:layout_height="72dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/light_button"
+        android:onClick="lightIconIntent"
         app:layout_constraintStart_toEndOf="@+id/temp_icon"
         app:layout_constraintTop_toTopOf="@+id/temp_icon"
         app:srcCompat="@drawable/light_icon" />
@@ -67,6 +69,7 @@
         android:layout_height="72dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/ram_button"
+        android:onClick="ramIconIntent"
         app:layout_constraintEnd_toStartOf="@+id/battery_icon"
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/ram_icon" />
@@ -79,6 +82,7 @@
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/battery_button"
+        android:onClick="batteryIconIntent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temp_icon"
@@ -90,6 +94,7 @@
         android:layout_height="72dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/speed_button"
+        android:onClick="speedIconIntent"
         app:layout_constraintStart_toEndOf="@+id/battery_icon"
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/speed_icon" />
