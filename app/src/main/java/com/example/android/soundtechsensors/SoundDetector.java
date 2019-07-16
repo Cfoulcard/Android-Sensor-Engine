@@ -1,5 +1,6 @@
 package com.example.android.soundtechsensors;
 
+import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 
 import java.io.IOException;
@@ -10,7 +11,9 @@ public class SoundDetector {
 
     private MediaRecorder mRecorder = null;
 
-    public void start() {
+
+
+    void start() {
         if (mRecorder == null) {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -19,6 +22,8 @@ public class SoundDetector {
             mRecorder.setOutputFile("/dev/null");
             try {
                 mRecorder.prepare();
+            } catch (IllegalStateException e) {
+                e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -41,4 +46,5 @@ public class SoundDetector {
             return 0;
 
     }
+
 }
