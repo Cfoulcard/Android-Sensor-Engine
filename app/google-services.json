@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1030019902502",
+    "firebase_url": "https://sound-tech-sensors.firebaseio.com",
+    "project_id": "sound-tech-sensors",
+    "storage_bucket": "sound-tech-sensors.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030019902502:android:5841263859910185",
+        "android_client_info": {
+          "package_name": "com.example.android.soundtechsensors"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030019902502-5rt6dpbheo9f623bcds052ef7bc4n9f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.soundtechsensors",
+            "certificate_hash": "2f5227234f8f7cdf1e39e9d824af1f87408dd219"
+          }
+        },
+        {
+          "client_id": "1030019902502-76hddd1c94l5i0fleff3s6pt6dlnkdqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRGXTgZhxnmtTUJnAEc0rbymReN0AVhKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030019902502-76hddd1c94l5i0fleff3s6pt6dlnkdqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
