@@ -1,7 +1,11 @@
 package com.example.android.soundtechsensors;
 
+import android.media.AudioFormat;
+import android.media.AudioRecord;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
+import android.util.Log;
+import android.widget.Toast;
 
 import java.io.IOException;
 
@@ -13,7 +17,7 @@ public class SoundDetector {
 
 
 
-    void start() {
+    public void start() {
         if (mRecorder == null) {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -34,17 +38,19 @@ public class SoundDetector {
     public void stop() {
         if (mRecorder != null) {
             mRecorder.stop();
+            mRecorder.reset();
             mRecorder.release();
             mRecorder = null;
         }
     }
 
+
+
     public double getAmplitude() {
         if (mRecorder != null)
-            return  mRecorder.getMaxAmplitude();
-        else
+            return mRecorder.getMaxAmplitude();
+        else {
             return 0;
-
+        }
     }
-
 }
