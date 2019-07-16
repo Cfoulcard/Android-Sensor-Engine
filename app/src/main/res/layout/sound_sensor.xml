@@ -100,17 +100,52 @@
     <Button
         android:id="@+id/sound_recorder_btn"
         style="@android:style/Widget.Material.Button"
-        android:layout_width="200dp"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:onClick="stopRecordingSound"
+        android:text="Stop"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sound_recorder_btn2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/sound_recorder_btn2"
+        app:layout_constraintTop_toTopOf="@+id/sound_recorder_btn2" />
+
+    <Button
+        android:id="@+id/sound_recorder_btn2"
+        style="@android:style/Widget.Material.Button"
+        android:layout_width="wrap_content"
         android:layout_height="64dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:onClick="recordSound"
         android:text="Record"
         android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_sound" />
+        app:layout_constraintTop_toBottomOf="@+id/change_sound"
+        app:layout_constraintVertical_bias="0.263" />
+
+    <Button
+        android:id="@+id/sound_recorder_btn3"
+        style="@android:style/Widget.Material.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="64dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:onClick="getamp"
+        android:text="Amp"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="@+id/sound_recorder_btn2"
+        app:layout_constraintEnd_toStartOf="@+id/sound_recorder_btn2"
+        app:layout_constraintHorizontal_bias="0.482"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/sound_recorder_btn2"
+        app:layout_constraintVertical_bias="0.0" />
 
 </android.support.constraint.ConstraintLayout>
