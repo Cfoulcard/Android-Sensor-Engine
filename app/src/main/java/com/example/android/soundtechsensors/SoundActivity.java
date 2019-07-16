@@ -54,9 +54,12 @@ if (ContextCompat.checkSelfPermission(this,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
+
+        //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
-        //TODO if user denies permission recast the prompt upon reopening activity
+        //TODO if user denies permission recast the prompt upon reopening activity ✔
+        //TODO provide explanation for the audio request
 
         // This section is used to request permission to utilize the user's microphone and record audio
         // Refer to https://developer.android.com/training/permissions/requesting.html#java
@@ -83,12 +86,13 @@ if (ContextCompat.checkSelfPermission(this,
             // Permission has already been granted
         }
 
+
+
         //Used to test request audio recording permission as a toast message
         if(!isRecordAudioPermissionGranted())
         {
             Toast.makeText(getApplicationContext(), "Need to request permission", Toast.LENGTH_SHORT).show();
-        }
-        else{
+        } else {
             Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
         }
     }
@@ -97,7 +101,7 @@ if (ContextCompat.checkSelfPermission(this,
     //TODO Update Build Version
     private boolean isRecordAudioPermissionGranted()
     {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
                     PackageManager.PERMISSION_GRANTED) {
                 // put your code for Version>=Marshmallow
@@ -126,7 +130,7 @@ if (ContextCompat.checkSelfPermission(this,
         return true;
     }
     
-    //Sound Test
+    //Sound Test provided by MediaPlayer
     public void playSound(View v) {
         mp.start();
     }
