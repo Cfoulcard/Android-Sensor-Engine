@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
@@ -34,14 +35,17 @@ public class SoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
 
+
+
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
-
+        
 
         //TODO if user denies permission recast the prompt upon reopening activity ✔
+        //TODO prevent app from crashing if user deny's permissions and clicks record button
         //TODO provide explanation for the audio request
 
         // This section is used to request permission to utilize the user's microphone and record audio
@@ -122,4 +126,14 @@ public class SoundActivity extends AppCompatActivity {
         soundDetector.start();
     }
 
-}
+    public void stopRecordingSound(View v) {
+        soundDetector.stop();
+    }
+
+    private static final String TAG = "MyActivity";
+
+    public void getamp(View v) {
+        Log.i(TAG, "getAmplitude: ");
+        soundDetector.getAmplitude();
+        }
+    }
