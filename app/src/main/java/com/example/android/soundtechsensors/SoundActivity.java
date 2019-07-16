@@ -12,51 +12,34 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.analytics.FirebaseAnalytics;
+
+
 public class SoundActivity extends AppCompatActivity {
 
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
-    SoundDetector soundDetector;
-    String audioPermissionExplanation;
+
+    //Creates an instance of the SoundDetector Class. Will be used to access its methods
+    SoundDetector soundDetector = new SoundDetector();
+
+    private FirebaseAnalytics mFirebaseAnalytics;
 
     //Used for record audio permission
-    private int AUDIO_RECORD_REQUEST_CODE;
+    public static final int AUDIO_RECORD_REQUEST_CODE = 122;
     public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 123;
-
-    /* Here, this is the current activity
-if (ContextCompat.checkSelfPermission(this,
-    Manifest.permission.RECORD_AUDIO)
-            != PackageManager.PERMISSION_GRANTED) {
-
-        // Permission is not granted
-        // Should we show an explanation?
-        if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                Manifest.permission.RECORD_AUDIO)) {
-            // Show an explanation to the user *asynchronously* -- don't block
-            // this thread waiting for the user's response! After the user
-            // sees the explanation, try again to request the permission.
-        } else {
-            // No explanation needed; request the permission
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.RECORD_AUDIO},
-                    MY_PERMISSIONS_REQUEST_READ_CONTACTS);
-
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant. The callback method gets the
-            // result of the request.
-        }
-    } else {
-        // Permission has already been granted
-    }
-**/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
 
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
+
 
         //TODO if user denies permission recast the prompt upon reopening activity ✔
         //TODO provide explanation for the audio request
@@ -133,6 +116,10 @@ if (ContextCompat.checkSelfPermission(this,
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {
         mp.start();
+    }
+
+    public void recordSound(View v) {
+        soundDetector.start();
     }
 
 }
