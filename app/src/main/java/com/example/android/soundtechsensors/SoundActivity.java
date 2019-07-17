@@ -3,14 +3,17 @@ package com.example.android.soundtechsensors;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
+import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -22,7 +25,13 @@ public class SoundActivity extends AppCompatActivity {
     MediaPlayer mp;
 
     //Creates an instance of the SoundDetector Class. Will be used to access its methods
-    SoundDetector soundDetector = new SoundDetector();
+   // SoundDetector soundDetector = new SoundDetector();
+
+    TextView currentdb;
+    MediaRecorder mRecorder;
+    Thread runner;
+    private static double mEMA = 0.0;
+    static final private double EMA_FILTER = 0.6;
 
     private FirebaseAnalytics mFirebaseAnalytics;
 
@@ -30,21 +39,30 @@ public class SoundActivity extends AppCompatActivity {
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
     public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 123;
 
+    final Runnable updater = new Runnable(){
+
+        public void run(){
+            updateTv();
+        };
+    };
+    final Handler mHandler = new Handler();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
 
-
+        currentdb = (TextView) findViewById(R.id.current_decibel);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
-        
+
 
         //TODO if user denies permission recast the prompt upon reopening activity ✔
+        //TODO make dB accurate and plug in to the dB meter
         //TODO prevent app from crashing if user deny's permissions and clicks record button
         //TODO provide explanation for the audio request
 
@@ -82,7 +100,104 @@ public class SoundActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////////
+
+        if (runner == null)
+        {
+            runner = new Thread(){
+                public void run()
+                {
+                    while (runner != null)
+                    {
+                        try
+                        {
+                            Thread.sleep(1000);
+                            Log.i("Noise", "Tock");
+                        } catch (InterruptedException e) { };
+                        mHandler.post(updater);
+                    }
+                }
+            };
+            runner.start();
+            Log.d("Noise", "start runner()");
+        }
     }
+
+    public void onResume()
+    {
+        super.onResume();
+        startRecorder();
+    }
+
+    public void onPause()
+    {
+        super.onPause();
+        stopRecorder();
+    }
+
+    public void startRecorder(){
+        if (mRecorder == null)
+        {
+            mRecorder = new MediaRecorder();
+            mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
+            mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
+            mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mRecorder.setOutputFile("/dev/null");
+            try
+            {
+                mRecorder.prepare();
+            }catch (java.io.IOException ioe) {
+                android.util.Log.e("[Monkey]", "IOException: " +
+                        android.util.Log.getStackTraceString(ioe));
+
+            }catch (java.lang.SecurityException e) {
+                android.util.Log.e("[Monkey]", "SecurityException: " +
+                        android.util.Log.getStackTraceString(e));
+            }
+            try
+            {
+                mRecorder.start();
+            }catch (java.lang.SecurityException e) {
+                android.util.Log.e("[Monkey]", "SecurityException: " +
+                        android.util.Log.getStackTraceString(e));
+            }
+
+            //mEMA = 0.0;
+        }
+
+    }
+    public void stopRecorder() {
+        if (mRecorder != null) {
+            mRecorder.stop();
+            mRecorder.release();
+            mRecorder = null;
+        }
+    }
+
+    //For more detail change Integer to Double
+    public void updateTv(){
+        currentdb.setText(Integer.toString((getAmplitudeEMA())) + " dB");
+    }
+
+
+/*    public int soundDb(int ampl) {
+        return (int) (20 * Math.log10(getAmplitudeEMA() / ampl));
+    }*/
+
+    public double getAmplitude() {
+        if (mRecorder != null)
+            return  (mRecorder.getMaxAmplitude());
+        else
+            return 0;
+    }
+
+    public int getAmplitudeEMA() {
+        int amp = (int) getAmplitude();
+        mEMA = EMA_FILTER * amp + (1 - EMA_FILTER) * mEMA;
+        return (int)  mEMA;
+    }
+
 
     //Upon opening this activity user will be promoted to allow audio recording
     //TODO Update Build Version
@@ -116,24 +231,37 @@ public class SoundActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
     }
-    
+
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {
         mp.start();
     }
 
-    public void recordSound(View v) {
-        soundDetector.start();
+/*    public void recordSound(View v) {
+        soundDetector.startRecorder();
     }
 
     public void stopRecordingSound(View v) {
-        soundDetector.stop();
+        soundDetector.stopRecorder();
     }
 
     private static final String TAG = "MyActivity";
 
     public void getamp(View v) {
         Log.i(TAG, "getAmplitude: ");
-        soundDetector.getAmplitude();
-        }
-    }
+        soundDetector.getAmplitude();*/
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+// Helpful Resources
+
+    //Measure dB
+    //https://stackoverflow.com/questions/15693990/measuring-decibels-with-mobile-phone
+
+
+
+
+
+
+
+}
