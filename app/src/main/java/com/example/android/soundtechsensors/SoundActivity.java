@@ -62,8 +62,12 @@ public class SoundActivity extends AppCompatActivity {
 
 
         //TODO if user denies permission recast the prompt upon reopening activity ✔
+        //TODO Make XML work on any device
         //TODO make dB accurate and plug in to the dB meter
         //TODO prevent app from crashing if user deny's permissions and clicks record button
+        //TODO create a slide bar to have the user configure how loud the dB should be to make a sound
+        //TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
+        //TODO Enable the user to use their own custom media
         //TODO provide explanation for the audio request
 
         // This section is used to request permission to utilize the user's microphone and record audio
@@ -112,8 +116,8 @@ public class SoundActivity extends AppCompatActivity {
                     {
                         try
                         {
-                            Thread.sleep(1000);
-                            Log.i("Noise", "Tock");
+                            Thread.sleep(500);
+                           // Log.i("Noise", "Tock");
                         } catch (InterruptedException e) { };
                         mHandler.post(updater);
                     }
@@ -187,7 +191,7 @@ public class SoundActivity extends AppCompatActivity {
 
     public double getAmplitude() {
         if (mRecorder != null)
-            return  (mRecorder.getMaxAmplitude());
+            return  (mRecorder.getMaxAmplitude()/50);
         else
             return 0;
     }
@@ -235,6 +239,7 @@ public class SoundActivity extends AppCompatActivity {
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {
         mp.start();
+
     }
 
 /*    public void recordSound(View v) {
