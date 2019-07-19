@@ -64,7 +64,7 @@ public class SoundActivity extends AppCompatActivity {
         //TODO if user denies permission recast the prompt upon reopening activity ✔
         //TODO Make XML work on any device
         //TODO make dB accurate and plug in to the dB meter
-        //TODO prevent app from crashing if user deny's permissions and clicks record button
+        //TODO prevent app from crashing if user denies permissions
         //TODO create a slide bar to have the user configure how loud the dB should be to make a sound
         //TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
         //TODO Enable the user to use their own custom media
@@ -181,7 +181,7 @@ public class SoundActivity extends AppCompatActivity {
 
     //For more detail change Integer to Double
     public void updateTv(){
-        currentdb.setText(Integer.toString((getAmplitudeEMA())) + " dB");
+        currentdb.setText(Integer.toString((getAmplitudeEMA())) + " Current dB");
     }
 
 
