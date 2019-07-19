@@ -57,13 +57,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/db"
         android:textColor="@color/white"
         android:textSize="36sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sound_logo"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/change_sound" />
+
+    <TextView
+        android:id="@+id/configured_decibel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="28dp"
+        android:fontFamily="@font/anton_regular"
+        android:text="@string/db"
+        android:textColor="@color/white"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/sound"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -97,52 +114,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sound" />
 
-    <Button
-        android:id="@+id/sound_recorder_btn"
-        style="@android:style/Widget.Material.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Stop"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sound_recorder_btn2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/sound_recorder_btn2"
-        app:layout_constraintTop_toTopOf="@+id/sound_recorder_btn2" />
-
-    <Button
-        android:id="@+id/sound_recorder_btn2"
-        style="@android:style/Widget.Material.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+    <SeekBar
+        android:id="@+id/seekBar2"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="0dp"
+        android:layout_height="24dp"
         android:layout_marginBottom="8dp"
-        android:text="Record"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/change_sound"
-        app:layout_constraintVertical_bias="0.263" />
-
-    <Button
-        android:id="@+id/sound_recorder_btn3"
-        style="@android:style/Widget.Material.Button"
-        android:layout_width="wrap_content"
-        android:layout_height="64dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="Amp"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sound_recorder_btn2"
-        app:layout_constraintEnd_toStartOf="@+id/sound_recorder_btn2"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sound_recorder_btn2"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintBottom_toTopOf="@+id/configured_decibel"
+        app:layout_constraintEnd_toEndOf="@+id/sound_logo"
+        app:layout_constraintStart_toStartOf="@+id/sound_logo"
+        app:layout_constraintTop_toBottomOf="@+id/sensitivity" />
 
 </android.support.constraint.ConstraintLayout>
