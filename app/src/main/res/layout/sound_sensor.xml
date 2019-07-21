@@ -54,7 +54,7 @@
         app:layout_constraintTop_toTopOf="@+id/sound_logo" />
 
     <SeekBar
-        android:id="@+id/seekBar2"
+        android:id="@+id/decibel_seekbar"
         style="@style/Widget.AppCompat.SeekBar.Discrete"
         android:layout_width="0dp"
         android:layout_height="72dp"
