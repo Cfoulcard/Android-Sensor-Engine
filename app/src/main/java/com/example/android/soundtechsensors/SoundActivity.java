@@ -13,10 +13,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+//TODO if user denies permission recast the prompt upon reopening activity ✔
+//TODO Make XML work on any device
+//TODO make dB accurate and plug in to the dB meter
+//TODO prevent app from crashing if user denies permissions
+//TODO create a slide bar to have the user configure how loud the dB should be to make a sound
+//TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
+//TODO Enable the user to use their own custom media
+//TODO provide explanation for the audio request
 
 
 public class SoundActivity extends AppCompatActivity {
@@ -27,6 +37,7 @@ public class SoundActivity extends AppCompatActivity {
     //Creates an instance of the SoundDetector Class. Will be used to access its methods
    // SoundDetector soundDetector = new SoundDetector();
 
+    TextView configuredDecibel;
     TextView currentdb;
     MediaRecorder mRecorder;
     Thread runner;
@@ -52,23 +63,44 @@ public class SoundActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sound_sensor);
 
-        currentdb = (TextView) findViewById(R.id.current_decibel);
-
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        configuredDecibel = (TextView) findViewById(R.id.configured_decibel);
+        currentdb = (TextView) findViewById(R.id.current_decibel);
+        SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
+        decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
+        decibelSeekbar.setProgress(50); // 50 default progress value
+        configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
+
+// https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
+        decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int pval = 0;
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress,
+                                          boolean fromUser) {
+                //Toast.makeText(getApplicationContext(),"seekbar progress: "+progress, Toast.LENGTH_SHORT).show();
+                pval = progress;
+            }
 
-        //TODO if user denies permission recast the prompt upon reopening activity ✔
-        //TODO Make XML work on any device
-        //TODO make dB accurate and plug in to the dB meter
-        //TODO prevent app from crashing if user denies permissions
-        //TODO create a slide bar to have the user configure how loud the dB should be to make a sound
-        //TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
-        //TODO Enable the user to use their own custom media
-        //TODO provide explanation for the audio request
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                configuredDecibel.setText(pval + seekBar.getMax());
+
+            }
+
+        });
+
+
 
         // This section is used to request permission to utilize the user's microphone and record audio
         // Refer to https://developer.android.com/training/permissions/requesting.html#java
@@ -178,6 +210,12 @@ public class SoundActivity extends AppCompatActivity {
             mRecorder = null;
         }
     }
+
+
+
+ /*   public void setConfiguredDecibel() {
+        configuredDecibel.setText(onProgressChanged());
+    }*/
 
     //For more detail change Integer to Double
     public void updateTv(){
