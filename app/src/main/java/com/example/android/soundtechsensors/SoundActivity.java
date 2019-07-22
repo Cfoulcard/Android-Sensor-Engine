@@ -44,6 +44,7 @@ public class SoundActivity extends AppCompatActivity {
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
 
+    // Initiate Firebase Analystics
     private FirebaseAnalytics mFirebaseAnalytics;
 
     //Used for record audio permission
@@ -56,7 +57,10 @@ public class SoundActivity extends AppCompatActivity {
             updateTv();
         };
     };
+
     final Handler mHandler = new Handler();
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,19 +70,22 @@ public class SoundActivity extends AppCompatActivity {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
+        //Textviews
         configuredDecibel = (TextView) findViewById(R.id.configured_decibel);
         currentdb = (TextView) findViewById(R.id.current_decibel);
+
+        //Seekbar properties
+        // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
         SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
         decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
         decibelSeekbar.setProgress(50); // 50 default progress value
-        configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
-
-// https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
+       // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
-        decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        //Decibel Seekbar configuration
+        /*decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
@@ -97,8 +104,7 @@ public class SoundActivity extends AppCompatActivity {
                 configuredDecibel.setText(pval + seekBar.getMax());
 
             }
-
-        });
+        });*/
 
 
 
@@ -127,8 +133,6 @@ public class SoundActivity extends AppCompatActivity {
             // Permission has already been granted
         }
 
-
-
         //Used to test request audio recording permission as a toast message
         if(!isRecordAudioPermissionGranted())
         {
@@ -136,8 +140,6 @@ public class SoundActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
         }
-
-        ////////////////////////////////////////////////////////////////////////////////////////////
 
         if (runner == null)
         {
@@ -160,18 +162,25 @@ public class SoundActivity extends AppCompatActivity {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //This section is used to pick up sound from the user's microphone
+
+    //Microphone recording starts
     public void onResume()
     {
         super.onResume();
         startRecorder();
     }
 
+    //Stops microphone from recording when user exits activity
     public void onPause()
     {
         super.onPause();
         stopRecorder();
     }
 
+    //Properties of the microphone
     public void startRecorder(){
         if (mRecorder == null)
         {
@@ -203,6 +212,7 @@ public class SoundActivity extends AppCompatActivity {
         }
 
     }
+
     public void stopRecorder() {
         if (mRecorder != null) {
             mRecorder.stop();
@@ -217,30 +227,33 @@ public class SoundActivity extends AppCompatActivity {
         configuredDecibel.setText(onProgressChanged());
     }*/
 
-    //For more detail change Integer to Double
+ ///////////////////////////////////////////////////////////////////////////////////////////////////
+ //This section controls the decibel properties
+ //For more decibel detail change Integer to Double
     public void updateTv(){
-        currentdb.setText(Integer.toString((getAmplitudeEMA())) + " Current dB");
+        currentdb.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
     }
 
-
-/*    public int soundDb(int ampl) {
+    public int soundDb(double ampl){
         return (int) (20 * Math.log10(getAmplitudeEMA() / ampl));
-    }*/
+    }
 
-    public double getAmplitude() {
+    //Calculates the decibel valve
+    public int getAmplitude() {
         if (mRecorder != null)
-            return  (mRecorder.getMaxAmplitude()/50);
+            return  (mRecorder.getMaxAmplitude()) / 70;
         else
             return 0;
     }
 
-    public int getAmplitudeEMA() {
-        int amp = (int) getAmplitude();
+    public double getAmplitudeEMA() {
+        double amp = getAmplitude();
         mEMA = EMA_FILTER * amp + (1 - EMA_FILTER) * mEMA;
-        return (int)  mEMA;
+        return mEMA;
     }
 
-
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //Record Audio Permission
     //Upon opening this activity user will be promoted to allow audio recording
     //TODO Update Build Version
     private boolean isRecordAudioPermissionGranted()
@@ -266,6 +279,8 @@ public class SoundActivity extends AppCompatActivity {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     //This will add functionality to the menu button within the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -277,22 +292,7 @@ public class SoundActivity extends AppCompatActivity {
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {
         mp.start();
-
     }
-
-/*    public void recordSound(View v) {
-        soundDetector.startRecorder();
-    }
-
-    public void stopRecordingSound(View v) {
-        soundDetector.stopRecorder();
-    }
-
-    private static final String TAG = "MyActivity";
-
-    public void getamp(View v) {
-        Log.i(TAG, "getAmplitude: ");
-        soundDetector.getAmplitude();*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
