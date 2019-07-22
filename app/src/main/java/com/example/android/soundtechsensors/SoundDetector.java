@@ -103,7 +103,7 @@ public class SoundDetector extends SoundActivity {
         }
     }
 
-    public void updateTv(){
+    /*public void updateTv(){
         mStatusView.setText(Double.toString((getAmplitudeEMA())) + " dB");
     }
 
@@ -121,7 +121,7 @@ public class SoundDetector extends SoundActivity {
         double amp =  getAmplitude();
         mEMA = EMA_FILTER * amp + (1.0 - EMA_FILTER) * mEMA;
         return (int) mEMA;
-    }
+    }*/
 
 }
 
