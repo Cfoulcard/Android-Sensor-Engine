@@ -14,6 +14,7 @@ public class MainActivity extends AppCompatActivity {
 
 //TODO: Make going into other Activities responsive
 
+    // Initiate Firebase Analystics
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
