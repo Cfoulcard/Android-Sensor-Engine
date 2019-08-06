@@ -60,6 +60,7 @@
         android:layout_height="72dp"
         android:layout_marginBottom="4dp"
         android:interpolator="@android:interpolator/anticipate"
+        android:max="120"
         android:soundEffectsEnabled="true"
         app:layout_constraintBottom_toTopOf="@+id/configured_decibel"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
