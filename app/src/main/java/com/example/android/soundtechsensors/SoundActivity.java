@@ -19,9 +19,11 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import org.w3c.dom.Text;
+
 //TODO if user denies permission recast the prompt upon reopening activity ✔
 //TODO Make XML work on any device
-//TODO make dB accurate and plug in to the dB meter
+//TODO make dB accurate and plug in to the dB meter ✔
 //TODO prevent app from crashing if user denies permissions
 //TODO create a slide bar to have the user configure how loud the dB should be to make a sound
 //TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
@@ -55,7 +57,7 @@ public class SoundActivity extends AppCompatActivity {
 
         public void run(){
             updateTv();
-        };
+        }
     };
 
     final Handler mHandler = new Handler();
@@ -76,37 +78,36 @@ public class SoundActivity extends AppCompatActivity {
 
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
-        SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
-        decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
-        decibelSeekbar.setProgress(50); // 50 default progress value
-       // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
+        final SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
+      //  decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
+       //decibelSeekbar.getProgress(); // 50 default progress value
+      // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
         //Decibel Seekbar configuration
-        /*decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            int pval = 0;
+      decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
                                           boolean fromUser) {
                 //Toast.makeText(getApplicationContext(),"seekbar progress: "+progress, Toast.LENGTH_SHORT).show();
-                pval = progress;
+                configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
             }
 
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
+                configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
             }
 
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
-                configuredDecibel.setText(pval + seekBar.getMax());
-
+                configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
             }
-        });*/
+        });
 
-
+        ////////////////////////////////////////////////////////////////////////////////////////////
 
         // This section is used to request permission to utilize the user's microphone and record audio
         // Refer to https://developer.android.com/training/permissions/requesting.html#java
@@ -133,14 +134,20 @@ public class SoundActivity extends AppCompatActivity {
             // Permission has already been granted
         }
 
-        //Used to test request audio recording permission as a toast message
-        if(!isRecordAudioPermissionGranted())
+        // Used to test request audio recording permission as a toast message
+ /*       if(!isRecordAudioPermissionGranted())
         {
             Toast.makeText(getApplicationContext(), "Need to request permission", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //This section is used to pick up sound from the user's microphone
+
+        //Adjust milliseconds to change refresh rate of decibel tracker
         if (runner == null)
         {
             runner = new Thread(){
@@ -151,7 +158,7 @@ public class SoundActivity extends AppCompatActivity {
                         try
                         {
                             Thread.sleep(500);
-                           // Log.i("Noise", "Tock");
+                            // Log.i("Noise", "Tock");
                         } catch (InterruptedException e) { };
                         mHandler.post(updater);
                     }
@@ -161,10 +168,6 @@ public class SoundActivity extends AppCompatActivity {
             Log.d("Noise", "start runner()");
         }
     }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //This section is used to pick up sound from the user's microphone
 
     //Microphone recording starts
     public void onResume()
@@ -207,10 +210,7 @@ public class SoundActivity extends AppCompatActivity {
                 android.util.Log.e("[Monkey]", "SecurityException: " +
                         android.util.Log.getStackTraceString(e));
             }
-
-            //mEMA = 0.0;
         }
-
     }
 
     public void stopRecorder() {
@@ -228,28 +228,33 @@ public class SoundActivity extends AppCompatActivity {
     }*/
 
  ///////////////////////////////////////////////////////////////////////////////////////////////////
- //This section controls the decibel properties
+ //This section controls the decibel properties picked up by the microphone
+ //The formula attempts to emulate SPL (Sound Pressure Level)
+ //Read up more at https://www.wikiwand.com/en/Sound_pressure
  //For more decibel detail change Integer to Double
-    public void updateTv(){
-        currentdb.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
+    public void updateTv() {
+        currentdb.setText(Integer.toString((int) soundDb()) + " Current dB");
+
+        //Alternate decibel measurement
+        //currentdb.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
     }
 
-    public int soundDb(double ampl){
-        return (int) (20 * Math.log10(getAmplitudeEMA() / ampl));
+    public int soundDb() {
+        return (int) (20 * Math.log10(getAmplitudeEMA()));
     }
 
     //Calculates the decibel valve
     public int getAmplitude() {
         if (mRecorder != null)
-            return  (mRecorder.getMaxAmplitude()) / 70;
+            return  (mRecorder.getMaxAmplitude());
         else
             return 0;
     }
 
-    public double getAmplitudeEMA() {
-        double amp = getAmplitude();
+    public int getAmplitudeEMA() {
+        int amp = getAmplitude();
         mEMA = EMA_FILTER * amp + (1 - EMA_FILTER) * mEMA;
-        return mEMA;
+        return (int) mEMA;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
