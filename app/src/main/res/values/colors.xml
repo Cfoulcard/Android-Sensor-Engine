@@ -12,6 +12,10 @@
     <color name="dark_grey">#393939</color>
     <color name="near_midnight_grey">#171717</color>
 
+    <!-- Slide Bar Color -->
+    <color name="red">#FF0000</color>
+    <color name="candy_purple">#7700FF</color>
+
     <!-- Simple colors -->
     <color name="white">#FFFFFF</color>
 </resources>
