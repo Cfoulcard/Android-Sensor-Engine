@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -17,9 +16,9 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/sound_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sound_sensor"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/sound_sensor"
         app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
         app:srcCompat="@drawable/sound_icon_2" />
 
@@ -49,25 +48,27 @@
         android:text="@string/sensitivity"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sound_logo"
+        app:layout_constraintStart_toStartOf="@+id/sound_logo"
         app:layout_constraintTop_toTopOf="@+id/sound_logo" />
 
     <SeekBar
         android:id="@+id/decibel_seekbar"
-        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="0dp"
-        android:layout_height="72dp"
-        android:layout_marginBottom="4dp"
+        android:layout_height="14dp"
+        android:background="@drawable/drawable_gradient_slidebar"
         android:interpolator="@android:interpolator/anticipate"
-        android:max="120"
+        android:max="90"
+        android:progressDrawable="@drawable/drawable_gradient_slidebar"
+        android:requiresFadingEdge="horizontal"
         android:soundEffectsEnabled="true"
+        android:thumb="@drawable/thumb_slider"
+        android:thumbOffset="32dp"
         app:layout_constraintBottom_toTopOf="@+id/configured_decibel"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/sound_logo"
-        app:layout_constraintTop_toBottomOf="@+id/sensitivity"
-        app:layout_constraintVertical_bias="0.452" />
+        app:layout_constraintTop_toBottomOf="@+id/sensitivity" />
 
     <TextView
         android:id="@+id/current_decibel"
@@ -80,8 +81,8 @@
         android:text="@string/db"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/change_sound"
+        app:layout_constraintStart_toStartOf="@+id/change_sound"
         app:layout_constraintTop_toBottomOf="@+id/change_sound" />
 
     <TextView
@@ -96,8 +97,8 @@
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintBottom_toTopOf="@+id/sound"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/decibel_seekbar"
+        app:layout_constraintStart_toStartOf="@+id/decibel_seekbar" />
 
     <TextView
         android:id="@+id/sound"
@@ -109,8 +110,8 @@
         android:text="@string/sound"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/configured_decibel"
+        app:layout_constraintStart_toStartOf="@+id/configured_decibel"
         app:layout_constraintTop_toBottomOf="@+id/sound_logo" />
 
     <Button
@@ -124,9 +125,9 @@
         android:onClick="playSound"
         android:text="Fire!"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/sound"
         app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/sound"
         app:layout_constraintTop_toBottomOf="@+id/sound" />
 
 </android.support.constraint.ConstraintLayout>
