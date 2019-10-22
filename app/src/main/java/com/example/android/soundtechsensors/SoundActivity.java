@@ -25,11 +25,9 @@ import org.w3c.dom.Text;
 //TODO Make XML work on any device
 //TODO make dB accurate and plug in to the dB meter ✔
 //TODO prevent app from crashing if user denies permissions
-//TODO create a slide bar to have the user configure how loud the dB should be to make a sound
-//TODO Have a list of sounds the user can choose when the dB reaches the user's dB level
-//TODO Enable the user to use their own custom media
 //TODO provide explanation for the audio request
 
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class SoundActivity extends AppCompatActivity {
 
