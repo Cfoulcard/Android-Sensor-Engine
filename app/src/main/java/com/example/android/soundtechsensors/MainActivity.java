@@ -1,5 +1,6 @@
 package com.example.android.soundtechsensors;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -52,8 +53,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void lightIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
-        this.startActivity(soundIntent);
+        Intent lightIntent = new Intent(this, LightActivity.class);
+        this.startActivity(lightIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
