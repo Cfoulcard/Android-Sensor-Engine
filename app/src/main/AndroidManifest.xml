@@ -41,6 +41,14 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!--Light Sensor Activity-->
+        <activity
+            android:name=".LightActivity"
+            android:label="Light Sensor"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+
     </application>
 
 
