@@ -73,7 +73,7 @@ public class SoundActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //Textviews
-        configuredDecibel = (TextView) findViewById(R.id.configured_decibel);
+        configuredDecibel = (TextView) findViewById(R.id.current_decibel);
         currentdb = (TextView) findViewById(R.id.current_decibel);
 
         //Seekbar properties
@@ -233,7 +233,7 @@ public class SoundActivity extends AppCompatActivity {
  //Read up more at https://www.wikiwand.com/en/Sound_pressure
  //For more decibel detail change Integer to Double
     public void updateTv() {
-        currentdb.setText(Integer.toString((int) soundDb()) + " Current dB");
+        configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
 
         //Alternate decibel measurement
         //currentdb.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");

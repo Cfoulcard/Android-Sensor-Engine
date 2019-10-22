@@ -21,6 +21,7 @@
     <!--Individual Sensor Activity String Information-->
     <string name="sound_sensor">Sound Sensor</string>
     <string name="sensitivity">Sensitivity</string>
+    <string name="decibels">Decibels</string>
     <string name="db">0 dB</string>
     <string name="sound">Sound</string>
     <string name="sound_logo">Sound Logo</string>

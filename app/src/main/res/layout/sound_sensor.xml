@@ -38,14 +38,14 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/sensitivity"
+        android:id="@+id/decibels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/sensitivity"
+        android:text="@string/decibels"
         android:textColor="@color/white"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
@@ -65,54 +65,36 @@
         android:soundEffectsEnabled="true"
         android:thumb="@drawable/thumb_slider"
         android:thumbOffset="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/configured_decibel"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
         app:layout_constraintStart_toStartOf="@+id/sound_logo"
-        app:layout_constraintTop_toBottomOf="@+id/sensitivity" />
+        app:layout_constraintTop_toBottomOf="@+id/decibels" />
 
     <TextView
         android:id="@+id/current_decibel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="72dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/db"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/change_sound"
-        app:layout_constraintStart_toStartOf="@+id/change_sound"
-        app:layout_constraintTop_toBottomOf="@+id/change_sound" />
-
-    <TextView
-        android:id="@+id/configured_decibel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/anton_regular"
-        android:text="@string/db"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/sound"
-        app:layout_constraintEnd_toEndOf="@+id/decibel_seekbar"
-        app:layout_constraintStart_toStartOf="@+id/decibel_seekbar" />
+        app:layout_constraintBottom_toBottomOf="@+id/sound_logo"
+        app:layout_constraintEnd_toEndOf="@+id/sound_logo"
+        app:layout_constraintStart_toStartOf="@+id/sound_logo"
+        app:layout_constraintTop_toBottomOf="@+id/decibel_seekbar" />
 
     <TextView
         android:id="@+id/sound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/sound"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/configured_decibel"
-        app:layout_constraintStart_toStartOf="@+id/configured_decibel"
-        app:layout_constraintTop_toBottomOf="@+id/sound_logo" />
+        android:visibility="gone"
+        tools:layout_editor_absoluteX="169dp"
+        tools:layout_editor_absoluteY="402dp" />
 
     <Button
         android:id="@+id/change_sound"
@@ -125,6 +107,7 @@
         android:onClick="playSound"
         android:text="Fire!"
         android:textSize="18sp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/sound"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="@+id/sound"
