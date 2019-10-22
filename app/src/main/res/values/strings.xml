@@ -22,6 +22,9 @@
     <string name="sound_sensor">Sound Sensor</string>
     <string name="sensitivity">Sensitivity</string>
     <string name="decibels">Decibels</string>
+    <string name="lux_sensor">Light Sensor</string>
+    <string name="luminosity">Luminosity</string>
+    <string name="lumens">Lumens</string>
     <string name="db">0 dB</string>
     <string name="sound">Sound</string>
     <string name="sound_logo">Sound Logo</string>
