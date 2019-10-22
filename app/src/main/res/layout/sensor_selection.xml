@@ -45,7 +45,7 @@
         android:layout_height="72dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/temp_button"
-        android:onClick="tempIconIntent"
+        android:onClick="lightIconIntent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
