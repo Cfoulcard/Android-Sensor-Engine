@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lux_sensor"
-        app:srcCompat="@drawable/light_icon" />
+        app:srcCompat="@drawable/light_icon_2" />
 
     <TextView
         android:id="@+id/lux_sensor"
@@ -47,12 +47,12 @@
         app:layout_constraintTop_toBottomOf="@+id/lux_sensor" />
 
     <TextView
-        android:id="@+id/current_lumens"
+        android:id="@+id/current_lux"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="140dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/lumens"
+        android:text="@string/lux"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/sound_logo2"
