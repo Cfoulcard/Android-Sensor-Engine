@@ -57,6 +57,8 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity android:name=".SensorActivity" />
+
         <!--Ram Sensor Activity
         <activity
             android:name=".LightActivity"
