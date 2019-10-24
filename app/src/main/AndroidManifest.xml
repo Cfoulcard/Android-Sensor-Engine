@@ -32,7 +32,6 @@
             </intent-filter>
         </activity>
 
-        <!-- TODO: Add other sensor activities -->
         <!--Sound Sensor Activity-->
         <activity
             android:name=".SoundActivity"
@@ -41,6 +40,15 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!--Temperature Sensor Activity
+        <activity
+            android:name=".TemperatureActivity"
+            android:label="Light Sensor"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        -->
+
         <!--Light Sensor Activity-->
         <activity
             android:name=".LightActivity"
@@ -48,6 +56,33 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
+
+        <!--Ram Sensor Activity
+        <activity
+            android:name=".LightActivity"
+            android:label="Light Sensor"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        -->
+
+        <!--Battery Sensor Activity
+        <activity
+            android:name=".LightActivity"
+            android:label="Light Sensor"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        -->
+
+        <!--Speed Sensor Activity
+        <activity
+            android:name=".LightActivity"
+            android:label="Light Sensor"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait">
+        </activity>
+       -->
 
     </application>
 
