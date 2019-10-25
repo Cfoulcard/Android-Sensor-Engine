@@ -11,6 +11,8 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 public class LightActivity extends AppCompatActivity {
 
     TextView currentlux;
+    LightSensorActivity lightSensorActivity = new LightSensorActivity();
+
 
     // Initiate Firebase Analystics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -26,6 +28,8 @@ public class LightActivity extends AppCompatActivity {
 
         //Textviews
         currentlux = (TextView) findViewById(R.id.current_lux);
+
+
 
     }
 
