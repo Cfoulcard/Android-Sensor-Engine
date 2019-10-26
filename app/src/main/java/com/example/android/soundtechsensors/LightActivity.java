@@ -10,7 +10,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LightActivity extends AppCompatActivity {
 
-    TextView currentlux;
+
     LightSensorActivity lightSensorActivity = new LightSensorActivity();
 
 
@@ -21,13 +21,15 @@ public class LightActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.lux_sensor);
+       // setContentView(R.layout.lux_sensor);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //Textviews
-        currentlux = (TextView) findViewById(R.id.current_lux);
+
+     //   lightSensorActivity.onResume();
+
 
 
 

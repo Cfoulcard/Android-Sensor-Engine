@@ -29,7 +29,7 @@ import org.w3c.dom.Text;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-public class SoundActivity extends AppCompatActivity {
+public class SoundSensorActivity extends AppCompatActivity {
 
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
