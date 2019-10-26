@@ -8,7 +8,7 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/sound_logo2"
+        android:id="@+id/light_logo2"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/sound_logo"
@@ -42,21 +42,21 @@
         android:text="@string/luminosity"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/sound_logo2"
-        app:layout_constraintStart_toStartOf="@+id/sound_logo2"
+        app:layout_constraintEnd_toEndOf="@+id/light_logo2"
+        app:layout_constraintStart_toStartOf="@+id/light_logo2"
         app:layout_constraintTop_toBottomOf="@+id/lux_sensor" />
 
     <TextView
         android:id="@+id/current_lux"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/lux"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/sound_logo2"
-        app:layout_constraintEnd_toEndOf="@+id/sound_logo2"
-        app:layout_constraintStart_toStartOf="@+id/sound_logo2"
+        app:layout_constraintBottom_toBottomOf="@+id/light_logo2"
+        app:layout_constraintEnd_toEndOf="@+id/light_logo2"
+        app:layout_constraintStart_toStartOf="@+id/light_logo2"
         app:layout_constraintTop_toBottomOf="@+id/luminosity" />
 </android.support.constraint.ConstraintLayout>
