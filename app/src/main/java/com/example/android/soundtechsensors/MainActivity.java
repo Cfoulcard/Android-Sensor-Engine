@@ -41,37 +41,37 @@ public class MainActivity extends AppCompatActivity {
      */
 
     public void soundIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
+        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void tempIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
+        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void lightIconIntent(View view) {
-        Intent lightIntent = new Intent(this, LightActivity.class);
+        Intent lightIntent = new Intent(this, LightSensorActivity.class);
         this.startActivity(lightIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void ramIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
+        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void batteryIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
+        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void speedIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundActivity.class);
+        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
