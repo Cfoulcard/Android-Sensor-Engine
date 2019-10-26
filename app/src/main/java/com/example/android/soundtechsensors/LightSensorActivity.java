@@ -6,38 +6,42 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.TextView;
+import android.widget.Toast;
 
-public class LightSensorActivity extends Activity implements SensorEventListener {
+public class LightSensorActivity extends AppCompatActivity implements SensorEventListener {
 
-
-
+    TextView currentLux;
     private SensorManager sensorManager;
     private Sensor light;
-    TextView currentLux;
 
-    {
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
         setContentView(R.layout.lux_sensor);
 
-    // Get an instance of the sensor service, and use that to get an instance of
-    // a particular sensor.
-    sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-    light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-    currentLux = (TextView) findViewById(R.id.current_lux);
-
-
-}
+        // Get an instance of the sensor service, and use that to get an instance of
+        // a particular sensor.
+        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        currentLux = (TextView) findViewById(R.id.current_lux);
+    }
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
         // Do something here if sensor accuracy changes.
     }
 
+    //Main magic of the Light Sensor
     @Override
     public final void onSensorChanged(SensorEvent event) {
-        float lumens = event.values[0];
-        // Do something with this sensor data.
-
+        if( event.sensor.getType() == Sensor.TYPE_LIGHT)
+        {
+            currentLux.setText(event.values[0] + " lux" );
+        }
     }
 
     @Override
@@ -45,7 +49,6 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         // Register a listener for the sensor.
         super.onResume();
         sensorManager.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL);
-
     }
 
     @Override
@@ -54,5 +57,6 @@ public class LightSensorActivity extends Activity implements SensorEventListener
         super.onPause();
         sensorManager.unregisterListener(this);
     }
-
 }
+
+
