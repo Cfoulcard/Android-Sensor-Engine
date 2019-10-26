@@ -8,7 +8,7 @@ import android.widget.TextView;
 
 //Audio cannot run background as of Android 9 (API level 28)
 
-public class SoundDetector extends SoundActivity {
+public class SoundDetector extends SoundSensorActivity {
 
     TextView mStatusView;
     MediaRecorder mRecorder;
