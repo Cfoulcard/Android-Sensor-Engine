@@ -34,7 +34,7 @@
 
         <!--Sound Sensor Activity-->
         <activity
-            android:name=".SoundActivity"
+            android:name=".SoundSensorActivity"
             android:label="Sound Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -51,14 +51,12 @@
 
         <!--Light Sensor Activity-->
         <activity
-            android:name=".LightActivity"
+            android:name=".LightSensorActivity"
             android:label="Light Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".SensorActivity" />
-        <activity android:name=".LightSensorActivity" />
 
         <!--Ram Sensor Activity
         <activity
