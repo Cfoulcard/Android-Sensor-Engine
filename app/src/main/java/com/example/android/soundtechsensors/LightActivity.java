@@ -5,8 +5,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.View;
 import android.widget.TextView;
-
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+// TODO Change value of light
+//TODO add menu
 
 public class LightActivity extends AppCompatActivity {
 
