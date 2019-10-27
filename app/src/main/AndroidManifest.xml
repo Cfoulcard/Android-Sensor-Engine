@@ -40,14 +40,14 @@
             android:screenOrientation="portrait">
         </activity>
 
-        <!--Temperature Sensor Activity
+        <!--Temperature Sensor Activity-->
         <activity
             android:name=".TemperatureActivity"
-            android:label="Light Sensor"
+            android:label="Temperature Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        -->
+
 
         <!--Light Sensor Activity-->
         <activity
@@ -56,6 +56,7 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
+
 
 
         <!--Ram Sensor Activity
