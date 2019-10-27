@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void tempIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
-        this.startActivity(soundIntent);
+        Intent tempIntent = new Intent(this, TemperatureActivity.class);
+        this.startActivity(tempIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
