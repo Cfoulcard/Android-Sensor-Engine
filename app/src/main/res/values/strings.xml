@@ -25,6 +25,9 @@
     <string name="lux_sensor">Light Sensor</string>
     <string name="luminosity">Luminosity</string>
     <string name="lux">Lux</string>
+    <string name="phone_temp_sensor">Phone Temperature</string>
+    <string name="temperature">Temperature</string>
+    <string name="C">C</string>
     <string name="db">0 dB</string>
     <string name="sound">Sound</string>
     <string name="sound_logo">Sound Logo</string>
