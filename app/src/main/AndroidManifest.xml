@@ -56,7 +56,7 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-
+        <activity android:name=".RamActivity" />
 
 
         <!--Ram Sensor Activity

@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void ramIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
-        this.startActivity(soundIntent);
+        Intent ramIntent = new Intent(this, RamActivity.class);
+        this.startActivity(ramIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 

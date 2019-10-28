@@ -8,7 +8,6 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
-import android.widget.Toast;
 
 // TODO inform if phone does not support sensor
 // TODO add menu
@@ -22,7 +21,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.phone_temp_sensor);
+        setContentView(R.layout.temperature_sensor);
 
         // Get an instance of the sensor service, and use that to get an instance of
         // a particular sensor.

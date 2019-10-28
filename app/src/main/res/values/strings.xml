@@ -22,13 +22,20 @@
     <string name="sound_sensor">Sound Sensor</string>
     <string name="sensitivity">Sensitivity</string>
     <string name="decibels">Decibels</string>
-    <string name="lux_sensor">Light Sensor</string>
-    <string name="luminosity">Luminosity</string>
-    <string name="lux">Lux</string>
-    <string name="phone_temp_sensor">Phone Temperature</string>
-    <string name="temperature">Temperature</string>
-    <string name="C">C</string>
     <string name="db">0 dB</string>
     <string name="sound">Sound</string>
     <string name="sound_logo">Sound Logo</string>
+
+    <string name="lux_sensor">Light Sensor</string>
+    <string name="luminosity">Luminosity</string>
+    <string name="lux">Lux</string>
+
+    <string name="phone_temp_sensor">Phone Temperature</string>
+    <string name="temperature">Temperature</string>
+    <string name="C">C</string>
+
+    <string name="ram_sensor">Ram Sensor</string>
+    <string name="ram">Ram</string>
+    <string name="MB">MB</string>
+
 </resources>
