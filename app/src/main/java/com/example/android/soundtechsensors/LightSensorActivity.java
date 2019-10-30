@@ -2,6 +2,7 @@ package com.example.android.soundtechsensors;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -41,6 +42,7 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         if( event.sensor.getType() == Sensor.TYPE_LIGHT)
         {
             currentLux.setText(event.values[0] + " lux" );
+         //   currentLux.setTextColor(Color.CYAN);
         }
     }
 
