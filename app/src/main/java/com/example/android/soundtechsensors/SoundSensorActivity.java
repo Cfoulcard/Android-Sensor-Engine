@@ -2,6 +2,7 @@ package com.example.android.soundtechsensors;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -72,7 +73,7 @@ public class SoundSensorActivity extends AppCompatActivity {
 
         //Textviews
         configuredDecibel = (TextView) findViewById(R.id.current_decibel);
-        currentdb = (TextView) findViewById(R.id.current_decibel);
+
 
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
@@ -233,8 +234,17 @@ public class SoundSensorActivity extends AppCompatActivity {
     public void updateTv() {
         configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
 
+        //Change color of decibels based upon loudness
+        if (soundDb() > 70) {
+            configuredDecibel.setTextColor(Color.RED);
+        } else if (soundDb() < 69 && soundDb() > 30) {
+            configuredDecibel.setTextColor(Color.CYAN);
+        } else if (soundDb() < 30) {
+            configuredDecibel.setTextColor(Color.GREEN);
+        }
+
         //Alternate decibel measurement
-        //currentdb.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
+        //configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
     }
 
     public int soundDb() {
