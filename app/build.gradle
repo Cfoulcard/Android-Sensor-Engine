@@ -6,7 +6,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.example.android.soundtechsensors"
-        minSdkVersion 21
+        minSdkVersion 21 // Lollipop Version. Users can at least get their lick on
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
