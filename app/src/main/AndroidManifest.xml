@@ -9,25 +9,20 @@
  This will mean the user must explicitly grant access to use your feature-->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
 
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -48,7 +43,6 @@
             android:screenOrientation="portrait">
         </activity>
 
-
         <!--Light Sensor Activity-->
         <activity
             android:name=".LightSensorActivity"
@@ -56,37 +50,30 @@
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        <activity android:name=".RamActivity" />
 
-
-        <!--Ram Sensor Activity
+        <!--Ram Sensor Activity-->
         <activity
-            android:name=".LightActivity"
-            android:label="Light Sensor"
+            android:name=".RamActivity"
+            android:label="Ram Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        -->
 
-        <!--Battery Sensor Activity
+        <!--Battery Sensor Activity-->
         <activity
-            android:name=".LightActivity"
-            android:label="Light Sensor"
+            android:name=".BatteryActivity"
+            android:label="Battery Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-        -->
 
-        <!--Speed Sensor Activity
+        <!--Speed Sensor Activity-->
         <activity
-            android:name=".LightActivity"
-            android:label="Light Sensor"
+            android:name=".AccelerometerActivity"
+            android:label="Speed Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
-       -->
 
     </application>
-
-
 </manifest>
