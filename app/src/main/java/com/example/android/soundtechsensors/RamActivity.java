@@ -25,6 +25,7 @@ public class RamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.ram_sensor);
 
+
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         activityManager.getMemoryInfo(mi);
@@ -39,7 +40,7 @@ public class RamActivity extends AppCompatActivity {
         currentRam = (TextView) findViewById(R.id.current_ram);
         // realCurrentRam = (TextView) findViewById(R.id.ram);
 
-        //currentRam.setText((int) availableMegs);
+        currentRam.setText((int) availableMegs);
 
     }
 
