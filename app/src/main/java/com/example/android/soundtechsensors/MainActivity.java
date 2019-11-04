@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void batteryIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
+        Intent soundIntent = new Intent(this, BatteryActivity.class);
         this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
