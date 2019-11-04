@@ -31,7 +31,6 @@ public class RamActivity extends AppCompatActivity {
         currentRam = (TextView) findViewById(R.id.current_ram);
         String i = String.valueOf(getMemorySize());
         currentRam.setText((i) + " mB");
-
     }
 
     public int getMemorySize() {
