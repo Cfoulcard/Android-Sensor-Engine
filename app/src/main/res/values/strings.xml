@@ -38,4 +38,8 @@
     <string name="ram">Ram</string>
     <string name="MB">MB</string>
 
+    <string name="battery_sensor">Battery Level</string>
+    <string name="battery">Battery</string>
+    <string name="Percent">%</string>
+
 </resources>
