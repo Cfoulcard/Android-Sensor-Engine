@@ -1,5 +1,6 @@
 package com.example.android.soundtechsensors;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -16,15 +17,17 @@ public class BatteryActivity extends AppCompatActivity {
     TextView currentBattery;
     private Context context;
     private int mBatteryLevel;
-    private IntentFilter mBatteryLevelFilter;
+    private IntentFilter ifilter;
 
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.battery_sensor);
 
         currentBattery = findViewById(R.id.current_battery);
-        String i = registerMyReceiver();
+        int i = registerMyReceiver();
         currentBattery.setText((i) + " percent");
     }
 
@@ -41,17 +44,41 @@ public class BatteryActivity extends AppCompatActivity {
         return Integer.parseInt(temp);
     }*/
 
-    BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+/*    BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             mBatteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
             Toast.makeText(context, "Battery" + mBatteryLevel, Toast.LENGTH_LONG).show();
+
+        }
+    };*/
+
+/*    private String registerMyReceiver() {
+        mBatteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(mBatteryReceiver, mBatteryLevelFilter);
+        return new String(String.valueOf(mBatteryLevel));
+    }*/
+
+    BroadcastReceiver mBatteryReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            int level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+            int scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100);
+            int percent = (level * 100) / scale;
+            float batteryPct = level / (float)scale;
+
+           // return batteryPct;
+
+            Toast.makeText(context, "Current Battery Level: " + level, Toast.LENGTH_LONG).show();
         }
     };
 
-    private String registerMyReceiver() {
-        mBatteryLevelFilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
-        registerReceiver(mBatteryReceiver, mBatteryLevelFilter);
-        return String.valueOf(mBatteryLevel);
+    private int registerMyReceiver() {
+        ifilter = new IntentFilter(Intent.ACTION_BATTERY_CHANGED);
+        registerReceiver(mBatteryReceiver, ifilter);
+       // return (BatteryManager.EXTRA_LEVEL);
+
+       // return mBatteryLevel;
+        return 0;
     }
 }
