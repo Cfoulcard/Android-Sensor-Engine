@@ -7,7 +7,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.widget.TextView;
+
+import com.google.firebase.analytics.FirebaseAnalytics;
 
 // TODO inform if phone does not support sensor
 // TODO add menu
@@ -18,19 +21,27 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     private SensorManager sensorManager;
     private Sensor temperature;
 
+    // Initiate Firebase Analytics
+    private FirebaseAnalytics mFirebaseAnalytics;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_sensor);
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Get an instance of the sensor service, and use that to get an instance of
         // a particular sensor.
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         temperature = sensorManager.getDefaultSensor((Sensor.TYPE_AMBIENT_TEMPERATURE));
         currentDegrees = (TextView) findViewById(R.id.current_temp);
-
-
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -58,6 +69,13 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+    //This will add functionality to the menu button within the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+        return true;
     }
 }
 
