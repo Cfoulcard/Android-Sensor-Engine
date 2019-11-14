@@ -15,8 +15,10 @@ public class MainActivity extends AppCompatActivity {
 
 //TODO: Make going into other Activities responsive
 
-    // Initiate Firebase Analystics
+    // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
     //This will add functionality to the menu button within the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -36,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * When tapping the sound icon, this will open the Sound Sensor Activity
      * Go to the sensor_selection.xml to change the onClick values
      */
 
