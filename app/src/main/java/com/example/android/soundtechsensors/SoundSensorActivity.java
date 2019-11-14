@@ -45,7 +45,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
 
-    // Initiate Firebase Analystics
+    // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
 
     //Used for record audio permission
