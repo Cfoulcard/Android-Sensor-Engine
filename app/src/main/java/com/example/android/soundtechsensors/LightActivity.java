@@ -16,7 +16,7 @@ public class LightActivity extends AppCompatActivity {
     LightSensorActivity lightSensorActivity = new LightSensorActivity();
 
 
-    // Initiate Firebase Analystics
+    // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
 
     @Override
