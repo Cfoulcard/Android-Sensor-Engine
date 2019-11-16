@@ -42,4 +42,8 @@
     <string name="battery">Battery</string>
     <string name="Percent">%</string>
 
+    <string name="accelerometer_sensor">Accelerometer</string>
+    <string name="accelerometer">Speed</string>
+    <string name="mph">mph</string>
+
 </resources>
