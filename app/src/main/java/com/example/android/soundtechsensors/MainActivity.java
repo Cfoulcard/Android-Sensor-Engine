@@ -74,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void speedIconIntent(View view) {
-        Intent soundIntent = new Intent(this, SoundSensorActivity.class);
-        this.startActivity(soundIntent);
+        Intent speedIntent = new Intent(this, AccelerometerActivity.class);
+        this.startActivity(speedIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 }
