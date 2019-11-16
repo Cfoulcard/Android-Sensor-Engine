@@ -7,6 +7,7 @@
 
 <!-- Record Audio is listed as a Dangerous Permission
  This will mean the user must explicitly grant access to use your feature-->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
