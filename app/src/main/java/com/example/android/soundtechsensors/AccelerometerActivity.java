@@ -16,7 +16,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-//TODO fix permission
+//TODO fix permissions
 
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
 
