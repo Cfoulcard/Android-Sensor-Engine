@@ -1,6 +1,7 @@
 package com.example.android.soundtechsensors;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.media.MediaPlayer;
@@ -13,6 +14,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -300,6 +302,30 @@ public class SoundSensorActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
+    }
+
+    //The following is for the menu items within the navigation_menu.xml file
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.preferences:
+                Intent configurationsIntent = new Intent(this, Configurations.class);
+                this.startActivity(configurationsIntent);
+                return true;
+            case R.id.credits:
+                Intent creditsIntent = new Intent(this, Credits.class);
+                this.startActivity(creditsIntent);
+                return true;
+            case R.id.about:
+                Intent aboutIntent = new Intent(this, About.class);
+                this.startActivity(aboutIntent);
+                return true;
+            case R.id.premium:
+                Intent premiumIntent = new Intent(this, Premium.class);
+                this.startActivity(premiumIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     //Sound Test provided by MediaPlayer
