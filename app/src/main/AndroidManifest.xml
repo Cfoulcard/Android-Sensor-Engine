@@ -89,5 +89,30 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!--The following is for the menu items-->
+        <activity android:name=".Credits"
+            android:label="Credits"
+
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".Configurations"
+            android:label="Preferences"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".About"
+            android:label="About"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            />
+
+        <activity android:name=".Premium"
+            android:label="Premium"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"
+            />
+
     </application>
 </manifest>
