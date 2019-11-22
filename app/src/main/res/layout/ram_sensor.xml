@@ -8,13 +8,12 @@
     android:layout_height="match_parent">
 
 
-
     <TextView
         android:id="@+id/ram_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="156dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/ram_sensor"
