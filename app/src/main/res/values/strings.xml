@@ -11,8 +11,8 @@
     <string name="credits">Credits</string>
     <string name="premium">Premium</string>
 
-    <!--Sensor Select String Infomation-->
-    <string name="sensor_select">Sensor Select</string>
+    <!--Sensor Select String Information-->
+    <string name="sensor_select">Sensor Selection</string>
     <string name="sound_button">Sound Button</string>
     <string name="temp_button">Temp Button</string>
     <string name="light_button">LightButton</string>
