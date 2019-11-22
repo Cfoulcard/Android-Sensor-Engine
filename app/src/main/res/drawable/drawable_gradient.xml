@@ -4,7 +4,6 @@
     <!-- This gradient is for the sensor selection background -->
     <gradient
         android:angle="90"
-        android:endColor="@color/sky_blue"
-        android:startColor="@color/royal_purple" />
-
+        android:endColor="@color/grand_sky_blue"
+        android:startColor="@color/elvis_purple" />
 </shape>
