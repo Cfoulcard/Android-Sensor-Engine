@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_gradient"
+    android:fitsSystemWindows="false"
     tools:context=".MainActivity"
     >
 
@@ -30,8 +31,8 @@
 
     <ImageView
         android:id="@+id/sound_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/sound_button"
         android:onClick="soundIconIntent"
@@ -41,8 +42,8 @@
 
     <ImageView
         android:id="@+id/temp_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/temp_button"
         android:onClick="tempIconIntent"
@@ -54,8 +55,8 @@
 
     <ImageView
         android:id="@+id/light_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/light_button"
         android:onClick="lightIconIntent"
@@ -65,8 +66,8 @@
 
     <ImageView
         android:id="@+id/ram_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/ram_button"
         android:onClick="ramIconIntent"
@@ -76,8 +77,8 @@
 
     <ImageView
         android:id="@+id/battery_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="8dp"
@@ -90,8 +91,8 @@
 
     <ImageView
         android:id="@+id/speed_icon"
-        android:layout_width="72dp"
-        android:layout_height="72dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/speed_button"
         android:onClick="speedIconIntent"
