@@ -20,6 +20,7 @@ import java.util.prefs.Preferences;
 public class MainActivity extends AppCompatActivity {
 
 //TODO: Make going into other Activities responsive
+    //TODO: Turn off sensors when not in use
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
