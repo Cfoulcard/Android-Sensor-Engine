@@ -38,7 +38,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     MediaPlayer mp;
 
     //Creates an instance of the SoundDetector Class. Will be used to access its methods
-   // SoundDetector soundDetector = new SoundDetector();
+    // SoundDetector soundDetector = new SoundDetector();
 
     TextView configuredDecibel;
     TextView currentdb;
@@ -52,7 +52,7 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     //Used for record audio permission
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
-    public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 123;
+    public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
 
     final Runnable updater = new Runnable(){
 
@@ -80,15 +80,15 @@ public class SoundSensorActivity extends AppCompatActivity {
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
         final SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
-      //  decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
-       //decibelSeekbar.getProgress(); // 50 default progress value
-      // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
+        //  decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
+        //decibelSeekbar.getProgress(); // 50 default progress value
+        // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
 
         //This variable will initiate and create the MediaPlayer
         mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
         //Decibel Seekbar configuration
-      decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress,
@@ -112,28 +112,8 @@ public class SoundSensorActivity extends AppCompatActivity {
 
         // This section is used to request permission to utilize the user's microphone and record audio
         // Refer to https://developer.android.com/training/permissions/requesting.html#java
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.RECORD_AUDIO)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{Manifest.permission.RECORD_AUDIO},
-                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
-                // MY_PERMISSIONS_REQUEST_RECORD_AUDIO is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        } else {
-            // Permission has already been granted
-        }
+
+
 
         // Used to test request audio recording permission as a toast message
  /*       if(!isRecordAudioPermissionGranted())
@@ -145,8 +125,8 @@ public class SoundSensorActivity extends AppCompatActivity {
 
 
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //This section is used to pick up sound from the user's microphone
+        ////////////////////////////////////////////////////////////////////////////////////////////////
+        //This section is used to pick up sound from the user's microphone
 
         //Adjust milliseconds to change refresh rate of decibel tracker
         if (runner == null)
@@ -170,11 +150,65 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
     }
 
+    private void requestAudioPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            //When permission is not granted by user, show them message why this permission is needed.
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.RECORD_AUDIO)) {
+               // Toast.makeText(this, "Please grant permissions to record audio", Toast.LENGTH_LONG).show();
+
+                //Give user option to still opt-in the permissions
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
+
+            } else {
+                // Show user dialog to grant permission to record audio
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.RECORD_AUDIO},
+                        MY_PERMISSIONS_REQUEST_RECORD_AUDIO);
+            }
+        }
+        //If permission is granted, then go ahead recording audio
+        else if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.RECORD_AUDIO)
+                == PackageManager.PERMISSION_GRANTED) {
+
+            //Go ahead with recording audio now
+            startRecorder();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case MY_PERMISSIONS_REQUEST_RECORD_AUDIO: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
     //Microphone recording starts
     public void onResume()
     {
         super.onResume();
-        startRecorder();
+requestAudioPermissions();
     }
 
     //Stops microphone from recording when user exits activity
@@ -228,11 +262,11 @@ public class SoundSensorActivity extends AppCompatActivity {
         configuredDecibel.setText(onProgressChanged());
     }*/
 
- ///////////////////////////////////////////////////////////////////////////////////////////////////
- //This section controls the decibel properties picked up by the microphone
- //The formula attempts to emulate SPL (Sound Pressure Level)
- //Read up more at https://www.wikiwand.com/en/Sound_pressure
- //For more decibel detail change Integer to Double
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
+    //This section controls the decibel properties picked up by the microphone
+    //The formula attempts to emulate SPL (Sound Pressure Level)
+    //Read up more at https://www.wikiwand.com/en/Sound_pressure
+    //For more decibel detail change Integer to Double
     public void updateTv() {
         configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
 
