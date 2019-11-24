@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -20,6 +22,7 @@ import static com.example.android.soundtechsensors.R.layout.ram_sensor;
 
 public class RamActivity extends AppCompatActivity {
 
+    TextView ramText;
     TextView currentRam;
     private SensorManager sensorManager;
     private Sensor ram;
@@ -34,6 +37,14 @@ public class RamActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(ram_sensor);
+
+        ramText = (TextView) findViewById(R.id.ram);
+        currentRam = (TextView) findViewById(R.id.current_ram);
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        ramText.startAnimation(in);
+        currentRam.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

@@ -10,6 +10,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 //LocationListener needed to track speed
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
 
+    TextView accelerometer_sensor;
+    TextView accelerometer;
     TextView currentSpeed;
 
     // Initiate Firebase Analytics
@@ -37,7 +41,13 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.accelerometer_sensor);
 
+        accelerometer = (TextView) findViewById(R.id.accelerometer);
         currentSpeed = (TextView) findViewById(R.id.current_speed);
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        accelerometer.startAnimation(in);
+        currentSpeed.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

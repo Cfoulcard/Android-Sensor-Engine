@@ -8,6 +8,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
+    TextView temperature_text;
     TextView currentDegrees;
     private SensorManager sensorManager;
     private Sensor temperature;
@@ -31,6 +34,14 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_sensor);
+
+        temperature_text = (TextView) findViewById(R.id.temperature);
+        currentDegrees = (TextView) findViewById(R.id.current_temp);
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        temperature_text.startAnimation(in);
+        currentDegrees.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

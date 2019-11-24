@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LightSensorActivity extends AppCompatActivity implements SensorEventListener {
 
+    TextView luminosity;
     TextView currentLux;
     private SensorManager sensorManager;
     private Sensor light;
@@ -31,6 +34,14 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lux_sensor);
+
+        luminosity = (TextView) findViewById(R.id.luminosity);
+        currentLux = (TextView) findViewById(R.id.current_lux);
+
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        luminosity.startAnimation(in);
+        currentLux.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

@@ -9,6 +9,7 @@ import android.os.BatteryManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.view.animation.AlphaAnimation
 import android.widget.TextView
 import android.widget.Toast
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -16,6 +17,7 @@ import kotlinx.android.synthetic.main.battery_sensor.*
 
 class BatteryActivity : AppCompatActivity() {
 
+    internal lateinit var battery_text: TextView
     internal lateinit var currentBattery: TextView
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
@@ -46,6 +48,14 @@ class BatteryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.battery_sensor)
+
+        battery_text = findViewById(R.id.battery) as TextView
+        currentBattery = findViewById(R.id.current_battery) as TextView
+
+        val `in` = AlphaAnimation(0.0f, 1.0f)
+        `in`.duration = 1500
+        battery_text.startAnimation(`in`)
+        currentBattery.startAnimation(`in`)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
