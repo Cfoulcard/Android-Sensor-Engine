@@ -11,7 +11,12 @@
         <!--The following 2 lines are used to make the Status Bar and Nav Bar Transparent-->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+    </style>
 
+    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
+        ...
+        <item name="android:windowContentTransitions">true</item>
+            ...
     </style>
 
 
