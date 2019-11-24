@@ -31,6 +31,8 @@
 
     <ImageView
         android:id="@+id/sound_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/sound_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"
@@ -42,6 +44,8 @@
 
     <ImageView
         android:id="@+id/temp_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/temp_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
@@ -55,6 +59,8 @@
 
     <ImageView
         android:id="@+id/light_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/light_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="32dp"
@@ -66,6 +72,8 @@
 
     <ImageView
         android:id="@+id/ram_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/ram_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"
@@ -77,6 +85,8 @@
 
     <ImageView
         android:id="@+id/battery_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/battery_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
@@ -91,6 +101,8 @@
 
     <ImageView
         android:id="@+id/speed_icon"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/speed_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="32dp"
