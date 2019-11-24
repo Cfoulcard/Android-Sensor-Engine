@@ -24,6 +24,8 @@
 
     <ImageView
         android:id="@+id/accelerometer_logo"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/speed_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/accelerometer_sensor"
