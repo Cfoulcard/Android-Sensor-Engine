@@ -24,6 +24,8 @@
 
     <ImageView
         android:id="@+id/lux_sensor_logo"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/light_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/sound_logo"
