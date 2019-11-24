@@ -123,6 +123,8 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
             //int speed=(int) ((location.getSpeed()*3600)/1000); //This is speed in km/h
             int speed = (int) (location.getSpeed() * 2.2369); //This is speed in mph
 
+            //Refer to this link for more speed data https://www.wikiwand.com/en/Speed
+
             currentSpeed.setText(speed + " mph");
         }
     }
