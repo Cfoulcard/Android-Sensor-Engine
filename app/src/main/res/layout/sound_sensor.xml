@@ -5,11 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/drawable_gradient_dark"
-    tools:context=".SoundSensorActivity">
+    tools:context=".SoundSensorActivity"
+    >
 
 
     <ImageView
         android:id="@+id/sound_logo"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/sound_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:layout_marginStart="8dp"
