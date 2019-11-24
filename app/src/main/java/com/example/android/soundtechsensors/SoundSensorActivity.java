@@ -285,7 +285,11 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Read up more at https://www.wikiwand.com/en/Sound_pressure
     //For more decibel detail change Integer to Double
     public void updateTv() {
-        configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
+
+
+        if (soundDb() > 0) {
+            configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
+        }
 
         //Change color of decibels based upon loudness
         if (soundDb() > 70) {
