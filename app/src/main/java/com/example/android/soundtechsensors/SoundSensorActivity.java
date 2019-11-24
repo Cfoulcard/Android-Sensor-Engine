@@ -16,6 +16,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -24,13 +26,10 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.w3c.dom.Text;
 
-//TODO if user denies permission recast the prompt upon reopening activity ✔
+//TODO Fix long dB number if denied permission
 //TODO Make XML work on any device
-//TODO make dB accurate and plug in to the dB meter ✔
-//TODO prevent app from crashing if user denies permissions
-//TODO provide explanation for the audio request
 
-////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class SoundSensorActivity extends AppCompatActivity {
 
@@ -41,6 +40,8 @@ public class SoundSensorActivity extends AppCompatActivity {
     // SoundDetector soundDetector = new SoundDetector();
 
     TextView configuredDecibel;
+    TextView decibels;
+    TextView soundSensor;
     TextView currentdb;
     MediaRecorder mRecorder;
     Thread runner;
@@ -68,6 +69,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.sound_sensor);
 
         // Obtain the FirebaseAnalytics instance.
@@ -75,8 +77,16 @@ public class SoundSensorActivity extends AppCompatActivity {
 
         //Textviews
         configuredDecibel = (TextView) findViewById(R.id.current_decibel);
+        decibels = (TextView) findViewById(R.id.decibels);
+        soundSensor = (TextView) findViewById(R.id.sound_sensor);
 
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        configuredDecibel.startAnimation(in);
+        decibels.startAnimation(in);
+    //    soundSensor.startAnimation(in);
 
+        requestAudioPermissions();
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
         final SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
@@ -158,7 +168,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             //When permission is not granted by user, show them message why this permission is needed.
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.RECORD_AUDIO)) {
-               // Toast.makeText(this, "Please grant permissions to record audio", Toast.LENGTH_LONG).show();
+              // Toast.makeText(this, "Please grant permission to measure sound", Toast.LENGTH_LONG).show();
 
                 //Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this,
@@ -178,7 +188,7 @@ public class SoundSensorActivity extends AppCompatActivity {
                 == PackageManager.PERMISSION_GRANTED) {
 
             //Go ahead with recording audio now
-            startRecorder();
+
         }
     }
 
@@ -208,7 +218,14 @@ public class SoundSensorActivity extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
-requestAudioPermissions();
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+                        != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+        startRecorder();
     }
 
     //Stops microphone from recording when user exits activity
