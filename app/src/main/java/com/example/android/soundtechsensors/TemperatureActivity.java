@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -35,8 +36,14 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Get an instance of the sensor service, and use that to get an instance of
-        // a particular sensor.
+        // the surrounding temperature. If device does not support this sensor a toast message will
+        // appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) == null){
+            Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
+        }
+
+        // Ambient Temperature measures the temperature around the device
         temperature = sensorManager.getDefaultSensor((Sensor.TYPE_AMBIENT_TEMPERATURE));
         currentDegrees = (TextView) findViewById(R.id.current_temp);
     }
