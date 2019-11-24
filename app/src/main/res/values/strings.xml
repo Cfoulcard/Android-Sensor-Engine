@@ -34,7 +34,7 @@
     <string name="luminosity">Luminosity</string>
     <string name="lux">Lux</string>
 
-    <string name="phone_temp_sensor">Phone Temperature</string>
+    <string name="phone_temp_sensor">Air Temperature</string>
     <string name="temperature">Temperature</string>
     <string name="C">C</string>
 
@@ -49,5 +49,12 @@
     <string name="accelerometer_sensor">Accelerometer</string>
     <string name="accelerometer">Speed</string>
     <string name="mph">mph</string>
+
+    <string name="sound_anim"></string>
+    <string name="temp_anim"></string>
+    <string name="light_anim"></string>
+    <string name="ram_anim"></string>
+    <string name="battery_anim"></string>
+    <string name="speed_anim"></string>
 
 </resources>
