@@ -11,117 +11,146 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+//Permission for accessing GPS location -- needed to track speed
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-//TODO fix permissions
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//LocationListener needed to track speed
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
 
     TextView currentSpeed;
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    //Needed for location permission
     private final int REQUEST_LOCATION_PERMISSION = 1;
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.accelerometer_sensor);
 
-
         currentSpeed = (TextView) findViewById(R.id.current_speed);
-
-        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-        if (ActivityCompat.checkSelfPermission(this, ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-            //                                          int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }
-
-        if (ContextCompat.checkSelfPermission(this,
-                ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            // Permission is not granted
-            // Should we show an explanation?
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    ACCESS_FINE_LOCATION)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(this,
-                        new String[]{ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-                // MY_PERMISSIONS_REQUEST_RECORD_AUDIO is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
-        } else {
-            // Permission has already been granted
-        }
-
-/*        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            // TODO: Consider calling
-            //    ActivityCompat#requestPermissions
-            // here to request the missing permissions, and then overriding
-            public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                                                      int[] grantResults)
-            // to handle the case where the user grants the permission. See the documentation
-            // for ActivityCompat#requestPermissions for more details.
-            return;
-        }*/
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        this.onLocationChanged(null);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-
+        //Calls the location permission dialog box upon opening this activity
+        requestLocationPermissions();
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //This section is is dedicated for the location permission properties
+    private void requestLocationPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
 
+            //When permission is not granted by user, show them message why this permission is needed.
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    ACCESS_FINE_LOCATION)) {
+              //  Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
+
+                //Give user option to still opt-in the permissions
+                ActivityCompat.requestPermissions(this,
+                        new String[]{ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+
+            } else {
+                // Show user dialog to grant permission to record audio
+                ActivityCompat.requestPermissions(this,
+                        new String[]{ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+            }
+        }
+        //If permission is granted, then go ahead recording audio
+        else if (ContextCompat.checkSelfPermission(this,
+                ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+
+
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Speed Formula for the Accelerometer
     @Override
     public void onLocationChanged(Location location) {
         if (location == null) {
             // if you can't get speed because reasons :)
             currentSpeed.setText("0 mph");
         } else {
-            //int speed=(int) ((location.getSpeed()) is the standard which returns meters per second. In this example i converted it to kilometers per hour
-
-            // int speed=(int) ((location.getSpeed()*3600)/1000); //km/h
-            int speed = (int) (location.getSpeed() * 2.2369); //mph
+            //int speed=(int) ((location.getSpeed()) is the standard which returns meters per second.
+            //int speed=(int) ((location.getSpeed()*3600)/1000); //This is speed in km/h
+            int speed = (int) (location.getSpeed() * 2.2369); //This is speed in mph
 
             currentSpeed.setText(speed + " mph");
         }
-
     }
 
     @Override
     public void onStatusChanged(String provider, int status, Bundle extras) {
-
     }
 
     @Override
     public void onProviderEnabled(String provider) {
-
     }
 
     @Override
     public void onProviderDisabled(String provider) {
-
     }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//This section parses the speed data when the permissions are granted
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED) {
+
+            return;
+        }
+
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        this.onLocationChanged(null);
+    }
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////
 
     //This will add functionality to the menu button within the action bar
     @Override
