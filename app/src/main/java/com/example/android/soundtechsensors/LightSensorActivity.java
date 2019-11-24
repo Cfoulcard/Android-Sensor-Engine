@@ -36,8 +36,14 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Get an instance of the sensor service, and use that to get an instance of
-        // a particular sensor.
+        // a the light sensor. If the device does not support this sensor a toast message
+        // will appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
+            Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
+        }
+
+        //Light sensor to measure light
         light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         currentLux = (TextView) findViewById(R.id.current_lux);
     }
