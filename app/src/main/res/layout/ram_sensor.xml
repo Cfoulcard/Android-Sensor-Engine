@@ -25,6 +25,8 @@
 
     <ImageView
         android:id="@+id/ram_logo"
+        style="@style/MaterialAnimations"
+        android:transitionName="@string/ram_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/phone_temp_sensor"
