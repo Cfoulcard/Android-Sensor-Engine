@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,8 +21,6 @@ import java.util.prefs.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    //TODO: Turn off sensors when not in use (Battery, Speed, Ram)
     //TODO: Add animated launch screen?
     //TODO: Add F for Temp Sensor (Kelvin?)
     //TODO: Add km/h for speed
@@ -164,5 +163,14 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(speedIntent, transitionActivityOptions.toBundle());
      //   this.startActivity(speedIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void prefIconIntent(View view) {
+        Intent prefIntent = new Intent(this, SettingsActivity.class);
+
+        Button pref = findViewById(R.id.button2);
+
+        this.startActivity(prefIntent);
+
     }
 }
