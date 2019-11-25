@@ -1,6 +1,7 @@
 package com.example.android.soundtechsensors;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -27,6 +28,8 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     TextView accelerometer_sensor;
     TextView accelerometer;
     TextView currentSpeed;
+    LocationListener mlocListener;
+
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -38,12 +41,13 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.accelerometer_sensor);
 
+        //TextViews
         accelerometer = (TextView) findViewById(R.id.accelerometer);
         currentSpeed = (TextView) findViewById(R.id.current_speed);
 
+        //Animation fade in for TextViews
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         accelerometer.startAnimation(in);
@@ -56,59 +60,43 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         requestLocationPermissions();
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-    //This section is is dedicated for the location permission properties
-    private void requestLocationPermissions() {
-        if (ContextCompat.checkSelfPermission(this,
-                ACCESS_FINE_LOCATION)
+////////////////////////////////////////////////////////////////////////////////////////////////////
+//This section parses the speed data when the permissions are granted
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            //When permission is not granted by user, show them message why this permission is needed.
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    ACCESS_FINE_LOCATION)) {
-              //  Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
-
-                //Give user option to still opt-in the permissions
-                ActivityCompat.requestPermissions(this,
-                        new String[]{ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-
-            } else {
-                // Show user dialog to grant permission to record audio
-                ActivityCompat.requestPermissions(this,
-                        new String[]{ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION_PERMISSION);
-            }
+            return;
         }
-        //If permission is granted, then go ahead recording audio
-        else if (ContextCompat.checkSelfPermission(this,
-                ACCESS_FINE_LOCATION)
-                == PackageManager.PERMISSION_GRANTED) {
 
+        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
 
-        }
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+        this.onLocationChanged(null);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String[] permissions, int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_LOCATION_PERMISSION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    // permission was granted, yay! Do the
-                    // contacts-related task you need to do.
-                } else {
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-                }
-                return;
-            }
+    //Upon destroying the activity the location data will terminate
+    //Used to free memory/battery usage
+    public  void onDestroy()
+    {
+        super.onDestroy();
+      LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        lm.removeUpdates(this);
+    }
 
-            // other 'case' lines to check for other
-            // permissions this app might request.
-        }
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //This will add functionality to the menu button within the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+        return true;
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -141,39 +129,59 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     public void onProviderDisabled(String provider) {
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-//This section parses the speed data when the permissions are granted
-    @Override
-    protected void onResume() {
-        super.onResume();
-        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
-
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    //This section is is dedicated for the location permission properties
+    private void requestLocationPermissions() {
+        if (ContextCompat.checkSelfPermission(this,
+                ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            return;
-        }
+            //When permission is not granted by user, show them message why this permission is needed.
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    ACCESS_FINE_LOCATION)) {
+                //  Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
 
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-        this.onLocationChanged(null);
+                //Give user option to still opt-in the permissions
+                ActivityCompat.requestPermissions(this,
+                        new String[]{ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+
+            } else {
+                // Show user dialog to grant permission to record audio
+                ActivityCompat.requestPermissions(this,
+                        new String[]{ACCESS_FINE_LOCATION},
+                        REQUEST_LOCATION_PERMISSION);
+            }
+        }
+        //If permission is granted, then go ahead recording audio
+        else if (ContextCompat.checkSelfPermission(this,
+                ACCESS_FINE_LOCATION)
+                == PackageManager.PERMISSION_GRANTED) {
+        }
     }
 
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //This will add functionality to the menu button within the action bar
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_menu, menu);
-        return true;
+    public void onRequestPermissionsResult(int requestCode,
+                                           String[] permissions, int[] grantResults) {
+        switch (requestCode) {
+            case REQUEST_LOCATION_PERMISSION: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                }
+                return;
+            }
+
+            // other 'case' lines to check for other
+            // permissions this app might request.
+        }
     }
 }
-
-
 
 
 
