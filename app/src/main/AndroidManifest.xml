@@ -114,5 +114,11 @@
             android:screenOrientation="portrait"
             />
 
+        <activity android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:label="Preferences"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 </manifest>
