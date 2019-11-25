@@ -15,13 +15,14 @@ import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-// TODO inform if phone does not support sensor
 // TODO add menu
 
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
     TextView temperature_text;
     TextView currentDegrees;
+    TextView currentDegreesF;
+    TextView currentDegreesK;
     private SensorManager sensorManager;
     private Sensor temperature;
 
@@ -37,6 +38,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
 
         temperature_text = (TextView) findViewById(R.id.temperature);
         currentDegrees = (TextView) findViewById(R.id.current_temp);
+        currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
+        currentDegreesK = (TextView) findViewById(R.id.current_temp_k);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
@@ -69,11 +72,23 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     //Main magic of the Temperature Sensor
     @Override
     public final void onSensorChanged(SensorEvent event) {
+        //The default Android properties for event.values[0] is the formula for Celsius
         if(event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE)
         {
             currentDegrees.setText(event.values[0] + " °C" );
+
+            //The following converts celsius into fahrenheit
+        } if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            int b = (int) event.values[0];
+            int c = b * 9/5 + 32;
+            currentDegreesF.setText(c + " °F");
+        } if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            int b = (int) event.values[0];
+            int k = (int) (b + 273.15);
+            currentDegreesK.setText(k + " K");
         }
-    }
+        }
+
 
     @Override
     protected void onResume() {
