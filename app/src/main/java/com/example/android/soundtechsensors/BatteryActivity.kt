@@ -31,7 +31,7 @@ class BatteryActivity : AppCompatActivity() {
     //Is parsed by registerMyReceiver() to the textview
     private var mBatteryReceiver: BroadcastReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
-            val level = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
+            val level = intent.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, -1)
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
             val percent = level * 100 / scale
             val batteryPct = level / scale.toFloat()
@@ -72,6 +72,11 @@ class BatteryActivity : AppCompatActivity() {
         registerReceiver(mBatteryReceiver, ifilter)
 
         return mBatteryReceiver
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(registerMyReceiver())
     }
 
     //This will add functionality to the menu button within the action bar
