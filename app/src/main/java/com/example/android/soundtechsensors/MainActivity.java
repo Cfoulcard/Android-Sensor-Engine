@@ -22,10 +22,7 @@ import java.util.prefs.Preferences;
 public class MainActivity extends AppCompatActivity {
 
     //TODO: Add animated launch screen?
-    //TODO: Add F for Temp Sensor (Kelvin?)
-    //TODO: Add km/h for speed
     //TODO: Create about and credits menu activities
-    //TODO: Make Preferences for the above conversions
     //TODO: Show user a list of sensors their device can use
     //TODO: Tidy code and reduce build size
     //TODO: Plan Google Play launch
