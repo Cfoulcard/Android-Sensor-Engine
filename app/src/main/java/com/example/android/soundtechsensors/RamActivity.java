@@ -38,9 +38,11 @@ public class RamActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(ram_sensor);
 
+        //TextViews
         ramText = (TextView) findViewById(R.id.ram);
         currentRam = (TextView) findViewById(R.id.current_ram);
 
+        //Animation for TextView fade in
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         ramText.startAnimation(in);
@@ -70,6 +72,16 @@ public class RamActivity extends AppCompatActivity {
         return (int) availableMegs;
     }
 
+    private void unbindService(String activityService) {
+    }
+
+    //Unbind ACTIVITY_SERVICE to release ram resources
+    public void onDestroy() {
+        super.onDestroy();
+
+        unbindService(ACTIVITY_SERVICE);
+    }
+
     //This will add functionality to the menu button within the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -77,5 +89,4 @@ public class RamActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
     }
-
 }
