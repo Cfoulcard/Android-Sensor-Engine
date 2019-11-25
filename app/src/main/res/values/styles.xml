@@ -19,5 +19,9 @@
             ...
     </style>
 
+    <style name="PreferencesTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+    </style>
+
 
 </resources>
