@@ -112,4 +112,15 @@
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/speed_icon" />
 
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:onClick="prefIconIntent"
+        android:text="Button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/battery_icon" />
+
 </android.support.constraint.ConstraintLayout>
