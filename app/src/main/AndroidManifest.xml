@@ -119,6 +119,7 @@
             android:label="Preferences"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".SettingsPrefActivity" />
 
     </application>
 </manifest>
