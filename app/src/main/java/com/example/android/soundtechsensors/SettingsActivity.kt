@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.preference.PreferenceFragment
 import android.support.v7.app.AppCompatActivity
 
-class SettingsActivity : AppCompatActivity() {
+class SettingsActivityB : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,8 +21,8 @@ class SettingsActivity : AppCompatActivity() {
             super.onCreate(savedInstanceState)
             addPreferencesFromResource(R.xml.preferences)
 
-            (findPreference("ringtone"))
-            (findPreference("text"))
+            (findPreference("speed_pref"))
+
 
         }
     }
