@@ -165,8 +165,6 @@ public class MainActivity extends AppCompatActivity {
     public void prefIconIntent(View view) {
         Intent prefIntent = new Intent(this, SettingsActivity.class);
 
-        Button pref = findViewById(R.id.button2);
-
         this.startActivity(prefIntent);
 
     }
