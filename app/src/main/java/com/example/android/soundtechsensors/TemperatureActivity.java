@@ -1,11 +1,15 @@
 package com.example.android.soundtechsensors;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.preference.Preference;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.animation.AlphaAnimation;
@@ -14,6 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.analytics.FirebaseAnalytics;
+
+import java.util.ArrayList;
 
 // TODO add menu
 
@@ -25,6 +31,11 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     TextView currentDegreesK;
     private SensorManager sensorManager;
     private Sensor temperature;
+    private Context mContext;
+    private Activity mActivity;
+    private SharedPreferences mSharedPreferences;
+
+
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -36,10 +47,20 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_sensor);
 
+        // Get the application context
+        mContext = getApplicationContext();
+
+        // Get the activity
+        mActivity = TemperatureActivity.this;
+
+        // Get the instance of SharedPreferences object
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+
         temperature_text = (TextView) findViewById(R.id.temperature);
         currentDegrees = (TextView) findViewById(R.id.current_temp);
         currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
-        currentDegreesK = (TextView) findViewById(R.id.current_temp_k);
+      //  currentDegreesK = (TextView) findViewById(R.id.current_temp);
+
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
@@ -60,6 +81,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // Ambient Temperature measures the temperature around the device
         temperature = sensorManager.getDefaultSensor((Sensor.TYPE_AMBIENT_TEMPERATURE));
         currentDegrees = (TextView) findViewById(R.id.current_temp);
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -72,28 +95,47 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     //Main magic of the Temperature Sensor
     @Override
     public final void onSensorChanged(SensorEvent event) {
-        //The default Android properties for event.values[0] is the formula for Celsius
-        if(event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE)
-        {
-            currentDegrees.setText(event.values[0] + " °C" );
+        String temp_unit = mSharedPreferences.getString(getString(R.string.temperature_measurement), null);
+
+
+
+        String temp_unit2 = mSharedPreferences.getString(getString(R.string.temperature_measurement), String.valueOf(1));
+            int temp_id_celsius = mSharedPreferences.getInt("Celsius", 0);
+            int temp_id_fahrenheit = mSharedPreferences.getInt("Fahrenheit", 1);
+            int temp_id_kelvin = mSharedPreferences.getInt(" Kelvin", 2);
+
+            //The default Android properties for event.values[0] is the formula for Celsius
+            if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE
+            && temp_id_celsius == 0) {
+                    currentDegrees.setText(String.format("%s Cgfr", event.values[0]));
+                }
 
             //The following converts celsius into fahrenheit
-        } if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            int b = (int) event.values[0];
-            int c = b * 9/5 + 32;
-            currentDegreesF.setText(c + " °F");
-        } if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            int b = (int) event.values[0];
-            int k = (int) (b + 273.15);
-            currentDegreesK.setText(k + " K");
-        }
-        }
+            if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE && temp_id_fahrenheit == 1) {
+                    int b = (int) event.values[0];
+                    int c = b * 9 / 5 + 32;
+                    currentDegrees.setText(c + " F");
+                }
+            }
+
+
+/*
+            if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+                if (temp_id_kelvin == 1) {
+                    int b = (int) event.values[0];
+                    int k = (int) (b + 273.15);
+                    currentDegrees.setText(k + " " + temp_unit);
+                }
+            }*/
+
+
 
 
     @Override
     protected void onResume() {
         // Register a listener for the sensor.
         super.onResume();
+
         sensorManager.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
