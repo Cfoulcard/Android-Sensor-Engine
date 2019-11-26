@@ -37,6 +37,8 @@
     <string name="phone_temp_sensor">Air Temperature</string>
     <string name="temperature">Temperature</string>
     <string name="C">C</string>
+    <string name="temperature_measurement">Unit of Measurement</string>
+    <string name="temperature_measurement2">Unit of Measurement2</string>
 
     <string name="ram_sensor">Ram Sensor</string>
     <string name="ram">Ram</string>
@@ -49,6 +51,7 @@
     <string name="accelerometer_sensor">Accelerometer</string>
     <string name="accelerometer">Speed</string>
     <string name="mph">mph</string>
+    <string name="speed_measurement">Speed Unit of Measurement</string>
 
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
@@ -56,5 +59,9 @@
     <string name="ram_anim"></string>
     <string name="battery_anim"></string>
     <string name="speed_anim"></string>
+
+    <string name="speed_pref"></string>
+
+
 
 </resources>
