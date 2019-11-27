@@ -1,9 +1,9 @@
 <resources>
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
     <!-- Base application theme. -->
     <!--NoActionBar is used to disable the Title Bar. Change to DarkActionBar to reenable-->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+    <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
@@ -11,17 +11,36 @@
         <!--The following 2 lines are used to make the Status Bar and Nav Bar Transparent-->
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowTranslucentNavigation">true</item>
+        <item name="android:windowBackground">@drawable/launch_screen</item>
     </style>
 
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--The following 2 lines are used to make the Status Bar and Nav Bar Transparent-->
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
+    </style>
+////////////////////////////////////////////////////////////////////////////////////////////////////
     <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        ...
+        <!--This is used for the transition effect when switching from the sensor select screen to sensor activities-->
         <item name="android:windowContentTransitions">true</item>
             ...
     </style>
-
+////////////////////////////////////////////////////////////////////////////////////////////////////
+    <!--To make the action bar dark for the Preferences Activity-->
     <style name="PreferencesTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
     </style>
+////////////////////////////////////////////////////////////////////////////////////////////////////
+<!--    <style name="AppTheme.Launcher" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/drawable_gradient_dark</item>
+
+    </style>-->
 
 
 </resources>
