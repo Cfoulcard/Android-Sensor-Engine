@@ -29,7 +29,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: Add animated launch screen?
     //TODO: Create about and credits menu activities
     //TODO: Show user a list of sensors their device can use
     //TODO: Tidy code and reduce build size
@@ -50,6 +49,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Make sure this is before calling super.onCreate
+        setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.sensor_selection);
@@ -117,8 +118,8 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(soundIntent, transitionActivityOptions.toBundle());
-        
-       // this.startActivity(soundIntent);
+
+        // this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
@@ -131,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(tempIntent, transitionActivityOptions.toBundle());
 
-       // this.startActivity(tempIntent);
+        // this.startActivity(tempIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
@@ -143,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(lightIntent, transitionActivityOptions.toBundle());
-       // this.startActivity(lightIntent);
+        // this.startActivity(lightIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
@@ -155,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(ramIntent, transitionActivityOptions.toBundle());
-    //    this.startActivity(ramIntent);
+        //    this.startActivity(ramIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
@@ -167,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(batteryIntent, transitionActivityOptions.toBundle());
-     //   this.startActivity(soundIntent);
+        //   this.startActivity(soundIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
@@ -179,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(speedIntent, transitionActivityOptions.toBundle());
-     //   this.startActivity(speedIntent);
+        //   this.startActivity(speedIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
