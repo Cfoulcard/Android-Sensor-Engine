@@ -2,9 +2,9 @@
 <resources>
     <!-- Temperature String Arrays for Preferences -->
     <string-array name="temperature_units">
-        <item>Celsius</item>
-        <item>Fahrenheit</item>
-        <item>Kelvin</item>
+        <item>@string/Celsius</item>
+        <item>@string/Fahrenheit</item>
+        <item>@string/Kelvin</item>
     </string-array>
 
     <string-array name="temperature_units_values">
