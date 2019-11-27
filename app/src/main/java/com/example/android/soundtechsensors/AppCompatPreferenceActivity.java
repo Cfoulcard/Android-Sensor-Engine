@@ -1,5 +1,6 @@
 package com.example.android.soundtechsensors;
 
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
@@ -20,11 +21,16 @@ public abstract class AppCompatPreferenceActivity extends PreferenceActivity {
 
     private AppCompatDelegate mDelegate;
 
+    public abstract void onCreatePreferences(Bundle bundle, String s);
+
+    public abstract void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         getDelegate().installViewFactory();
         getDelegate().onCreate(savedInstanceState);
         super.onCreate(savedInstanceState);
+  //      setContentView(R.layout.configurations);
     }
 
     @Override
