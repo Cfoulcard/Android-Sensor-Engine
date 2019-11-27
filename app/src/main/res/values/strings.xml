@@ -39,6 +39,10 @@
     <string name="C">C</string>
     <string name="temperature_measurement">Unit of Measurement</string>
     <string name="temperature_measurement2">Unit of Measurement2</string>
+    <string name="Celsius">Celsius</string>
+    <string name="Fahrenheit">Fahrenheit</string>
+    <string name="Kelvin">Kelvin</string>
+    <string name="not_available">N/A</string>
 
     <string name="ram_sensor">Ram Sensor</string>
     <string name="ram">Ram</string>
