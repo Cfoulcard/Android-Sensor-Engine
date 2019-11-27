@@ -1,5 +1,6 @@
 package com.example.android.soundtechsensors.Sensors;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -23,6 +24,7 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
 
     TextView luminosity;
     TextView currentLux;
+    TextView lightSensor;
     private SensorManager sensorManager;
     private Sensor light;
 
@@ -36,13 +38,15 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lux_sensor);
 
-        luminosity = (TextView) findViewById(R.id.luminosity);
-        currentLux = (TextView) findViewById(R.id.current_lux);
+        luminosity = findViewById(R.id.luminosity);
+        currentLux = findViewById(R.id.current_lux);
+        lightSensor = findViewById(R.id.lux_sensor);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         luminosity.startAnimation(in);
         currentLux.startAnimation(in);
+        lightSensor.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -57,7 +61,7 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
 
         //Light sensor to measure light
         light = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
-        currentLux = (TextView) findViewById(R.id.current_lux);
+        currentLux = findViewById(R.id.current_lux);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,12 +72,12 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
     }
 
     //Main magic of the Light Sensor
+    @SuppressLint("SetTextI18n")
     @Override
     public final void onSensorChanged(SensorEvent event) {
-        if( event.sensor.getType() == Sensor.TYPE_LIGHT)
-        {
-            currentLux.setText(event.values[0] + " lux" );
-         //   currentLux.setTextColor(Color.CYAN);
+        if (event.sensor.getType() == Sensor.TYPE_LIGHT) {
+            currentLux.setText(event.values[0] + " lux");
+            //   currentLux.setTextColor(Color.CYAN);
         }
     }
 

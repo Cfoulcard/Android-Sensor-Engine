@@ -47,12 +47,14 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         //TextViews
         accelerometer = (TextView) findViewById(R.id.accelerometer);
         currentSpeed = (TextView) findViewById(R.id.current_speed);
+        accelerometer_sensor = (TextView) findViewById(R.id.accelerometer_sensor);
 
         //Animation fade in for TextViews
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         accelerometer.startAnimation(in);
         currentSpeed.startAnimation(in);
+        accelerometer_sensor.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);

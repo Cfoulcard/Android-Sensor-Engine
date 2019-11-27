@@ -17,14 +17,16 @@ import android.widget.TextView;
 import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-import static com.example.android.soundtechsensors.R.layout.ram_sensor;
+import org.w3c.dom.Text;
 
+import static com.example.android.soundtechsensors.R.layout.ram_sensor;
 
 
 public class RamActivity extends AppCompatActivity {
 
     TextView ramText;
     TextView currentRam;
+    TextView ramSensor;
     private SensorManager sensorManager;
     private Sensor ram;
 
@@ -40,22 +42,24 @@ public class RamActivity extends AppCompatActivity {
         setContentView(ram_sensor);
 
         //TextViews
-        ramText = (TextView) findViewById(R.id.ram);
-        currentRam = (TextView) findViewById(R.id.current_ram);
+        ramText = findViewById(R.id.ram);
+        currentRam = findViewById(R.id.current_ram);
+        ramSensor = findViewById(R.id.ram_sensor);
 
         //Animation for TextView fade in
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         ramText.startAnimation(in);
         currentRam.startAnimation(in);
+        ramSensor.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Get an instance of the sensor service, and use that to get an instance of
         // a particular sensor.
-        currentRam = (TextView) findViewById(R.id.current_ram);
-        String i = String.valueOf(getMemorySize());
+        currentRam = findViewById(R.id.current_ram);
+        long i = (getMemorySize());
         currentRam.setText((i) + " mB");
     }
 
@@ -68,7 +72,7 @@ public class RamActivity extends AppCompatActivity {
         double availableMegs = mi.availMem / 0x100000L;
 
 //Percentage can be calculated for API 16+
-        double percentAvail = mi.availMem / (double)mi.totalMem * 100.0;
+        double percentAvail = mi.availMem / (double) mi.totalMem * 100.0;
 
         return (int) availableMegs;
     }

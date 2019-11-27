@@ -29,9 +29,6 @@ import com.example.android.soundtechsensors.Menu_Items.Premium;
 import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-//TODO Fix long dB number if denied permission
-//TODO Make XML work on any device
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 public class SoundSensorActivity extends AppCompatActivity {
@@ -39,15 +36,25 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
 
-
+    //TextView Data
     TextView configuredDecibel;
     TextView decibels;
     TextView soundSensor;
     TextView currentdb;
+
+    //For sound recording + converting to sound data
     MediaRecorder mRecorder;
     Thread runner;
     private static double mEMA = 0.0;
     static final private double EMA_FILTER = 0.6;
+    final Runnable updater = new Runnable() {
+
+        public void run() {
+            updateTv();
+        }
+    };
+
+    final Handler mHandler = new Handler();
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -56,21 +63,13 @@ public class SoundSensorActivity extends AppCompatActivity {
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
     public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
 
-    final Runnable updater = new Runnable(){
-
-        public void run(){
-            updateTv();
-        }
-    };
-
-    final Handler mHandler = new Handler();
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        //Enable for fade in transition
+        // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.sound_sensor);
 
         // Obtain the FirebaseAnalytics instance.
@@ -81,16 +80,19 @@ public class SoundSensorActivity extends AppCompatActivity {
         decibels = (TextView) findViewById(R.id.decibels);
         soundSensor = (TextView) findViewById(R.id.sound_sensor);
 
+        //Animation that plays when entering/exiting Activity
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         configuredDecibel.startAnimation(in);
         decibels.startAnimation(in);
-    //    soundSensor.startAnimation(in);
+        soundSensor.startAnimation(in);
 
+        //To request audio permissions upon opening activity
         requestAudioPermissions();
+
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
-        final SeekBar decibelSeekbar= (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
+        final SeekBar decibelSeekbar = (SeekBar) findViewById(R.id.decibel_seekbar); // initiate the Seekbar
         //  decibelSeekbar.setMax(999); // 999 maximum value for the Seek bar
         //decibelSeekbar.getProgress(); // 50 default progress value
         // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
@@ -125,7 +127,6 @@ public class SoundSensorActivity extends AppCompatActivity {
         // Refer to https://developer.android.com/training/permissions/requesting.html#java
 
 
-
         // Used to test request audio recording permission as a toast message
  /*       if(!isRecordAudioPermissionGranted())
         {
@@ -135,23 +136,20 @@ public class SoundSensorActivity extends AppCompatActivity {
         }*/
 
 
-
         ////////////////////////////////////////////////////////////////////////////////////////////////
         //This section is used to pick up sound from the user's microphone
 
         //Adjust milliseconds to change refresh rate of decibel tracker
-        if (runner == null)
-        {
-            runner = new Thread(){
-                public void run()
-                {
-                    while (runner != null)
-                    {
-                        try
-                        {
+        if (runner == null) {
+            runner = new Thread() {
+                public void run() {
+                    while (runner != null) {
+                        try {
                             Thread.sleep(500);
                             // Log.i("Noise", "Tock");
-                        } catch (InterruptedException e) { };
+                        } catch (InterruptedException e) {
+                        }
+                        ;
                         mHandler.post(updater);
                     }
                 }
@@ -161,6 +159,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void requestAudioPermissions() {
         if (ContextCompat.checkSelfPermission(this,
                 Manifest.permission.RECORD_AUDIO)
@@ -169,7 +168,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             //When permission is not granted by user, show them message why this permission is needed.
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                     Manifest.permission.RECORD_AUDIO)) {
-              // Toast.makeText(this, "Please grant permission to measure sound", Toast.LENGTH_LONG).show();
+                // Toast.makeText(this, "Please grant permission to measure sound", Toast.LENGTH_LONG).show();
 
                 //Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this,
@@ -214,10 +213,10 @@ public class SoundSensorActivity extends AppCompatActivity {
             // permissions this app might request.
         }
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Microphone recording starts
-    public void onResume()
-    {
+    public void onResume() {
         super.onResume();
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED &&
@@ -230,36 +229,32 @@ public class SoundSensorActivity extends AppCompatActivity {
     }
 
     //Stops microphone from recording when user exits activity
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         stopRecorder();
     }
 
     //Properties of the microphone
-    public void startRecorder(){
-        if (mRecorder == null)
-        {
+    public void startRecorder() {
+        if (mRecorder == null) {
             mRecorder = new MediaRecorder();
             mRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             mRecorder.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
             mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
             mRecorder.setOutputFile("/dev/null");
-            try
-            {
+            try {
                 mRecorder.prepare();
-            }catch (java.io.IOException ioe) {
+            } catch (java.io.IOException ioe) {
                 android.util.Log.e("[Monkey]", "IOException: " +
                         android.util.Log.getStackTraceString(ioe));
 
-            }catch (java.lang.SecurityException e) {
+            } catch (java.lang.SecurityException e) {
                 android.util.Log.e("[Monkey]", "SecurityException: " +
                         android.util.Log.getStackTraceString(e));
             }
-            try
-            {
+            try {
                 mRecorder.start();
-            }catch (java.lang.SecurityException e) {
+            } catch (java.lang.SecurityException e) {
                 android.util.Log.e("[Monkey]", "SecurityException: " +
                         android.util.Log.getStackTraceString(e));
             }
@@ -292,14 +287,14 @@ public class SoundSensorActivity extends AppCompatActivity {
             configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
         }
 
-        //Change color of decibels based upon loudness
+/*        //Change color of decibels based upon loudness
         if (soundDb() > 70) {
             configuredDecibel.setTextColor(Color.RED);
         } else if (soundDb() < 69 && soundDb() > 30) {
-            configuredDecibel.setTextColor(Color.CYAN);
+            configuredDecibel.setTextColor(Color.WHITE);
         } else if (soundDb() < 30) {
-            configuredDecibel.setTextColor(Color.GREEN);
-        }
+            configuredDecibel.setTextColor(Color.WHITE);
+        }*/
 
         //Alternate decibel measurement
         //configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
@@ -312,7 +307,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Calculates the decibel valve
     public int getAmplitude() {
         if (mRecorder != null)
-            return  (mRecorder.getMaxAmplitude());
+            return (mRecorder.getMaxAmplitude());
         else
             return 0;
     }
@@ -327,8 +322,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Record Audio Permission
     //Upon opening this activity user will be promoted to allow audio recording
     //TODO Update Build Version
-    private boolean isRecordAudioPermissionGranted()
-    {
+    private boolean isRecordAudioPermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
                     PackageManager.PERMISSION_GRANTED) {
@@ -340,7 +334,7 @@ public class SoundSensorActivity extends AppCompatActivity {
                             "App required access to audio", Toast.LENGTH_SHORT).show();
                 }
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO
-                },AUDIO_RECORD_REQUEST_CODE);
+                }, AUDIO_RECORD_REQUEST_CODE);
                 return false;
             }
 
@@ -395,11 +389,6 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     //Measure dB
     //https://stackoverflow.com/questions/15693990/measuring-decibels-with-mobile-phone
-
-
-
-
-
 
 
 }

@@ -21,12 +21,15 @@ import android.widget.Toast;
 import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import org.w3c.dom.Text;
+
 // TODO add menu
 
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
     TextView temperature_text;
     TextView currentDegrees;
+    TextView airTemp;
     TextView currentDegreesTest;
     TextView currentDegreesK;
     private SensorManager sensorManager;
@@ -34,8 +37,6 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     private Context mContext;
     private Activity mActivity;
     private SharedPreferences mSharedPreferences;
-
-
 
 
     // Initiate Firebase Analytics
@@ -49,18 +50,19 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         setContentView(R.layout.temperature_sensor);
 
 
-
         temperature_text = (TextView) findViewById(R.id.temperature);
         currentDegrees = (TextView) findViewById(R.id.current_temp);
-        currentDegreesTest = (TextView) findViewById(R.id.currentdegreestest);
-    //    currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
-      //  currentDegreesK = (TextView) findViewById(R.id.current_temp);
+        airTemp = (TextView) findViewById(R.id.temperature_sensor);
+        //  currentDegreesTest = (TextView) findViewById(R.id.currentdegreestest);
+        //    currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
+        //  currentDegreesK = (TextView) findViewById(R.id.current_temp);
 
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         temperature_text.startAnimation(in);
         currentDegrees.startAnimation(in);
+        airTemp.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -69,14 +71,13 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // the surrounding temperature. If device does not support this sensor a toast message will
         // appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) == null){
+        if (sensorManager.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE) == null) {
             Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
         }
 
         // Ambient Temperature measures the temperature around the device
         temperature = sensorManager.getDefaultSensor((Sensor.TYPE_AMBIENT_TEMPERATURE));
         currentDegrees = (TextView) findViewById(R.id.current_temp);
-
 
 
     }
@@ -101,15 +102,14 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // Get the instance of SharedPreferences object
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
         SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("","");
+        editor.putString("", "");
         editor.apply();
         editor.commit();
 
 
-
         int degrees;
 
-      //  currentDegrees.setText(mSharedPreferences.getInt("Celsius", getResources().getStringArray(0)));
+        //  currentDegrees.setText(mSharedPreferences.getInt("Celsius", getResources().getStringArray(0)));
         String temp_unit_c = mSharedPreferences.getString(getString(R.string.temperature_measurement),
                 mContext.getResources().getString(R.string.Celsius));
 
@@ -136,19 +136,15 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                 temp_unit_c == mSharedPreferences.getString(getString(R.string.Celsius),
                         mContext.getResources().getString(R.string.Celsius))) {
 
-            currentDegrees.setText(b + " C");
+            currentDegrees.setText(b + " °C");
 
         }
 
         //The following converts celsius into fahrenheit
-        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
-                temp_unit_f == mSharedPreferences.getString(getString(R.string.Fahrenheit),
-                        mContext.getResources().getString(R.string.Fahrenheit))) {
+        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
 
             currentDegrees.setText(c + " F");
-        }
-
-        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
+        } else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
                 temp_unit_k == mSharedPreferences.getString(getString(R.string.Kelvin),
                         mContext.getResources().getString(R.string.Kelvin))) {
 
@@ -204,6 +200,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         super.onPause();
         sensorManager.unregisterListener(this);
     }
+
     //This will add functionality to the menu button within the action bar
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
