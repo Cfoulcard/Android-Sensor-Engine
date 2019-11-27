@@ -79,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="72dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/db"
+        android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/sound_logo"

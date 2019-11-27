@@ -35,7 +35,7 @@
     <string name="lux">Lux</string>
 
     <string name="phone_temp_sensor">Air Temperature</string>
-    <string name="temperature">Temperature</string>
+    <string name="temperature">Degrees</string>
     <string name="C">C</string>
     <string name="temperature_measurement">Unit of Measurement</string>
     <string name="temperature_measurement2">Unit of Measurement2</string>
@@ -45,11 +45,11 @@
     <string name="not_available">N/A</string>
 
     <string name="ram_sensor">Ram Sensor</string>
-    <string name="ram">Ram</string>
+    <string name="ram">Available</string>
     <string name="MB">MB</string>
 
-    <string name="battery_sensor">Battery Level</string>
-    <string name="battery">Battery</string>
+    <string name="battery_sensor">Battery Heat</string>
+    <string name="battery">Temperature</string>
     <string name="Percent">%</string>
 
     <string name="accelerometer_sensor">Accelerometer</string>

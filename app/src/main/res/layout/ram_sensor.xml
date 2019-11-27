@@ -55,7 +55,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/MB"
+        android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/ram_logo"
