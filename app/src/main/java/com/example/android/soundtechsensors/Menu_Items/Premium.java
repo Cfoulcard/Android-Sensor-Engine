@@ -1,14 +1,16 @@
-package com.example.android.soundtechsensors;
+package com.example.android.soundtechsensors.Menu_Items;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-public class Configurations extends AppCompatActivity {
+import com.example.android.soundtechsensors.R;
+
+public class Premium extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.configurations);
+        setContentView(R.layout.premium);
 
     }
 }

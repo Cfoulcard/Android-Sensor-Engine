@@ -36,7 +36,7 @@
 
         <!--Sound Sensor Activity-->
         <activity
-            android:name=".SoundSensorActivity"
+            android:name=".Sensors.SoundSensorActivity"
             android:label="Sound Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -44,7 +44,7 @@
 
         <!--Temperature Sensor Activity-->
         <activity
-            android:name=".TemperatureActivity"
+            android:name=".Sensors.TemperatureActivity"
             android:label="Temperature Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -52,7 +52,7 @@
 
         <!--Light Sensor Activity-->
         <activity
-            android:name=".LightSensorActivity"
+            android:name=".Sensors.LightSensorActivity"
             android:label="Light Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -60,7 +60,7 @@
 
         <!--Ram Sensor Activity-->
         <activity
-            android:name=".RamActivity"
+            android:name=".Sensors.RamActivity"
             android:label="Ram Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
@@ -68,13 +68,13 @@
 
         <!--Battery Sensor Activity-->
         <activity
-            android:name=".BatteryActivity"
+            android:name=".Sensors.BatteryActivity"
             android:label="Battery Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name=".BatteryActivity">
+        <receiver android:name=".Sensors.BatteryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
@@ -83,43 +83,43 @@
 
         <!--Speed Sensor Activity-->
         <activity
-            android:name=".AccelerometerActivity"
+            android:name=".Sensors.AccelerometerActivity"
             android:label="Speed Sensor"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <!--The following is for the menu items-->
-        <activity android:name=".Credits"
+        <activity android:name=".Menu_Items.Credits"
             android:label="Credits"
 
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".Configurations"
+        <activity android:name=".Preferences.Configurations"
             android:label="Preferences"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".About"
+        <activity android:name=".Menu_Items.About"
             android:label="About"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".Premium"
+        <activity android:name=".Menu_Items.Premium"
             android:label="Premium"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".SettingsActivity"
+        <activity android:name=".Preferences.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:label="Preferences"
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".SettingsPrefActivity" />
+         />
 
     </application>
 </manifest>

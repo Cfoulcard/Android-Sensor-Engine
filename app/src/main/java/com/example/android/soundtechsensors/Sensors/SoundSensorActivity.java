@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.soundtechsensors.Sensors;
 
 import android.Manifest;
 import android.content.Intent;
@@ -22,9 +22,12 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.soundtechsensors.Menu_Items.About;
+import com.example.android.soundtechsensors.Preferences.Configurations;
+import com.example.android.soundtechsensors.Menu_Items.Credits;
+import com.example.android.soundtechsensors.Menu_Items.Premium;
+import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import org.w3c.dom.Text;
 
 //TODO Fix long dB number if denied permission
 //TODO Make XML work on any device
@@ -36,8 +39,6 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
 
-    //Creates an instance of the SoundDetector Class. Will be used to access its methods
-    // SoundDetector soundDetector = new SoundDetector();
 
     TextView configuredDecibel;
     TextView decibels;

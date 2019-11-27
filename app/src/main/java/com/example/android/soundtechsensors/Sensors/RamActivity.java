@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.soundtechsensors.Sensors;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -14,6 +14,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
+import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static com.example.android.soundtechsensors.R.layout.ram_sensor;

@@ -2,22 +2,30 @@ package com.example.android.soundtechsensors;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
+import com.example.android.soundtechsensors.Menu_Items.About;
+import com.example.android.soundtechsensors.Menu_Items.Credits;
+import com.example.android.soundtechsensors.Menu_Items.Premium;
+import com.example.android.soundtechsensors.Preferences.Configurations;
+import com.example.android.soundtechsensors.Preferences.SettingsActivity;
+import com.example.android.soundtechsensors.Sensors.AccelerometerActivity;
+import com.example.android.soundtechsensors.Sensors.BatteryActivity;
+import com.example.android.soundtechsensors.Sensors.LightSensorActivity;
+import com.example.android.soundtechsensors.Sensors.RamActivity;
+import com.example.android.soundtechsensors.Sensors.SoundSensorActivity;
+import com.example.android.soundtechsensors.Sensors.TemperatureActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import java.util.prefs.Preferences;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +42,10 @@ public class MainActivity extends AppCompatActivity {
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
 
+    private Context mContext;
+    private Activity mActivity;
+    private SharedPreferences mSharedPreferences;
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
@@ -48,6 +60,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+
+        // Get the application context
+        mContext = getApplicationContext();
+
+        // Get the activity
+        mActivity = MainActivity.this;
+
+        // Get the instance of SharedPreferences object
+        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

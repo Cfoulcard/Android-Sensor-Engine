@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors
+package com.example.android.soundtechsensors.Sensors
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
@@ -11,9 +11,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.animation.AlphaAnimation
 import android.widget.TextView
-import android.widget.Toast
+import com.example.android.soundtechsensors.R
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.battery_sensor.*
 
 class BatteryActivity : AppCompatActivity() {
 

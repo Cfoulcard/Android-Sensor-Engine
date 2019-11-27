@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.soundtechsensors.Sensors;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.android.soundtechsensors.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 //Permission for accessing GPS location -- needed to track speed

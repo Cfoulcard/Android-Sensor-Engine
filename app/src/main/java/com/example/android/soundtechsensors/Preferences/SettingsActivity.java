@@ -1,26 +1,37 @@
-package com.example.android.soundtechsensors;
+package com.example.android.soundtechsensors.Preferences;
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.EditTextPreference;
-import android.preference.ListPreference;
-import android.preference.Preference;
-import android.preference.PreferenceFragment;
-import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.text.TextUtils;
-import android.view.MenuItem;
-import android.widget.Toast;
+        import android.content.SharedPreferences;
+        import android.media.Ringtone;
+        import android.media.RingtoneManager;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.preference.CheckBoxPreference;
+        import android.preference.EditTextPreference;
+        import android.preference.ListPreference;
+        import android.preference.Preference;
+        import android.preference.PreferenceFragment;
+        import android.preference.PreferenceManager;
+        import android.preference.PreferenceScreen;
+        import android.preference.RingtonePreference;
+        import android.text.TextUtils;
+        import android.view.MenuItem;
+        import android.widget.Toast;
+
+        import com.example.android.soundtechsensors.AppCompatPreferenceActivity;
+        import com.example.android.soundtechsensors.R;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();
+
+    @Override
+    public void onCreatePreferences(Bundle bundle, String s) {
+
+    }
+
+    @Override
+    public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, String key) {
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +52,9 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
                 /*android.preference.SwitchPreference preference = (android.preference.SwitchPreference) findPreference("@string/speed_pref");
                 preference.setSummaryOff("Switch off state updated from code");
                 preference.setSummaryOn("Switch on state updated from code");*/
-
         }
+
+
 
         @Override
         public void onResume() {
