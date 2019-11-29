@@ -38,9 +38,7 @@
             </intent-filter>
         </activity>
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
 
-        <!--Sound Sensor Activity-->
         <activity
             android:name=".Sensors.SoundSensorActivity"
             android:label="Sound Sensor"
@@ -95,7 +93,7 @@
             android:screenOrientation="portrait">
         </activity>
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
+
 
         <!--The following is for the menu items-->
         <activity android:name=".Menu_Items.Credits"
@@ -122,7 +120,7 @@
             android:screenOrientation="portrait"
             />
 
-        <activity android:name=".Preferences.SettingsActivity"
+       <activity android:name=".Preferences.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:label="Preferences"
             android:parentActivityName=".MainActivity"
