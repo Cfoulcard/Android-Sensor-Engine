@@ -4,14 +4,15 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" android:opacity="opaque">
 
     <!-- The background color, preferably the same as your normal theme -->
-    <item android:drawable="@drawable/drawable_gradient_dark"/>
+    <item android:drawable="@drawable/drawable_gradient_grey"/>
 
     <!-- Your product logo - 144dp color version of your app icon -->
     <item>
 
         <bitmap
-            android:src="@drawable/logo128"
-            android:gravity="center"/>
+            android:src="@drawable/launch_logo_256"
+            android:gravity="center"
+            />
 
     </item>
 
