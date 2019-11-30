@@ -1,24 +1,20 @@
-package com.example.android.soundtechsensors.Preferences;
+package com.example.android.androidsensorengine.Preferences;
 
         import android.content.SharedPreferences;
         import android.media.Ringtone;
         import android.media.RingtoneManager;
         import android.net.Uri;
         import android.os.Bundle;
-        import android.preference.CheckBoxPreference;
         import android.preference.EditTextPreference;
         import android.preference.ListPreference;
         import android.preference.Preference;
         import android.preference.PreferenceFragment;
         import android.preference.PreferenceManager;
-        import android.preference.PreferenceScreen;
         import android.preference.RingtonePreference;
         import android.text.TextUtils;
-        import android.view.MenuItem;
-        import android.widget.Toast;
 
-        import com.example.android.soundtechsensors.AppCompatPreferenceActivity;
-        import com.example.android.soundtechsensors.R;
+        import com.example.android.androidsensorengine.AppCompatPreferenceActivity;
+        import com.example.android.androidsensorengine.R;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();

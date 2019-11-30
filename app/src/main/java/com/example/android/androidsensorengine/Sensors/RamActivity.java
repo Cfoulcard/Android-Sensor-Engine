@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors.Sensors;
+package com.example.android.androidsensorengine.Sensors;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
@@ -14,12 +14,12 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
 
-import com.example.android.soundtechsensors.R;
+import com.example.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.w3c.dom.Text;
 
-import static com.example.android.soundtechsensors.R.layout.ram_sensor;
+import static com.example.android.androidsensorengine.R.layout.ram_sensor;
 
 
 public class RamActivity extends AppCompatActivity {

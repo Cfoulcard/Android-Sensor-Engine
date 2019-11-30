@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors.Sensors
+package com.example.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
 import android.content.BroadcastReceiver
@@ -11,7 +11,7 @@ import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.animation.AlphaAnimation
 import android.widget.TextView
-import com.example.android.soundtechsensors.R
+import com.example.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class BatteryActivity : AppCompatActivity() {

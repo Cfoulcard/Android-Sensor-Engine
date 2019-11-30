@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors.Sensors;
+package com.example.android.androidsensorengine.Sensors;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,7 +17,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.soundtechsensors.R;
+import com.example.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LightSensorActivity extends AppCompatActivity implements SensorEventListener {

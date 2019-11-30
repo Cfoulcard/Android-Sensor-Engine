@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.androidsensorengine;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors.Sensors;
+package com.example.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,8 +9,6 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.annotation.ColorInt;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.animation.AlphaAnimation;
@@ -18,10 +16,8 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.soundtechsensors.R;
+import com.example.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
-
-import org.w3c.dom.Text;
 
 // TODO add menu
 
@@ -132,24 +128,22 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         }*/
 
         //The default Android properties for event.values[0] is the formula for Celsius
-        if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
-                temp_unit_c == mSharedPreferences.getString(getString(R.string.Celsius),
-                        mContext.getResources().getString(R.string.Celsius))) {
-
-            currentDegrees.setText(b + " °C");
+        //This is for Fahrenheit
+        if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+            currentDegrees.setText(c + " °F");
 
         }
 
         //The following converts celsius into fahrenheit
-        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
+/*        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
 
             currentDegrees.setText(c + " F");
         } else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
                 temp_unit_k == mSharedPreferences.getString(getString(R.string.Kelvin),
                         mContext.getResources().getString(R.string.Kelvin))) {
 
-            currentDegrees.setText(k + " K");
-        }
+            currentDegrees.setText(k + " °K");
+        }*/
 
 
     }

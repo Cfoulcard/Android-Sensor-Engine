@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.androidsensorengine;
 
 import android.content.SharedPreferences;
 import android.content.res.Configuration;

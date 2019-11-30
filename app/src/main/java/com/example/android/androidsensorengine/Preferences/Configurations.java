@@ -1,9 +1,9 @@
-package com.example.android.soundtechsensors.Preferences;
+package com.example.android.androidsensorengine.Preferences;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.example.android.soundtechsensors.R;
+import com.example.android.androidsensorengine.R;
 
 public class Configurations extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.example.android.androidsensorengine;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -14,17 +14,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.android.soundtechsensors.Menu_Items.About;
-import com.example.android.soundtechsensors.Menu_Items.Credits;
-import com.example.android.soundtechsensors.Menu_Items.Premium;
-import com.example.android.soundtechsensors.Preferences.Configurations;
-import com.example.android.soundtechsensors.Preferences.SettingsActivity;
-import com.example.android.soundtechsensors.Sensors.AccelerometerActivity;
-import com.example.android.soundtechsensors.Sensors.BatteryActivity;
-import com.example.android.soundtechsensors.Sensors.LightSensorActivity;
-import com.example.android.soundtechsensors.Sensors.RamActivity;
-import com.example.android.soundtechsensors.Sensors.SoundSensorActivity;
-import com.example.android.soundtechsensors.Sensors.TemperatureActivity;
+import com.example.android.androidsensorengine.Sensors.AccelerometerActivity;
+import com.example.android.androidsensorengine.Menu_Items.About;
+import com.example.android.androidsensorengine.Menu_Items.Credits;
+import com.example.android.androidsensorengine.Menu_Items.Premium;
+import com.example.android.androidsensorengine.Preferences.Configurations;
+import com.example.android.androidsensorengine.Preferences.SettingsActivity;
+import com.example.android.androidsensorengine.R;
+import com.example.android.androidsensorengine.Sensors.BatteryActivity;
+import com.example.android.androidsensorengine.Sensors.LightSensorActivity;
+import com.example.android.androidsensorengine.Sensors.RamActivity;
+import com.example.android.androidsensorengine.Sensors.SoundSensorActivity;
+import com.example.android.androidsensorengine.Sensors.TemperatureActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {

@@ -1,9 +1,8 @@
-package com.example.android.soundtechsensors.Sensors;
+package com.example.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Color;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -22,11 +21,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.soundtechsensors.Menu_Items.About;
-import com.example.android.soundtechsensors.Preferences.Configurations;
-import com.example.android.soundtechsensors.Menu_Items.Credits;
-import com.example.android.soundtechsensors.Menu_Items.Premium;
-import com.example.android.soundtechsensors.R;
+import com.example.android.androidsensorengine.Menu_Items.Premium;
+import com.example.android.androidsensorengine.Menu_Items.About;
+import com.example.android.androidsensorengine.Preferences.Configurations;
+import com.example.android.androidsensorengine.Menu_Items.Credits;
+import com.example.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
