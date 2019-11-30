@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:1030019902502:android:5841263859910185",
         "android_client_info": {
-          "package_name": "com.example.android.soundtechsensors"
+          "package_name": "com.example.android.androidsensorengine"
         }
       },
       "oauth_client": [
