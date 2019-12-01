@@ -8,9 +8,46 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030019902502:android:5841263859910185",
+        "mobilesdk_app_id": "1:1030019902502:android:f23f3cbf3f95fd3e8b8ae7",
         "android_client_info": {
           "package_name": "com.example.android.androidsensorengine"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1030019902502-d8if1emp5jahp9jbt76ka9iqovltdc7k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.android.androidsensorengine",
+            "certificate_hash": "2f5227234f8f7cdf1e39e9d824af1f87408dd219"
+          }
+        },
+        {
+          "client_id": "1030019902502-76hddd1c94l5i0fleff3s6pt6dlnkdqh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRGXTgZhxnmtTUJnAEc0rbymReN0AVhKo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1030019902502-76hddd1c94l5i0fleff3s6pt6dlnkdqh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1030019902502:android:5841263859910185",
+        "android_client_info": {
+          "package_name": "com.example.android.soundtechsensors"
         }
       },
       "oauth_client": [
