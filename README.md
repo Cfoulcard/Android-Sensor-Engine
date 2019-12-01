@@ -25,4 +25,4 @@ There's a world of features I'd like to implement into this app over time. Here'
 ## Beta
 This app will be launched onto the Google Play Store in the near future for testing/feedback. I'll provide a link once it is launched.
 
-![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/accelerometer_screenshot.png)
+
