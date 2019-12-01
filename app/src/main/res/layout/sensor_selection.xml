@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/drawable_gradient"
     android:fitsSystemWindows="false"
-    tools:context="com.example.android.androidsensorengine.MainActivity"
+    tools:context="com.christianfoulcard.android.androidsensorengine.MainActivity"
     >
 
 

@@ -1,4 +1,4 @@
-package com.example.android.androidsensorengine.Sensors;
+package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
 import android.content.Context;
@@ -16,7 +16,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.androidsensorengine.R;
+import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 // TODO add menu

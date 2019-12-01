@@ -7,7 +7,7 @@ apply plugin: 'io.fabric'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.example.android.androidsensorengine"
+        applicationId "com.christianfoulcard.android.androidsensorengine"
         minSdkVersion 21 // Lollipop Version. Users can at least get their lick on
         targetSdkVersion 29
         versionCode 1

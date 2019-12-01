@@ -1,4 +1,4 @@
-package com.example.android.androidsensorengine.Sensors;
+package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.content.Intent;
@@ -21,11 +21,11 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.android.androidsensorengine.Menu_Items.Premium;
-import com.example.android.androidsensorengine.Menu_Items.About;
-import com.example.android.androidsensorengine.Preferences.Configurations;
-import com.example.android.androidsensorengine.Menu_Items.Credits;
-import com.example.android.androidsensorengine.R;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
+import com.christianfoulcard.android.androidsensorengine.Preferences.Configurations;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
+import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,4 +1,4 @@
-package com.example.android.androidsensorengine.Preferences;
+package com.christianfoulcard.android.androidsensorengine.Preferences;
 
         import android.content.SharedPreferences;
         import android.media.Ringtone;
@@ -13,8 +13,8 @@ package com.example.android.androidsensorengine.Preferences;
         import android.preference.RingtonePreference;
         import android.text.TextUtils;
 
-        import com.example.android.androidsensorengine.AppCompatPreferenceActivity;
-        import com.example.android.androidsensorengine.R;
+        import com.christianfoulcard.android.androidsensorengine.AppCompatPreferenceActivity;
+        import com.christianfoulcard.android.androidsensorengine.R;
 
 public class SettingsActivity extends AppCompatPreferenceActivity {
     private static final String TAG = SettingsActivity.class.getSimpleName();

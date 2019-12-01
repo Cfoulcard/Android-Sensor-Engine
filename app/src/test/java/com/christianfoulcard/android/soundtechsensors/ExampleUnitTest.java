@@ -1,4 +1,4 @@
-package com.example.android.soundtechsensors;
+package com.christianfoulcard.android.soundtechsensors;
 
 import org.junit.Test;
 

@@ -1,4 +1,4 @@
-package com.example.android.androidsensorengine;
+package com.christianfoulcard.android.androidsensorengine;
 
 import android.app.Activity;
 import android.app.ActivityOptions;
@@ -14,18 +14,18 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
-import com.example.android.androidsensorengine.Sensors.AccelerometerActivity;
-import com.example.android.androidsensorengine.Menu_Items.About;
-import com.example.android.androidsensorengine.Menu_Items.Credits;
-import com.example.android.androidsensorengine.Menu_Items.Premium;
-import com.example.android.androidsensorengine.Preferences.Configurations;
-import com.example.android.androidsensorengine.Preferences.SettingsActivity;
-import com.example.android.androidsensorengine.R;
-import com.example.android.androidsensorengine.Sensors.BatteryActivity;
-import com.example.android.androidsensorengine.Sensors.LightSensorActivity;
-import com.example.android.androidsensorengine.Sensors.RamActivity;
-import com.example.android.androidsensorengine.Sensors.SoundSensorActivity;
-import com.example.android.androidsensorengine.Sensors.TemperatureActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerActivity;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
+import com.christianfoulcard.android.androidsensorengine.Preferences.Configurations;
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
+import com.christianfoulcard.android.androidsensorengine.R;
+import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {

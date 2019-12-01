@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.android.androidsensorengine"
+    package="com.christianfoulcard.android.androidsensorengine"
     tools:ignore="ExtraText"
     android:versionCode="1"
     android:versionName="BETA">
@@ -30,7 +30,7 @@
         <!--Change the theme to AppTheme to go straight to the Sensor Select Screen-->
         <!--AppTheme.Launcher is for the launcher screen-->
         <activity
-            android:name="com.example.android.androidsensorengine.MainActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"
 
             android:theme="@style/AppTheme.Launcher">
@@ -42,45 +42,45 @@
 
 
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.SoundSensorActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity"
             android:label="Sound Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <!--Temperature Sensor Activity-->
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.TemperatureActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity"
             android:label="Temperature Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <!--Light Sensor Activity-->
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.LightSensorActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity"
             android:label="Light Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <!--Ram Sensor Activity-->
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.RamActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity"
             android:label="Ram Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
         <!--Battery Sensor Activity-->
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.BatteryActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity"
             android:label="Battery Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <receiver android:name="com.example.android.androidsensorengine.Sensors.BatteryActivity">
+        <receiver android:name="com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
                 <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
@@ -89,43 +89,43 @@
 
         <!--Speed Sensor Activity-->
         <activity
-            android:name="com.example.android.androidsensorengine.Sensors.AccelerometerActivity"
+            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerActivity"
             android:label="Speed Sensor"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
         </activity>
 
 
 
         <!--The following is for the menu items-->
-        <activity android:name="com.example.android.androidsensorengine.Menu_Items.Credits"
+        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits"
             android:label="Credits"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name="com.example.android.androidsensorengine.Preferences.Configurations"
+        <activity android:name="com.christianfoulcard.android.androidsensorengine.Preferences.Configurations"
             android:label="Preferences"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name="com.example.android.androidsensorengine.Menu_Items.About"
+        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.About"
             android:label="About"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"
             />
 
-        <activity android:name="com.example.android.androidsensorengine.Menu_Items.Premium"
+        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium"
             android:label="Premium"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"
             />
 
-       <activity android:name="com.example.android.androidsensorengine.Preferences.SettingsActivity"
+       <activity android:name="com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:label="Preferences"
-            android:parentActivityName="com.example.android.androidsensorengine.MainActivity"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"/>
 
 

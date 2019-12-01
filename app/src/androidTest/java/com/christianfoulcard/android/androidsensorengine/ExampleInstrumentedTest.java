@@ -1,4 +1,4 @@
-package com.example.android.androidsensorengine;
+package com.christianfoulcard.android.androidsensorengine;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

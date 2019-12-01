@@ -1,7 +1,6 @@
-package com.example.android.androidsensorengine.Sensors;
+package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -14,9 +13,8 @@ import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.android.androidsensorengine.R;
+import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 //Permission for accessing GPS location -- needed to track speed
