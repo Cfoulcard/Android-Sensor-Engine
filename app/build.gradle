@@ -4,7 +4,17 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
+
 android {
+
+
+
+    signingConfigs {
+        release {
+
+        }
+    }
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.christianfoulcard.android.androidsensorengine"
@@ -22,10 +32,11 @@ android {
     }
 }
 
-buildScan {
+
+/*buildScan {
     termsOfServiceUrl = 'https://gradle.com/terms-of-service'
     termsOfServiceAgree = 'yes'
-}
+}*/
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
