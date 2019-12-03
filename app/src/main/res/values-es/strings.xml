@@ -1,6 +1,7 @@
 <resources>
 
-    <!--Spanish Translation-->
+    <!--Spanish Translation TODO: Add string resources for toast messages-->
+
 
     <string name="app_name">Android Sensor Engine</string>
 
