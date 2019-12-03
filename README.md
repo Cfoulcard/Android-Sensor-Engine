@@ -21,6 +21,7 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Backgound notifications
 - A list of all currently available sensors on a device
 - Smooth animations
+- Localize throughout the world (English + Spanish currently supported)
 
 ## Beta
 This app will be launched onto the Google Play Store in the near future for testing/feedback. I'll provide a link once it is launched.
