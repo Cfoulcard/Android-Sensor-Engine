@@ -15,7 +15,7 @@
     <string name="sensor_select">Sensor Selection</string>
     <string name="sound_button">Sound Button</string>
     <string name="temp_button">Temp Button</string>
-    <string name="light_button">LightButton</string>
+    <string name="light_button">Light Button</string>
     <string name="ram_button">Ram Button</string>
     <string name="battery_button">Battery Button</string>
     <string name="speed_button">Speed Button</string>
