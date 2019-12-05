@@ -1,0 +1,68 @@
+<resources>
+
+    <!--Spanish Translation TODO: Add string resources for toast messages-->
+
+
+    <string name="app_name">Android Sensor Engine</string>
+
+    <!--Navigation Menu String Information-->
+    <string name="preferences">Préférences</string>
+    <string name="about">À propos de</string>
+    <string name="credits">Crédits</string>
+    <string name="premium">Premium</string>
+
+    <!--Sensor Select String Information-->
+
+    <string name="sensor_select">Sélection du capteur</string>
+    <string name="sound_button">Bouton Son</string>
+    <string name="temp_button">Bouton Temp</string>
+    <string name="light_button">Bouton lumineux</string>
+    <string name="ram_button">Bouton Ram</string>
+    <string name="battery_button">Bouton de la batterie</string>
+    <string name="speed_button">Bouton de vitesse</string>
+    <string name="ham_icon_black">Bouton de jambon noir</string>
+    <string name="ham_icon_white">Bouton de jambon blanc</string>
+
+    <!--Individual Sensor Activity String Information-->
+
+    <string name="sound_sensor">Capteur de son</string>
+    <string name="sensitivity">Sensibilité</string>
+    <string name="decibels">Décibels</string>
+    <string name="db">0 dB</string>
+    <string name="sound">Son</string>
+    <string name="sound_logo">Logo sonore</string>
+    <string name="lux_sensor">Capteur de lumière</string>
+    <string name="luminosity">Luminosity</string>
+    <string name="lux">Lux</string>
+    <string name="phone_temp_sensor">Température de l\'air</string>
+    <string name="temperature">Degrés</string>
+    <string name="C">C</string>
+    <string name="temperature_measurement">Unité de mesure</string>
+    <string name="temperature_measurement2">Unité de mesure</string>
+    <string name="Celsius">Celsius</string>
+    <string name="Fahrenheit">Fahrenheit</string>
+    <string name="Kelvin">Kelvin</string>
+    <string name="not_available">N/A</string>
+    <string name="ram_sensor">Capteur de mémoire dynamique</string>
+    <string name="ram">Disponible</string>
+    <string name="MB">MB</string>
+    <string name="battery_sensor">Chaleur de la batterie</string>
+    <string name="battery">Température</string>
+    <string name="Percent">%</string>
+    <string name="accelerometer_sensor">Accéléromètre</string>
+    <string name="accelerometer">Vitesse</string>
+    <string name="mph">mph</string>
+    <string name="speed_measurement">Unité de mesure de vitesse</string>
+
+    <string name="sound_anim"></string>
+    <string name="temp_anim"></string>
+    <string name="light_anim"></string>
+    <string name="ram_anim"></string>
+    <string name="battery_anim"></string>
+    <string name="speed_anim"></string>
+    <string name="speed_pref"></string>
+
+
+
+
+</resources>
