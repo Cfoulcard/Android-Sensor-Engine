@@ -24,6 +24,6 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Localize throughout the world (English + Spanish currently supported)
 
 ## Beta
-This app will be launched onto the Google Play Store in the near future for testing/feedback. I'll provide a link once it is launched.
+This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with optimization.
 
 
