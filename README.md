@@ -21,7 +21,7 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Backgound notifications
 - A list of all currently available sensors on a device
 - Smooth animations
-- Localize throughout the world (English/French/Spanish currently supported)
+- Localize throughout the world (English/Spanish currently supported)
 
 ## Beta
 This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with optimization.
