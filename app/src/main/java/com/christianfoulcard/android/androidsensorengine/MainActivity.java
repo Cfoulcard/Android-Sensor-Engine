@@ -32,8 +32,6 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Create about and credits menu activities
     //TODO: Show user a list of sensors their device can use
-    //TODO: Tidy code and reduce build size
-    //TODO: Plan Google Play launch
 
 
     //FUTURE IDEAS
