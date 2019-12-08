@@ -2,6 +2,7 @@
 📱 An Android App Engineered to Utilize Smartphone Sensors ~ **Currently in Beta**
 
 ![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/featured_image.png)
+![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/google-play-badge.png)
 
 This is a personal project being developed and maintained for devices running on Android. It capitalizes on sensors and utilities on Android smartphones. One overaching goal I'm on a quest to achieve is clean code and clean design. As this is my first real app I'm out to document and explain code/features. Also a clean/vibrant/picture based UI is used to make using the app simple and easy. So far the following features have been developed:
 - Sound Decibel Reading
