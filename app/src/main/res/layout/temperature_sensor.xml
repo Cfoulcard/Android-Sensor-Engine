@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
+        android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/phone_temp_sensor"
@@ -26,21 +26,21 @@
     <ImageView
         android:id="@+id/temperature_logo"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/temp_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/phone_temp_sensor"
+        android:transitionName="@string/temp_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temperature_sensor"
-        app:srcCompat="@drawable/temp_icon_2" />
+        app:srcCompat="@drawable/ic_temp_icon_2" />
 
     <TextView
         android:id="@+id/temperature"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/temperature"
         android:textColor="@color/white"
@@ -53,7 +53,7 @@
         android:id="@+id/current_temp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="120dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/not_available"
         android:textColor="@color/white"

@@ -21,7 +21,7 @@
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="@color/white"
-        android:textSize="42sp"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -32,61 +32,60 @@
     <ImageView
         android:id="@+id/sound_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/sound_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/sound_button"
         android:onClick="soundIconIntent"
+        android:transitionName="@string/sound_anim"
         app:layout_constraintEnd_toStartOf="@+id/temp_icon"
         app:layout_constraintTop_toTopOf="@+id/temp_icon"
-        app:srcCompat="@drawable/sound_icon" />
+        app:srcCompat="@drawable/ic_sound_icon" />
 
     <ImageView
         android:id="@+id/temp_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/temp_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginTop="32dp"
         android:contentDescription="@string/temp_button"
         android:onClick="tempIconIntent"
+        android:transitionName="@string/temp_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensor_select_text"
-        app:srcCompat="@drawable/temp_icon" />
+        app:srcCompat="@drawable/ic_temp_icon" />
 
     <ImageView
         android:id="@+id/light_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/light_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/light_button"
         android:onClick="lightIconIntent"
+        android:transitionName="@string/light_anim"
         app:layout_constraintStart_toEndOf="@+id/temp_icon"
         app:layout_constraintTop_toTopOf="@+id/temp_icon"
-        app:srcCompat="@drawable/light_icon" />
+        app:srcCompat="@drawable/ic_light_icon" />
 
     <ImageView
         android:id="@+id/ram_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/ram_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginEnd="32dp"
         android:contentDescription="@string/ram_button"
         android:onClick="ramIconIntent"
+        android:transitionName="@string/ram_anim"
         app:layout_constraintEnd_toStartOf="@+id/battery_icon"
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
-        app:srcCompat="@drawable/ram_icon" />
+        app:srcCompat="@drawable/ic_ram_icon" />
 
     <ImageView
         android:id="@+id/battery_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/battery_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="8dp"
@@ -94,23 +93,24 @@
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/battery_button"
         android:onClick="batteryIconIntent"
+        android:transitionName="@string/battery_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/temp_icon"
-        app:srcCompat="@drawable/battery_icon" />
+        app:srcCompat="@drawable/ic_battery_icon" />
 
     <ImageView
         android:id="@+id/speed_icon"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/speed_anim"
         android:layout_width="80dp"
         android:layout_height="80dp"
         android:layout_marginStart="32dp"
         android:contentDescription="@string/speed_button"
         android:onClick="speedIconIntent"
+        android:transitionName="@string/speed_anim"
         app:layout_constraintStart_toEndOf="@+id/battery_icon"
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
-        app:srcCompat="@drawable/speed_icon" />
+        app:srcCompat="@drawable/ic_speed_icon" />
 
     <Button
         android:id="@+id/button2"

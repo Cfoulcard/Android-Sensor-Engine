@@ -37,7 +37,7 @@
         app:layout_constraintEnd_toStartOf="@+id/speed_icon"
         app:layout_constraintStart_toEndOf="@+id/ram_icon"
         app:layout_constraintTop_toTopOf="@+id/ram_icon"
-        app:srcCompat="@drawable/battery_icon" />
+        app:srcCompat="@drawable/ic_battery_icon" />
 
     <ImageView
         android:id="@+id/sound_icon"
@@ -47,7 +47,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensor_select_text"
-        app:srcCompat="@drawable/sound_icon" />
+        app:srcCompat="@drawable/ic_sound_icon" />
 
     <ImageView
         android:id="@+id/temp_icon"
@@ -58,7 +58,7 @@
         app:layout_constraintEnd_toStartOf="@+id/light_icon"
         app:layout_constraintStart_toEndOf="@+id/sound_icon"
         app:layout_constraintTop_toTopOf="@+id/sound_icon"
-        app:srcCompat="@drawable/temp_icon" />
+        app:srcCompat="@drawable/ic_temp_icon" />
 
     <ImageView
         android:id="@+id/ram_icon"
@@ -68,7 +68,7 @@
         android:layout_marginTop="32dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sound_icon"
-        app:srcCompat="@drawable/ram_icon" />
+        app:srcCompat="@drawable/ic_ram_icon" />
 
     <ImageView
         android:id="@+id/light_icon"
@@ -77,7 +77,7 @@
         android:layout_marginEnd="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/temp_icon"
-        app:srcCompat="@drawable/light_icon" />
+        app:srcCompat="@drawable/ic_light_icon" />
 
     <ImageView
         android:id="@+id/speed_icon"
@@ -86,6 +86,6 @@
         android:layout_marginEnd="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
-        app:srcCompat="@drawable/speed_icon" />
+        app:srcCompat="@drawable/ic_speed_icon" />
 
 </android.support.constraint.ConstraintLayout>

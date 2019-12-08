@@ -26,15 +26,15 @@
     <ImageView
         android:id="@+id/battery_logo"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/battery_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/battery_sensor"
+        android:transitionName="@string/battery_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/battery_sensor"
-        app:srcCompat="@drawable/battery_icon_2" />
+        app:srcCompat="@drawable/ic_battery_icon_2" />
 
     <TextView
         android:id="@+id/battery"

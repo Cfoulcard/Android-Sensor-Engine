@@ -26,15 +26,15 @@
     <ImageView
         android:id="@+id/ram_logo"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/ram_anim"
         android:layout_width="300dp"
         android:layout_height="300dp"
         android:contentDescription="@string/phone_temp_sensor"
+        android:transitionName="@string/ram_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ram_sensor"
-        app:srcCompat="@drawable/ram_icon_2" />
+        app:srcCompat="@drawable/ic_ram_icon_2" />
 
     <TextView
         android:id="@+id/ram"

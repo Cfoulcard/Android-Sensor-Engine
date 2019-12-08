@@ -12,26 +12,22 @@
     <ImageView
         android:id="@+id/sound_logo"
         style="@style/MaterialAnimations"
-        android:transitionName="@string/sound_anim"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:contentDescription="@string/sound_logo"
+        android:transitionName="@string/sound_anim"
         app:layout_constraintEnd_toEndOf="@+id/sound_sensor"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@+id/sound_sensor"
         app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
-        app:srcCompat="@drawable/sound_icon_2" />
+        app:srcCompat="@drawable/ic_sound_icon_2" />
 
     <TextView
         android:id="@+id/sound_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="156dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="128dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/sound_sensor"
         android:textColor="@color/white"
@@ -44,15 +40,13 @@
         android:id="@+id/decibels"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/decibels"
         android:textColor="@color/white"
         android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/sound_logo"
-        app:layout_constraintStart_toStartOf="@+id/sound_logo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/sound_logo" />
 
     <SeekBar
@@ -60,6 +54,7 @@
         style="@style/Widget.AppCompat.SeekBar"
         android:layout_width="0dp"
         android:layout_height="14dp"
+        android:layout_marginTop="280dp"
         android:background="@drawable/drawable_gradient_slidebar"
         android:interpolator="@android:interpolator/anticipate"
         android:max="90"
@@ -70,6 +65,7 @@
         android:thumbOffset="32dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
+        app:layout_constraintHorizontal_bias="0.43"
         app:layout_constraintStart_toStartOf="@+id/sound_logo"
         app:layout_constraintTop_toBottomOf="@+id/decibels" />
 
@@ -77,7 +73,7 @@
         android:id="@+id/current_decibel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="72dp"
+        android:layout_marginTop="96dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/not_available"
         android:textColor="@color/white"
