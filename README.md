@@ -13,6 +13,15 @@ This is a personal project being developed and maintained for devices running on
 - Battery Temperature Sensor
 - Accelerometer Tracker
 
+## Languages Support
+Support is included for the following languages:
+- English
+- Spanish
+- French
+- Portuguese
+
+There will be future support for more languages beyond what's currently offered.
+
 ## Future Plans
 There's a world of features I'd like to implement into this app over time. Here's a couple:
 - Make a leveler and determine balance
@@ -23,7 +32,7 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Backgound notifications
 - A list of all currently available sensors on a device
 - Smooth animations
-- Localize throughout the world (English/Spanish currently supported)
+- Localize throughout the world
 
 ## Beta
 This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with optimization.
