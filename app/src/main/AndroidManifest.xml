@@ -31,7 +31,7 @@
         <!--AppTheme.Launcher is for the launcher screen-->
         <activity
             android:name="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
+
 
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
@@ -45,7 +45,7 @@
             android:name="com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity"
             android:label="Sound Sensor"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
+            >
         </activity>
 
         <!--Temperature Sensor Activity-->
