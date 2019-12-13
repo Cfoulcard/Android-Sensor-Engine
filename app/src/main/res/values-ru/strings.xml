@@ -1,0 +1,71 @@
+<resources>
+
+    <!--TODO convert to different languages-->
+    <!--https://developer.android.com/guide/topics/resources/localization#creating-alternatives-->
+
+    <string name="app_name">Android Sensor Engine</string>
+
+    <!--Navigation Menu String Information-->
+    <string name="preferences">Предпочтения</string>
+    <string name="about">Около</string>
+    <string name="credits">Кредиты</string>
+    <string name="premium">премия</string>
+
+    <!--Sensor Select String Information-->
+    <string name="sensor_select">Выбор датчика</string>
+    <string name="sound_button">Кнопка звука</string>
+    <string name="temp_button">Кнопка температура</string>
+    <string name="light_button">световая кнопка</string>
+    <string name="ram_button">кнопка оперативной памяти</string>
+    <string name="battery_button">кнопка батареи</string>
+    <string name="speed_button">кнопка скорости</string>
+    <string name="ham_icon_black">черная кнопка</string>
+    <string name="ham_icon_white">белая кнопка</string>
+
+    <!--Individual Sensor Activity String Information-->
+    <string name="sound_sensor">Звуковой датчик</string>
+    <string name="sensitivity">чувствительность</string>
+    <string name="decibels">децибелы</string>
+    <string name="db">0 dB</string>
+    <string name="sound">Звук</string>
+    <string name="sound_logo">Звук Логотип</string>
+
+    <string name="lux_sensor">Световой датчик</string>
+    <string name="luminosity">светимость</string>
+    <string name="lux">Lux</string>
+
+    <string name="phone_temp_sensor">Температура воздуха</string>
+    <string name="temperature">степени</string>
+    <string name="C">C</string>
+    <string name="temperature_measurement">Единица измерения</string>
+    <string name="temperature_measurement2">Единица измерения</string>
+    <string name="Celsius">Celsius</string>
+    <string name="Fahrenheit">Фаренгейт</string>
+    <string name="Kelvin">кельвин</string>
+    <string name="not_available">N/A</string>
+
+    <string name="ram_sensor">Датчик плунжера</string>
+    <string name="ram">имеется в наличии</string>
+    <string name="MB">MB</string>
+
+    <string name="battery_sensor">Тепло батареи</string>
+    <string name="battery">температура</string>
+    <string name="Percent">%</string>
+
+    <string name="accelerometer_sensor">акселерометр</string>
+    <string name="accelerometer">скорость</string>
+    <string name="mph">mph</string>
+    <string name="speed_measurement">Единица измерения скорости</string>
+
+    <string name="sound_anim"></string>
+    <string name="temp_anim"></string>
+    <string name="light_anim"></string>
+    <string name="ram_anim"></string>
+    <string name="battery_anim"></string>
+    <string name="speed_anim"></string>
+
+    <string name="speed_pref"></string>
+
+
+
+</resources>
