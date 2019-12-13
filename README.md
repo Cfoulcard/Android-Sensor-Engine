@@ -13,12 +13,13 @@ This is a personal project being developed and maintained for devices running on
 - Battery Temperature Sensor
 - Accelerometer Tracker
 
-## Languages Support
+## Language Support
 Support is included for the following languages:
 - English
 - Spanish
 - French
 - Portuguese
+- Russian
 
 There will be future support for more languages beyond what's currently offered.
 
