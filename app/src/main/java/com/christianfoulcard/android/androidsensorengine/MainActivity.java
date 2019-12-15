@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Create about and credits menu activities
     //TODO: Show user a list of sensors their device can use
+    //TODO: Fix XML Responsiveness on different devices
 
 
     //FUTURE IDEAS
