@@ -61,7 +61,6 @@
         android:progressDrawable="@drawable/drawable_gradient_slidebar"
         android:requiresFadingEdge="horizontal"
         android:soundEffectsEnabled="true"
-        android:thumb="@drawable/thumb_slider"
         android:thumbOffset="32dp"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="@+id/sound_logo"
