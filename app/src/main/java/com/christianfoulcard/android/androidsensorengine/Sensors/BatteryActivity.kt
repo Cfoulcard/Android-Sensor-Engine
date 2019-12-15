@@ -18,7 +18,7 @@ class BatteryActivity : AppCompatActivity() {
 
     internal lateinit var battery_text: TextView
     internal lateinit var currentBattery: TextView
-    internal lateinit var batterSensor: TextView
+    internal lateinit var batterySensor: TextView
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
@@ -53,13 +53,13 @@ class BatteryActivity : AppCompatActivity() {
 
         battery_text = findViewById(R.id.battery) as TextView
         currentBattery = findViewById(R.id.current_battery) as TextView
-        batterSensor = findViewById(R.id.battery_sensor) as TextView
+        batterySensor = findViewById(R.id.battery_sensor) as TextView
 
         val `in` = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
         battery_text.startAnimation(`in`)
         currentBattery.startAnimation(`in`)
-        batterSensor.startAnimation(`in`)
+        batterySensor.startAnimation(`in`)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
