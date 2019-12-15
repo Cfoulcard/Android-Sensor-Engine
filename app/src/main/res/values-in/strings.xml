@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Android Sensor Engine</string>
+
+    <!--Navigation Menu String Information-->
+    <string name="preferences">Preferensi</string>
+    <string name="about">Tentang</string>
+    <string name="credits">Kredit</string>
+    <string name="premium">Premium</string>
+
+    <!--Sensor Select String Information-->
+    <string name="sensor_select">Pemilihan Sensor</string>
+    <string name="sound_button">Tombol Suara</string>
+    <string name="temp_button">Tombol Suhu </string>
+    <string name="light_button">ombol Cahaya</string>
+    <string name="ram_button">Tombol Ram</string>
+    <string name="battery_button">Tombol Baterai</string>
+    <string name="speed_button">Tombol Kecepatan</string>
+    <string name="ham_icon_black">Tombol Ham Hitam</string>
+    <string name="ham_icon_white">Tombol Ham Putih</string>
+
+    <!--Individual Sensor Activity String Information-->
+    <string name="sound_sensor">Sensor Suara</string>
+    <string name="sensitivity">Sensitivitas</string>
+    <string name="decibels">Desibel</string>
+    <string name="db">0 dB</string>
+    <string name="sound">Suara</string>
+    <string name="sound_logo">Logo Suara</string>
+
+    <string name="lux_sensor">Sensor Cahaya</string>
+    <string name="luminosity">Kilau</string>
+    <string name="lux">Lux</string>
+
+    <string name="phone_temp_sensor">Temperatur Udara</string>
+    <string name="temperature">Derajat</string>
+    <string name="C">C</string>
+    <string name="temperature_measurement">Unit Pengukuran</string>
+    <string name="temperature_measurement2">Unit Pengukuran</string>
+    <string name="Celsius">Celsius</string>
+    <string name="Fahrenheit">Fahrenheit</string>
+    <string name="Kelvin">Kelvin</string>
+    <string name="not_available">N/A</string>
+
+    <string name="ram_sensor">Sensor Ram</string>
+    <string name="ram">Tersedia</string>
+    <string name="MB">MB</string>
+
+    <string name="battery_sensor">Panas Baterai</string>
+    <string name="battery">Suhu</string>
+    <string name="Percent">%</string>
+
+    <string name="accelerometer_sensor">Akselerometer</string>
+    <string name="accelerometer">Kecepatan</string>
+    <string name="mph">mph</string>
+    <string name="speed_measurement">Satuan Kecepatan Pengukuran</string>
+
+
+</resources>
