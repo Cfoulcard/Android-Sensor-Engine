@@ -112,16 +112,18 @@
         app:layout_constraintTop_toTopOf="@+id/battery_icon"
         app:srcCompat="@drawable/ic_speed_icon" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/humidity_icon"
+        style="@style/MaterialAnimations"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_marginTop="32dp"
-        android:onClick="prefIconIntent"
-        android:text="Button"
-        android:visibility="gone"
+        android:contentDescription="@string/humidity_button"
+        android:onClick="humidityIconIntent"
+        android:transitionName=""
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/battery_icon" />
+        app:layout_constraintTop_toBottomOf="@+id/battery_icon"
+        app:srcCompat="@drawable/ic_humidity_icon" />
 
 </android.support.constraint.ConstraintLayout>
