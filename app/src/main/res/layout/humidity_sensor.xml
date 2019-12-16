@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+
+xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:background="@drawable/drawable_gradient_dark"
+android:layout_width="match_parent"
+android:layout_height="match_parent">
+
+
+<TextView
+    android:id="@+id/humidity_sensor"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="128dp"
+    android:layout_marginEnd="8dp"
+    android:fontFamily="@font/anton_regular"
+    android:text="@string/humidity_sensor"
+    android:textColor="@color/white"
+    android:textSize="36sp"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+<ImageView
+    android:id="@+id/humidity_logo"
+    style="@style/MaterialAnimations"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:contentDescription="@string/humidity_sensor"
+    android:transitionName="@string/humidity_anim"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/humidity_sensor"
+    app:srcCompat="@drawable/ic_humidity_icon_2" />
+
+    <TextView
+        android:id="@+id/humidity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/anton_regular"
+        android:text="@string/humidity"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/humidity_logo"
+        app:layout_constraintStart_toStartOf="@+id/humidity_logo"
+        app:layout_constraintTop_toBottomOf="@+id/humidity_sensor" />
+
+<TextView
+    android:id="@+id/current_humidity"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="120dp"
+    android:fontFamily="@font/anton_regular"
+    android:text="@string/not_available"
+    android:textColor="@color/white"
+    android:textSize="24sp"
+    app:layout_constraintBottom_toBottomOf="@+id/humidity_logo"
+    app:layout_constraintEnd_toEndOf="@+id/humidity_logo"
+    app:layout_constraintStart_toStartOf="@+id/humidity_logo"
+    app:layout_constraintTop_toBottomOf="@+id/humidity" />
+</android.support.constraint.ConstraintLayout>
