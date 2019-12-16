@@ -20,6 +20,7 @@ Support is included for the following languages:
 - French
 - Portuguese
 - Russian
+- Indonesian
 
 There will be future support for more languages beyond what's currently offered.
 
