@@ -22,6 +22,7 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.Configurati
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity;
@@ -182,6 +183,16 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(speedIntent, transitionActivityOptions.toBundle());
         //   this.startActivity(speedIntent);
         // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void humidityIconIntent(View view) {
+        Intent humidityIntent = new Intent(this, HumidityActivity.class);
+
+        ImageView sharedView = findViewById(R.id.humidity_icon);
+        String transitionName = "";
+
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
+        this.startActivity(humidityIntent, transitionActivityOptions.toBundle());
     }
 
     public void prefIconIntent(View view) {
