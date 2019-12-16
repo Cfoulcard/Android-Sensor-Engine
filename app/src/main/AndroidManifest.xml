@@ -97,6 +97,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <!--Humidity Sensor Activity-->
+        <activity android:name=".Sensors.HumidityActivity"
+            android:label="Humidity Sensor"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
+            android:screenOrientation="portrait"
+            />
+
 
 
         <!--The following is for the menu items-->
@@ -129,6 +136,7 @@
             android:label="Preferences"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"/>
+
 
 
     </application>
