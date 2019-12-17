@@ -104,6 +104,13 @@
             android:screenOrientation="portrait"
             />
 
+        <!--Pressure Sensor Activity-->
+        <activity android:name=".Sensors.PressureActivity"
+            android:label="Pressure Sensor"
+            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
+            android:screenOrientation="portrait"
+            />
+
 
 
         <!--The following is for the menu items-->
@@ -136,6 +143,7 @@
             android:label="Preferences"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait"/>
+
 
 
 

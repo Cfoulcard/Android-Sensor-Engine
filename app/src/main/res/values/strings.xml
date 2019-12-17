@@ -20,6 +20,7 @@
     <string name="battery_button">Battery Button</string>
     <string name="speed_button">Speed Button</string>
     <string name="humidity_button">Humidity Button</string>
+    <string name="pressure_button">Pressure Button</string>
     <string name="ham_icon_black">Black Ham Button</string>
     <string name="ham_icon_white">White Ham Button</string>
 
@@ -61,6 +62,9 @@
     <string name="humidity_sensor">Water Vapor</string>
     <string name="humidity">Relative Humidity</string>
 
+    <string name="pressure_sensor">Atmospheric Pressure</string>
+    <string name="level">Level</string>
+
 
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
@@ -69,6 +73,7 @@
     <string name="battery_anim"></string>
     <string name="speed_anim"></string>
     <string name="humidity_anim"></string>
+    <string name="pressure_anim"></string>
 
     <string name="speed_pref"></string>
 

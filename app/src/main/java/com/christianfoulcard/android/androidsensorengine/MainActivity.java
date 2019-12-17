@@ -24,6 +24,7 @@ import com.christianfoulcard.android.androidsensorengine.R;
 import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.PressureActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity;
@@ -193,6 +194,16 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(humidityIntent, transitionActivityOptions.toBundle());
+    }
+
+    public void pressureIconIntent(View view) {
+        Intent pressureIntent = new Intent(this, PressureActivity.class);
+
+        ImageView sharedView = findViewById(R.id.pressure_icon);
+        String transitionName = "";
+
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
+        this.startActivity(pressureIntent, transitionActivityOptions.toBundle());
     }
 
     public void prefIconIntent(View view) {
