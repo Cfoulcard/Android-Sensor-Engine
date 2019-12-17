@@ -47,7 +47,6 @@
             android:label="Sound Sensor"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
             android:screenOrientation="portrait">
-            >
         </activity>
 
         <!--Temperature Sensor Activity-->
