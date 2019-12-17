@@ -12,6 +12,8 @@ This is a personal project being developed and maintained for devices running on
 - Available Ram Detection
 - Battery Temperature Sensor
 - Accelerometer Tracker
+- Atmospheric Pressure Gauge
+- Humidity Sensor
 
 ## Language Support
 Support is included for the following languages:
@@ -27,8 +29,6 @@ There will be future support for more languages beyond what's currently offered.
 ## Future Plans
 There's a world of features I'd like to implement into this app over time. Here's a couple:
 - Make a leveler and determine balance
-- Calculate Humidity
-- Measure Pressure
 - Provide analogies to help explain readings
 - Sound effects or vibrations to happen with user configured preferences
 - Backgound notifications
