@@ -39,11 +39,11 @@
         android:id="@+id/luminosity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/luminosity"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="26sp"
         app:layout_constraintEnd_toEndOf="@+id/lux_sensor_logo"
         app:layout_constraintStart_toStartOf="@+id/lux_sensor_logo"
         app:layout_constraintTop_toBottomOf="@+id/lux_sensor" />
