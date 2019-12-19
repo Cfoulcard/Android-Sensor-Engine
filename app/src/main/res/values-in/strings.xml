@@ -17,6 +17,8 @@
     <string name="ram_button">Tombol Ram</string>
     <string name="battery_button">Tombol Baterai</string>
     <string name="speed_button">Tombol Kecepatan</string>
+    <string name="humidity_button">Tombol Kelembaban</string>
+    <string name="pressure_button">Tombol Tekanan</string>
     <string name="ham_icon_black">Tombol Ham Hitam</string>
     <string name="ham_icon_white">Tombol Ham Putih</string>
 
@@ -54,6 +56,12 @@
     <string name="accelerometer">Kecepatan</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Satuan Kecepatan Pengukuran</string>
+
+    <string name="humidity_sensor">Uap air</string>
+    <string name="humidity">Humidité relative</string>
+
+    <string name="pressure_sensor">Tekanan atmosfir</string>
+    <string name="level">Tingkat</string>
 
 
 </resources>

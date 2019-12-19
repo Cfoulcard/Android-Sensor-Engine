@@ -19,6 +19,8 @@
     <string name="ram_button">кнопка оперативной памяти</string>
     <string name="battery_button">кнопка батареи</string>
     <string name="speed_button">кнопка скорости</string>
+    <string name="humidity_button">Кнопка влажности</string>
+    <string name="pressure_button">Кнопка давления</string>
     <string name="ham_icon_black">черная кнопка</string>
     <string name="ham_icon_white">белая кнопка</string>
 
@@ -56,6 +58,12 @@
     <string name="accelerometer">скорость</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Единица измерения скорости</string>
+
+    <string name="humidity_sensor">Водяной пар</string>
+    <string name="humidity">Относительная влажность</string>
+
+    <string name="pressure_sensor">Атмосферное давление</string>
+    <string name="level">уровень</string>
 
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>

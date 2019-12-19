@@ -19,6 +19,8 @@
     <string name="ram_button">Botón Ram</string>
     <string name="battery_button">Botón de la batería</string>
     <string name="speed_button">Botón de velocidad</string>
+    <string name="humidity_button">Botón de humedad</string>
+    <string name="pressure_button">Botón de presión</string>
     <string name="ham_icon_black">Botón de jamón negro</string>
     <string name="ham_icon_white">Jamon Blanco</string>
 
@@ -56,6 +58,12 @@
     <string name="accelerometer">Velocidad</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Unidad de medida de velocidad</string>
+
+    <string name="humidity_sensor">Vapor de agua</string>
+    <string name="humidity">Humedad relativa</string>
+
+    <string name="pressure_sensor">Presión atmosférica</string>
+    <string name="level">Nivel</string>
 
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
