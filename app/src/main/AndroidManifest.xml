@@ -141,10 +141,8 @@
             android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
             android:label="Preferences"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"/>
-
-
-
+            android:screenOrientation="portrait"
+           />
 
     </application>
 </manifest>
