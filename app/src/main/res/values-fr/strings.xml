@@ -22,6 +22,7 @@
     <string name="speed_button">Bouton de vitesse</string>
     <string name="humidity_button">Bouton d\'humidité</string>
     <string name="pressure_button">Bouton de pression</string>
+    <string name="walk_button">Bouton de marche</string>
     <string name="ham_icon_black">Bouton de jambon noir</string>
     <string name="ham_icon_white">Bouton de jambon blanc</string>
 
@@ -62,12 +63,19 @@
     <string name="pressure_sensor">Pression atmosphérique</string>
     <string name="level">Niveau</string>
 
+    <string name="walk_sensor">Compteur de pas</string>
+    <string name="steps">Étapes franchies</string>
+
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
     <string name="light_anim"></string>
     <string name="ram_anim"></string>
     <string name="battery_anim"></string>
     <string name="speed_anim"></string>
+    <string name="humidity_anim"></string>
+    <string name="pressure_anim"></string>
+    <string name="walk_anim"></string>
+
     <string name="speed_pref"></string>
 
 

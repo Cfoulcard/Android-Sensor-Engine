@@ -21,6 +21,7 @@
     <string name="speed_button">кнопка скорости</string>
     <string name="humidity_button">Кнопка влажности</string>
     <string name="pressure_button">Кнопка давления</string>
+    <string name="walk_button">Кнопка ходьбы</string>
     <string name="ham_icon_black">черная кнопка</string>
     <string name="ham_icon_white">белая кнопка</string>
 
@@ -65,12 +66,18 @@
     <string name="pressure_sensor">Атмосферное давление</string>
     <string name="level">уровень</string>
 
+    <string name="walk_sensor">Счетчик шагов</string>
+    <string name="steps">Предпринятые шаги</string>
+
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
     <string name="light_anim"></string>
     <string name="ram_anim"></string>
     <string name="battery_anim"></string>
     <string name="speed_anim"></string>
+    <string name="humidity_anim"></string>
+    <string name="pressure_anim"></string>
+    <string name="walk_anim"></string>
 
     <string name="speed_pref"></string>
 

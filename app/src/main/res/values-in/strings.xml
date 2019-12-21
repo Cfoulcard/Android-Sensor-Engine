@@ -19,6 +19,7 @@
     <string name="speed_button">Tombol Kecepatan</string>
     <string name="humidity_button">Tombol Kelembaban</string>
     <string name="pressure_button">Tombol Tekanan</string>
+    <string name="walk_button">Tombol berjalan</string>
     <string name="ham_icon_black">Tombol Ham Hitam</string>
     <string name="ham_icon_white">Tombol Ham Putih</string>
 
@@ -63,5 +64,19 @@
     <string name="pressure_sensor">Tekanan atmosfir</string>
     <string name="level">Tingkat</string>
 
+    <string name="walk_sensor">Penghitung Langkah</string>
+    <string name="steps">Langkah Diambil</string>
+
+    <string name="sound_anim"></string>
+    <string name="temp_anim"></string>
+    <string name="light_anim"></string>
+    <string name="ram_anim"></string>
+    <string name="battery_anim"></string>
+    <string name="speed_anim"></string>
+    <string name="humidity_anim"></string>
+    <string name="pressure_anim"></string>
+    <string name="walk_anim"></string>
+
+    <string name="speed_pref"></string>
 
 </resources>
