@@ -68,7 +68,7 @@ public class RamActivity extends AppCompatActivity {
 
 //Percentage can be calculated for API 16+
         double percentAvail = mi.availMem / (double) mi.totalMem * 100.0;
-
+//TODO constantly update memory text
         return (int) availableMegs;
     }
 

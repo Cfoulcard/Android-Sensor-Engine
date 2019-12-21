@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -172,6 +173,7 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
+                    Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
