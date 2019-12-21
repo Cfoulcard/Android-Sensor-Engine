@@ -53,7 +53,7 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         // will appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT) == null) {
-            Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show();
         }
 
         //Light sensor to measure light

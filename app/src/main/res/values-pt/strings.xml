@@ -22,6 +22,7 @@
     <string name="walk_button">Botão Caminhar</string>
     <string name="ham_icon_black">Botão de presunto preto</string>
     <string name="ham_icon_white">Botão de presunto branco</string>
+    <string name="unsupported_sensor">O seu dispositivo não suporta este sensor</string>
 
     <!--Individual Sensor Activity String Information-->
     <string name="sound_sensor">Sensor de som</string>
@@ -30,6 +31,7 @@
     <string name="db">0 dB</string>
     <string name="sound">Som</string>
     <string name="sound_logo">Logotipo do som</string>
+    <string name="sound_permission_denied">Por favor, permita permissão do microfone para usar este sensor</string>
 
     <string name="lux_sensor">Sensor de luz</string>
     <string name="luminosity">Luminosidade</string>
@@ -57,6 +59,7 @@
     <string name="accelerometer">Velocidade</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Unidade de medida de velocidade</string>
+    <string name="location_permission_denied">Permita permissão de localização para usar este sensor</string>
 
     <string name="humidity_sensor">Vapor de água</string>
     <string name="humidity">Humidade relativa</string>

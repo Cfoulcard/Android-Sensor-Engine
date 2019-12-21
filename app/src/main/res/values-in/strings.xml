@@ -22,6 +22,7 @@
     <string name="walk_button">Tombol berjalan</string>
     <string name="ham_icon_black">Tombol Ham Hitam</string>
     <string name="ham_icon_white">Tombol Ham Putih</string>
+    <string name="unsupported_sensor">Perangkat Anda tidak mendukung sensor ini</string>
 
     <!--Individual Sensor Activity String Information-->
     <string name="sound_sensor">Sensor Suara</string>
@@ -30,6 +31,7 @@
     <string name="db">0 dB</string>
     <string name="sound">Suara</string>
     <string name="sound_logo">Logo Suara</string>
+    <string name="sound_permission_denied">Izinkan izin mikrofon untuk menggunakan sensor ini</string>
 
     <string name="lux_sensor">Sensor Cahaya</string>
     <string name="luminosity">Kilau</string>
@@ -57,6 +59,7 @@
     <string name="accelerometer">Kecepatan</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Satuan Kecepatan Pengukuran</string>
+    <string name="location_permission_denied">Izinkan izin lokasi untuk menggunakan sensor ini</string>
 
     <string name="humidity_sensor">Uap air</string>
     <string name="humidity">Humidité relative</string>

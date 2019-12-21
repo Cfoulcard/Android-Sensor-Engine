@@ -54,7 +54,7 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
         // appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_PRESSURE) == null) {
-            Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show();
         }
 
         // Ambient Temperature measures the temperature around the device

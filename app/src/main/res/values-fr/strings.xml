@@ -25,6 +25,7 @@
     <string name="walk_button">Bouton de marche</string>
     <string name="ham_icon_black">Bouton de jambon noir</string>
     <string name="ham_icon_white">Bouton de jambon blanc</string>
+    <string name="unsupported_sensor">Votre appareil ne prend pas en charge ce capteur</string>
 
     <!--Individual Sensor Activity String Information-->
 
@@ -34,9 +35,12 @@
     <string name="db">0 dB</string>
     <string name="sound">Son</string>
     <string name="sound_logo">Logo sonore</string>
+    <string name="sound_permission_denied">Veuillez autoriser le microphone à utiliser ce capteur</string>
+
     <string name="lux_sensor">Capteur de lumière</string>
     <string name="luminosity">Luminosity</string>
     <string name="lux">Lux</string>
+
     <string name="phone_temp_sensor">Température de l\'air</string>
     <string name="temperature">Degrés</string>
     <string name="C">C</string>
@@ -46,16 +50,20 @@
     <string name="Fahrenheit">Fahrenheit</string>
     <string name="Kelvin">Kelvin</string>
     <string name="not_available">N/A</string>
+
     <string name="ram_sensor">Capteur de mémoire dynamique</string>
     <string name="ram">Disponible</string>
     <string name="MB">MB</string>
+
     <string name="battery_sensor">Chaleur de la batterie</string>
     <string name="battery">Température</string>
     <string name="Percent">%</string>
+
     <string name="accelerometer_sensor">Accéléromètre</string>
     <string name="accelerometer">Vitesse</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Unité de mesure de vitesse</string>
+    <string name="location_permission_denied">Veuillez autoriser la localisation pour utiliser ce capteur</string>
 
     <string name="humidity_sensor">Vapeur d\'eau</string>
     <string name="humidity">Humidité relative</string>

@@ -54,7 +54,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // appear
         sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         if (sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) == null) {
-            Toast.makeText(this, "Your device does not support this sensor", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show();
         }
 
         // Ambient Temperature measures the temperature around the device
@@ -73,12 +73,12 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // Get the activity
         mActivity = WalkActivity.this;
 
-        int water_vapor = (int) event.values[0];
+        int stepcounter = (int) event.values[0];
 
         //The default Android properties for event.values[0] is the formula for Celsius
         //This is for Fahrenheit
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            currentSteps.setText(water_vapor + " Steps");
+            currentSteps.setText(stepcounter + " Steps");
 //TODO change to string
         }
     }

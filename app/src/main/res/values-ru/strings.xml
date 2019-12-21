@@ -24,6 +24,7 @@
     <string name="walk_button">Кнопка ходьбы</string>
     <string name="ham_icon_black">черная кнопка</string>
     <string name="ham_icon_white">белая кнопка</string>
+    <string name="unsupported_sensor">Ваше устройство не поддерживает этот датчик</string>
 
     <!--Individual Sensor Activity String Information-->
     <string name="sound_sensor">Звуковой датчик</string>
@@ -32,6 +33,7 @@
     <string name="db">0 dB</string>
     <string name="sound">Звук</string>
     <string name="sound_logo">Звук Логотип</string>
+    <string name="sound_permission_denied">Пожалуйста, позвольте разрешению микрофона использовать этот датчик</string>
 
     <string name="lux_sensor">Световой датчик</string>
     <string name="luminosity">светимость</string>
@@ -59,6 +61,7 @@
     <string name="accelerometer">скорость</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Единица измерения скорости</string>
+    <string name="location_permission_denied">Пожалуйста, позвольте разрешению местоположения использовать этот датчик</string>
 
     <string name="humidity_sensor">Водяной пар</string>
     <string name="humidity">Относительная влажность</string>

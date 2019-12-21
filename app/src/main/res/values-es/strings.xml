@@ -24,6 +24,7 @@
     <string name="walk_button">Botón de caminar</string>
     <string name="ham_icon_black">Botón de jamón negro</string>
     <string name="ham_icon_white">Jamon Blanco</string>
+    <string name="unsupported_sensor">Su dispositivo no es compatible con este sensor</string>
 
     <!--Individual Sensor Activity String Information-->
     <string name="sound_sensor">Sensor de sonido</string>
@@ -32,6 +33,7 @@
     <string name="db">0 dB</string>
     <string name="sound">Sonar</string>
     <string name="sound_logo">Logotipo de sonido</string>
+    <string name="sound_permission_denied">Por favor permita permiso del micrófono para usar este sensor</string>
 
     <string name="lux_sensor">Sensor de luz</string>
     <string name="luminosity">Luminosidad</string>
@@ -59,6 +61,7 @@
     <string name="accelerometer">Velocidad</string>
     <string name="mph">mph</string>
     <string name="speed_measurement">Unidad de medida de velocidad</string>
+    <string name="location_permission_denied">Permita permiso de ubicación para usar este sensor</string>
 
     <string name="humidity_sensor">Vapor de agua</string>
     <string name="humidity">Humedad relativa</string>

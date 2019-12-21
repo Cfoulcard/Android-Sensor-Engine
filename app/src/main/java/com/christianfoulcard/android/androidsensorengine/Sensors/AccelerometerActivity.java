@@ -173,7 +173,7 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
                 } else {
-                    Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
+                    Toast.makeText(this, R.string.location_permission_denied, Toast.LENGTH_LONG).show();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
