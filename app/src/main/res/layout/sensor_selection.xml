@@ -136,4 +136,16 @@
         app:layout_constraintTop_toTopOf="@+id/humidity_icon"
         app:srcCompat="@drawable/ic_pressure_icon" />
 
+    <ImageView
+        android:id="@+id/walk_icon"
+        style="@style/MaterialAnimations"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="32dp"
+        android:contentDescription="@string/walk_button"
+        android:onClick="walkIconIntent"
+        app:layout_constraintStart_toEndOf="@+id/humidity_icon"
+        app:layout_constraintTop_toTopOf="@+id/humidity_icon"
+        app:srcCompat="@drawable/ic_walk_icon" />
+
 </android.support.constraint.ConstraintLayout>

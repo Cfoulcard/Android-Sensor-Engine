@@ -28,6 +28,7 @@ import com.christianfoulcard.android.androidsensorengine.Sensors.PressureActivit
 import com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity;
+import com.christianfoulcard.android.androidsensorengine.Sensors.WalkActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
@@ -204,6 +205,16 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(pressureIntent, transitionActivityOptions.toBundle());
+    }
+
+    public void walkIconIntent(View view) {
+        Intent walkIntent = new Intent(this, WalkActivity.class);
+
+        ImageView sharedView = findViewById(R.id.walk_icon);
+        String transitionName = "";
+
+        ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
+        this.startActivity(walkIntent, transitionActivityOptions.toBundle());
     }
 
     public void prefIconIntent(View view) {
