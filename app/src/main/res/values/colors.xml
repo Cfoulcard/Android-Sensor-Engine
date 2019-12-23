@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#385BF2</color>
-    <color name="colorPrimaryDark">#4A148C</color>
+    <color name="colorPrimaryDark">#210246</color>
     <color name="colorAccent">#D81B60</color>
 
     <!-- Sensor Selection Gradient Color -->
@@ -13,7 +13,7 @@
     <color name="dark_blue">#000046</color>
 
     <color name="grand_sky_blue">#2876F9</color>
-    <color name="elvis_purple">#6D17CB </color>
+    <color name="elvis_purple">#6D17CB</color>
 
     <!-- Individual Sensor Gradient Color -->
     <color name="dark_grey">#393939</color>

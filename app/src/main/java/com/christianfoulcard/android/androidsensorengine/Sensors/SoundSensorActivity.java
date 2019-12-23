@@ -1,8 +1,10 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -17,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -35,11 +39,14 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
 
+    Dialog soundInfoDialog;
+
     //TextView Data
     TextView configuredDecibel;
     TextView decibels;
     TextView soundSensor;
     TextView currentdb;
+    ImageView soundInfo;
 
     //For sound recording + converting to sound data
     MediaRecorder mRecorder;
@@ -74,10 +81,16 @@ public class SoundSensorActivity extends AppCompatActivity {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
-        //Textviews
+        //TextViews
         configuredDecibel = (TextView) findViewById(R.id.current_decibel);
         decibels = (TextView) findViewById(R.id.decibels);
         soundSensor = (TextView) findViewById(R.id.sound_sensor);
+
+        //ImageViews
+        soundInfo = (ImageView) findViewById(R.id.sound_info);
+
+        //Dialog Box for Sound Info
+        soundInfoDialog = new Dialog(this);
 
         //Animation that plays when entering/exiting Activity
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
@@ -85,6 +98,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         configuredDecibel.startAnimation(in);
         decibels.startAnimation(in);
         soundSensor.startAnimation(in);
+        soundInfo.startAnimation(in);
 
         //To request audio permissions upon opening activity
         requestAudioPermissions();
@@ -346,6 +360,18 @@ public class SoundSensorActivity extends AppCompatActivity {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    public void showSoundDialogPopup(View v) {
+        soundInfoDialog.setContentView(R.layout.sound_popup_info);
+
+        soundInfoDialog.show();
+    }
+
+    public void closeSoundDialogPopup(View v) {
+        soundInfoDialog.setContentView(R.layout.sound_popup_info);
+
+        soundInfoDialog.dismiss();
+    }
 
     //This will add functionality to the menu button within the action bar
     @Override

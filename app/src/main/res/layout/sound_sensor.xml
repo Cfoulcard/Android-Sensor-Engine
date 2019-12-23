@@ -23,6 +23,17 @@
         app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
         app:srcCompat="@drawable/ic_sound_icon_2" />
 
+    <ImageView
+        android:id="@+id/sound_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:onClick="showSoundDialogPopup"
+        app:layout_constraintStart_toEndOf="@+id/sound_sensor"
+        app:layout_constraintTop_toTopOf="@+id/sound_sensor"
+        app:srcCompat="@drawable/ic_question_icon" />
+
     <TextView
         android:id="@+id/sound_sensor"
         android:layout_width="wrap_content"
