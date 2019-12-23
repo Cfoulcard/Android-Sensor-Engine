@@ -35,7 +35,10 @@ public class MainActivity extends AppCompatActivity {
 
     //TODO: Create about and credits menu activities
     //TODO: Show user a list of sensors their device can use
-    //TODO: Fix XML Responsiveness on different devices
+    //TODO: Fix XML Responsiveness on different devices according to languages
+    //TODO: Add elevation/sea level sensor?
+    //TODO Add Info button on sensor activites
+    //TODO: Snackbar instead of Toast?
 
 
     //FUTURE IDEAS
