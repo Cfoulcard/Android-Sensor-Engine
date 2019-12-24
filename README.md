@@ -14,6 +14,7 @@ This is a personal project being developed and maintained for devices running on
 - Accelerometer Tracker
 - Atmospheric Pressure Gauge
 - Humidity Sensor
+- Step Counter
 
 ## Language Support
 Support is included for the following languages:
