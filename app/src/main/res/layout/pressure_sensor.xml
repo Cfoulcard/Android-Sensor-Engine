@@ -19,10 +19,21 @@
         android:fontFamily="@font/anton_regular"
         android:text="@string/pressure_sensor"
         android:textColor="@color/white"
-        android:textSize="36sp"
+        android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/info_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:onClick="showPressureDialogPopup"
+        app:layout_constraintStart_toEndOf="@+id/pressure_sensor"
+        app:layout_constraintTop_toTopOf="@+id/pressure_sensor"
+        app:srcCompat="@drawable/ic_question_icon" />
 
     <ImageView
         android:id="@+id/pressure_logo"
