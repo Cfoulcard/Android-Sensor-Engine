@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -9,8 +10,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +22,23 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class HumidityActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Dialog popup info
+    Dialog humidityInfoDialog;
+
+    //TextViews
     TextView humidity_text;
     TextView currentHumidity;
     TextView humidityAmount;
+
+    //ImsgeViews
+    ImageView humidityInfo;
+
+    //Sensor initiation
     private SensorManager sensorManager;
     private Sensor humidity;
     private Context mContext;
     private Activity mActivity;
+
     private SharedPreferences mSharedPreferences;
 
     // Initiate Firebase Analytics
@@ -36,15 +49,23 @@ public class HumidityActivity extends AppCompatActivity implements SensorEventLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.humidity_sensor);
 
+        //TextViews
         humidity_text = (TextView) findViewById(R.id.humidity);
         currentHumidity = (TextView) findViewById(R.id.current_humidity);
         humidityAmount = (TextView) findViewById(R.id.humidity_sensor);
+
+        //ImageViews
+        humidityInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        humidityInfoDialog = new Dialog(this);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         humidity_text.startAnimation(in);
         currentHumidity.startAnimation(in);
         humidityAmount.startAnimation(in);
+        humidityInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -100,5 +121,17 @@ public class HumidityActivity extends AppCompatActivity implements SensorEventLi
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    public void showHumidityDialogPopup(View v) {
+        humidityInfoDialog.setContentView(R.layout.humidity_popup_info);
+
+        humidityInfoDialog.show();
+    }
+
+    public void closeHumidityDialogPopup(View v) {
+        humidityInfoDialog.setContentView(R.layout.humidity_popup_info);
+
+        humidityInfoDialog.dismiss();
     }
 }

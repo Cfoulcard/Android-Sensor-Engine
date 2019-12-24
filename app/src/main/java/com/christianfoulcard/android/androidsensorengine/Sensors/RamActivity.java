@@ -2,13 +2,16 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
+import android.app.Dialog;
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.christianfoulcard.android.androidsensorengine.R;
@@ -19,11 +22,16 @@ import static com.christianfoulcard.android.androidsensorengine.R.layout.ram_sen
 
 public class RamActivity extends AppCompatActivity {
 
+    //Dialog popup info
+    Dialog ramInfoDialog;
+
+    //TextViews
     TextView ramText;
     TextView currentRam;
     TextView ramSensor;
-    private SensorManager sensorManager;
-    private Sensor ram;
+
+    //ImsgeViews
+    ImageView ramInfo;
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -41,12 +49,19 @@ public class RamActivity extends AppCompatActivity {
         currentRam = findViewById(R.id.current_ram);
         ramSensor = findViewById(R.id.ram_sensor);
 
+        //ImageViews
+        ramInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        ramInfoDialog = new Dialog(this);
+
         //Animation for TextView fade in
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         ramText.startAnimation(in);
         currentRam.startAnimation(in);
         ramSensor.startAnimation(in);
+        ramInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -80,6 +95,18 @@ public class RamActivity extends AppCompatActivity {
         super.onDestroy();
 
         unbindService(ACTIVITY_SERVICE);
+    }
+
+    public void showRamDialogPopup(View v) {
+        ramInfoDialog.setContentView(R.layout.ram_popup_info);
+
+        ramInfoDialog.show();
+    }
+
+    public void closeRamDialogPopup(View v) {
+        ramInfoDialog.setContentView(R.layout.ram_popup_info);
+
+        ramInfoDialog.dismiss();
     }
 
     //This will add functionality to the menu button within the action bar

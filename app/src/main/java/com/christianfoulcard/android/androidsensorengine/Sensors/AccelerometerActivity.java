@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,8 +11,10 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,10 +28,17 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 //LocationListener needed to track speed
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
 
+    //Dialog popup info
+    Dialog accelerometerInfoDialog;
+
+    //TextViews
     TextView accelerometer_sensor;
     TextView accelerometer;
     TextView currentSpeed;
     LocationListener mlocListener;
+
+    //ImsgeViews
+    ImageView accelerometerInfo;
 
 
     // Initiate Firebase Analytics
@@ -43,17 +53,25 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         super.onCreate(savedInstanceState);
         setContentView(R.layout.accelerometer_sensor);
 
+        //ImageViews
+        accelerometerInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        accelerometerInfoDialog = new Dialog(this);
+
         //TextViews
         accelerometer = (TextView) findViewById(R.id.accelerometer);
         currentSpeed = (TextView) findViewById(R.id.current_speed);
         accelerometer_sensor = (TextView) findViewById(R.id.accelerometer_sensor);
 
-        //Animation fade in for TextViews
+
+        //Animation fade in for UI elements
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         accelerometer.startAnimation(in);
         currentSpeed.startAnimation(in);
         accelerometer_sensor.startAnimation(in);
+        accelerometerInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -62,7 +80,7 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         requestLocationPermissions();
     }
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////
 //This section parses the speed data when the permissions are granted
     @Override
     public void onResume() {
@@ -71,7 +89,7 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
+                        != PackageManager.PERMISSION_GRANTED) {
 
             return;
         }
@@ -87,8 +105,20 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     public  void onDestroy()
     {
         super.onDestroy();
-      LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
+        LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         lm.removeUpdates(this);
+    }
+
+    public void showAccelerometerDialogPopup(View v) {
+        accelerometerInfoDialog.setContentView(R.layout.accelerometer_popup_info);
+
+        accelerometerInfoDialog.show();
+    }
+
+    public void closeAccelerometerDialogPopup(View v) {
+        accelerometerInfoDialog.setContentView(R.layout.accelerometer_popup_info);
+
+        accelerometerInfoDialog.dismiss();
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

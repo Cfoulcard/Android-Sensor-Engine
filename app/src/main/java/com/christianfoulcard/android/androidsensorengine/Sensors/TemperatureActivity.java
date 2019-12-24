@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -11,8 +12,10 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,17 +26,26 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Dialog popup info
+    Dialog tempInfoDialog;
+
+    //TextViews
     TextView temperature_text;
     TextView currentDegrees;
     TextView airTemp;
     TextView currentDegreesTest;
     TextView currentDegreesK;
+
+    //ImsgeViews
+    ImageView tempInfo;
+
+    //Sensor initiation
     private SensorManager sensorManager;
     private Sensor temperature;
     private Context mContext;
     private Activity mActivity;
-    private SharedPreferences mSharedPreferences;
 
+    private SharedPreferences mSharedPreferences;
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -45,7 +57,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_sensor);
 
-
+//TextViews
         temperature_text = (TextView) findViewById(R.id.temperature);
         currentDegrees = (TextView) findViewById(R.id.current_temp);
         airTemp = (TextView) findViewById(R.id.temperature_sensor);
@@ -53,12 +65,18 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         //    currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
         //  currentDegreesK = (TextView) findViewById(R.id.current_temp);
 
+        //ImageViews
+        tempInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        tempInfoDialog = new Dialog(this);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         temperature_text.startAnimation(in);
         currentDegrees.startAnimation(in);
         airTemp.startAnimation(in);
+        tempInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -193,6 +211,18 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    public void showTempDialogPopup(View v) {
+        tempInfoDialog.setContentView(R.layout.temperature_popup_info);
+
+        tempInfoDialog.show();
+    }
+
+    public void closeTempDialogPopup(View v) {
+        tempInfoDialog.setContentView(R.layout.temperature_popup_info);
+
+        tempInfoDialog.dismiss();
     }
 
     //This will add functionality to the menu button within the action bar

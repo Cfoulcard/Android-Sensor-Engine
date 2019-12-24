@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -9,8 +10,10 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,11 +22,20 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class LightSensorActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Dialog popup info
+    Dialog lightInfoDialog;
+
+    //TextViews
     TextView luminosity;
     TextView currentLux;
     TextView lightSensor;
+
+    //Sensor initiation
     private SensorManager sensorManager;
     private Sensor light;
+
+    //ImsgeViews
+    ImageView lightInfo;
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -35,15 +47,23 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lux_sensor);
 
+        //TextViews
         luminosity = findViewById(R.id.luminosity);
         currentLux = findViewById(R.id.current_lux);
         lightSensor = findViewById(R.id.lux_sensor);
+
+        //ImageViews
+        lightInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        lightInfoDialog = new Dialog(this);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         luminosity.startAnimation(in);
         currentLux.startAnimation(in);
         lightSensor.startAnimation(in);
+        lightInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -90,6 +110,18 @@ public class LightSensorActivity extends AppCompatActivity implements SensorEven
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    public void showLightDialogPopup(View v) {
+        lightInfoDialog.setContentView(R.layout.lux_popup_info);
+
+        lightInfoDialog.show();
+    }
+
+    public void closeLightDialogPopup(View v) {
+        lightInfoDialog.setContentView(R.layout.lux_popup_info);
+
+        lightInfoDialog.dismiss();
     }
 
     //This will add functionality to the menu button within the action bar

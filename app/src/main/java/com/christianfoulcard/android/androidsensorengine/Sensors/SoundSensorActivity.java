@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.drawable.Drawable;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
 import android.os.Build;
@@ -19,7 +18,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -39,6 +37,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
 
+    //Dialog popup info
     Dialog soundInfoDialog;
 
     //TextView Data
@@ -46,6 +45,8 @@ public class SoundSensorActivity extends AppCompatActivity {
     TextView decibels;
     TextView soundSensor;
     TextView currentdb;
+
+    //Image Views
     ImageView soundInfo;
 
     //For sound recording + converting to sound data
@@ -87,7 +88,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         soundSensor = (TextView) findViewById(R.id.sound_sensor);
 
         //ImageViews
-        soundInfo = (ImageView) findViewById(R.id.sound_info);
+        soundInfo = (ImageView) findViewById(R.id.info_button);
 
         //Dialog Box for Sound Info
         soundInfoDialog = new Dialog(this);

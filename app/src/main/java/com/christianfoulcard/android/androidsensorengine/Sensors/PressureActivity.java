@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -9,8 +10,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +22,23 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class PressureActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Dialog popup info
+    Dialog pressureInfoDialog;
+
+    //TextViews
     TextView pressure_text;
     TextView currentPressure;
     TextView pressureLevel;
+
+    //ImsgeViews
+    ImageView pressureInfo;
+
+    //Sensor initiation
     private SensorManager sensorManager;
     private Sensor pressure;
     private Context mContext;
     private Activity mActivity;
+
     private SharedPreferences mSharedPreferences;
 
     // Initiate Firebase Analytics
@@ -36,15 +49,23 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pressure_sensor);
 
+        //TextViews
         pressure_text = (TextView) findViewById(R.id.pressure);
         currentPressure = (TextView) findViewById(R.id.current_pressure);
         pressureLevel = (TextView) findViewById(R.id.pressure_sensor);
+
+        //ImageViews
+        pressureInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        pressureInfoDialog = new Dialog(this);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         pressure_text.startAnimation(in);
         currentPressure.startAnimation(in);
         pressureLevel.startAnimation(in);
+        pressureInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -100,6 +121,18 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    public void showPressureDialogPopup(View v) {
+        pressureInfoDialog.setContentView(R.layout.pressure_popup_info);
+
+        pressureInfoDialog.show();
+    }
+
+    public void closePressureDialogPopup(View v) {
+        pressureInfoDialog.setContentView(R.layout.pressure_popup_info);
+
+        pressureInfoDialog.dismiss();
     }
 }
 

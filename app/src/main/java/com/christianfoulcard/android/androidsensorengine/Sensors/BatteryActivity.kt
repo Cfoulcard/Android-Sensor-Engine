@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
+import android.app.Dialog
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -9,13 +10,19 @@ import android.os.BatteryManager
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.view.Menu
+import android.view.View
 import android.view.animation.AlphaAnimation
+import android.widget.ImageView
 import android.widget.TextView
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class BatteryActivity : AppCompatActivity() {
 
+    //Dialog popup info
+    var batteryInfoDialog: Dialog? = null
+
+    //TextViews
     internal lateinit var battery_text: TextView
     internal lateinit var currentBattery: TextView
     internal lateinit var batterySensor: TextView
@@ -23,6 +30,9 @@ class BatteryActivity : AppCompatActivity() {
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
     // private val level = registerMyReceiver()
+
+    //ImsgeViews
+    var batteryInfo: ImageView? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
@@ -55,11 +65,18 @@ class BatteryActivity : AppCompatActivity() {
         currentBattery = findViewById(R.id.current_battery) as TextView
         batterySensor = findViewById(R.id.battery_sensor) as TextView
 
+        //ImageViews
+        batteryInfo = findViewById<View>(R.id.info_button) as ImageView
+
+        //Dialog Box for Temperature Info
+        batteryInfoDialog = Dialog(this)
+
         val `in` = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
         battery_text.startAnimation(`in`)
         currentBattery.startAnimation(`in`)
         batterySensor.startAnimation(`in`)
+        batteryInfo!!.startAnimation(`in`)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -81,6 +98,16 @@ class BatteryActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(registerMyReceiver())
+    }
+
+    fun showBatteryDialogPopup(v: View?) {
+        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.show()
+    }
+
+    fun closeBatteryDialogPopup(v: View?) {
+        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.dismiss()
     }
 
     //This will add functionality to the menu button within the action bar

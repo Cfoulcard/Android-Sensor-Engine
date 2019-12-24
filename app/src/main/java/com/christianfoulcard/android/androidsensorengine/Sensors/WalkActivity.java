@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
@@ -9,8 +10,10 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,13 +22,23 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class WalkActivity extends AppCompatActivity implements SensorEventListener {
 
+    //Dialog popup info
+    Dialog walkInfoDialog;
+
+    //TextViews
     TextView steps_text;
     TextView currentSteps;
     TextView stepAmount;
+
+    //Sensor initiation
     private SensorManager sensorManager;
     private Sensor steps;
     private Context mContext;
     private Activity mActivity;
+
+    //ImsgeViews
+    ImageView walkInfo;
+
     private SharedPreferences mSharedPreferences;
 
     // Initiate Firebase Analytics
@@ -36,15 +49,23 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.walk_sensor);
 
+        //TextViews
         steps_text = (TextView) findViewById(R.id.walk_sensor);
         currentSteps = (TextView) findViewById(R.id.current_steps);
         stepAmount = (TextView) findViewById(R.id.steps);
+
+        //ImageViews
+        walkInfo = (ImageView) findViewById(R.id.info_button);
+
+        //Dialog Box for Temperature Info
+        walkInfoDialog = new Dialog(this);
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(1500);
         steps_text.startAnimation(in);
         currentSteps.startAnimation(in);
         stepAmount.startAnimation(in);
+        walkInfo.startAnimation(in);
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -100,5 +121,17 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
         sensorManager.unregisterListener(this);
+    }
+
+    public void showWalkDialogPopup(View v) {
+        walkInfoDialog.setContentView(R.layout.walk_popup_info);
+
+        walkInfoDialog.show();
+    }
+
+    public void closeWalkDialogPopup(View v) {
+        walkInfoDialog.setContentView(R.layout.walk_popup_info);
+
+        walkInfoDialog.dismiss();
     }
 }
