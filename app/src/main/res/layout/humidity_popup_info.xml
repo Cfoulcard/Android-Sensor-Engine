@@ -2,28 +2,12 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="300dp"
+    android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:background="@color/common_google_signin_btn_text_light_pressed"
     android:orientation="vertical"
     android:padding="5dp">
-
-    <Button
-        android:id="@+id/dismiss_dialog"
-        android:layout_width="0dp"
-        android:layout_height="36dp"
-        android:background="@drawable/drawable_gradient_angled"
-        android:fontFamily="@font/quantico"
-        android:onClick="closeHumidityDialogPopup"
-        android:text="X"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/infoText" />
 
     <TextView
         android:id="@+id/infoText"
@@ -33,14 +17,58 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/quantico"
         android:padding="20dp"
-        android:text="LOL."
+        android:text="This sensor calculates the relative humidity around you without the use of wifi or data. This information is given to you in the form of raw data."
         android:textAlignment="textStart"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/drawable_gradient"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/infoText" />
+
+    <TextView
+        android:id="@+id/infoText2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="24dp"
+        android:fontFamily="@font/quantico"
+        android:padding="20dp"
+        android:text="Humidity is the amount of water vapor residing in the air. A value of 100% means the air is thoroughly saturated with water and cannot hold any more. Clouds form at this percentage! Though the temperature is also higher as a result. Low values can make us feel cooler than the actual temperature and gives way to dry air which in turn helps evaporate sweat!"
+        android:textAlignment="textStart"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/dismiss_dialog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/dismiss_dialog"
+        android:layout_width="0dp"
+        android:layout_height="36dp"
+        android:background="@drawable/button_style"
+        android:fontFamily="@font/quantico"
+        android:onClick="closeHumidityDialogPopup"
+        android:text="X"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
