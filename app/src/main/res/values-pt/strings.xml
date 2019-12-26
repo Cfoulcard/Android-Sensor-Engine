@@ -82,5 +82,14 @@
 
     <string name="speed_pref"></string>
 
+    <!--Popup Info-->
+    <!--Sound Sensor-->
+    <string name="sound_desc_2">Um decibel é uma unidade de medida logarítmica usada para medir a intensidade do som. Se você está perto ou longe de uma fonte de som, pode usá-lo para ter uma idéia de quão intenso é o som. Observe que os microfones Android são limitados a um máximo de 90 dB!</string>
+    <string name="sound_desc_1">Esse sensor mede as informações espaciais do som ao seu redor. Seu dispositivo usa o microfone para fazer isso funcionar. A informação do som é então convertida em decibéis (dB).</string>
+    <string name="temp_desc_1">O sensor de temperatura do ar usa o hardware do seu telefone para encontrar a temperatura ambiente em que você está. Isso funcionará em qualquer lugar, mesmo sem estar conectado a uma fonte da Internet!</string>
+    <string name="temp_desc_2">Exemplos de casos de uso incluem determinar se sua casa está resfriando adequadamente, leituras de espaço / gabinete industrial e encontrar a temperatura externa enquanto estiver offline. Observe que essas leituras podem estar um pouco desligadas, pois seu smartphone pode ter calor armazenado próximo ao sensor do hardware! As capas de smartphone também podem levar a leituras de saída mais altas!</string>
+    <string name="light_desc_1">Sensor ini tidak memerlukan kalibrasi atau modifikasi untuk menafsirkan data cahaya. Ini akan mengukur lux (cahaya) dari jarak berapa pun dan kembali kepada Anda intensitasnya.</string>
+    <string name="light_desc_2">Os valores de lux variam muito, dependendo das informações da luz ambiente que o seu smartphone absorve. Sua sala de estar pode medir de 1 a 150 com algumas fontes de luz acesas. Ir a um escritório ou show room bem iluminado pode ter uma leitura de 500 lux! Saia e isso pode aumentar para 25.000! Esse sensor pode ser útil para planejar salas e espaços para atender a certos padrões de iluminação.</string>
+
 
 </resources>
