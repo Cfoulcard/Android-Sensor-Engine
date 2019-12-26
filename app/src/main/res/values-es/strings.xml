@@ -84,6 +84,14 @@
 
     <string name="speed_pref"></string>
 
+    <!--Popup Info-->
+    <!--Sound Sensor-->
+    <string name="sound_desc_2">Un decibel es una unidad logarítmica de medida utilizada para medir el volumen del sonido. Ya sea que esté cerca o lejos de una fuente de sonido, puede usar esto para tener una idea de qué tan intenso es el sonido. ¡Tenga en cuenta que los micrófonos Android están limitados a un máximo de 90 dB!</string>
+    <string name="sound_desc_1">Este sensor mide la información espacial del sonido a su alrededor. Su dispositivo utiliza el micrófono para que esto funcione. La información del sonido se convierte a decibelios (dB).</string>
+    <string name="temp_desc_1">El sensor de temperatura del aire utiliza el hardware de su teléfono para encontrar la temperatura ambiente en la que se encuentra actualmente. ¡Esto funcionará en cualquier lugar, incluso sin estar conectado a una fuente de Internet!</string>
+    <string name="temp_desc_2">Los ejemplos de casos de uso incluyen determinar si su hogar se está enfriando adecuadamente, lecturas de espacio / recinto industrial y encontrar la temperatura exterior mientras está desconectado. ¡Tenga en cuenta que estas lecturas pueden estar ligeramente apagadas ya que su teléfono inteligente puede tener calor almacenado cerca del sensor del hardware! ¡Las fundas de los teléfonos inteligentes también pueden tener lecturas de salida más altas!</string>
+    <string name="light_desc_1">Este sensor no requiere calibración o modificación para interpretar los datos de luz. Medirá lux (luz) desde cualquier distancia y le devolverá su intensidad.</string>
+    <string name="light_desc_2">Los valores de lux diferirán enormemente dependiendo de la información de luz ambiental que absorba su teléfono inteligente. Su sala de estar puede medir entre 1 y 150 con algunas fuentes de luz encendidas. ¡Ir a una oficina o sala de espectáculos bien iluminada puede tener una lectura de 500 lux! ¡Salga y esto puede saltar hasta 25,000! Este sensor puede ser útil para planificar habitaciones y espacios para cumplir con ciertos estándares de iluminación.</string>
 
 
 </resources>
