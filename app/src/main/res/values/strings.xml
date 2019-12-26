@@ -72,6 +72,41 @@
     <string name="walk_sensor">Step Counter</string>
     <string name="steps">Steps Taken</string>
 
+    <!--Popup Info-->
+    <!--Sound Sensor-->
+    <string name="sound_desc_1">This sensor measures spatial sound information around you. Your device uses the microphone to make this work. The sound information is then converted into decibels (dB).</string>
+    <string name="sound_desc_2">A decibel is a logarithmic unit of measurement used to measure the loudness of sound. Whether you\'re close up or far away from a sound source you can use this to get an idea of how intense the sound is. Note that Android microphones are limited to a maximum of 90 dB!</string>
+
+    <!--Temperature Sensor-->
+    <string name="temp_desc_1">The Air Temperature sensor uses your phone\'s hardware to find the ambient temperature you\'re currently in. This will work anywhere even without being connected to an internet source!</string>
+    <string name="temp_desc_2">Example use cases include determining if your home is cooling properly, industrial space/enclosure readings, and finding outside temperature while offline. Please note that these readings may be slightly off as your smartphone may have heat stored near the hardware\'s sensor! Smartphone cases may also factor higher output readings!</string>
+
+    <!--Light Sensor-->
+    <string name="light_desc_1">This sensor requires no calibration or modification to interpret light data. It will measure lux (light) from any distance and return to you its intensity.</string>
+    <string name="light_desc_2">The values of lux will differ wildly depending on the ambient light information your smartphone absorbs. Your living room may measure anywhere from 1–150 with a few light sources on. Going to a well lit office or show room may have a reading of 500 lux! Step outside and this may jump up to 25,000! This sensor can be useful for planning out rooms and spaces to meet certain lighting standards.</string>
+
+    <!--Ram Sensor-->
+    <string name="ram_desc_1"></string>
+    <string name="ram_desc_2"></string>
+
+    <!--Battery Sensor-->
+    <string name="battery_desc_1"></string>
+    <string name="battery_desc_2"></string>
+
+    <!--Accelerometer Sensor-->
+    <string name="speed_desc_1"></string>
+    <string name="speed_desc_2"></string>
+
+    <!--Pressure Sensor-->
+    <string name="pressure_desc_1"></string>
+    <string name="pressure_desc_2"></string>
+
+    <!--humidity Sensor-->
+    <string name="humidity_desc_1"></string>
+    <string name="humidity_desc_2"></string>
+
+    <!--Step Sensor-->
+    <string name="step_desc_1"></string>
 
     <string name="sound_anim"></string>
     <string name="temp_anim"></string>
