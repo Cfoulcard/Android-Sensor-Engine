@@ -82,4 +82,13 @@
 
     <string name="speed_pref"></string>
 
+    <!--Popup Info-->
+    <!--Sound Sensor-->
+    <string name="sound_desc_1">Sensor ini mengukur informasi suara spasial di sekitar Anda. Perangkat Anda menggunakan mikrofon untuk membuat ini berfungsi. Informasi suara kemudian dikonversi menjadi desibel (dB).</string>
+    <string name="sound_desc_2">Desibel adalah satuan pengukuran logaritmik yang digunakan untuk mengukur kenyaringan suara. Apakah Anda dekat atau jauh dari sumber suara, Anda dapat menggunakan ini untuk mendapatkan gambaran seberapa kuat suara itu. Perhatikan bahwa mikrofon Android dibatasi hingga maksimal 90 dB!</string>
+    <string name="temp_desc_1">Sensor Suhu Udara menggunakan perangkat keras ponsel Anda untuk menemukan suhu sekitar tempat Anda berada saat ini. Sensor ini akan bekerja di mana saja bahkan tanpa terhubung ke sumber internet!</string>
+    <string name="temp_desc_2">Contoh kasus penggunaan mencakup menentukan apakah rumah Anda pendinginan dengan benar, pembacaan ruang / enklosur industri, dan menemukan suhu luar saat offline. Harap dicatat bahwa pembacaan ini mungkin sedikit tidak aktif karena ponsel cerdas Anda mungkin memiliki panas yang tersimpan di dekat sensor perangkat keras! Casing ponsel pintar juga dapat menjadi faktor pembacaan output yang lebih tinggi!</string>
+    <string name="light_desc_1">Sensor ini tidak memerlukan kalibrasi atau modifikasi untuk menafsirkan data cahaya. Ini akan mengukur lux (cahaya) dari jarak berapa pun dan kembali kepada Anda intensitasnya.</string>
+    <string name="light_desc_2">Nilai lux akan sangat berbeda tergantung pada informasi cahaya sekitar yang diserap oleh ponsel cerdas Anda. Ruang tamu Anda dapat mengukur mulai dari 1–150 dengan beberapa sumber cahaya menyala. Pergi ke kantor atau ruang pertunjukan yang terang mungkin memiliki bacaan 500 lux! Keluar dan ini bisa melonjak hingga 25.000! Sensor ini dapat berguna untuk merencanakan ruang dan ruang untuk memenuhi standar pencahayaan tertentu.</string>
+
 </resources>
