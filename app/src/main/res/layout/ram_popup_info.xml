@@ -17,8 +17,7 @@
         android:layout_marginEnd="24dp"
         android:fontFamily="@font/quantico"
         android:padding="20dp"
-        android:text="RAM (Random Access Memory) is constantly consumed and in use for every mobile device. This sensor measures the amount of memory currently available on your system.
-"
+        android:text="@string/ram_desc_1"
         android:textAlignment="textStart"
         android:textColor="@color/white"
         android:textSize="18sp"
@@ -47,7 +46,7 @@
         android:layout_marginBottom="24dp"
         android:fontFamily="@font/quantico"
         android:padding="20dp"
-        android:text="This sensor is geared toward those curious about how much RAM is being used by the system. A portion of RAM is always in use because of the Android OS powering your phone providing functionality as you use it. The more RAM your device has available the more apps can run in the background!"
+        android:text="@string/ram_desc_2"
         android:textAlignment="textStart"
         android:textColor="@color/white"
         android:textSize="18sp"
