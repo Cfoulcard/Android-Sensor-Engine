@@ -85,7 +85,6 @@
     <string name="speed_pref"></string>
 
     <!--Popup Info-->
-    <!--Sound Sensor-->
     <string name="sound_desc_2">Un decibel es una unidad logarítmica de medida utilizada para medir el volumen del sonido. Ya sea que esté cerca o lejos de una fuente de sonido, puede usar esto para tener una idea de qué tan intenso es el sonido. ¡Tenga en cuenta que los micrófonos Android están limitados a un máximo de 90 dB!</string>
     <string name="sound_desc_1">Este sensor mide la información espacial del sonido a su alrededor. Su dispositivo utiliza el micrófono para que esto funcione. La información del sonido se convierte a decibelios (dB).</string>
     <string name="temp_desc_1">El sensor de temperatura del aire utiliza el hardware de su teléfono para encontrar la temperatura ambiente en la que se encuentra actualmente. ¡Esto funcionará en cualquier lugar, incluso sin estar conectado a una fuente de Internet!</string>

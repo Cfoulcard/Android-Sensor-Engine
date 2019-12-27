@@ -83,7 +83,6 @@
     <string name="speed_pref"></string>
 
     <!--Popup Info-->
-    <!--Sound Sensor-->
     <string name="sound_desc_1">Sensor ini mengukur informasi suara spasial di sekitar Anda. Perangkat Anda menggunakan mikrofon untuk membuat ini berfungsi. Informasi suara kemudian dikonversi menjadi desibel (dB).</string>
     <string name="sound_desc_2">Desibel adalah satuan pengukuran logaritmik yang digunakan untuk mengukur kenyaringan suara. Apakah Anda dekat atau jauh dari sumber suara, Anda dapat menggunakan ini untuk mendapatkan gambaran seberapa kuat suara itu. Perhatikan bahwa mikrofon Android dibatasi hingga maksimal 90 dB!</string>
     <string name="temp_desc_1">Sensor Suhu Udara menggunakan perangkat keras ponsel Anda untuk menemukan suhu sekitar tempat Anda berada saat ini. Sensor ini akan bekerja di mana saja bahkan tanpa terhubung ke sumber internet!</string>

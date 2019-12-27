@@ -87,7 +87,6 @@
     <string name="speed_pref"></string>
 
     <!--Popup Info-->
-    <!--Sound Sensor-->
     <string name="sound_desc_1">Ce capteur mesure les informations sonores spatiales autour de vous. Votre appareil utilise le microphone pour que cela fonctionne. Les informations sonores sont ensuite converties en décibels (dB).</string>
     <string name="sound_desc_2">Un décibel est une unité de mesure logarithmique utilisée pour mesurer l\'intensité sonore du son. Que vous soyez proche ou éloigné d\'une source sonore, vous pouvez l\'utiliser pour vous faire une idée de l\'intensité du son. Notez que les microphones Android sont limités à un maximum de 90 dB!</string>
     <string name="temp_desc_1">Le capteur de température de l\'air utilise le matériel de votre téléphone pour trouver la température ambiante dans laquelle vous vous trouvez actuellement. Cela fonctionnera n\'importe où même sans être connecté à une source Internet!</string>
