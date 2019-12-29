@@ -94,12 +94,12 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         // Get the activity
         mActivity = WalkActivity.this;
 
-        int stepcounter = (int) event.values[0];
+        int stepCounter = (int) event.values[0];
 
         //The default Android properties for event.values[0] is the formula for Celsius
         //This is for Fahrenheit
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            currentSteps.setText(stepcounter + " Steps");
+            currentSteps.setText(stepCounter + " Steps");
 //TODO change to string
         }
     }
@@ -120,7 +120,9 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
     protected void onPause() {
         // Be sure to unregister the sensor when the activity pauses.
         super.onPause();
-        sensorManager.unregisterListener(this);
+
+        // No need to unregister. Step counter will stop if uncommented
+       // sensorManager.unregisterListener(this);
     }
 
     public void showWalkDialogPopup(View v) {

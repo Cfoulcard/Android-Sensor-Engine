@@ -14,6 +14,11 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+    <!-- As of Android 10 the ACTIVITY_RECOGNITION is required to be declared to track steps.
+    This is for the Step Sensor to work on Android 10 Devices -->
+    <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
