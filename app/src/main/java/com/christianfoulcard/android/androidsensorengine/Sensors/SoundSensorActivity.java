@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -48,6 +49,7 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     //Image Views
     ImageView soundInfo;
+    ImageView soundLogo;
 
     //For sound recording + converting to sound data
     MediaRecorder mRecorder;
@@ -173,6 +175,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
     }
 
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     private void requestAudioPermissions() {
         if (ContextCompat.checkSelfPermission(this,
@@ -243,6 +246,8 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
         startRecorder();
     }
+
+
 
     //Stops microphone from recording when user exits activity
     public void onPause() {

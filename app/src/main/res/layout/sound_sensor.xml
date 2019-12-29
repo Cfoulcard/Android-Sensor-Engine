@@ -21,7 +21,8 @@
         app:layout_constraintEnd_toEndOf="@+id/sound_sensor"
         app:layout_constraintStart_toStartOf="@+id/sound_sensor"
         app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
-        app:srcCompat="@drawable/ic_sound_icon_2" />
+        app:srcCompat="@drawable/ic_sound_icon_2"
+        />
 
     <ImageView
         android:id="@+id/info_button"
