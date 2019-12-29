@@ -15,13 +15,15 @@ android {
         }
     }
 
+    // To publish an app on Google Play be sure the API targets Android 9 (28) or higher
+
     compileSdkVersion 29
     defaultConfig {
         applicationId "com.christianfoulcard.android.androidsensorengine"
         minSdkVersion 21 // Lollipop Version. Users can at least get their lick on
         targetSdkVersion 29
-        versionCode 1
-        versionName "1.0"
+        versionCode 2
+        versionName "2.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
