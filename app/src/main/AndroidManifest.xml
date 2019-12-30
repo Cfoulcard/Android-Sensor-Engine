@@ -130,12 +130,6 @@
             android:screenOrientation="portrait"
             />
 
-        <activity android:name="com.christianfoulcard.android.androidsensorengine.Preferences.Configurations"
-            android:label="Preferences"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
         <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.About"
             android:label="About"
             android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"

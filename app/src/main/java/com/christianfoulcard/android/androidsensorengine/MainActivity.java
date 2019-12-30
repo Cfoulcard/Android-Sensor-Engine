@@ -18,9 +18,6 @@ import com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerAc
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
-import com.christianfoulcard.android.androidsensorengine.Preferences.Configurations;
-import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
-import com.christianfoulcard.android.androidsensorengine.R;
 import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity;
@@ -89,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //The following is for the menu items within the navigation_menu.xml file
-    public boolean onOptionsItemSelected(MenuItem item) {
+/*    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, Configurations.class);
@@ -110,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     /**
      * Go to the sensor_selection.xml to change the onClick values
@@ -220,10 +217,10 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(walkIntent, transitionActivityOptions.toBundle());
     }
 
-    public void prefIconIntent(View view) {
+/*    public void prefIconIntent(View view) {
         Intent prefIntent = new Intent(this, SettingsActivity.class);
 
         this.startActivity(prefIntent);
 
-    }
+    }*/
 }

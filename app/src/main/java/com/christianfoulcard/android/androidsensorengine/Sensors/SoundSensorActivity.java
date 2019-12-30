@@ -1,7 +1,6 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -26,7 +25,6 @@ import android.widget.Toast;
 
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
-import com.christianfoulcard.android.androidsensorengine.Preferences.Configurations;
 import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
@@ -388,7 +386,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     }
 
     //The following is for the menu items within the navigation_menu.xml file
-    public boolean onOptionsItemSelected(MenuItem item) {
+/*    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, Configurations.class);
@@ -409,7 +407,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
+    }*/
 
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {
