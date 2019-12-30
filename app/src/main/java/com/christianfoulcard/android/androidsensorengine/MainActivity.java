@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity;
@@ -213,10 +214,10 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(walkIntent, transitionActivityOptions.toBundle());
     }
 
-/*    public void prefIconIntent(View view) {
+    public void prefIconIntent(View view) {
         Intent prefIntent = new Intent(this, SettingsActivity.class);
 
         this.startActivity(prefIntent);
 
-    }*/
+    }
 }
