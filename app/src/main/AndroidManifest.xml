@@ -2,22 +2,24 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.christianfoulcard.android.androidsensorengine"
-    tools:ignore="ExtraText"
-    >
-    <!--Add app intent link-->
+    tools:ignore="ExtraText">
 
-    <!-- https://developer.android.com/guide/components/fundamentals#DeclaringRequirements
-     Above link for declaring app requirements on Google Play -->
-
-<!-- Record Audio and Location is listed as a Dangerous Permission
- This will mean the user must explicitly grant access to use your feature-->
+    <!-- Add app intent link -->
+    <!--
+ https://developer.android.com/guide/components/fundamentals#DeclaringRequirements
+     Above link for declaring app requirements on Google Play
+    -->
+    <!--
+ Record Audio and Location is listed as a Dangerous Permission
+ This will mean the user must explicitly grant access to use your feature
+    -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
-    <!-- As of Android 10 the ACTIVITY_RECOGNITION is required to be declared to track steps.
-    This is for the Step Sensor to work on Android 10 Devices -->
+    <!--
+ As of Android 10 the ACTIVITY_RECOGNITION is required to be declared to track steps.
+    This is for the Step Sensor to work on Android 10 Devices
+    -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-
 
     <application
         android:allowBackup="true"
@@ -26,133 +28,82 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning"
-        >
+        tools:ignore="GoogleAppIndexingWarning">
 
 
-        <!--Sensor Selection Screen-->
-        <!--Change the theme to AppTheme to go straight to the Sensor Select Screen-->
-        <!--AppTheme.Launcher is for the launcher screen-->
+        <!-- Sensor Selection Screen -->
+        <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
+        <!-- AppTheme.Launcher is for the launcher screen -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.MainActivity"
+            android:name=".MainActivity"
             android:screenOrientation="portrait"
-
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
-
-
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity"
+            android:name=".Sensors.SoundSensorActivity"
             android:label="Sound Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!--Temperature Sensor Activity-->
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity> <!-- Temperature Sensor Activity -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity"
+            android:name=".Sensors.TemperatureActivity"
             android:label="Temperature Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!--Light Sensor Activity-->
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity> <!-- Light Sensor Activity -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.LightSensorActivity"
+            android:name=".Sensors.LightSensorActivity"
             android:label="Light Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!--Ram Sensor Activity-->
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity> <!-- Ram Sensor Activity -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity"
+            android:name=".Sensors.RamActivity"
             android:label="Ram Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!--Battery Sensor Activity-->
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity> <!-- Battery Sensor Activity -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity"
+            android:name=".Sensors.BatteryActivity"
             android:label="Battery Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity>
 
-        <receiver android:name="com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity">
+        <receiver android:name=".Sensors.BatteryActivity">
             <intent-filter>
-                <action android:name="android.intent.action.ACTION_POWER_CONNECTED"/>
-                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED"/>
+                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
             </intent-filter>
-        </receiver>
-
-        <!--Speed Sensor Activity-->
+        </receiver> <!-- Speed Sensor Activity -->
         <activity
-            android:name="com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerActivity"
+            android:name=".Sensors.AccelerometerActivity"
             android:label="Speed Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
-
-        <!--Humidity Sensor Activity-->
-        <activity android:name=".Sensors.HumidityActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait"></activity> <!-- Humidity Sensor Activity -->
+        <activity
+            android:name=".Sensors.HumidityActivity"
             android:label="Humidity Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <!--Pressure Sensor Activity-->
-        <activity android:name=".Sensors.PressureActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" /> <!-- Pressure Sensor Activity -->
+        <activity
+            android:name=".Sensors.PressureActivity"
             android:label="Pressure Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <!--Steps Sensor Activity-->
-        <activity android:name=".Sensors.WalkActivity"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" /> <!-- Steps Sensor Activity -->
+        <activity
+            android:name=".Sensors.WalkActivity"
             android:label="Step Sensor"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-
-
-        <!--The following is for the menu items-->
-        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits"
-            android:label="Credits"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.About"
-            android:label="About"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-        <activity android:name="com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium"
-            android:label="Premium"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-            />
-
-       <activity android:name="com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity"
-            android:theme="@style/Theme.AppCompat.Light.DarkActionBar"
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
+        <activity
+            android:name=".Preferences.SettingsActivity"
             android:label="Preferences"
-            android:parentActivityName="com.christianfoulcard.android.androidsensorengine.MainActivity"
-            android:screenOrientation="portrait"
-           />
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
     </application>
+
 </manifest>
