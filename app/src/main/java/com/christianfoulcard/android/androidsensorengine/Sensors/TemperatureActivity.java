@@ -11,6 +11,8 @@ import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
+
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -19,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -114,14 +117,13 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         mActivity = TemperatureActivity.this;
 
         // Get the instance of SharedPreferences object
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        SharedPreferences.Editor editor = mSharedPreferences.edit();
-        editor.putString("", "");
+        SharedPreferences sharedPreferences =
+                PreferenceManager.getDefaultSharedPreferences(this);
+       // String name = sharedPreferences.getString(“airtempunits”, "");
+       // String degrees = sharedPreferences.getString(“airtempunit”, "");
+/*        editor.putString("", "");
         editor.apply();
-        editor.commit();
-
-
-        int degrees;
+        editor.commit();*/
 
         //  currentDegrees.setText(mSharedPreferences.getInt("Celsius", getResources().getStringArray(0)));
         String temp_unit_c = mSharedPreferences.getString(getString(R.string.temperature_measurement),
@@ -224,6 +226,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
 
         tempInfoDialog.dismiss();
     }
+
+
 
     //This will add functionality to the menu button within the action bar
     @Override
