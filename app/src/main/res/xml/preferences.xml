@@ -6,7 +6,7 @@
             android2:entries="@array/temperature_units"
             android2:entryValues="@array/temperature_units_values"
             android2:key="@string/temperature_measurement"
-            android2:title="@string/temperature_measurement2" />
+            android2:title="@string/temperature_measurement" />
 
     </PreferenceCategory>
 
