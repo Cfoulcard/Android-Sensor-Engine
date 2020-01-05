@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     android:background="@drawable/drawable_gradient"
     android:fitsSystemWindows="false"
-    tools:context="com.christianfoulcard.android.androidsensorengine.MainActivity"
-    >
+    tools:context="com.christianfoulcard.android.androidsensorengine.MainActivity">
 
 
     <TextView
