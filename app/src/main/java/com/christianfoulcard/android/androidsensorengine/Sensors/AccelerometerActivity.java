@@ -100,11 +100,11 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
         this.onLocationChanged(null);
     }
 
-    //Upon destroying the activity the location data will terminate
+    //Upon leaving the activity the location data will terminate
     //Used to free memory/battery usage
-    public  void onDestroy()
+    public  void onPause()
     {
-        super.onDestroy();
+        super.onPause();
         LocationManager lm = (LocationManager) this.getSystemService(LOCATION_SERVICE);
         lm.removeUpdates(this);
     }
