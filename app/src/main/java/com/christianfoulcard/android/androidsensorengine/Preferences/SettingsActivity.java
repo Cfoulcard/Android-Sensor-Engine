@@ -6,8 +6,11 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceManager;
 
 import com.christianfoulcard.android.androidsensorengine.R;
+
+//TODO: Fix back button!
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -26,9 +29,9 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
 
+
+
     }
-
-
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @Override
