@@ -2,18 +2,17 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
 import android.app.Dialog
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
+import android.content.*
+import android.hardware.Sensor
 import android.os.BatteryManager
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
@@ -31,7 +30,7 @@ class BatteryActivity : AppCompatActivity() {
     private var ifilter: IntentFilter? = null
     // private val level = registerMyReceiver()
 
-    //ImsgeViews
+    //ImageViews
     var batteryInfo: ImageView? = null
 
     // Initiate Firebase Analytics
@@ -47,12 +46,28 @@ class BatteryActivity : AppCompatActivity() {
             val batteryPct = level / scale.toFloat()
             val celsiusLevel = level / 10
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
+            val kelvinLevel = celsiusLevel + 273
 
-            currentBattery.text = "$fahrenheitLevel °F"
+            // Get the instance of SharedPreferences object
+            //Note the original context was "this". This caused a Null Pointer error
+            //Used this@BatteryActivity to fix the issue
+            val settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@BatteryActivity)
+            //Get the string data from the Preferences
+            val unit = settings.getString("batterytempunit", "")
 
-            // Toast.makeText(context, "Current Battery Level: $level", Toast.LENGTH_LONG).show()
+            //Finds the preference string value and links it with the appropriate temperature calc formula
+            when (unit) {
+                "C°" -> currentBattery.setText(celsiusLevel.toString() + " " + unit)
+                "F°" -> currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
+                "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)
+            }
         }
+
+        // currentBattery.text = "$fahrenheitLevel °F"
+
+        // Toast.makeText(context, "Current Battery Level: $level", Toast.LENGTH_LONG).show()
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -84,6 +99,8 @@ class BatteryActivity : AppCompatActivity() {
         currentBattery = findViewById(R.id.current_battery)
         currentBattery.text = "${registerMyReceiver()} percent"
 
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -93,6 +110,11 @@ class BatteryActivity : AppCompatActivity() {
         registerReceiver(mBatteryReceiver, ifilter)
 
         return mBatteryReceiver
+    }
+
+    override fun onResume() {
+        super.onResume()
+
     }
 
     override fun onDestroy() {
