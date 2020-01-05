@@ -74,12 +74,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         //Dialog Box for Temperature Info
         tempInfoDialog = new Dialog(this);
 
-        final Animation in = new AlphaAnimation(0.0f, 1.0f);
-        in.setDuration(1500);
-        temperature_text.startAnimation(in);
-        currentDegrees.startAnimation(in);
-        airTemp.startAnimation(in);
-        tempInfo.startAnimation(in);
+
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -126,14 +121,14 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         editor.commit();*/
 
         //  currentDegrees.setText(mSharedPreferences.getInt("Celsius", getResources().getStringArray(0)));
-        String temp_unit_c = mSharedPreferences.getString(getString(R.string.temperature_measurement),
+/*        String temp_unit_c = mSharedPreferences.getString(getString(R.string.temperature_measurement),
                 mContext.getResources().getString(R.string.Celsius));
 
         String temp_unit_f = mSharedPreferences.getString(getString(R.string.temperature_measurement),
                 mContext.getResources().getString(R.string.Fahrenheit));
 
         String temp_unit_k = mSharedPreferences.getString(getString(R.string.temperature_measurement),
-                mContext.getResources().getString(R.string.Kelvin));
+                mContext.getResources().getString(R.string.Kelvin));*/
 
         int b = (int) event.values[0];
         int c = b * 9 / 5 + 32;
@@ -200,6 +195,17 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         mMidSquare.setTrailColor(trailColor);
         mTrebleTriangle.setTrailColor(trailColor);*//*
     }*/
+
+    @Override
+    protected void onStart() {
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        temperature_text.startAnimation(in);
+        currentDegrees.startAnimation(in);
+        airTemp.startAnimation(in);
+        tempInfo.startAnimation(in);
+        super.onStart();
+    }
 
     @Override
     protected void onResume() {
