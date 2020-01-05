@@ -8,9 +8,9 @@
     </string-array>
 
     <string-array name="temperature_units_values">
-        <item>Celsius</item>
-        <item>Fahrenheit</item>
-        <item>Kelvin</item>
+        <item>C°</item>
+        <item>F°</item>
+        <item>K°</item>
     </string-array>
 
     <!-- Speed String Arrays for Preferences -->
