@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Get the instance of SharedPreferences object
         mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+
+        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
