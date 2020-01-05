@@ -36,8 +36,6 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     TextView temperature_text;
     TextView currentDegrees;
     TextView airTemp;
-    TextView currentDegreesTest;
-    TextView currentDegreesK;
 
     //ImsgeViews
     ImageView tempInfo;
@@ -47,8 +45,6 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     private Sensor temperature;
     private Context mContext;
     private Activity mActivity;
-
-    private SharedPreferences mSharedPreferences;
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -60,13 +56,10 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temperature_sensor);
 
-//TextViews
+        //TextViews
         temperature_text = (TextView) findViewById(R.id.temperature);
         currentDegrees = (TextView) findViewById(R.id.current_temp);
         airTemp = (TextView) findViewById(R.id.temperature_sensor);
-        //  currentDegreesTest = (TextView) findViewById(R.id.currentdegreestest);
-        //    currentDegreesF = (TextView) findViewById(R.id.current_temp_f);
-        //  currentDegreesK = (TextView) findViewById(R.id.current_temp);
 
         //ImageViews
         tempInfo = (ImageView) findViewById(R.id.info_button);
@@ -112,89 +105,32 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         mActivity = TemperatureActivity.this;
 
         // Get the instance of SharedPreferences object
-        SharedPreferences sharedPreferences =
-                PreferenceManager.getDefaultSharedPreferences(this);
-       // String name = sharedPreferences.getString(“airtempunits”, "");
-       // String degrees = sharedPreferences.getString(“airtempunit”, "");
-/*        editor.putString("", "");
-        editor.apply();
-        editor.commit();*/
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+        //Get the string data from the Preferences
+        String unit = settings.getString("airtempunit", "");
 
-        //  currentDegrees.setText(mSharedPreferences.getInt("Celsius", getResources().getStringArray(0)));
-/*        String temp_unit_c = mSharedPreferences.getString(getString(R.string.temperature_measurement),
-                mContext.getResources().getString(R.string.Celsius));
+        //Calculates Celsius
+        int c = (int) event.values[0];
+        //Calculates Fahrenheit
+        int f = c * 9 / 5 + 32;
+        //Calculates Kelvin
+        int k = (int) (c + 273.15);
 
-        String temp_unit_f = mSharedPreferences.getString(getString(R.string.temperature_measurement),
-                mContext.getResources().getString(R.string.Fahrenheit));
-
-        String temp_unit_k = mSharedPreferences.getString(getString(R.string.temperature_measurement),
-                mContext.getResources().getString(R.string.Kelvin));*/
-
-        int b = (int) event.values[0];
-        int c = b * 9 / 5 + 32;
-        int k = (int) (b + 273.15);
-
-
-       /* if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
-                temp_unit == mSharedPreferences.getString(getString(R.string.temperature_measurement),
-                        mContext.getResources().getString(R.string.temperature_measurement))) {
-
-            currentDegrees.setText(temp_unit);
-        }*/
-
-        //The default Android properties for event.values[0] is the formula for Celsius
-        //This is for Fahrenheit
+        //Finds the preference string value and links it with the appropriate temperature calc formula
         if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-            currentDegrees.setText(c + " °F");
-
+            switch (unit) {
+                case "C°":
+                    currentDegrees.setText(c + " " + unit);
+                    break;
+                case "F°":
+                    currentDegrees.setText(f + " " + unit);
+                    break;
+                case "K°":
+                    currentDegrees.setText(k + " " + unit);
+                    break;
+            }
         }
-
-        //The following converts celsius into fahrenheit
-/*        else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE) {
-
-            currentDegrees.setText(c + " F");
-        } else if (event.sensor.getType() == Sensor.TYPE_AMBIENT_TEMPERATURE &&
-                temp_unit_k == mSharedPreferences.getString(getString(R.string.Kelvin),
-                        mContext.getResources().getString(R.string.Kelvin))) {
-
-            currentDegrees.setText(k + " °K");
-        }*/
-
-
     }
-
-/*    public void setColor(String newColorKey) {
-
-        @ColorInt
-        int temp;
-
-        @ColorInt
-        int trailColor;
-
-        int b = 5435432;
-        int z = 432432;
-        int u = 768;
-       // int c = b * 9 / 5 + 32;
-      //  int k = (int) (b + 273.15);
-
-        if (newColorKey.equals("Celsius")) {
-            temp = getString()
-        } else if (newColorKey.equals("Fahrenheit")) {
-            currentDegrees.setText(z + " F");
-        } else {
-            currentDegrees.setText(u + " K");
-        }
-
-        currentDegreesTest.setText(temp);
-
-*//*        mBassCircle.setShapeColor(shapeColor);
-        mMidSquare.setShapeColor(shapeColor);
-        mTrebleTriangle.setShapeColor(shapeColor);
-
-        mBassCircle.setTrailColor(trailColor);
-        mMidSquare.setTrailColor(trailColor);
-        mTrebleTriangle.setTrailColor(trailColor);*//*
-    }*/
 
     @Override
     protected void onStart() {
