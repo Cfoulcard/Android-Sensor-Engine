@@ -2,6 +2,7 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -135,17 +138,50 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     //Speed Formula for the Accelerometer
     @Override
     public void onLocationChanged(Location location) {
+
+        // Get the instance of SharedPreferences object
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
+        //Get the string data from the Preferences
+        String unit = settings.getString("speedunit", "");
+
         if (location == null) {
             // if you can't get speed because reasons :)
-            currentSpeed.setText("0 mph");
+            switch (unit) {
+                case "MPH":
+                case "KM/H":
+                case "M/S":
+                case "FT/S":
+                case "knots":
+                    currentSpeed.setText("0 " + unit);
+                    break;
+            }
         } else {
-            //int speed=(int) ((location.getSpeed()) is the standard which returns meters per second.
-            //int speed=(int) ((location.getSpeed()*3600)/1000); //This is speed in km/h
-            int speed = (int) (location.getSpeed() * 2.2369); //This is speed in mph
+            int speedMs =(int) ((location.getSpeed())); // This is the standard which returns meters per second.
+            int speedMph = (int) (location.getSpeed() * 2.2369); // This is speed in mph
+            int speedKm =(int) ((location.getSpeed()*3600)/1000); // This is speed in km/h
+            int speedFts = (int) (location.getSpeed() * 3.2808); // This is speed in Feet per second
+            int speedKnot = (int) (location.getSpeed() * 1.9438); // This is speed in knots
 
             //Refer to this link for more speed data https://www.wikiwand.com/en/Speed
 
-            currentSpeed.setText(speed + " mph");
+            switch (unit) {
+                case "MPH":
+                    currentSpeed.setText(speedMph + " " + unit);
+                    break;
+                case "KM/H":
+                    currentSpeed.setText(speedKm + " " + unit);
+                    break;
+                case "M/S":
+                    currentSpeed.setText(speedMs + " " + unit);
+                    break;
+                case "FT/S":
+                    currentSpeed.setText(speedFts + " " + unit);
+                    break;
+                case "Knots":
+                    currentSpeed.setText(speedKnot + " " + unit);
+                    break;
+            }
         }
     }
 
