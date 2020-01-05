@@ -33,10 +33,10 @@
     <PreferenceCategory app:title="Battery Temperature">
 
         <ListPreference
-            android:defaultValue="true"
+            android:defaultValue="F°"
             android:entries="@array/temperature_units"
             android:entryValues="@array/temperature_units_values"
-            android:key="battery_temp_1"
+            android:key="batterytempunit"
             android:title="@string/temperature_measurement"
             app:useSimpleSummaryProvider="true" />
 
@@ -45,10 +45,10 @@
     <PreferenceCategory app:title="Accelerometer">
 
         <ListPreference
-            android:defaultValue="true"
+            android:defaultValue="MPH"
             android:entries="@array/speed_units"
             android:entryValues="@array/speed_units_values"
-            android:key="speed_1"
+            android:key="speedunit"
             android:title="@string/speed_measurement"
             app:useSimpleSummaryProvider="true" />
 
