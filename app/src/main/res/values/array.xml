@@ -17,10 +17,16 @@
     <string-array name="speed_units">
         <item>MPH</item>
         <item>KM/H</item>
+        <item>M/S</item>
+        <item>FT/S</item>
+        <item>Knots</item>
     </string-array>
 
     <string-array name="speed_units_values">
         <item>MPH</item>
         <item>KM/H</item>
+        <item>M/S</item>
+        <item>FT/S</item>
+        <item>Knots</item>
     </string-array>
 </resources>
