@@ -106,6 +106,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
 
         // Get the instance of SharedPreferences object
         SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(this);
+
         //Get the string data from the Preferences
         String unit = settings.getString("airtempunit", "");
 
