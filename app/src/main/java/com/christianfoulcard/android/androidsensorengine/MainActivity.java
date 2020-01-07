@@ -9,10 +9,14 @@ import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.AccelerometerActivity;
 import com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity;
@@ -85,10 +89,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //The following is for the menu items within the navigation_menu.xml file
-/*    public boolean onOptionsItemSelected(MenuItem item) {
+/*   public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
-                Intent configurationsIntent = new Intent(this, Configurations.class);
+                Intent configurationsIntent = new Intent(this, SettingsActivity.class);
                 this.startActivity(configurationsIntent);
                 return true;
             case R.id.credits:
