@@ -17,8 +17,9 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <PreferenceCategory app:title="Air Temperature"
-        app:key="airtempunits">
+    <PreferenceCategory
+        app:key="airtempunits"
+        app:title="Air Temperature">
 
         <ListPreference
             android:defaultValue="F°"

@@ -27,10 +27,6 @@ public class SettingsActivity extends AppCompatActivity {
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-
-
-
     }
 
     public static class SettingsFragment extends PreferenceFragmentCompat {
@@ -42,7 +38,4 @@ public class SettingsActivity extends AppCompatActivity {
             ListPreference listPreference3 = findPreference("speedunit");
         }
     }
-
-
-
 }
