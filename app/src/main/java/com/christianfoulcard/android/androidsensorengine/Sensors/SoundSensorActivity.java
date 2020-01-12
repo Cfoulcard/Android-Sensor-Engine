@@ -2,6 +2,7 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -21,6 +23,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.About;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Credits;
+import com.christianfoulcard.android.androidsensorengine.Menu_Items.Premium;
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -69,10 +75,13 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppThemeSensors);
         super.onCreate(savedInstanceState);
         //Enable for fade in transition
         // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+
         setContentView(R.layout.sound_sensor);
+
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -381,10 +390,10 @@ public class SoundSensorActivity extends AppCompatActivity {
     }
 
     //The following is for the menu items within the navigation_menu.xml file
-/*    public boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
-                Intent configurationsIntent = new Intent(this, Configurations.class);
+                Intent configurationsIntent = new Intent(this, SettingsActivity.class);
                 this.startActivity(configurationsIntent);
                 return true;
             case R.id.credits:
@@ -402,7 +411,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 
     //Sound Test provided by MediaPlayer
     public void playSound(View v) {

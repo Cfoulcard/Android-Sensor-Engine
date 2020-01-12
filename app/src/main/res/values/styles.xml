@@ -25,8 +25,20 @@
         <item name="android:windowTranslucentNavigation">true</item>
         <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
     </style>
+
+    <style name="AppThemeSensors" parent="@style/Theme.AppCompat.Light.DarkActionBar">
+
+        <item name="colorPrimary">@color/colorPrimaryGrey</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <!--The following 2 lines are used to make the Status Bar and Nav Bar Transparent-->
+       <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentNavigation">true</item>
+        <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
+    </style>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.NoActionBar">
+    <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!--This is used for the transition effect when switching from the sensor select screen to sensor activities-->
         <item name="android:windowContentTransitions">true</item>
             ...

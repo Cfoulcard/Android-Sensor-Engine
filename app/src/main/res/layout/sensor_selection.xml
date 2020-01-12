@@ -148,15 +148,4 @@
         app:layout_constraintTop_toTopOf="@+id/humidity_icon"
         app:srcCompat="@drawable/ic_walk_icon" />
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="24dp"
-        android:onClick="prefIconIntent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_ham_icon_black" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

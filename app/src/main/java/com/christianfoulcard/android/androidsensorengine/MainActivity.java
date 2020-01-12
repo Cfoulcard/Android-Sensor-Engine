@@ -60,8 +60,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.sensor_selection);
 
         // This will make the Status Bar completely transparent
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+/*        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);*/
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //The following is for the menu items within the navigation_menu.xml file
-/*   public boolean onOptionsItemSelected(MenuItem item) {
+   public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, SettingsActivity.class);
@@ -110,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }*/
+    }
 
     /**
      * Go to the sensor_selection.xml to change the onClick values

@@ -3,6 +3,7 @@
     <color name="colorPrimary">#385BF2</color>
     <color name="colorPrimaryDark">#210246</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimaryGrey">#222222</color>
 
     <!-- Sensor Selection Gradient Color -->
     <color name="sky_blue">#41B6E6</color>
