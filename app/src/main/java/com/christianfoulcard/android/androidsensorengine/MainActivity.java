@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Add elevation/sea level sensor?
     //TODO: Snackbar instead of Toast?
     //TODO: Go through each activitiy's lifecycle
+    //TODO: Fix animations
 
 
     //FUTURE IDEAS
@@ -94,18 +95,6 @@ public class MainActivity extends AppCompatActivity {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, SettingsActivity.class);
                 this.startActivity(configurationsIntent);
-                return true;
-            case R.id.credits:
-                Intent creditsIntent = new Intent(this, Credits.class);
-                this.startActivity(creditsIntent);
-                return true;
-            case R.id.about:
-                Intent aboutIntent = new Intent(this, About.class);
-                this.startActivity(aboutIntent);
-                return true;
-            case R.id.premium:
-                Intent premiumIntent = new Intent(this, Premium.class);
-                this.startActivity(premiumIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
