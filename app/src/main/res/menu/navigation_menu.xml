@@ -8,16 +8,4 @@
         android:id="@+id/preferences"
         android:title="@string/preferences" />
 
-    <item
-        android:id="@+id/credits"
-        android:title="@string/credits" />
-
-    <item
-        android:id="@+id/about"
-        android:title="@string/about" />
-
-    <item
-        android:id="@+id/premium"
-        android:title="@string/premium" />
-
 </menu>
