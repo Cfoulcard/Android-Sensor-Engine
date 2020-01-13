@@ -3,18 +3,21 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.*
-import android.hardware.Sensor
 import android.os.BatteryManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
+
+//TODO fix preference not parsing data on units
 
 class BatteryActivity : AppCompatActivity() {
 
@@ -73,6 +76,7 @@ class BatteryActivity : AppCompatActivity() {
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.battery_sensor)
 
@@ -137,5 +141,17 @@ class BatteryActivity : AppCompatActivity() {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation_menu, menu)
         return true
+    }
+
+    //The following is for the menu items within the navigation_menu.xml file
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.preferences -> {
+                val configurationsIntent = Intent(this, SettingsActivity::class.java)
+                this.startActivity(configurationsIntent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }

@@ -3,15 +3,18 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 import android.annotation.SuppressLint;
 import android.app.ActivityManager;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -39,6 +42,7 @@ public class RamActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppThemeSensors);
         super.onCreate(savedInstanceState);
         setContentView(ram_sensor);
 
@@ -113,5 +117,17 @@ public class RamActivity extends AppCompatActivity {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
+    }
+
+    //The following is for the menu items within the navigation_menu.xml file
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.preferences:
+                Intent configurationsIntent = new Intent(this, SettingsActivity.class);
+                this.startActivity(configurationsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }

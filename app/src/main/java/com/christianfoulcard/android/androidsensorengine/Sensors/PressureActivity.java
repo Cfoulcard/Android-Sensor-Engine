@@ -3,6 +3,7 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -10,6 +11,9 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -17,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity;
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
@@ -46,6 +51,7 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppThemeSensors);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pressure_sensor);
 
@@ -133,6 +139,26 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
         pressureInfoDialog.setContentView(R.layout.pressure_popup_info);
 
         pressureInfoDialog.dismiss();
+    }
+
+    //This will add functionality to the menu button within the action bar
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.navigation_menu, menu);
+        return true;
+    }
+
+    //The following is for the menu items within the navigation_menu.xml file
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.preferences:
+                Intent configurationsIntent = new Intent(this, SettingsActivity.class);
+                this.startActivity(configurationsIntent);
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 }
 

@@ -9,6 +9,8 @@ import android.media.MediaRecorder;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -395,18 +397,6 @@ public class SoundSensorActivity extends AppCompatActivity {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, SettingsActivity.class);
                 this.startActivity(configurationsIntent);
-                return true;
-            case R.id.credits:
-                Intent creditsIntent = new Intent(this, Credits.class);
-                this.startActivity(creditsIntent);
-                return true;
-            case R.id.about:
-                Intent aboutIntent = new Intent(this, About.class);
-                this.startActivity(aboutIntent);
-                return true;
-            case R.id.premium:
-                Intent premiumIntent = new Intent(this, Premium.class);
-                this.startActivity(premiumIntent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
