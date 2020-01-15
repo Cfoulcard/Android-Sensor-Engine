@@ -141,21 +141,6 @@ public class SoundSensorActivity extends AppCompatActivity {
             }
         });
 
-        ////////////////////////////////////////////////////////////////////////////////////////////
-
-        // This section is used to request permission to utilize the user's microphone and record audio
-        // Refer to https://developer.android.com/training/permissions/requesting.html#java
-
-
-        // Used to test request audio recording permission as a toast message
- /*       if(!isRecordAudioPermissionGranted())
-        {
-            Toast.makeText(getApplicationContext(), "Need to request permission", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(getApplicationContext(), "No need to request permission", Toast.LENGTH_SHORT).show();
-        }*/
-
-
         ////////////////////////////////////////////////////////////////////////////////////////////////
         //This section is used to pick up sound from the user's microphone
 
@@ -346,7 +331,7 @@ public class SoundSensorActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //Record Audio Permission
     //Upon opening this activity user will be promoted to allow audio recording
-    //TODO Update Build Version
+
     private boolean isRecordAudioPermissionGranted() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
@@ -356,7 +341,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             } else {
                 if (shouldShowRequestPermissionRationale(Manifest.permission.RECORD_AUDIO)) {
                     Toast.makeText(this,
-                            "App required access to audio", Toast.LENGTH_SHORT).show();
+                            R.string.sound_permission_denied, Toast.LENGTH_SHORT).show();
                 }
                 requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO
                 }, AUDIO_RECORD_REQUEST_CODE);
