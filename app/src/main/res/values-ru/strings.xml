@@ -1,8 +1,5 @@
 <resources>
 
-    <!--TODO convert to different languages-->
-    <!--https://developer.android.com/guide/topics/resources/localization#creating-alternatives-->
-
     <string name="app_name">Android Sensor Engine</string>
 
     <!--Navigation Menu String Information-->

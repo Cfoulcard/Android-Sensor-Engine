@@ -10,8 +10,6 @@ import androidx.preference.PreferenceManager;
 
 import com.christianfoulcard.android.androidsensorengine.R;
 
-//TODO: Fix back button!
-
 public class SettingsActivity extends AppCompatActivity {
 
     @Override

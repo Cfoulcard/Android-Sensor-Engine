@@ -27,8 +27,6 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
-// TODO add menu
-
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
     //Dialog popup info

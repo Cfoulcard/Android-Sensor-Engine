@@ -19,7 +19,7 @@
 
     <PreferenceCategory
         app:key="airtempunits"
-        app:title="Air Temperature">
+        app:title="@string/phone_temp_sensor">
 
         <ListPreference
             android:defaultValue="F°"
@@ -31,7 +31,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Battery Temperature">
+    <PreferenceCategory app:title="@string/battery_sensor">
 
         <ListPreference
             android:defaultValue="F°"
@@ -43,7 +43,7 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory app:title="Accelerometer">
+    <PreferenceCategory app:title="@string/accelerometer">
 
         <ListPreference
             android:defaultValue="MPH"

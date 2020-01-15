@@ -101,8 +101,6 @@
             android:label="Preferences"
             android:screenOrientation="portrait" />
 
-        <!-- TODO translate pref -->
-
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -106,7 +106,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         //This is for Fahrenheit
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
             currentSteps.setText(stepCounter + " Steps");
-//TODO change to string
+//TODO change to string resource
         }
     }
 

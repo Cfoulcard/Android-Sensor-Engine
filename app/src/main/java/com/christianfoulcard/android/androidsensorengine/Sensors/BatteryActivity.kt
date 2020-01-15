@@ -17,7 +17,7 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
-//TODO fix preference not parsing data on units
+//TODO: Toast message if not working?
 
 class BatteryActivity : AppCompatActivity() {
 

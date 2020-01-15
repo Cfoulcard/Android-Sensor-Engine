@@ -20,6 +20,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static com.christianfoulcard.android.androidsensorengine.R.layout.ram_sensor;
 
+// TODO: Toast Message?
 
 public class RamActivity extends AppCompatActivity {
 
