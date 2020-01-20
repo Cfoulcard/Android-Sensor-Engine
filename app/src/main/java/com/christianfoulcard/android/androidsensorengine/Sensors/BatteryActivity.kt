@@ -17,8 +17,6 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
-//TODO: Toast message if not working?
-
 class BatteryActivity : AppCompatActivity() {
 
     //Dialog popup info
