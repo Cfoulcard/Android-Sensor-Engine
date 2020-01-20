@@ -105,8 +105,7 @@ public class WalkActivity extends AppCompatActivity implements SensorEventListen
         //The default Android properties for event.values[0] is the formula for Celsius
         //This is for Fahrenheit
         if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            currentSteps.setText(stepCounter + " Steps");
-//TODO change to string resource
+            currentSteps.setText(stepCounter + ""); //Crashes without ""
         }
     }
 
