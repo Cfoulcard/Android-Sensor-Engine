@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Show user a list of sensors their device can use
     //TODO: Fix XML Responsiveness on different devices according to languages
     //TODO: Add elevation/sea level sensor?
-    //TODO: Go through each activitiy's lifecycle
+    //TODO: Go through each activity's lifecycle
     //TODO: Fix animations
 
 
