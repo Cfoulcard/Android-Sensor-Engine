@@ -27,6 +27,8 @@
             android:entryValues="@array/temperature_units_values"
             android:key="airtempunit"
             android:title="@string/temperature_measurement"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="true"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -39,6 +41,8 @@
             android:entryValues="@array/temperature_units_values"
             android:key="batterytempunit"
             android:title="@string/temperature_measurement"
+            app:allowDividerAbove="false"
+            app:allowDividerBelow="true"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -51,6 +55,7 @@
             android:entryValues="@array/speed_units_values"
             android:key="speedunit"
             android:title="@string/speed_measurement"
+            app:allowDividerAbove="false"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

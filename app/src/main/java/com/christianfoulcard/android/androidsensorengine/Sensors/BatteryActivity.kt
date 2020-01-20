@@ -54,10 +54,9 @@ class BatteryActivity : AppCompatActivity() {
             //Used this@BatteryActivity to fix the issue
             val settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@BatteryActivity)
             //Get the string data from the Preferences
-            val unit = settings.getString("batterytempunit", "")
 
             //Finds the preference string value and links it with the appropriate temperature calc formula
-            when (unit) {
+            when (val unit = settings.getString("batterytempunit", "")) {
                 "C°" -> currentBattery.setText(celsiusLevel.toString() + " " + unit)
                 "F°" -> currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
                 "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)
@@ -99,7 +98,7 @@ class BatteryActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         currentBattery = findViewById(R.id.current_battery)
-        currentBattery.text = "${registerMyReceiver()} percent"
+
 
 
 
@@ -115,13 +114,18 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
+        currentBattery.text = "${registerMyReceiver()} percent"
         super.onResume()
+    }
 
+    override fun onPause() {
+        unregisterReceiver(registerMyReceiver())
+        super.onPause()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        unregisterReceiver(registerMyReceiver())
+
     }
 
     fun showBatteryDialogPopup(v: View?) {
