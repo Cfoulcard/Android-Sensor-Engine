@@ -20,8 +20,6 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 import static com.christianfoulcard.android.androidsensorengine.R.layout.ram_sensor;
 
-// TODO: Toast Message?
-
 public class RamActivity extends AppCompatActivity {
 
     //Dialog popup info
@@ -72,17 +70,28 @@ public class RamActivity extends AppCompatActivity {
         // Get an instance of the sensor service, and use that to get an instance of
         // a particular sensor.
         currentRam = findViewById(R.id.current_ram);
-        long i = (getMemorySize());
-        currentRam.setText((i) + " mB");
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    @Override
+    protected void onResume() {
+        long i = (getMemorySize());
+        currentRam.setText((i) + " mB");
+        super.onResume();
+    }
 
     public int getMemorySize() {
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         activityManager.getMemoryInfo(mi);
         double availableMegs = mi.availMem / 0x100000L;
+
+        final Runtime runtime = Runtime.getRuntime();
+        final long usedMemInMB =(runtime.totalMemory() - runtime.freeMemory()) / 1048576L;
 
 //Percentage can be calculated for API 16+
         double percentAvail = mi.availMem / (double) mi.totalMem * 100.0;
