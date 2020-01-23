@@ -31,9 +31,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class MainActivity extends AppCompatActivity {
 
-    //TODO: Create about and credits menu activities
     //TODO: Show user a list of sensors their device can use
-    //TODO: Fix XML Responsiveness on different devices according to languages
     //TODO: Add elevation/sea level sensor?
     //TODO: Go through each activity's lifecycle
     //TODO: Fix animations
