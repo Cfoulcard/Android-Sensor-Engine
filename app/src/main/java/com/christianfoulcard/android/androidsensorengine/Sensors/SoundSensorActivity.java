@@ -2,6 +2,8 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -12,6 +14,8 @@ import android.os.Handler;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
@@ -36,6 +40,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class SoundSensorActivity extends AppCompatActivity {
 
+    private static final String CHANNEL_ID = "123";
     //Initiates the Media Player to play raw files
     MediaPlayer mp;
 
@@ -65,6 +70,33 @@ public class SoundSensorActivity extends AppCompatActivity {
     };
 
     final Handler mHandler = new Handler();
+
+    String textTitle = "Android Sensor Engine";
+    String textContent = "Hey, Look, Listen!";
+    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+            .setSmallIcon(R.drawable.launch_logo_128)
+            .setContentTitle(textTitle)
+            .setContentText(textContent)
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.sound);
+            String description = getString(R.string.sound_sensor);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+            // notificationId is a unique int for each notification that you must define
+
+        }
+    }
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
@@ -109,6 +141,11 @@ public class SoundSensorActivity extends AppCompatActivity {
 
         //To request audio permissions upon opening activity
         requestAudioPermissions();
+
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(123, builder.build());
+        createNotificationChannel();
 
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
@@ -234,6 +271,8 @@ public class SoundSensorActivity extends AppCompatActivity {
             return;
         }
         startRecorder();
+
+
     }
 
 
@@ -353,6 +392,8 @@ public class SoundSensorActivity extends AppCompatActivity {
             return true;
         }
     }
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
