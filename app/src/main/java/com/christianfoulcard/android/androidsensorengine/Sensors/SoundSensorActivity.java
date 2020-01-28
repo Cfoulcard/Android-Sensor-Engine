@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Dialog;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.MediaPlayer;
@@ -71,13 +72,11 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     final Handler mHandler = new Handler();
 
-    String textTitle = "Android Sensor Engine";
-    String textContent = "Hey, Look, Listen!";
-    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-            .setSmallIcon(R.drawable.launch_logo_128)
-            .setContentTitle(textTitle)
-            .setContentText(textContent)
-            .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+
+
+
+
 
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
@@ -142,10 +141,22 @@ public class SoundSensorActivity extends AppCompatActivity {
         //To request audio permissions upon opening activity
         requestAudioPermissions();
 
+        String textTitle = "Android Sensor Engine";
+        String textContent = "Hey, Look, Listen!";
+        Intent intent = new Intent(this, SoundSensorActivity.class);
+       // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                .setSmallIcon(R.drawable.launch_logo_128)
+                .setContentTitle(textTitle)
+                .setContentText(textContent)
+                .setContentIntent(pendingIntent)
+                .setAutoCancel(true)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(123, builder.build());
-        createNotificationChannel();
+
 
         //Seekbar properties
         // https://www.tutlane.com/tutorial/android/android-seekbar-with-examples
@@ -271,6 +282,7 @@ public class SoundSensorActivity extends AppCompatActivity {
             return;
         }
         startRecorder();
+        createNotificationChannel();
 
 
     }
