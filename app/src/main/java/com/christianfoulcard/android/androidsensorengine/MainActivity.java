@@ -29,16 +29,14 @@ import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActi
 import com.christianfoulcard.android.androidsensorengine.Sensors.WalkActivity;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+////////////////////////////////////////////////////////////////////////////////////////////////////
+
 public class MainActivity extends AppCompatActivity {
 
     //TODO: Show user a list of sensors their device can use
     //TODO: Add elevation/sea level sensor?
     //TODO: Go through each activity's lifecycle
     //TODO: Fix animations
-
-
-    //FUTURE IDEAS
-    //Add new activity explaining what sensors are available on user's device
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
