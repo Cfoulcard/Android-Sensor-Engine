@@ -38,38 +38,31 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Go through each activity's lifecycle
     //TODO: Fix animations
 
-    // Initiate Firebase Analytics
-    private FirebaseAnalytics mFirebaseAnalytics;
-
-    private Context mContext;
-    private Activity mActivity;
-    private SharedPreferences mSharedPreferences;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Make sure this is before calling super.onCreate
+        // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.sensor_selection);
 
         // This will make the Status Bar completely transparent
-/*        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);*/
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+                WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         // Get the application context
-        mContext = getApplicationContext();
-
-        // Get the activity
-        mActivity = MainActivity.this;
+        Context mContext = getApplicationContext();
 
         // Get the instance of SharedPreferences object
-        mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+
+        // Get the activity
+        Activity mActivity = MainActivity.this;
 
         PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
     }
@@ -77,15 +70,15 @@ public class MainActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //This will add functionality to the menu button within the action bar
-    @Override
+/*    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navigation_menu, menu);
         return true;
-    }
+    }*/
 
     //The following is for the menu items within the navigation_menu.xml file
-   public boolean onOptionsItemSelected(MenuItem item) {
+/*   public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.preferences:
                 Intent configurationsIntent = new Intent(this, SettingsActivity.class);
@@ -94,11 +87,7 @@ public class MainActivity extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
-    }
-
-    /**
-     * Go to the sensor_selection.xml to change the onClick values
-     */
+    }*/
 
     public void soundIconIntent(View view) {
         Intent soundIntent = new Intent(this, SoundSensorActivity.class);
@@ -204,10 +193,10 @@ public class MainActivity extends AppCompatActivity {
         this.startActivity(walkIntent, transitionActivityOptions.toBundle());
     }
 
-    public void prefIconIntent(View view) {
+/*    public void prefIconIntent(View view) {
         Intent prefIntent = new Intent(this, SettingsActivity.class);
 
         this.startActivity(prefIntent);
 
-    }
+    }*/
 }
