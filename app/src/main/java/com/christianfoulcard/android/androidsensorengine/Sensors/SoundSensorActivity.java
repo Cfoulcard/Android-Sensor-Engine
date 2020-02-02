@@ -41,9 +41,10 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class SoundSensorActivity extends AppCompatActivity {
 
+    //Notification ID
     private static final String CHANNEL_ID = "123";
     //Initiates the Media Player to play raw files
-    MediaPlayer mp;
+    //MediaPlayer mp;
 
     //Dialog popup info
     Dialog soundInfoDialog;
@@ -52,11 +53,9 @@ public class SoundSensorActivity extends AppCompatActivity {
     TextView configuredDecibel;
     TextView decibels;
     TextView soundSensor;
-    TextView currentdb;
 
     //Image Views
     ImageView soundInfo;
-    ImageView soundLogo;
 
     //For sound recording + converting to sound data
     MediaRecorder mRecorder;
@@ -69,15 +68,9 @@ public class SoundSensorActivity extends AppCompatActivity {
             updateTv();
         }
     };
-
     final Handler mHandler = new Handler();
 
-
-
-
-
-
-
+    //For handling the notifications
     private void createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -97,9 +90,6 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
     }
 
-    // Initiate Firebase Analytics
-    private FirebaseAnalytics mFirebaseAnalytics;
-
     //Used for record audio permission
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
     public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
@@ -112,12 +102,10 @@ public class SoundSensorActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         //Enable for fade in transition
         // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
         setContentView(R.layout.sound_sensor);
 
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
+        FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
 
         //TextViews
         configuredDecibel = (TextView) findViewById(R.id.current_decibel);
@@ -166,7 +154,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         // configuredDecibel.setText(decibelSeekbar.getProgress() + "/" + decibelSeekbar.getMax());
 
         //This variable will initiate and create the MediaPlayer
-        mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
+        //mp = MediaPlayer.create(this, R.raw.lightningsoundtest);
 
         //Decibel Seekbar configuration
         decibelSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -348,6 +336,24 @@ public class SoundSensorActivity extends AppCompatActivity {
             configuredDecibel.setText(Integer.toString((int) soundDb()) + " dB");
         }
 
+        if (soundDb() == 70) {
+            String textTitle = "Android Sensor Engine";
+            String textContent = "70 dB reached";
+            Intent intent = new Intent(this, SoundSensorActivity.class);
+            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+                    .setSmallIcon(R.drawable.launch_logo_256)
+                    .setContentTitle(textTitle)
+                    .setContentText(textContent)
+                    .setContentIntent(pendingIntent)
+                    .setAutoCancel(true)
+                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+
+            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+            notificationManager.notify(123, builder.build());
+        }
+
 /*        //Change color of decibels based upon loudness
         if (soundDb() > 70) {
             configuredDecibel.setTextColor(Color.RED);
@@ -442,9 +448,9 @@ public class SoundSensorActivity extends AppCompatActivity {
     }
 
     //Sound Test provided by MediaPlayer
-    public void playSound(View v) {
+/*    public void playSound(View v) {
         mp.start();
-    }
+    }*/
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
