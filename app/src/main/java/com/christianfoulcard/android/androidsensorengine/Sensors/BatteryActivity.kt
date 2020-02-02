@@ -2,8 +2,12 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.*
 import android.os.BatteryManager
+import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.view.Menu
@@ -13,6 +17,8 @@ import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -36,6 +42,8 @@ class BatteryActivity : AppCompatActivity() {
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
+
+    private val ID = "333"
 
     //Initiate Broadcast Receiver to utilize BatteryManager Features
     //Is parsed by registerMyReceiver() to the textview
@@ -61,13 +69,53 @@ class BatteryActivity : AppCompatActivity() {
                 "F°" -> currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
                 "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)
             }
+
+            val unit = settings.getString("batterytempunit", "")
+            val battNumber = settings.getString("editTextPreferenceBattery", "")
+            if (settings.getBoolean("switch_preference_battery", true)) {
+                if (battNumber == "80") {
+                    val textTitle = "Android Sensor Engine"
+                    val textContent = "Your device's battery has reached " + settings.getString("edit_text_battery_temp", "") + " " +
+                            unit
+
+                    //  val intent = Intent(this, BatteryActivity::class.java)
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                    val builder = NotificationCompat.Builder(context, ID)
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                    val notificationManager = NotificationManagerCompat.from(context)
+                    notificationManager.notify(123, builder.build())
+                }
+            }
         }
 
-        // currentBattery.text = "$fahrenheitLevel °F"
 
-        // Toast.makeText(context, "Current Battery Level: $level", Toast.LENGTH_LONG).show()
+
     }
 
+    //For handling the notifications
+    private fun createNotificationChannel() { // Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = getString(R.string.battery)
+            val description = getString(R.string.battery_sensor)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(ID, name, importance)
+            channel.description = description
+            // Register the channel with the system; you can't change the importance
+// or other notification behaviors after this
+            val notificationManager = getSystemService(NotificationManager::class.java)!!
+            notificationManager.createNotificationChannel(channel)
+            // notificationId is a unique int for each notification that you must define
+        }
+    }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -98,6 +146,8 @@ class BatteryActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         currentBattery = findViewById(R.id.current_battery)
+
+        createNotificationChannel()
 
 
 
