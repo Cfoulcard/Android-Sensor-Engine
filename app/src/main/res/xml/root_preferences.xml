@@ -44,6 +44,19 @@
             app:allowDividerAbove="false"
             app:allowDividerBelow="true"
             app:useSimpleSummaryProvider="true" />
+        <SwitchPreference
+            android:defaultValue="false"
+            android:key="switch_preference_battery"
+            android:title="Temperature Alert Notifications" />
+        <EditTextPreference
+            android:dependency="switch_preference_battery"
+            android:digits="0123456789"
+            android:inputType="numberDecimal"
+            android:key="edit_text_battery_temp"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:title="Temperature Amount"
+            app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
 
