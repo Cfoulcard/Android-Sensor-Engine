@@ -70,17 +70,53 @@ class BatteryActivity : AppCompatActivity() {
                 "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)
             }
 
-            val unit = settings.getString("batterytempunit", "")
-            val battNumber = settings.getString("editTextPreferenceBattery", "")
-            if (settings.getBoolean("switch_preference_battery", true)) {
-                if (battNumber == "80") {
-                    val textTitle = "Android Sensor Engine"
-                    val textContent = "Your device's battery has reached " + settings.getString("edit_text_battery_temp", "") + " " +
-                            unit
+            ////////////////////////////////////////////////////////////////////////////////////////
+            //Notification alert section
 
-                    //  val intent = Intent(this, BatteryActivity::class.java)
-                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            //Gets the unit of measurement from the batterytempunit key in root_preferences.xml
+            val unit = settings.getString("batterytempunit", "")
+            //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
+            val battNumber = settings.getString("edit_text_battery_temp", "")
+            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+            if (settings.getBoolean("switch_preference_battery", true)) {
+                //Conditions that must be true for the notifications to work
+                //If Celsius is chosen as the unit of measurement
+                if (battNumber == celsiusLevel.toString() && unit == "C°") {
+                    val textTitle = "Android Sensor Engine"
+                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+
+                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                    val builder = NotificationCompat.Builder(context, ID)
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                    val notificationManager = NotificationManagerCompat.from(context)
+                    notificationManager.notify(123, builder.build())
+                    //If Fahrenheit is chosen as the unit of measurement
+                } else if (battNumber == fahrenheitLevel.toString() && unit == "F°") {
+                    val textTitle = "Android Sensor Engine"
+                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+
+                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                    val builder = NotificationCompat.Builder(context, ID)
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+
+                    val notificationManager = NotificationManagerCompat.from(context)
+                    notificationManager.notify(123, builder.build())
+                    //If Kelvin is chosen as the unit of measurement
+                } else if (battNumber == kelvinLevel.toString() && unit == "K°") {
+                    val textTitle = "Android Sensor Engine"
+                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+
                     val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                     val builder = NotificationCompat.Builder(context, ID)
                             .setSmallIcon(R.drawable.launch_logo_256)
@@ -95,9 +131,6 @@ class BatteryActivity : AppCompatActivity() {
                 }
             }
         }
-
-
-
     }
 
     //For handling the notifications
@@ -165,11 +198,13 @@ class BatteryActivity : AppCompatActivity() {
 
     override fun onResume() {
         currentBattery.text = "${registerMyReceiver()} percent"
+        createNotificationChannel()
         super.onResume()
     }
 
     override fun onPause() {
         unregisterReceiver(registerMyReceiver())
+        createNotificationChannel()
         super.onPause()
     }
 
