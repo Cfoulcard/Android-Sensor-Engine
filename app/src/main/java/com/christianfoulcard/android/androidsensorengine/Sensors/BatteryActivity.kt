@@ -1,10 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.*
 import android.os.BatteryManager
 import android.os.Build
@@ -23,7 +20,12 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 
+
 class BatteryActivity : AppCompatActivity() {
+
+    //TODO convert strings to resources
+    //TODO Notification intents
+    //TODO Custom Sounds?
 
     //Dialog popup info
     var batteryInfoDialog: Dialog? = null
@@ -53,7 +55,7 @@ class BatteryActivity : AppCompatActivity() {
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
             val percent = level * 100 / scale
             val batteryPct = level / scale.toFloat()
-            val celsiusLevel = level / 10
+            val celsiusLevel = level.toFloat() / 10.0f
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
             val kelvinLevel = celsiusLevel + 273
 
@@ -85,17 +87,22 @@ class BatteryActivity : AppCompatActivity() {
                     val textTitle = "Android Sensor Engine"
                     val textContent = "Your device's battery has reached " + battNumber + " " + unit
 
+
                     val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                     val builder = NotificationCompat.Builder(context, ID)
+
+
                             .setSmallIcon(R.drawable.launch_logo_256)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true)
 
                     val notificationManager = NotificationManagerCompat.from(context)
                     notificationManager.notify(123, builder.build())
+
                     //If Fahrenheit is chosen as the unit of measurement
                 } else if (battNumber == fahrenheitLevel.toString() && unit == "F°") {
                     val textTitle = "Android Sensor Engine"
@@ -109,6 +116,7 @@ class BatteryActivity : AppCompatActivity() {
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true)
 
                     val notificationManager = NotificationManagerCompat.from(context)
                     notificationManager.notify(123, builder.build())
@@ -125,6 +133,7 @@ class BatteryActivity : AppCompatActivity() {
                             .setContentIntent(pendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true)
 
                     val notificationManager = NotificationManagerCompat.from(context)
                     notificationManager.notify(123, builder.build())
@@ -146,6 +155,7 @@ class BatteryActivity : AppCompatActivity() {
 // or other notification behaviors after this
             val notificationManager = getSystemService(NotificationManager::class.java)!!
             notificationManager.createNotificationChannel(channel)
+
             // notificationId is a unique int for each notification that you must define
         }
     }
@@ -179,12 +189,6 @@ class BatteryActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         currentBattery = findViewById(R.id.current_battery)
-
-        createNotificationChannel()
-
-
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
