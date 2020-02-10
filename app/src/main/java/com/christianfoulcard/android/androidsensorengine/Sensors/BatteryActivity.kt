@@ -47,6 +47,89 @@ class BatteryActivity : AppCompatActivity() {
 
     private val ID = "333"
 
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @SuppressLint("SetTextI18n")
+    override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppThemeSensors)
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.battery_sensor)
+
+        battery_text = findViewById(R.id.battery) as TextView
+        currentBattery = findViewById(R.id.current_battery) as TextView
+        batterySensor = findViewById(R.id.battery_sensor) as TextView
+
+        //ImageViews
+        batteryInfo = findViewById<View>(R.id.info_button) as ImageView
+
+        //Dialog Box for Temperature Info
+        batteryInfoDialog = Dialog(this)
+
+        val `in` = AlphaAnimation(0.0f, 1.0f)
+        `in`.duration = 1500
+        battery_text.startAnimation(`in`)
+        currentBattery.startAnimation(`in`)
+        batterySensor.startAnimation(`in`)
+        batteryInfo!!.startAnimation(`in`)
+
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+       // currentBattery = findViewById(R.id.current_battery)
+        registerMyReceiver()
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun registerMyReceiver(): BroadcastReceiver {
+        ifilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
+        registerReceiver(mBatteryReceiver, ifilter)
+
+        return mBatteryReceiver
+    }
+
+    override fun onStart() {
+      //  currentBattery.text = "${registerMyReceiver()} percent"
+        createNotificationChannel()
+        super.onStart()
+    }
+
+    override fun onResume() {
+        registerMyReceiver()
+        if (currentBattery.text  == registerMyReceiver().toString()) {
+            currentBattery.text = registerMyReceiver().toString()
+
+        } else {
+            currentBattery.text = "Updating..."
+        }
+
+        super.onResume()
+    }
+
+    override fun onPause() {
+        registerMyReceiver()
+      //  currentBattery.text = "${registerMyReceiver()} percent"
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        unregisterReceiver(registerMyReceiver())
+        super.onDestroy()
+
+    }
+
+    fun showBatteryDialogPopup(v: View?) {
+        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.show()
+    }
+
+    fun closeBatteryDialogPopup(v: View?) {
+        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.dismiss()
+    }
+
     //Initiate Broadcast Receiver to utilize BatteryManager Features
     //Is parsed by registerMyReceiver() to the textview
     private var mBatteryReceiver: BroadcastReceiver = object : BroadcastReceiver() {
@@ -55,7 +138,7 @@ class BatteryActivity : AppCompatActivity() {
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
             val percent = level * 100 / scale
             val batteryPct = level / scale.toFloat()
-            val celsiusLevel = level.toFloat() / 10.0f
+            val celsiusLevel = level / 10
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
             val kelvinLevel = celsiusLevel + 273
 
@@ -158,73 +241,6 @@ class BatteryActivity : AppCompatActivity() {
 
             // notificationId is a unique int for each notification that you must define
         }
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    @SuppressLint("SetTextI18n")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppThemeSensors)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.battery_sensor)
-
-        battery_text = findViewById(R.id.battery) as TextView
-        currentBattery = findViewById(R.id.current_battery) as TextView
-        batterySensor = findViewById(R.id.battery_sensor) as TextView
-
-        //ImageViews
-        batteryInfo = findViewById<View>(R.id.info_button) as ImageView
-
-        //Dialog Box for Temperature Info
-        batteryInfoDialog = Dialog(this)
-
-        val `in` = AlphaAnimation(0.0f, 1.0f)
-        `in`.duration = 1500
-        battery_text.startAnimation(`in`)
-        currentBattery.startAnimation(`in`)
-        batterySensor.startAnimation(`in`)
-        batteryInfo!!.startAnimation(`in`)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-        currentBattery = findViewById(R.id.current_battery)
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    private fun registerMyReceiver(): BroadcastReceiver {
-        ifilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        registerReceiver(mBatteryReceiver, ifilter)
-
-        return mBatteryReceiver
-    }
-
-    override fun onResume() {
-        currentBattery.text = "${registerMyReceiver()} percent"
-        createNotificationChannel()
-        super.onResume()
-    }
-
-    override fun onPause() {
-        unregisterReceiver(registerMyReceiver())
-        createNotificationChannel()
-        super.onPause()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-
-    }
-
-    fun showBatteryDialogPopup(v: View?) {
-        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
-        batteryInfoDialog?.show()
-    }
-
-    fun closeBatteryDialogPopup(v: View?) {
-        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
-        batteryInfoDialog?.dismiss()
     }
 
     //This will add functionality to the menu button within the action bar
