@@ -36,6 +36,7 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Make a leveler and determine balance
 - Provide analogies to help explain readings
 - Background notifications
+- Custom notification sound alerts
 - A list of all currently available sensors on a device
 - Smooth animations
 - Localize throughout the world
