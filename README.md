@@ -16,6 +16,10 @@ This is a personal project being developed and maintained for devices running on
 - Humidity Sensor
 - Step Counter
 
+## Feature in progress
+- Notifcations for certain sensors (i.e alerts for when battery becomes too hot)
+- User editable settings to alert them at certain unit amounts
+
 ## Language Support
 Support is included for the following languages:
 - English
