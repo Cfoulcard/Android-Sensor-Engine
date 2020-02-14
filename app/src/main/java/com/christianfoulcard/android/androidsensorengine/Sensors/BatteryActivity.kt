@@ -1,7 +1,10 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
-import android.app.*
+import android.app.Dialog
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.*
 import android.os.BatteryManager
 import android.os.Build
@@ -19,6 +22,9 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
+import java.util.*
+import kotlin.concurrent.schedule
+import kotlin.concurrent.scheduleAtFixedRate
 
 
 class BatteryActivity : AppCompatActivity() {
@@ -41,6 +47,9 @@ class BatteryActivity : AppCompatActivity() {
 
     //ImageViews
     var batteryInfo: ImageView? = null
+
+    private var timer: Timer? = null
+    private var timerTask: TimerTask? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
@@ -78,7 +87,7 @@ class BatteryActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
        // currentBattery = findViewById(R.id.current_battery)
-        registerMyReceiver()
+      //  registerMyReceiver()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -98,19 +107,32 @@ class BatteryActivity : AppCompatActivity() {
 
     override fun onResume() {
         registerMyReceiver()
-        if (currentBattery.text  == registerMyReceiver().toString()) {
-            currentBattery.text = registerMyReceiver().toString()
 
-        } else {
-            currentBattery.text = "Updating..."
-        }
+        // create a daemon thread
+        val timer = Timer("schedule", true)
+
+        // schedule at a fixed rate
+/*        timer.schedule(1000, 1000) {
+            mBatteryReceiver
+
+        }*/
+
+
+
 
         super.onResume()
+        if (currentBattery.text  == registerMyReceiver().toString()) {
+            currentBattery.text = registerMyReceiver().toString()
+        }
     }
 
     override fun onPause() {
         registerMyReceiver()
-      //  currentBattery.text = "${registerMyReceiver()} percent"
+
+        if (currentBattery.text  == registerMyReceiver().toString()) {
+            currentBattery.text = registerMyReceiver().toString()
+
+        }
         super.onPause()
     }
 
@@ -138,7 +160,7 @@ class BatteryActivity : AppCompatActivity() {
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
             val percent = level * 100 / scale
             val batteryPct = level / scale.toFloat()
-            val celsiusLevel = level / 10
+            val celsiusLevel = level.toFloat() / 10
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
             val kelvinLevel = celsiusLevel + 273
 
@@ -242,6 +264,8 @@ class BatteryActivity : AppCompatActivity() {
             // notificationId is a unique int for each notification that you must define
         }
     }
+
+
 
     //This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
