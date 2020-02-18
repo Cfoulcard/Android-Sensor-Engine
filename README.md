@@ -44,4 +44,6 @@ There's a world of features I'd like to implement into this app over time. Here'
 ## Beta
 This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with optimization.
 
+## Other info
+This project is built using Java, Kotlin, and XML
 
