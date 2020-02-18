@@ -160,7 +160,7 @@ class BatteryActivity : AppCompatActivity() {
             val scale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, 100)
             val percent = level * 100 / scale
             val batteryPct = level / scale.toFloat()
-            val celsiusLevel = level.toFloat() / 10
+            val celsiusLevel = level / 10
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
             val kelvinLevel = celsiusLevel + 273
 
@@ -188,60 +188,62 @@ class BatteryActivity : AppCompatActivity() {
             if (settings.getBoolean("switch_preference_battery", true)) {
                 //Conditions that must be true for the notifications to work
                 //If Celsius is chosen as the unit of measurement
-                if (battNumber == celsiusLevel.toString() && unit == "C°") {
-                    val textTitle = "Android Sensor Engine"
-                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+                if (battNumber != null) {
+                    if (battNumber == celsiusLevel.toString() && unit == "C°") {
+                        val textTitle = "Android Sensor Engine"
+                        val textContent = "Your device's battery has reached " + battNumber + " " + unit
 
 
-                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-                    val builder = NotificationCompat.Builder(context, ID)
+                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                        val builder = NotificationCompat.Builder(context, ID)
 
 
-                            .setSmallIcon(R.drawable.launch_logo_256)
-                            .setContentTitle(textTitle)
-                            .setContentText(textContent)
-                            .setContentIntent(pendingIntent)
-                            .setAutoCancel(true)
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setOnlyAlertOnce(true)
+                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setContentTitle(textTitle)
+                                .setContentText(textContent)
+                                .setContentIntent(pendingIntent)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setOnlyAlertOnce(true)
 
-                    val notificationManager = NotificationManagerCompat.from(context)
-                    notificationManager.notify(123, builder.build())
+                        val notificationManager = NotificationManagerCompat.from(context)
+                        notificationManager.notify(123, builder.build())
 
-                    //If Fahrenheit is chosen as the unit of measurement
-                } else if (battNumber == fahrenheitLevel.toString() && unit == "F°") {
-                    val textTitle = "Android Sensor Engine"
-                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+                        //If Fahrenheit is chosen as the unit of measurement
+                    } else if (battNumber == fahrenheitLevel.toString()  && unit == "F°") {
+                        val textTitle = "Android Sensor Engine"
+                        val textContent = "Your device's battery has reached " + fahrenheitLevel + " " + unit
 
-                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-                    val builder = NotificationCompat.Builder(context, ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
-                            .setContentTitle(textTitle)
-                            .setContentText(textContent)
-                            .setContentIntent(pendingIntent)
-                            .setAutoCancel(true)
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setOnlyAlertOnce(true)
+                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                        val builder = NotificationCompat.Builder(context, ID)
+                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setContentTitle(textTitle)
+                                .setContentText(textContent)
+                                .setContentIntent(pendingIntent)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setOnlyAlertOnce(true)
 
-                    val notificationManager = NotificationManagerCompat.from(context)
-                    notificationManager.notify(123, builder.build())
-                    //If Kelvin is chosen as the unit of measurement
-                } else if (battNumber == kelvinLevel.toString() && unit == "K°") {
-                    val textTitle = "Android Sensor Engine"
-                    val textContent = "Your device's battery has reached " + battNumber + " " + unit
+                        val notificationManager = NotificationManagerCompat.from(context)
+                        notificationManager.notify(123, builder.build())
+                        //If Kelvin is chosen as the unit of measurement
+                    } else if (battNumber == kelvinLevel.toString() && unit == "K°") {
+                        val textTitle = "Android Sensor Engine"
+                        val textContent = "Your device's battery has reached " + battNumber + " " + unit
 
-                    val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
-                    val builder = NotificationCompat.Builder(context, ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
-                            .setContentTitle(textTitle)
-                            .setContentText(textContent)
-                            .setContentIntent(pendingIntent)
-                            .setAutoCancel(true)
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setOnlyAlertOnce(true)
+                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                        val builder = NotificationCompat.Builder(context, ID)
+                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setContentTitle(textTitle)
+                                .setContentText(textContent)
+                                .setContentIntent(pendingIntent)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setOnlyAlertOnce(true)
 
-                    val notificationManager = NotificationManagerCompat.from(context)
-                    notificationManager.notify(123, builder.build())
+                        val notificationManager = NotificationManagerCompat.from(context)
+                        notificationManager.notify(123, builder.build())
+                    }
                 }
             }
         }
@@ -264,8 +266,6 @@ class BatteryActivity : AppCompatActivity() {
             // notificationId is a unique int for each notification that you must define
         }
     }
-
-
 
     //This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
