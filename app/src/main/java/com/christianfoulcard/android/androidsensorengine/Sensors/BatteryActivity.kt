@@ -9,6 +9,7 @@ import android.content.*
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
@@ -101,24 +102,13 @@ class BatteryActivity : AppCompatActivity() {
 
     override fun onStart() {
       //  currentBattery.text = "${registerMyReceiver()} percent"
+
         createNotificationChannel()
         super.onStart()
     }
 
     override fun onResume() {
         registerMyReceiver()
-
-        // create a daemon thread
-        val timer = Timer("schedule", true)
-
-        // schedule at a fixed rate
-/*        timer.schedule(1000, 1000) {
-            mBatteryReceiver
-
-        }*/
-
-
-
 
         super.onResume()
         if (currentBattery.text  == registerMyReceiver().toString()) {
@@ -205,6 +195,7 @@ class BatteryActivity : AppCompatActivity() {
                                 .setAutoCancel(true)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setOnlyAlertOnce(true)
+
 
                         val notificationManager = NotificationManagerCompat.from(context)
                         notificationManager.notify(123, builder.build())
