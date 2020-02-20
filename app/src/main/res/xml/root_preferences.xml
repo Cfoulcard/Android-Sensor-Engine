@@ -55,7 +55,7 @@
             android:key="edit_text_battery_temp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Temperature Amount"
+            android:title="Notify Me When Temperature Is..."
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
