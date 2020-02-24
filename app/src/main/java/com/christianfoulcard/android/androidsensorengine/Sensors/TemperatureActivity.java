@@ -2,6 +2,10 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,9 +13,12 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.preference.PreferenceFragmentCompat;
 
 import android.view.Menu;
@@ -28,6 +35,8 @@ import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
+
+    private static final String CHANNEL_ID = "222";
 
     //Dialog popup info
     Dialog tempInfoDialog;
@@ -132,6 +141,45 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     break;
             }
         }
+
+        ////////////////////////////////////////////////////////////////////////////////////////
+        //Notification alert section
+
+        //Gets the unit of measurement from the airtempunit key in root_preferences.xml
+        String tempPref = settings.getString("airtempunit", "");
+        //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
+        String airNumber = settings.getString("edit_text_air_temp", "");
+        //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+        if (settings.getBoolean("switch_preference_air", true)) {
+            //Conditions that must be true for the notifications to work
+            //If Celsius is chosen as the unit of measurement
+            if (airNumber != null) {
+                if (airNumber == String.valueOf(c) && tempPref == "C°") {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "The air around you has reached " + airNumber + " " + tempPref;
+
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+// notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(124, builder.build());
+
+                }
+            }
+        }
     }
 
     @Override
@@ -142,6 +190,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         currentDegrees.startAnimation(in);
         airTemp.startAnimation(in);
         tempInfo.startAnimation(in);
+
+        createNotificationChannel();
         super.onStart();
     }
 
@@ -171,7 +221,22 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         tempInfoDialog.dismiss();
     }
 
-
+//For handling notifications
+    private void createNotificationChannel () { // Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
 
     //This will add functionality to the menu button within the action bar
     @Override
