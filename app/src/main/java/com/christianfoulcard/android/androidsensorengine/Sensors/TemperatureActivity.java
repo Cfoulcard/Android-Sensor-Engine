@@ -55,6 +55,11 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     private Context mContext;
     private Activity mActivity;
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //Notification alert section
+
+
+
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
 
@@ -95,9 +100,44 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         currentDegrees = (TextView) findViewById(R.id.current_temp);
 
 
+
+
+
+
+
+        createNotificationChannel();
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    protected void onStart() {
+        final Animation in = new AlphaAnimation(0.0f, 1.0f);
+        in.setDuration(1500);
+        temperature_text.startAnimation(in);
+        currentDegrees.startAnimation(in);
+        airTemp.startAnimation(in);
+        tempInfo.startAnimation(in);
+
+        createNotificationChannel();
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume() {
+        // Register a listener for the sensor.
+        super.onResume();
+        sensorManager.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        // Be sure to unregister the sensor when the activity pauses.
+        super.onPause();
+        sensorManager.unregisterListener(this);
+    }
 
     @Override
     public final void onAccuracyChanged(Sensor sensor, int accuracy) {
@@ -107,6 +147,9 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     //Main magic of the Temperature Sensor
     @Override
     public final void onSensorChanged(SensorEvent event) {
+
+
+
 
         // Get the application context
         mContext = getApplicationContext();
@@ -140,74 +183,51 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     currentDegrees.setText(k + " " + unit);
                     break;
             }
-        }
-
-        ////////////////////////////////////////////////////////////////////////////////////////
-        //Notification alert section
-
-        //Gets the unit of measurement from the airtempunit key in root_preferences.xml
-        String tempPref = settings.getString("airtempunit", "");
-        //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
-        String airNumber = settings.getString("edit_text_air_temp", "");
-        //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
-        if (settings.getBoolean("switch_preference_air", true)) {
-            //Conditions that must be true for the notifications to work
-            //If Celsius is chosen as the unit of measurement
-            if (airNumber != null) {
-                if (airNumber == String.valueOf(c) && tempPref == "C°") {
-                    String textTitle = "Android Sensor Engine";
-                    String textContent = "The air around you has reached " + airNumber + " " + tempPref;
 
 
-                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+            //Gets the unit of measurement from the airtempunit key in root_preferences.xml
+            //   String tempPref = settings.getString("airtempunit", "");
+            //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
+            String airNumber = settings.getString("edit_text_air_temp", "");
+            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+
+            if (settings.getBoolean("switch_preference_air", true)) {
+                //Conditions that must be true for the notifications to work
+                //If Celsius is chosen as the unit of measurement
+                if (airNumber != null) {
+                    if (airNumber == String.valueOf(c)) {
+                        String textTitle = "Android Sensor Engine";
+                        String textContent = "The air around you has reached " + airNumber + " " + unit;
 
 
-                            .setSmallIcon(R.drawable.launch_logo_256)
-                            .setContentTitle(textTitle)
-                            .setContentText(textContent)
-                            //  .setContentIntent(pendingIntent)
-                            .setAutoCancel(true)
-                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                            .setOnlyAlertOnce(true);
+                        // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
 
 
+                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setContentTitle(textTitle)
+                                .setContentText(textContent)
+                                //  .setContentIntent(pendingIntent)
+                                .setAutoCancel(true)
+                                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                                .setOnlyAlertOnce(true);
 
-                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-// notificationId is a unique int for each notification that you must define
-                    notificationManager.notify(124, builder.build());
 
+                        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                        // notificationId is a unique int for each notification that you must define
+                        notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+
+
+                    }
                 }
             }
         }
+
     }
 
-    @Override
-    protected void onStart() {
-        final Animation in = new AlphaAnimation(0.0f, 1.0f);
-        in.setDuration(1500);
-        temperature_text.startAnimation(in);
-        currentDegrees.startAnimation(in);
-        airTemp.startAnimation(in);
-        tempInfo.startAnimation(in);
 
-        createNotificationChannel();
-        super.onStart();
-    }
 
-    @Override
-    protected void onResume() {
-        // Register a listener for the sensor.
-        super.onResume();
-        sensorManager.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL);
-    }
 
-    @Override
-    protected void onPause() {
-        // Be sure to unregister the sensor when the activity pauses.
-        super.onPause();
-        sensorManager.unregisterListener(this);
-    }
 
     public void showTempDialogPopup(View v) {
         tempInfoDialog.setContentView(R.layout.temperature_popup_info);
@@ -233,9 +253,9 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
+
     }
 
     //This will add functionality to the menu button within the action bar
