@@ -2,14 +2,19 @@ package com.christianfoulcard.android.androidsensorengine.Sensors;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -33,6 +38,9 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //LocationListener needed to track speed
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
+
+    //ID used for notifications
+    private static final String CHANNEL_ID = "444";
 
     //Dialog popup info
     Dialog accelerometerInfoDialog;
@@ -88,6 +96,15 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+    @Override
+    public void onStart() {
+        super.onStart();
+createNotificationChannel();
+
+        }
+
+
 //This section parses the speed data when the permissions are granted
     @Override
     public void onResume() {
@@ -173,9 +190,9 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
                     break;
             }
         } else {
-            int speedMs =(int) ((location.getSpeed())); // This is the standard which returns meters per second.
+            int speedMs = (int) ((location.getSpeed())); // This is the standard which returns meters per second.
             int speedMph = (int) (location.getSpeed() * 2.2369); // This is speed in mph
-            int speedKm =(int) ((location.getSpeed()*3600)/1000); // This is speed in km/h
+            int speedKm = (int) ((location.getSpeed() * 3600) / 1000); // This is speed in km/h
             int speedFts = (int) (location.getSpeed() * 3.2808); // This is speed in Feet per second
             int speedKnot = (int) (location.getSpeed() * 1.9438); // This is speed in knots
 
@@ -198,6 +215,128 @@ public class AccelerometerActivity extends AppCompatActivity implements Location
                     currentSpeed.setText(speedKnot + " " + unit);
                     break;
             }
+
+            //Gets the unit of measurement from the speedunit key in root_preferences.xml
+            int speedNumber = Integer.parseInt(settings.getString("edit_text_speed", ""));
+            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+
+            if (settings.getBoolean("switch_preference_speed", true)) {
+                //Conditions that must be true for the notifications to work
+                //If MPH is chosen as the unit of measurement
+                if (speedNumber == speedMph && unit.equals("MPH")) {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "You have reached " + speedNumber + " " + unit;
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                } else if (speedNumber == speedKm && unit.equals("KM/H")) {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "You have reached " + speedNumber + " " + unit;
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                } else if (speedNumber == speedMs && unit.equals("M/S")) {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "You have reached " + speedNumber + " " + unit;
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                } else if (speedNumber == speedFts && unit.equals("FT/S")) {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "You have reached " + speedNumber + " " + unit;
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                } else if (speedNumber == speedKnot && unit.equals("Knots")) {
+                    String textTitle = "Android Sensor Engine";
+                    String textContent = "You have reached " + speedNumber + " " + unit;
+
+                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
+                    NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+
+                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setContentTitle(textTitle)
+                            .setContentText(textContent)
+                            //  .setContentIntent(pendingIntent)
+                            .setAutoCancel(true)
+                            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                            .setOnlyAlertOnce(true);
+
+                    NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+                    // notificationId is a unique int for each notification that you must define
+                    notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                }
+            }
+        }
+    }
+    
+    //For handling notifications
+    private void createNotificationChannel () {
+        // Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = getString(R.string.channel_name);
+            String description = getString(R.string.channel_description);
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 
