@@ -322,7 +322,7 @@ createNotificationChannel();
             }
         }
     }
-    
+
     //For handling notifications
     private void createNotificationChannel () {
         // Create the NotificationChannel, but only on API 26+ because
