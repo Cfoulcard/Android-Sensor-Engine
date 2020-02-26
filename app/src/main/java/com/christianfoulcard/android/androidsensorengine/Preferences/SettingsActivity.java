@@ -48,7 +48,8 @@ public class SettingsActivity extends AppCompatActivity {
             ListPreference listPreference2 = findPreference("batterytempunit");
             ListPreference listPreference3 = findPreference("speedunit");
             SwitchPreference switchPreference1 = findPreference("switch_preference_battery");
-            SwitchPreference switchPreference2 = findPreference("switch_preference_battery");
+            SwitchPreference switchPreference2 = findPreference("switch_preference_air");
+            SwitchPreference switchPreference3 = findPreference("switch_preference_speed");
 
             EditTextPreference editTextPreferenceBattery = findPreference("edit_text_battery_temp");
             Objects.requireNonNull(editTextPreferenceBattery).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
@@ -68,7 +69,14 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
+            EditTextPreference editTextPreferenceSpeed = findPreference("edit_text_speed");
+            Objects.requireNonNull(editTextPreferenceSpeed).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
+                @Override
+                public void onBindEditText(@NonNull EditText editText) {
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
+                }
+            });
         }
     }
 }
