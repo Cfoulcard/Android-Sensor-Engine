@@ -70,26 +70,6 @@ public class SoundSensorActivity extends AppCompatActivity {
     };
     final Handler mHandler = new Handler();
 
-    //For handling the notifications
-    private void createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.sound);
-            String description = getString(R.string.sound_sensor);
-            int importance = NotificationManager.IMPORTANCE_DEFAULT;
-            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
-            channel.setDescription(description);
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            NotificationManager notificationManager = getSystemService(NotificationManager.class);
-            assert notificationManager != null;
-            notificationManager.createNotificationChannel(channel);
-            // notificationId is a unique int for each notification that you must define
-
-        }
-    }
-
     //Used for record audio permission
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
     public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
@@ -128,22 +108,6 @@ public class SoundSensorActivity extends AppCompatActivity {
 
         //To request audio permissions upon opening activity
         requestAudioPermissions();
-
-        String textTitle = "Android Sensor Engine";
-        String textContent = "Hey, Look, Listen!";
-        Intent intent = new Intent(this, SoundSensorActivity.class);
-       // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setSmallIcon(R.drawable.launch_logo_256)
-                .setContentTitle(textTitle)
-                .setContentText(textContent)
-                .setContentIntent(pendingIntent)
-                .setAutoCancel(true)
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        notificationManager.notify(123, builder.build());
 
 
         //Seekbar properties
@@ -270,7 +234,6 @@ public class SoundSensorActivity extends AppCompatActivity {
             return;
         }
         startRecorder();
-        createNotificationChannel();
 
 
     }
