@@ -40,7 +40,7 @@ import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 public class AccelerometerActivity extends AppCompatActivity implements LocationListener {
 
     //ID used for notifications
-    private static final String CHANNEL_ID = "444";
+    private static final String CHANNEL_ID = "2";
 
     //Dialog popup info
     Dialog accelerometerInfoDialog;
@@ -328,8 +328,8 @@ createNotificationChannel();
         // Create the NotificationChannel, but only on API 26+ because
 // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
+            CharSequence name = getString(R.string.channel_name_speed);
+            String description = getString(R.string.channel_description_speed);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
