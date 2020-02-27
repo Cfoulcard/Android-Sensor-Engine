@@ -72,7 +72,7 @@ public class SoundSensorActivity extends AppCompatActivity {
 
     //Used for record audio permission
     public static final int AUDIO_RECORD_REQUEST_CODE = 122;
-    public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 1;
+    public static final int MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 99;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -300,21 +300,7 @@ public class SoundSensorActivity extends AppCompatActivity {
         }
 
         if (soundDb() == 70) {
-            String textTitle = "Android Sensor Engine";
-            String textContent = "70 dB reached";
-            Intent intent = new Intent(this, SoundSensorActivity.class);
-            // intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
-            NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-                    .setSmallIcon(R.drawable.launch_logo_256)
-                    .setContentTitle(textTitle)
-                    .setContentText(textContent)
-                    .setContentIntent(pendingIntent)
-                    .setAutoCancel(true)
-                    .setPriority(NotificationCompat.PRIORITY_DEFAULT);
 
-            NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-            notificationManager.notify(123, builder.build());
         }
 
 /*        //Change color of decibels based upon loudness
