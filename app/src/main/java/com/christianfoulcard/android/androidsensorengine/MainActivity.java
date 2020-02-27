@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Fix animations
     //TODO: String other languages
     //TODO Custom Sounds?
+    //TODO: Notification screen cleanup
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
