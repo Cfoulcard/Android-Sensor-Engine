@@ -6,6 +6,7 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -145,7 +146,6 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     @Override
     public final void onSensorChanged(SensorEvent event) {
 
-
         // Get the application context
         mContext = getApplicationContext();
 
@@ -179,17 +179,23 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     break;
             }
 
-
-            //Gets the unit of measurement from the airtempunit key in root_preferences.xml
-            //   String tempPref = settings.getString("airtempunit", "");
-            //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
+            //Gets the string value from the edit_text_air_temp key in root_preferences.xml
             int airNumber = Integer.parseInt(settings.getString("edit_text_air_temp", ""));
-            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
 
+            // Create an Intent for the activity you want to start
+            Intent resultIntent = new Intent(this, TemperatureActivity.class);
+             // Create the TaskStackBuilder and add the intent, which inflates the back stack
+            TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
+            stackBuilder.addNextIntentWithParentStack(resultIntent);
+            // Get the PendingIntent containing the entire back stack
+            PendingIntent resultPendingIntent =
+                    stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
+
+            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_air", true)) {
                 //Conditions that must be true for the notifications to work
                 //If Celsius is chosen as the unit of measurement
-                if (airNumber == c) {
+                if (airNumber == c && unit.equals("C°")) {
                     String textTitle = "Android Sensor Engine";
                     String textContent = "The air around you has reached " + airNumber + " " + unit;
 
@@ -200,7 +206,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                             .setSmallIcon(R.drawable.launch_logo_256)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
-                            //  .setContentIntent(pendingIntent)
+                            .setContentIntent(resultPendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setOnlyAlertOnce(true);
@@ -209,42 +215,39 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                     // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
-                } else if (airNumber == f) {
+
+                    //If Fahrenheit is chosen as the unit of measurement
+                } else if (airNumber == f && unit.equals("F°")) {
                     String textTitle = "Android Sensor Engine";
                     String textContent = "The air around you has reached " + airNumber + " " + unit;
 
-                    // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-
-
                             .setSmallIcon(R.drawable.launch_logo_256)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
-                            //  .setContentIntent(pendingIntent)
+                            .setContentIntent(resultPendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setOnlyAlertOnce(true);
-
 
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                     // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
-                } else if (airNumber == k) {
+
+                    //If Kelvin is chosen as the unit of measurement
+                } else if (airNumber == k && unit.equals("K°")) {
                     String textTitle = "Android Sensor Engine";
                     String textContent = "The air around you has reached " + airNumber + " " + unit;
 
                     // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
-
-
                             .setSmallIcon(R.drawable.launch_logo_256)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
-                            //  .setContentIntent(pendingIntent)
+                            .setContentIntent(resultPendingIntent)
                             .setAutoCancel(true)
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setOnlyAlertOnce(true);
-
 
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                     // notificationId is a unique int for each notification that you must define
@@ -266,9 +269,9 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
             NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            assert notificationManager != null;
             notificationManager.createNotificationChannel(channel);
         }
-
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

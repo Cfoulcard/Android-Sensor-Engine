@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Add elevation/sea level sensor?
     //TODO: Go through each activity's lifecycle
     //TODO: Fix animations
+    //TODO: String other languages
+    //TODO Custom Sounds?
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////

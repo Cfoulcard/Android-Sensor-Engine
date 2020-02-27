@@ -1,15 +1,11 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
-import android.app.Dialog
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.PendingIntent
+import android.app.*
 import android.content.*
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
@@ -24,14 +20,10 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
-import kotlin.concurrent.schedule
-import kotlin.concurrent.scheduleAtFixedRate
 
 
 class BatteryActivity : AppCompatActivity() {
 
-    //TODO convert strings to resources
-    //TODO Notification intents
     //TODO Custom Sounds?
 
     //Dialog popup info
@@ -89,6 +81,8 @@ class BatteryActivity : AppCompatActivity() {
 
        // currentBattery = findViewById(R.id.current_battery)
       //  registerMyReceiver()
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -175,6 +169,8 @@ class BatteryActivity : AppCompatActivity() {
             //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
             val battNumber = settings.getString("edit_text_battery_temp", "")
             //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+
+
             if (settings.getBoolean("switch_preference_battery", true)) {
                 //Conditions that must be true for the notifications to work
                 //If Celsius is chosen as the unit of measurement
@@ -184,8 +180,11 @@ class BatteryActivity : AppCompatActivity() {
                         val textContent = "Your device's battery has reached " + battNumber + " " + unit
 
 
+
+
                         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
+
 
 
                                 .setSmallIcon(R.drawable.launch_logo_256)
