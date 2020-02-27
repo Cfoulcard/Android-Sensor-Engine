@@ -47,7 +47,9 @@ class BatteryActivity : AppCompatActivity() {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    private val ID = "333"
+    private val ID = "3"
+
+    //val resultIntent = Intent(context, BatteryActivity::class.java)
 
 
 
@@ -96,27 +98,29 @@ class BatteryActivity : AppCompatActivity() {
 
     override fun onStart() {
       //  currentBattery.text = "${registerMyReceiver()} percent"
+        registerMyReceiver()
+        if (currentBattery.text  == registerMyReceiver().toString()) {
+            currentBattery.text = registerMyReceiver().toString()
+        }
 
         createNotificationChannel()
         super.onStart()
     }
 
     override fun onResume() {
-        registerMyReceiver()
+
 
         super.onResume()
-        if (currentBattery.text  == registerMyReceiver().toString()) {
-            currentBattery.text = registerMyReceiver().toString()
-        }
+
     }
 
     override fun onPause() {
-        registerMyReceiver()
+       // registerMyReceiver()
 
-        if (currentBattery.text  == registerMyReceiver().toString()) {
+/*        if (currentBattery.text  == registerMyReceiver().toString()) {
             currentBattery.text = registerMyReceiver().toString()
 
-        }
+        }*/
         super.onPause()
     }
 
@@ -134,6 +138,26 @@ class BatteryActivity : AppCompatActivity() {
     fun closeBatteryDialogPopup(v: View?) {
         batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
         batteryInfoDialog?.dismiss()
+    }
+
+    //For handling the notifications
+    private fun createNotificationChannel() { // Create the NotificationChannel, but only on API 26+ because
+// the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = getString(R.string.channel_name_battery)
+            val description = getString(R.string.channel_description_battery)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(ID, name, importance)
+            channel.description = description
+
+
+            // Register the channel with the system; you can't change the importance
+// or other notification behaviors after this
+            val notificationManager = getSystemService(NotificationManager::class.java)!!
+            notificationManager.createNotificationChannel(channel)
+
+            // notificationId is a unique int for each notification that you must define
+        }
     }
 
     //Initiate Broadcast Receiver to utilize BatteryManager Features
@@ -170,6 +194,17 @@ class BatteryActivity : AppCompatActivity() {
             val battNumber = settings.getString("edit_text_battery_temp", "")
             //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
 
+            // Create an Intent for the activity you want to start
+            // Create an Intent for the activity you want to start
+            val resultIntent = Intent(this, BatteryActivity::class.java)
+            // Create the TaskStackBuilder and add the intent, which inflates the back stack
+            // Create the TaskStackBuilder and add the intent, which inflates the back stack
+            val stackBuilder = TaskStackBuilder.create(context)
+            stackBuilder.addNextIntentWithParentStack(resultIntent)
+            // Get the PendingIntent containing the entire back stack
+            // Get the PendingIntent containing the entire back stack
+            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+
 
             if (settings.getBoolean("switch_preference_battery", true)) {
                 //Conditions that must be true for the notifications to work
@@ -179,18 +214,17 @@ class BatteryActivity : AppCompatActivity() {
                         val textTitle = "Android Sensor Engine"
                         val textContent = "Your device's battery has reached " + battNumber + " " + unit
 
-
-
-
-                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
+                      //  val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
+
+
 
 
 
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
-                                .setContentIntent(pendingIntent)
+                                .setContentIntent(resultPendingIntent)
                                 .setAutoCancel(true)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setOnlyAlertOnce(true)
@@ -209,7 +243,7 @@ class BatteryActivity : AppCompatActivity() {
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
-                                .setContentIntent(pendingIntent)
+                                .setContentIntent(resultPendingIntent)
                                 .setAutoCancel(true)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setOnlyAlertOnce(true)
@@ -226,7 +260,7 @@ class BatteryActivity : AppCompatActivity() {
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
-                                .setContentIntent(pendingIntent)
+                                .setContentIntent(resultPendingIntent)
                                 .setAutoCancel(true)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setOnlyAlertOnce(true)
@@ -239,23 +273,11 @@ class BatteryActivity : AppCompatActivity() {
         }
     }
 
-    //For handling the notifications
-    private fun createNotificationChannel() { // Create the NotificationChannel, but only on API 26+ because
-// the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name: CharSequence = getString(R.string.battery)
-            val description = getString(R.string.battery_sensor)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(ID, name, importance)
-            channel.description = description
-            // Register the channel with the system; you can't change the importance
-// or other notification behaviors after this
-            val notificationManager = getSystemService(NotificationManager::class.java)!!
-            notificationManager.createNotificationChannel(channel)
-
-            // notificationId is a unique int for each notification that you must define
-        }
+    //This is needed to help open the activity from the notifications
+    private fun Intent(broadcastReceiver: BroadcastReceiver, java: Class<BatteryActivity>): Intent? {
+return Intent(this, BatteryActivity::class.java)
     }
+
 
     //This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
