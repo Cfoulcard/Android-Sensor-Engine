@@ -38,7 +38,7 @@ import com.google.firebase.analytics.FirebaseAnalytics;
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
     //ID used for notifications
-    private static final String CHANNEL_ID = "111";
+    private static final String CHANNEL_ID = "1";
 
     //Dialog popup info
     Dialog tempInfoDialog;
@@ -261,8 +261,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
     private void createNotificationChannel () { // Create the NotificationChannel, but only on API 26+ because
 // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            CharSequence name = getString(R.string.channel_name);
-            String description = getString(R.string.channel_description);
+            CharSequence name = getString(R.string.channel_name_air_temp);
+            String description = getString(R.string.channel_description_air_temp);
             int importance = NotificationManager.IMPORTANCE_DEFAULT;
             NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
             channel.setDescription(description);
