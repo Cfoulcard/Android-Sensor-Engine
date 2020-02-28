@@ -50,6 +50,8 @@ public class SettingsActivity extends AppCompatActivity {
             SwitchPreference switchPreference1 = findPreference("switch_preference_battery");
             SwitchPreference switchPreference2 = findPreference("switch_preference_air");
             SwitchPreference switchPreference3 = findPreference("switch_preference_speed");
+            SwitchPreference switchPreference4 = findPreference("switch_preference_pressure");
+            SwitchPreference switchPreference5 = findPreference("switch_preference_humidity");
 
             EditTextPreference editTextPreferenceBattery = findPreference("edit_text_battery_temp");
             Objects.requireNonNull(editTextPreferenceBattery).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
@@ -71,6 +73,24 @@ public class SettingsActivity extends AppCompatActivity {
 
             EditTextPreference editTextPreferenceSpeed = findPreference("edit_text_speed");
             Objects.requireNonNull(editTextPreferenceSpeed).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
+                @Override
+                public void onBindEditText(@NonNull EditText editText) {
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+
+                }
+            });
+
+            EditTextPreference editTextPreferencePressure = findPreference("edit_text_pressure");
+            Objects.requireNonNull(editTextPreferencePressure).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
+                @Override
+                public void onBindEditText(@NonNull EditText editText) {
+                    editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
+
+                }
+            });
+
+            EditTextPreference editTextPreferenceHumidity = findPreference("edit_text_humidity");
+            Objects.requireNonNull(editTextPreferenceHumidity).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
                     editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);

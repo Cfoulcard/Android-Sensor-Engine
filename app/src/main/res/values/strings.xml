@@ -125,9 +125,13 @@
     <string name="channel_name_air_temp">Air Temperature Notifications</string>
     <string name="channel_name_speed">Accelerometer Notifications</string>
     <string name="channel_name_battery">Battery Heat Notifications</string>
+    <string name="channel_name_pressure">Pressure Notifications</string>
+    <string name="channel_name_humidity">Humidity Notifications</string>
     <string name="channel_description_air_temp"></string>
     <string name="channel_description_speed"></string>
     <string name="channel_description_battery"></string>
+    <string name="channel_description_pressure"></string>
+    <string name="channel_description_humidity"></string>
 
 
 </resources>
