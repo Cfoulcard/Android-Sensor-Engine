@@ -35,6 +35,10 @@ import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsAct
 import com.christianfoulcard.android.androidsensorengine.R;
 import com.google.firebase.analytics.FirebaseAnalytics;
 
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class TemperatureActivity extends AppCompatActivity implements SensorEventListener {
 
     //ID used for notifications
@@ -59,6 +63,10 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
 
     // Initiate Firebase Analytics
     private FirebaseAnalytics mFirebaseAnalytics;
+
+    MyTimerTask tasker;
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -93,6 +101,9 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         // Ambient Temperature measures the temperature around the device
         temperature = sensorManager.getDefaultSensor((Sensor.TYPE_AMBIENT_TEMPERATURE));
         currentDegrees = (TextView) findViewById(R.id.current_temp);
+
+
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,9 +122,13 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
         sensorManager.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL);
 
         //Enables notifications if they are enabled
+
         createNotificationChannel();
         super.onStart();
     }
+
+
+
 
     @Override
     protected void onResume() {
@@ -184,15 +199,20 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
 
             // Create an Intent for the activity you want to start
             Intent resultIntent = new Intent(this, TemperatureActivity.class);
-             // Create the TaskStackBuilder and add the intent, which inflates the back stack
+            // Create the TaskStackBuilder and add the intent, which inflates the back stack
             TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
             stackBuilder.addNextIntentWithParentStack(resultIntent);
             // Get the PendingIntent containing the entire back stack
             PendingIntent resultPendingIntent =
                     stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT);
 
+
+
+
+
             //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_air", true)) {
+
                 //Conditions that must be true for the notifications to work
                 //If Celsius is chosen as the unit of measurement
                 if (airNumber == c && unit.equals("C°")) {
