@@ -40,12 +40,13 @@ public class MainActivity extends AppCompatActivity {
     //TODO: Fix/String in other languages
     //TODO Custom Sounds?
     //TODO: Notification screen cleanup
-
+    //TODO: Fix Pressure Notifications
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme);
         super.onCreate(savedInstanceState);
@@ -57,40 +58,10 @@ public class MainActivity extends AppCompatActivity {
 
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
         FirebaseAnalytics mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
-        // Get the application context
-        Context mContext = getApplicationContext();
-
-        // Get the instance of SharedPreferences object
-        SharedPreferences mSharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-
-        // Get the activity
-        Activity mActivity = MainActivity.this;
-
-        PreferenceManager.setDefaultValues(this, R.xml.root_preferences, false);
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-    //This will add functionality to the menu button within the action bar
-/*    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navigation_menu, menu);
-        return true;
-    }*/
-
-    //The following is for the menu items within the navigation_menu.xml file
-/*   public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.preferences:
-                Intent configurationsIntent = new Intent(this, SettingsActivity.class);
-                this.startActivity(configurationsIntent);
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }*/
+    // Intents to start the sensor activities
 
     public void soundIconIntent(View view) {
         Intent soundIntent = new Intent(this, SoundSensorActivity.class);
@@ -100,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(soundIntent, transitionActivityOptions.toBundle());
-
-        // this.startActivity(soundIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void tempIconIntent(View view) {
@@ -113,9 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(tempIntent, transitionActivityOptions.toBundle());
-
-        // this.startActivity(tempIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void lightIconIntent(View view) {
@@ -126,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(lightIntent, transitionActivityOptions.toBundle());
-        // this.startActivity(lightIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void ramIconIntent(View view) {
@@ -138,8 +101,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(ramIntent, transitionActivityOptions.toBundle());
-        //    this.startActivity(ramIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void batteryIconIntent(View view) {
@@ -150,8 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(batteryIntent, transitionActivityOptions.toBundle());
-        //   this.startActivity(soundIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void speedIconIntent(View view) {
@@ -162,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
 
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(speedIntent, transitionActivityOptions.toBundle());
-        //   this.startActivity(speedIntent);
-        // Toast.makeText(view.getContext(),"Button Clicked",Toast.LENGTH_LONG).show();
     }
 
     public void humidityIconIntent(View view) {
@@ -195,11 +152,4 @@ public class MainActivity extends AppCompatActivity {
         ActivityOptions transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, sharedView, transitionName);
         this.startActivity(walkIntent, transitionActivityOptions.toBundle());
     }
-
-/*    public void prefIconIntent(View view) {
-        Intent prefIntent = new Intent(this, SettingsActivity.class);
-
-        this.startActivity(prefIntent);
-
-    }*/
 }
