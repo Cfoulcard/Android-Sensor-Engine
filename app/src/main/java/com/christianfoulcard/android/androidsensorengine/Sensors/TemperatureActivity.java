@@ -195,7 +195,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
             }
 
             //Gets the string value from the edit_text_air_temp key in root_preferences.xml
-            int airNumber = Integer.parseInt(settings.getString("edit_text_air_temp", ""));
+            int airNumber = Integer.parseInt(settings.getString("edit_text_air_temp", String.valueOf(10000)));
 
             // Create an Intent for the activity you want to start
             Intent resultIntent = new Intent(this, TemperatureActivity.class);
@@ -272,6 +272,8 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                     // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
+                } else {
+                    currentDegrees.setText(f + " " + unit);
                 }
             }
         }

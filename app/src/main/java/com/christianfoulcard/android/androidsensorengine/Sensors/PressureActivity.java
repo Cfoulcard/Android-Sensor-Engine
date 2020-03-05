@@ -124,8 +124,7 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
 
         }
 
-        //Gets the string value from the edit_text_pressure key in root_preferences.xml
-        int pressureNumber = Integer.parseInt(settings.getString("edit_text_pressure", ""));
+
 
         // Create an Intent for the activity you want to start
         Intent resultIntent = new Intent(this, PressureActivity.class);
@@ -138,8 +137,11 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
 
         //Checks to see if the pressure alert notifications are turned on in root_preferences.xml
         if (settings.getBoolean("switch_preference_pressure", true)) {
+
+            //Gets the string value from the edit_text_pressure key in root_preferences.xml
+            int pressureNumber = Integer.parseInt(settings.getString("edit_text_pressure", String.valueOf(10000)));
             //Conditions that must be true for the notifications to work
-            if (pressureNumber == pressure_level) {
+            if (pressure_level == pressureNumber) {
                 String textTitle = "Android Sensor Engine";
                 String textContent = "The atmospheric pressure has reached " + pressureNumber + " " + "hPa";
 

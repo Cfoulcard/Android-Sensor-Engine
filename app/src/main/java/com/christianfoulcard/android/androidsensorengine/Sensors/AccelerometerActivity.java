@@ -217,7 +217,7 @@ createNotificationChannel();
             }
 
             //Gets the unit of measurement from the speedunit key in root_preferences.xml
-            int speedNumber = Integer.parseInt(settings.getString("edit_text_speed", ""));
+            int speedNumber = Integer.parseInt(settings.getString("edit_text_speed", String.valueOf(10000)));
             //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
 
             if (settings.getBoolean("switch_preference_speed", true)) {

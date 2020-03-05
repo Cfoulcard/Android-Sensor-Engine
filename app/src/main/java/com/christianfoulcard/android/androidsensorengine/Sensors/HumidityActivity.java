@@ -124,7 +124,7 @@ public class HumidityActivity extends AppCompatActivity implements SensorEventLi
         }
 
         //Gets the string value from the edit_text_humidity key in root_preferences.xml
-        int vaporNumber = Integer.parseInt(settings.getString("edit_text_humidity", "0"));
+        int vaporNumber = Integer.parseInt(settings.getString("edit_text_humidity", String.valueOf(1000)));
 
         // Create an Intent for the activity you want to start
         Intent resultIntent = new Intent(this, HumidityActivity.class);
