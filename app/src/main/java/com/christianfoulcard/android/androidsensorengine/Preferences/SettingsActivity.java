@@ -1,8 +1,12 @@
 package com.christianfoulcard.android.androidsensorengine.Preferences;
 
+import android.app.Dialog;
+import android.app.Presentation;
+import android.content.Context;
 import android.os.Bundle;
 import android.text.InputType;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -18,6 +22,8 @@ import com.christianfoulcard.android.androidsensorengine.R;
 import java.util.Objects;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    Dialog inputError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +68,7 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-            EditTextPreference editTextPreferenceAir = findPreference("edit_text_air_temp");
+            final EditTextPreference editTextPreferenceAir = findPreference("edit_text_air_temp");
             Objects.requireNonNull(editTextPreferenceAir).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
@@ -80,12 +86,11 @@ public class SettingsActivity extends AppCompatActivity {
                 }
             });
 
-            EditTextPreference editTextPreferencePressure = findPreference("edit_text_pressure");
+            final EditTextPreference editTextPreferencePressure = findPreference("edit_text_pressure");
             Objects.requireNonNull(editTextPreferencePressure).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
                     editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
-
                 }
             });
 
