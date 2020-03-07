@@ -103,6 +103,18 @@
     <string name="speed_desc_1">Le capteur accéléromètre est un outil pratique pour déterminer votre vitesse de sortie. Cela fonctionne en rassemblant des données GPS en fonction de votre emplacement et en convertissant votre vitesse en un nombre tangible.</string>
     <string name="speed_desc_2">Certains scénarios d\'utilisation incluent le suivi de la précision de la vitesse de la voiture et la recherche de votre vitesse de course maximale. Notez que parce que cela n\'est aussi précis que votre connexion au wifi / données, le capteur peut ou non être aussi précis qu\'il pourrait l\'être!</string>
     <string name="step_desc_1">Le compteur de pas est un outil simple pour calculer le nombre de pas que vous avez faits à un moment donné.</string>
+    <string name="notification_alerts">Alertes de notification</string>
+    <string name="channel_name_humidity">Notifications d\'humidité</string>
+    <string name="channel_name_pressure">Notifications de pression</string>
+    <string name="channel_name_battery">Notifications de chaleur de la batterie</string>
+    <string name="channel_name_speed">Notifications de l\'accéléromètre</string>
+    <string name="channel_name_air_temp">Notifications de température de l\'air</string>
+    <string name="title_activity_settings">Réglages</string>
+    <string name="notify_air">M\'avertir lorsque la température de l\'air est</string>
+    <string name="notify_battery">M\'avertir lorsque la température de la batterie est</string>
+    <string name="notify_speed">M\'avertir lorsque l\'accéléromètre atteint</string>
+    <string name="notify_pressure">M\'avertir lorsque la pression est</string>
+    <string name="notify_humidity">M\'avertir lorsque l\'humidité est</string>
 
 
 </resources>

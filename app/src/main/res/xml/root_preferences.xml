@@ -33,7 +33,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_preference_air"
-            android:title="Notification Alerts" />
+            android:title="@string/notification_alerts" />
         <EditTextPreference
             android:dependency="switch_preference_air"
             android:digits="0123456789"
@@ -41,7 +41,7 @@
             android:key="edit_text_air_temp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Notify Me When Air Temperature Is..."
+            android:title="@string/notify_air"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -60,7 +60,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_preference_battery"
-            android:title="Notification Alerts" />
+            android:title="@string/notification_alerts" />
         <EditTextPreference
             android:dependency="switch_preference_battery"
             android:digits="0123456789"
@@ -68,7 +68,7 @@
             android:key="edit_text_battery_temp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Notify Me When Battery Temperature Is..."
+            android:title="@string/notify_battery"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -86,7 +86,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_preference_speed"
-            android:title="Notification Alerts" />
+            android:title="@string/notification_alerts" />
         <EditTextPreference
             android:dependency="switch_preference_speed"
             android:digits="0123456789"
@@ -94,7 +94,7 @@
             android:key="edit_text_speed"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Notify Me When My Speed Is..."
+            android:title="@string/notify_speed"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>
@@ -104,7 +104,7 @@
 <SwitchPreference
     android:defaultValue="false"
     android:key="switch_preference_pressure"
-    android:title="Notification Alerts" />
+    android:title="@string/notification_alerts" />
 <EditTextPreference
     android:dependency="switch_preference_pressure"
     android:digits="0123456789"
@@ -112,7 +112,7 @@
     android:key="edit_text_pressure"
     android:selectAllOnFocus="true"
     android:singleLine="true"
-    android:title="Notify Me When The Pressure Is..."
+    android:title="@string/notify_pressure"
     app:useSimpleSummaryProvider="true" />
 
 </PreferenceCategory>
@@ -122,7 +122,7 @@
         <SwitchPreference
             android:defaultValue="false"
             android:key="switch_preference_humidity"
-            android:title="Notification Alerts" />
+            android:title="@string/notification_alerts" />
         <EditTextPreference
             android:dependency="switch_preference_humidity"
             android:digits="0123456789"
@@ -130,7 +130,7 @@
             android:key="edit_text_humidity"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:title="Notify Me When The Humidity Is..."
+            android:title="@string/notify_humidity"
             app:useSimpleSummaryProvider="true" />
 
     </PreferenceCategory>

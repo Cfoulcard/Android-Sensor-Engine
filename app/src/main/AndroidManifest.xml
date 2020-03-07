@@ -98,7 +98,7 @@
             android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
         <activity
             android:name=".Preferences.SettingsActivity"
-            android:label="Preferences"
+            android:label="@string/preferences"
             android:screenOrientation="portrait" />
 
         <meta-data

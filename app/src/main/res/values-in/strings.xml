@@ -100,5 +100,17 @@
     <string name="speed_desc_1">Sensor Accelerometer adalah alat yang berguna untuk menentukan output kecepatan Anda. Ini berfungsi dengan mengumpulkan data GPS berdasarkan lokasi Anda dan mengubah kecepatan Anda menjadi angka nyata.</string>
     <string name="speed_desc_2">Beberapa skenario penggunaan termasuk melacak akurasi kecepatan mobil dan menemukan kecepatan lari terbaik Anda. Perhatikan bahwa karena ini hanya seakurat koneksi Anda ke wifi / data, sensor mungkin atau mungkin tidak seakurat mungkin!</string>
     <string name="step_desc_1">Penghitung Langkah adalah alat sederhana untuk menghitung jumlah langkah yang telah Anda ambil pada waktu tertentu.</string>
+    <string name="notification_alerts">Lansiran Pemberitahuan</string>
+    <string name="channel_name_humidity">Pemberitahuan Kelembaban</string>
+    <string name="channel_name_pressure">Pemberitahuan Tekanan</string>
+    <string name="channel_name_battery">Pemberitahuan Panas Baterai</string>
+    <string name="channel_name_speed">Pemberitahuan Akselerometer</string>
+    <string name="channel_name_air_temp">Pemberitahuan Suhu Udara</string>
+    <string name="title_activity_settings">Pengaturan</string>
+    <string name="notify_air">Beritahu saya ketika Suhu Udara</string>
+    <string name="notify_battery">Beritahu saya ketika Suhu Baterai</string>
+    <string name="notify_speed">Beritahu saya ketika Accelerometer mencapai</string>
+    <string name="notify_pressure">Beritahu saya ketika ada tekanan</string>
+    <string name="notify_humidity">Beritahu saya saat Kelembaban terjadi</string>
 
 </resources>

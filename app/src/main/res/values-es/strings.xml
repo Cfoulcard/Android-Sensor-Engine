@@ -100,6 +100,18 @@
     <string name="speed_desc_1">El sensor del acelerómetro es una herramienta útil para determinar su salida de velocidad. Esto funciona al recopilar datos GPS basados en su ubicación y convertir su velocidad en un número tangible.</string>
     <string name="speed_desc_2">Algunos escenarios de uso incluyen el seguimiento de la precisión de la velocidad del automóvil y la búsqueda de su velocidad máxima de carrera. Tenga en cuenta que debido a que esto es tan preciso como su conexión a wifi / datos, ¡el sensor puede o no ser tan preciso como podría ser!</string>
     <string name="step_desc_1">El Contador de pasos es una herramienta simple para calcular la cantidad de pasos que ha dado en un momento dado.</string>
+    <string name="notification_alerts">Alertas de notificaciones</string>
+    <string name="title_activity_settings">Configuraciones</string>
+    <string name="channel_name_air_temp">Notificaciones de temperatura del aire</string>
+    <string name="channel_name_speed">Notificaciones de acelerómetro</string>
+    <string name="channel_name_battery">Notificaciones de calor de batería</string>
+    <string name="channel_name_pressure">Notificaciones de presión</string>
+    <string name="channel_name_humidity">Notificaciones de humedad</string>
+    <string name="notify_air">Notificarme cuando la temperatura del aire sea</string>
+    <string name="notify_battery">Notificarme cuando la temperatura de la batería sea</string>
+    <string name="notify_speed">Notificarme cuando llegue el acelerómetro</string>
+    <string name="notify_pressure">Notificarme cuando la presión es</string>
+    <string name="notify_humidity">Notificarme cuando la humedad es</string>
 
 
 </resources>

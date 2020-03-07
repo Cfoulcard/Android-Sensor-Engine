@@ -132,6 +132,12 @@
     <string name="channel_description_battery"></string>
     <string name="channel_description_pressure"></string>
     <string name="channel_description_humidity"></string>
+    <string name="notification_alerts">Notification Alerts</string>
+    <string name="notify_air">Notify me when the Air Temperature is</string>
+    <string name="notify_battery">Notify me when the Battery Temperature is</string>
+    <string name="notify_speed">Notify me when the Accelerometer reaches</string>
+    <string name="notify_pressure">Notify me when the Pressure is</string>
+    <string name="notify_humidity">Notify me when the Humidity is</string>
 
 
 </resources>

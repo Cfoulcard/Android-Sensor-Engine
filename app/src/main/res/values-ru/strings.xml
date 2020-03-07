@@ -99,6 +99,18 @@
     <string name="speed_desc_1">Датчик акселерометра - удобный инструмент для определения вашей скорости на выходе. Это работает путем сбора данных GPS на основе вашего местоположения и преобразования вашей скорости в осязаемое число.</string>
     <string name="speed_desc_2">Некоторые сценарии использования включают отслеживание точности скорости автомобиля и определение максимальной скорости движения. Обратите внимание, что, поскольку это точно так же, как ваше подключение к Wi-Fi / данных, датчик может быть или не быть настолько точным, как это могло бы быть!</string>
     <string name="step_desc_1">Счетчик шагов - это простой инструмент для подсчета количества шагов, которые вы предприняли в любой момент времени.</string>
+    <string name="notification_alerts">Оповещения</string>
+    <string name="title_activity_settings">настройки</string>
+    <string name="channel_name_air_temp">Уведомления о температуре воздуха</string>
+    <string name="channel_name_speed">Акселерометр Уведомления</string>
+    <string name="channel_name_battery">Уведомления о нагреве батареи</string>
+    <string name="channel_name_pressure">Уведомления о давлении</string>
+    <string name="channel_name_humidity">Уведомления о влажности</string>
+    <string name="notify_air">Сообщите мне, когда температура воздуха</string>
+    <string name="notify_battery">Сообщите мне, когда температура батареи</string>
+    <string name="notify_speed">Сообщите мне, когда акселерометр достигает</string>
+    <string name="notify_pressure">Сообщите мне, когда давление</string>
+    <string name="notify_humidity">Сообщите мне, когда влажность</string>
 
 
 </resources>
