@@ -272,8 +272,6 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
                     // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(Integer.parseInt(CHANNEL_ID), builder.build());
-                } else {
-                    currentDegrees.setText(f + " " + unit);
                 }
             }
         }
