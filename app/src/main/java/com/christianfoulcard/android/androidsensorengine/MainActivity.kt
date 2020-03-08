@@ -16,6 +16,7 @@ import com.google.firebase.analytics.FirebaseAnalytics
 //TODO: Fix animations
 //TODO Custom Sounds?
 //TODO: Notification Logo Size
+//TODO: Update ram activity parsing
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class MainActivity : AppCompatActivity() {
