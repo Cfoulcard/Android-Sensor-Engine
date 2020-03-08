@@ -24,8 +24,6 @@ import java.util.*
 
 class BatteryActivity : AppCompatActivity() {
 
-    //TODO Custom Sounds?
-
     //Dialog popup info
     var batteryInfoDialog: Dialog? = null
 
@@ -36,22 +34,15 @@ class BatteryActivity : AppCompatActivity() {
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
-    // private val level = registerMyReceiver()
 
     //ImageViews
     var batteryInfo: ImageView? = null
 
-    private var timer: Timer? = null
-    private var timerTask: TimerTask? = null
-
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
+    //Channel ID for notifications
     private val ID = "3"
-
-    //val resultIntent = Intent(context, BatteryActivity::class.java)
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -61,6 +52,7 @@ class BatteryActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.battery_sensor)
 
+        //TextViews
         battery_text = findViewById(R.id.battery) as TextView
         currentBattery = findViewById(R.id.current_battery) as TextView
         batterySensor = findViewById(R.id.battery_sensor) as TextView
@@ -71,12 +63,7 @@ class BatteryActivity : AppCompatActivity() {
         //Dialog Box for Temperature Info
         batteryInfoDialog = Dialog(this)
 
-        val `in` = AlphaAnimation(0.0f, 1.0f)
-        `in`.duration = 1500
-        battery_text.startAnimation(`in`)
-        currentBattery.startAnimation(`in`)
-        batterySensor.startAnimation(`in`)
-        batteryInfo!!.startAnimation(`in`)
+
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -97,7 +84,14 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
-      //  currentBattery.text = "${registerMyReceiver()} percent"
+        val `in` = AlphaAnimation(0.0f, 1.0f)
+        `in`.duration = 1500
+        battery_text.startAnimation(`in`)
+        currentBattery.startAnimation(`in`)
+        batterySensor.startAnimation(`in`)
+        batteryInfo!!.startAnimation(`in`)
+
+        //Registers the sensor
         registerMyReceiver()
         if (currentBattery.text  == registerMyReceiver().toString()) {
             currentBattery.text = registerMyReceiver().toString()
@@ -108,26 +102,17 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     override fun onResume() {
-
-
         super.onResume()
-
     }
 
     override fun onPause() {
-       // registerMyReceiver()
-
-/*        if (currentBattery.text  == registerMyReceiver().toString()) {
-            currentBattery.text = registerMyReceiver().toString()
-
-        }*/
         super.onPause()
     }
 
     override fun onDestroy() {
+        //Unregister the Sensor
         unregisterReceiver(registerMyReceiver())
         super.onDestroy()
-
     }
 
     fun showBatteryDialogPopup(v: View?) {
@@ -141,8 +126,9 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     //For handling the notifications
-    private fun createNotificationChannel() { // Create the NotificationChannel, but only on API 26+ because
-// the NotificationChannel class is new and not in the support library
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val name: CharSequence = getString(R.string.channel_name_battery)
             val description = getString(R.string.channel_description_battery)
@@ -150,9 +136,8 @@ class BatteryActivity : AppCompatActivity() {
             val channel = NotificationChannel(ID, name, importance)
             channel.description = description
 
-
             // Register the channel with the system; you can't change the importance
-// or other notification behaviors after this
+            // or other notification behaviors after this
             val notificationManager = getSystemService(NotificationManager::class.java)!!
             notificationManager.createNotificationChannel(channel)
 
@@ -176,7 +161,6 @@ class BatteryActivity : AppCompatActivity() {
             //Note the original context was "this". This caused a Null Pointer error
             //Used this@BatteryActivity to fix the issue
             val settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@BatteryActivity)
-            //Get the string data from the Preferences
 
             //Finds the preference string value and links it with the appropriate temperature calc formula
             when (val unit = settings.getString("batterytempunit", "")) {
@@ -190,22 +174,21 @@ class BatteryActivity : AppCompatActivity() {
 
             //Gets the unit of measurement from the batterytempunit key in root_preferences.xml
             val unit = settings.getString("batterytempunit", "")
+
             //Gets the string value from the edit_text_battery_temp key in root_preferences.xml
             val battNumber = settings.getString("edit_text_battery_temp", "")
-            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
 
             // Create an Intent for the activity you want to start
-            // Create an Intent for the activity you want to start
             val resultIntent = Intent(this, BatteryActivity::class.java)
-            // Create the TaskStackBuilder and add the intent, which inflates the back stack
+
             // Create the TaskStackBuilder and add the intent, which inflates the back stack
             val stackBuilder = TaskStackBuilder.create(context)
             stackBuilder.addNextIntentWithParentStack(resultIntent)
-            // Get the PendingIntent containing the entire back stack
+
             // Get the PendingIntent containing the entire back stack
             val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-
+            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_battery", true)) {
                 //Conditions that must be true for the notifications to work
                 //If Celsius is chosen as the unit of measurement
@@ -214,7 +197,6 @@ class BatteryActivity : AppCompatActivity() {
                         val textTitle = "Android Sensor Engine"
                         val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
-                      //  val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
 
                                 .setSmallIcon(R.drawable.launch_logo_256)
@@ -224,7 +206,6 @@ class BatteryActivity : AppCompatActivity() {
                                 .setAutoCancel(true)
                                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                                 .setOnlyAlertOnce(true)
-
 
                         val notificationManager = NotificationManagerCompat.from(context)
                         notificationManager.notify(123, builder.build())
@@ -234,7 +215,6 @@ class BatteryActivity : AppCompatActivity() {
                         val textTitle = "Android Sensor Engine"
                         val textContent = getString(R.string.notify_battery_message) + " " + fahrenheitLevel + " " + unit
 
-                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
@@ -246,12 +226,12 @@ class BatteryActivity : AppCompatActivity() {
 
                         val notificationManager = NotificationManagerCompat.from(context)
                         notificationManager.notify(123, builder.build())
+
                         //If Kelvin is chosen as the unit of measurement
                     } else if (battNumber == kelvinLevel.toString() && unit == "K°") {
                         val textTitle = "Android Sensor Engine"
                         val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
-                        val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
@@ -271,7 +251,7 @@ class BatteryActivity : AppCompatActivity() {
 
     //This is needed to help open the activity from the notifications
     private fun Intent(broadcastReceiver: BroadcastReceiver, java: Class<BatteryActivity>): Intent? {
-return Intent(this, BatteryActivity::class.java)
+    return Intent(this, BatteryActivity::class.java)
     }
 
 
