@@ -217,7 +217,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                 //If Celsius is chosen as the unit of measurement
                 if (airNumber == c && unit.equals("C°")) {
                     String textTitle = "Android Sensor Engine";
-                    String textContent = "The air around you has reached " + airNumber + " " + unit;
+                    String textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit;
 
                     // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
@@ -239,7 +239,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     //If Fahrenheit is chosen as the unit of measurement
                 } else if (airNumber == f && unit.equals("F°")) {
                     String textTitle = "Android Sensor Engine";
-                    String textContent = "The air around you has reached " + airNumber + " " + unit;
+                    String textContent =getString(R.string.notify_air_message) + " " + airNumber + " " + unit;
 
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
                             .setSmallIcon(R.drawable.launch_logo_256)
@@ -257,7 +257,7 @@ public class TemperatureActivity extends AppCompatActivity implements SensorEven
                     //If Kelvin is chosen as the unit of measurement
                 } else if (airNumber == k && unit.equals("K°")) {
                     String textTitle = "Android Sensor Engine";
-                    String textContent = "The air around you has reached " + airNumber + " " + unit;
+                    String textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit;
 
                     // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
                     NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
