@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.app.Presentation;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -59,6 +60,8 @@ public class SettingsActivity extends AppCompatActivity {
             SwitchPreference switchPreference4 = findPreference("switch_preference_pressure");
             SwitchPreference switchPreference5 = findPreference("switch_preference_humidity");
 
+
+
             EditTextPreference editTextPreferenceBattery = findPreference("edit_text_battery_temp");
             Objects.requireNonNull(editTextPreferenceBattery).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
                 @Override
@@ -70,10 +73,14 @@ public class SettingsActivity extends AppCompatActivity {
 
             final EditTextPreference editTextPreferenceAir = findPreference("edit_text_air_temp");
             Objects.requireNonNull(editTextPreferenceAir).setOnBindEditTextListener(new androidx.preference.EditTextPreference.OnBindEditTextListener() {
+
                 @Override
                 public void onBindEditText(@NonNull EditText editText) {
                     editText.setInputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_SIGNED);
 
+/*                    if (editTextPreferenceAir.getText().toString().equals("")) {
+                        editTextPreferenceAir.setText("0");
+                    }*/
                 }
             });
 
