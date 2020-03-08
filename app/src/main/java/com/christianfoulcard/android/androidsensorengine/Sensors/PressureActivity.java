@@ -143,7 +143,7 @@ public class PressureActivity extends AppCompatActivity implements SensorEventLi
             //Conditions that must be true for the notifications to work
             if (pressure_level == pressureNumber) {
                 String textTitle = "Android Sensor Engine";
-                String textContent = "The atmospheric pressure has reached " + pressureNumber + " " + "hPa";
+                String textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa";
 
                 // String pendingIntent = PendingIntent.getActivity(this, 0, intent, 0);
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)

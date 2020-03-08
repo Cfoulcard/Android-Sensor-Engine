@@ -138,6 +138,11 @@
     <string name="notify_speed">Notify me when the Accelerometer reaches</string>
     <string name="notify_pressure">Notify me when the Pressure is</string>
     <string name="notify_humidity">Notify me when the Humidity is</string>
+    <string name="notify_air_message">Ambient air temperature has reached</string>
+    <string name="notify_battery_message">Your device\'s battery has reached</string>
+    <string name="notify_speed_message">Your speed has reached</string>
+    <string name="notify_pressure_message">The atmospheric pressure has reached</string>
+    <string name="notify_humidity_message">The relative humidity has reached</string>
 
 
 </resources>

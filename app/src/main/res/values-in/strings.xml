@@ -112,5 +112,10 @@
     <string name="notify_speed">Beritahu saya ketika Accelerometer mencapai</string>
     <string name="notify_pressure">Beritahu saya ketika ada tekanan</string>
     <string name="notify_humidity">Beritahu saya saat Kelembaban terjadi</string>
+    <string name="notify_humidity_message">Kelembaban relatif telah mencapai</string>
+    <string name="notify_pressure_message">Tekanan atmosfer telah mencapai</string>
+    <string name="notify_speed_message">Kecepatan Anda telah mencapai</string>
+    <string name="notify_battery_message">Baterai perangkat Anda telah mencapai</string>
+    <string name="notify_air_message">Suhu udara sekitar telah mencapai</string>
 
 </resources>

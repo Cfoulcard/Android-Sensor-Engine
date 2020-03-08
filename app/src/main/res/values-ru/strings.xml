@@ -111,6 +111,11 @@
     <string name="notify_speed">Сообщите мне, когда акселерометр достигает</string>
     <string name="notify_pressure">Сообщите мне, когда давление</string>
     <string name="notify_humidity">Сообщите мне, когда влажность</string>
+    <string name="notify_air_message">Температура окружающего воздуха достигла</string>
+    <string name="notify_battery_message">Аккумулятор вашего устройства достиг</string>
+    <string name="notify_speed_message">Ваша скорость достигла</string>
+    <string name="notify_pressure_message">Атмосферное давление достигло</string>
+    <string name="notify_humidity_message">Относительная влажность достигла</string>
 
 
 </resources>

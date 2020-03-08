@@ -212,14 +212,10 @@ class BatteryActivity : AppCompatActivity() {
                 if (battNumber != null) {
                     if (battNumber == celsiusLevel.toString() && unit == "C°") {
                         val textTitle = "Android Sensor Engine"
-                        val textContent = "Your device's battery has reached " + battNumber + " " + unit
+                        val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
                       //  val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
-
-
-
-
 
                                 .setSmallIcon(R.drawable.launch_logo_256)
                                 .setContentTitle(textTitle)
@@ -236,7 +232,7 @@ class BatteryActivity : AppCompatActivity() {
                         //If Fahrenheit is chosen as the unit of measurement
                     } else if (battNumber == fahrenheitLevel.toString()  && unit == "F°") {
                         val textTitle = "Android Sensor Engine"
-                        val textContent = "Your device's battery has reached " + fahrenheitLevel + " " + unit
+                        val textContent = getString(R.string.notify_battery_message) + " " + fahrenheitLevel + " " + unit
 
                         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)
@@ -253,7 +249,7 @@ class BatteryActivity : AppCompatActivity() {
                         //If Kelvin is chosen as the unit of measurement
                     } else if (battNumber == kelvinLevel.toString() && unit == "K°") {
                         val textTitle = "Android Sensor Engine"
-                        val textContent = "Your device's battery has reached " + battNumber + " " + unit
+                        val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
                         val pendingIntent = PendingIntent.getActivity(context, 0, intent, 0)
                         val builder = NotificationCompat.Builder(context, ID)

@@ -140,7 +140,7 @@ public class HumidityActivity extends AppCompatActivity implements SensorEventLi
             //Conditions that must be true for the notifications to work
             if (vaporNumber == water_vapor) {
                 String textTitle = "Android Sensor Engine";
-                String textContent = "The relative humidity has reached " + vaporNumber + "%";
+                String textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%";
 
                 NotificationCompat.Builder builder = new NotificationCompat.Builder(this, CHANNEL_ID)
 

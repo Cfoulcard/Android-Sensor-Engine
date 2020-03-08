@@ -112,6 +112,11 @@
     <string name="notify_speed">Notifique-me quando o acelerômetro atingir</string>
     <string name="notify_pressure">Notifique-me quando a pressão estiver</string>
     <string name="notify_humidity">Notifique-me quando a umidade estiver</string>
+    <string name="notify_air_message">A temperatura do ar ambiente atingiu</string>
+    <string name="notify_battery_message">A bateria do seu dispositivo atingiu</string>
+    <string name="notify_speed_message">Sua velocidade atingiu</string>
+    <string name="notify_pressure_message">A pressão atmosférica atingiu</string>
+    <string name="notify_humidity_message">A umidade relativa atingiu</string>
 
 
 </resources>
