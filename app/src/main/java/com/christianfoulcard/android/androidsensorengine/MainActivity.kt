@@ -12,7 +12,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 
 //TODO: Show user a list of sensors their device can use
 //TODO: Add elevation/sea level sensor?
-//TODO: Go through each activity's lifecycle
 //TODO: Fix animations
 //TODO Custom Sounds?
 //TODO: Notification Logo Size
