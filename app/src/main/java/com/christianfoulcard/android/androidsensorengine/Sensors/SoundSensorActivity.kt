@@ -24,6 +24,9 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.google.android.gms.ads.*
+import com.google.android.gms.ads.formats.NativeAdOptions
+import com.google.android.gms.ads.formats.UnifiedNativeAd
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.io.IOException
 
@@ -52,6 +55,8 @@ class SoundSensorActivity : AppCompatActivity() {
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
 
+    lateinit var mAdView : AdView
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
@@ -62,8 +67,16 @@ class SoundSensorActivity : AppCompatActivity() {
 
         setContentView(R.layout.sound_sensor)
 
+        // Initialize Ads
+        MobileAds.initialize(this, "ca-app-pub-9554686964642039~3021936665") //ADMOB App ID
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
+
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+
 
         //TextViews
         configuredDecibel = findViewById<View>(R.id.current_decibel) as TextView
