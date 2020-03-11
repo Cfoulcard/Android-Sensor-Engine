@@ -5,7 +5,7 @@
 
 ![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/featured_image.png)
 
-This is a personal project being developed and maintained for devices running on Android. It capitalizes on sensors and utilities on Android smartphones. One overaching goal I'm on a quest to achieve is clean code and clean design. As this is my first real app I'm out to document and explain code/features. Also a clean/vibrant/picture based UI is used to make using the app simple and easy. So far the following features have been developed:
+This is a project being developed and maintained for devices running on Android. It capitalizes on sensors and utilities on Android smartphones. One overaching goal I'm on a quest to achieve is clean code and clean design. A clean/vibrant/picture based UI is used to make using the app simple and easy. You could say I'm helping UI fall in love with UX. So far the following features have been developed:
 - Sound Decibel Reading
 - Ambient Air Temperature Sensor
 - Light Sensor
@@ -16,8 +16,8 @@ This is a personal project being developed and maintained for devices running on
 - Humidity Sensor
 - Step Counter
 
-## Feature in progress
-- Notifcations for certain sensors (i.e alerts for when battery becomes too hot)
+##Country Availability
+This app is currently available in 83 countries throughout the world
 
 ## Language Support
 Support is included for the following languages:
@@ -32,17 +32,17 @@ There will be future support for more languages beyond what's currently offered.
 
 ## Future Plans
 There's a world of features I'd like to implement into this app over time. Here's a couple:
-- Make a leveler and determine balance
+- Add elevation
 - Provide analogies to help explain readings
-- Background notifications
+- Service side notifications 
 - Custom notification sound alerts
 - A list of all currently available sensors on a device
-- Smooth animations
+- Smooth animations and a more "vibrantly" lively experience
 - Localize throughout the world
 
 ## Beta
-This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with optimization.
+This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with various optimization.
 
 ## Other info
-This project is built using Java, Kotlin, and XML
+This project is built using Java, Kotlin, and XML. Designs were made/modified in Affinity Designer.
 
