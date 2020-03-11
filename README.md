@@ -16,7 +16,7 @@ This is a project being developed and maintained for devices running on Android.
 - Humidity Sensor
 - Step Counter
 
-##Country Availability
+## Country Availability
 This app is currently available in 83 countries throughout the world
 
 ## Language Support
