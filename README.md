@@ -3,7 +3,7 @@
 
 [<img src="https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.christianfoulcard.android.androidsensorengine)
 
-![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/featured_image.png)
+![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/featured_image_redux.png)
 
 This is a project being developed and maintained for devices running on Android. It capitalizes on sensors and utilities on Android smartphones. One overaching goal I'm on a quest to achieve is clean code and clean design. A clean/vibrant/picture based UI is used to make using the app simple and easy. You could say I'm helping UI fall in love with UX. So far the following features have been developed:
 - Sound Decibel Reading
