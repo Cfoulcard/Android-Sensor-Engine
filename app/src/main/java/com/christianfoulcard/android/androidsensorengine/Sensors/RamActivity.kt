@@ -16,6 +16,9 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 
 
@@ -37,12 +40,21 @@ class RamActivity : AppCompatActivity() {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
+    //For Ads
+    private lateinit var mAdView : AdView
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ram_sensor)
+
+        // Initialize Ads
+        MobileAds.initialize(this, "ca-app-pub-9554686964642039~3021936665") //ADMOB App ID
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         //TextViews
         ramText = findViewById(R.id.ram)

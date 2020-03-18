@@ -26,6 +26,9 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -51,11 +54,20 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     //Needed for location permission
     private val REQUESTLOCATIONPERMISSION = 1
 
+    //For Ads
+    private lateinit var mAdView : AdView
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.accelerometer_sensor)
+
+        // Initialize Ads
+        MobileAds.initialize(this, "ca-app-pub-9554686964642039~3021936665") //ADMOB App ID
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         //ImageViews
         accelerometerInfo = findViewById<View>(R.id.info_button) as ImageView

@@ -55,7 +55,8 @@ class SoundSensorActivity : AppCompatActivity() {
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
 
-    lateinit var mAdView : AdView
+    //For Ads
+    private lateinit var mAdView : AdView
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onCreate(savedInstanceState: Bundle?) {

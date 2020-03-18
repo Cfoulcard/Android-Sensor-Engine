@@ -7,7 +7,6 @@ apply plugin: 'io.fabric'
 
 android {
 
-
     signingConfigs {
         release {
 
@@ -29,6 +28,24 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        // Specifies one flavor dimension.
+        flavorDimensions "Engine"
+        productFlavors {
+            developing {
+                // Assigns this product flavor to the "version" flavor dimension.
+                // If you are using only one dimension, this property is optional,
+                // and the plugin automatically assigns all the module's flavors to
+                // that dimension.
+               // dimension "developing"
+                applicationIdSuffix ".demo"
+                versionNameSuffix "-demo"
+            }
+            withads {
+              //  dimension "withads"
+                applicationIdSuffix ".full"
+                versionNameSuffix "-full"
+            }
         }
     }
 }

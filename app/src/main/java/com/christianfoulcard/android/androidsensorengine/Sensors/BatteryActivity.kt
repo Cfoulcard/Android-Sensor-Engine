@@ -18,6 +18,9 @@ import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
 
@@ -44,6 +47,9 @@ class BatteryActivity : AppCompatActivity() {
     //Channel ID for notifications
     private val ID = "3"
 
+    //For Ads
+    private lateinit var mAdView : AdView
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @SuppressLint("SetTextI18n")
@@ -51,6 +57,12 @@ class BatteryActivity : AppCompatActivity() {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.battery_sensor)
+
+        // Initialize Ads
+        MobileAds.initialize(this, "ca-app-pub-9554686964642039~3021936665") //ADMOB App ID
+        mAdView = findViewById(R.id.adView)
+        val adRequest = AdRequest.Builder().build()
+        mAdView.loadAd(adRequest)
 
         //TextViews
         battery_text = findViewById(R.id.battery) as TextView
@@ -62,8 +74,6 @@ class BatteryActivity : AppCompatActivity() {
 
         //Dialog Box for Temperature Info
         batteryInfoDialog = Dialog(this)
-
-
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
