@@ -4,7 +4,9 @@ import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.Button
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.Sensors.*
@@ -33,6 +35,16 @@ class MainActivity : AppCompatActivity() {
 
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        val crashButton = Button(this)
+        crashButton.text = "Crash!"
+        crashButton.setOnClickListener {
+            throw RuntimeException("Test Crash") // Force a crash
+        }
+
+        addContentView(crashButton, ViewGroup.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -109,4 +121,6 @@ class MainActivity : AppCompatActivity() {
         val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, sharedView, transitionName)
         this.startActivity(walkIntent, transitionActivityOptions.toBundle())
     }
+
+
 }

@@ -51,7 +51,7 @@ class RamActivity : AppCompatActivity() {
         setContentView(R.layout.ram_sensor)
 
         // Initialize Ads
-        MobileAds.initialize(this, "ca-app-pub-9554686964642039~3021936665") //ADMOB App ID
+        MobileAds.initialize(this) {} //ADMOB App ID
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
