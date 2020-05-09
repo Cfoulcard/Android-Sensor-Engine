@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030019902502:android:f23f3cbf3f95fd3e8b8ae7",
+        "mobilesdk_app_id": "1:1030019902502:android:7a8fffffbdc277ac8b8ae7",
         "android_client_info": {
           "package_name": "com.christianfoulcard.android.androidsensorengine"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1030019902502-d8if1emp5jahp9jbt76ka9iqovltdc7k.apps.googleusercontent.com",
+          "client_id": "1030019902502-3ohfha49ua4r4rffud652es83q0p6q5a.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com..android.androidsensorengine",
-            "certificate_hash": "2f5227234f8f7cdf1e39e9d824af1f87408dd219"
+            "package_name": "com.christianfoulcard.android.androidsensorengine",
+            "certificate_hash": "274e6f37c1e79cde2128e8d0f53c725a81db9af6"
           }
         },
         {
@@ -41,21 +41,22 @@
             }
           ]
         }
-      }
+      },
+      "admob_app_id": "ca-app-pub-9554686964642039~3021936665"
     },
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1030019902502:android:5841263859910185",
+        "mobilesdk_app_id": "1:1030019902502:android:f23f3cbf3f95fd3e8b8ae7",
         "android_client_info": {
-          "package_name": "com.christianfoulcard.android.androidsensorengine"
+          "package_name": "com.example.android.androidsensorengine"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1030019902502-5rt6dpbheo9f623bcds052ef7bc4n9f8.apps.googleusercontent.com",
+          "client_id": "1030019902502-d8if1emp5jahp9jbt76ka9iqovltdc7k.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.christianfoulcard.android.androidsensorengine",
+            "package_name": "com.example.android.androidsensorengine",
             "certificate_hash": "2f5227234f8f7cdf1e39e9d824af1f87408dd219"
           }
         },
