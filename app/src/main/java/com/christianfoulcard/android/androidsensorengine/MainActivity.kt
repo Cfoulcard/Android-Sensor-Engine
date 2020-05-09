@@ -19,8 +19,13 @@ import com.google.firebase.analytics.FirebaseAnalytics
 //TODO: Notification Logo Size
 //TODO: Update ram activity parsing
 
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class MainActivity : AppCompatActivity() {
+
+    // Initiate Firebase Analytics
+    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -33,18 +38,9 @@ class MainActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-        // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
-        val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        // Obtain the FirebaseAnalytics instance.
+        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        val crashButton = Button(this)
-        crashButton.text = "Crash!"
-        crashButton.setOnClickListener {
-            throw RuntimeException("Test Crash") // Force a crash
-        }
-
-        addContentView(crashButton, ViewGroup.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT))
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
