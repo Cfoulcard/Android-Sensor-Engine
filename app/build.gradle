@@ -22,8 +22,8 @@ android {
         applicationId "com.christianfoulcard.android.androidsensorengine"
         minSdkVersion 21 // Lollipop Version. Users can at least get their lick on
         targetSdkVersion 29
-        versionCode 6
-        versionName "5.01"
+        versionCode 7
+        versionName "5.02"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
