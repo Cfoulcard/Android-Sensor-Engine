@@ -136,7 +136,7 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
                 val textTitle = "Android Sensor Engine"
                 val textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%"
                 val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.launch_logo_256)
+                        .setSmallIcon(R.drawable.notification_logo)
                         .setContentTitle(textTitle)
                         .setContentText(textContent)
                         .setContentIntent(resultPendingIntent)

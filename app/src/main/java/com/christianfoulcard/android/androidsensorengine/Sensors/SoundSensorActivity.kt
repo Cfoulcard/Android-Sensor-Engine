@@ -15,8 +15,6 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.ImageView
-import android.widget.SeekBar
-import android.widget.SeekBar.OnSeekBarChangeListener
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -24,10 +22,11 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.google.android.gms.ads.*
-import com.google.android.gms.ads.formats.NativeAdOptions
-import com.google.android.gms.ads.formats.UnifiedNativeAd
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.skyfishjy.library.RippleBackground
 import java.io.IOException
 
 //TODO: Take out a permission
@@ -48,6 +47,7 @@ class SoundSensorActivity : AppCompatActivity() {
 
     //Image Views
     var soundInfo: ImageView? = null
+    var soundLogo: ImageView? = null
 
     //For sound recording + converting to sound data
     var mRecorder: MediaRecorder? = null
@@ -86,6 +86,7 @@ class SoundSensorActivity : AppCompatActivity() {
 
         //ImageViews
         soundInfo = findViewById<View>(R.id.info_button) as ImageView
+        soundLogo = findViewById<View>(R.id.sound_logo) as ImageView
 
         //Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
@@ -97,6 +98,10 @@ class SoundSensorActivity : AppCompatActivity() {
         decibels!!.startAnimation(`in`)
         soundSensor!!.startAnimation(`in`)
         soundInfo!!.startAnimation(`in`)
+
+      //  val rippleBackground: RippleBackground = findViewById(R.id.content) as RippleBackground
+     //   val imageView = findViewById(R.id.soundInfo) as ImageView
+     //   soundLogo!!.setOnClickListener(View.OnClickListener { rippleBackground.startRippleAnimation() })
 
         //To request audio permissions upon opening activity
         requestAudioPermissions()

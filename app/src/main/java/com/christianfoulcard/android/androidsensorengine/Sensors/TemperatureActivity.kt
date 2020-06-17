@@ -182,7 +182,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -200,7 +200,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -218,7 +218,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)

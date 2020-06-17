@@ -203,7 +203,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -220,7 +220,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -237,7 +237,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -254,7 +254,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -271,7 +271,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.launch_logo_256)
+                            .setSmallIcon(R.drawable.notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)

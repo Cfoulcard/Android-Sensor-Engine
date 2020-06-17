@@ -209,7 +209,7 @@ class BatteryActivity : AppCompatActivity() {
 
                         val builder = NotificationCompat.Builder(context, ID)
 
-                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setSmallIcon(R.drawable.notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
@@ -226,7 +226,7 @@ class BatteryActivity : AppCompatActivity() {
                         val textContent = getString(R.string.notify_battery_message) + " " + fahrenheitLevel + " " + unit
 
                         val builder = NotificationCompat.Builder(context, ID)
-                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setSmallIcon(R.drawable.notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
@@ -243,7 +243,7 @@ class BatteryActivity : AppCompatActivity() {
                         val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
                         val builder = NotificationCompat.Builder(context, ID)
-                                .setSmallIcon(R.drawable.launch_logo_256)
+                                .setSmallIcon(R.drawable.notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
