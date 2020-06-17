@@ -73,6 +73,9 @@ dependencies {
     //For Ads
     implementation 'com.google.android.gms:play-services-ads:19.1.0'
 
+    //RippleBackground Library
+    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+
 
 
 }
