@@ -9,6 +9,7 @@ import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.media.AudioAttributes
+import android.media.MediaPlayer
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -60,8 +61,6 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     //For Ads
     private lateinit var mAdView : AdView
 
-
-
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
@@ -73,12 +72,6 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
         mAdView.loadAd(adRequest)
-
-        val attributes = AudioAttributes.Builder()
-                .setUsage(AudioAttributes.USAGE_NOTIFICATION)
-                .build()
-
-
 
         //TextViews
         pressure_text = findViewById<View>(R.id.pressure) as TextView
@@ -114,8 +107,6 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         // Get the activity
         mActivity = this@PressureActivity
 
-       // val sound: Uri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE + "://" + this.packageName + "/" + R.raw.lightningsoundtest)
-
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
         val pressure_level = event.values[0].toInt()
@@ -139,16 +130,10 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
             //Gets the string value from the edit_text_pressure key in root_preferences.xml
             val pressureNumber = settings.getString("edit_text_pressure", "")
 
-
-
-
             //Conditions that must be true for the notifications to work
             if (pressure_level.toString() == pressureNumber) {
                 val textTitle = "Android Sensor Engine"
                 val textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa"
-               // val mp: MediaPlayer = MediaPlayer.create(this, R.raw.lightningsoundtest)
-                val sound: Uri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.raw.lightningsoundtest)
-
 
                 val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.notification_logo)
@@ -158,18 +143,10 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setOnlyAlertOnce(true)
-                        .setSound(sound)
-
-
-
-             //   mp.start()
-
                 val notificationManager = NotificationManagerCompat.from(this)
-
 
                 // notificationId is a unique int for each notification that you must define
                 notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
-
             }
         }
     }
@@ -179,25 +156,15 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val audioAttributes = AudioAttributes.Builder()
-                    .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                    .build()
             val name: CharSequence = getString(R.string.channel_name_pressure)
             val description = getString(R.string.channel_description_pressure)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
-            val sound: Uri = Uri.parse("android.resource://" + applicationContext.packageName + "/" + R.raw.lightningsoundtest)
             channel.description = description
-            channel.setSound(sound, audioAttributes)
-
-
             // Register the channel with the system; you can't change the importance
             // or other notification behaviors after this
-
             val notificationManager = getSystemService(NotificationManager::class.java)!!
             notificationManager.createNotificationChannel(channel)
-
         }
     }
 
@@ -221,7 +188,7 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
-       // mAdView.resume()
+        // mAdView.resume()
     }
 
     override fun onPause() {
