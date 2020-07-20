@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/drawable_gradient_dark"
+    android:background="@drawable/mainbackground"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.RamActivity">
 
@@ -37,7 +37,7 @@
         android:onClick="showRamDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/ram_sensor"
         app:layout_constraintTop_toTopOf="@+id/ram_sensor"
-        app:srcCompat="@drawable/ic_question_icon" />
+        app:srcCompat="@drawable/question" />
 
     <ImageView
         android:id="@+id/ram_logo"
@@ -50,34 +50,34 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ram_sensor"
-        app:srcCompat="@drawable/ic_ram_icon_2" />
+        app:srcCompat="@drawable/ramicon2" />
 
-    <TextView
-        android:id="@+id/ram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/anton_regular"
-        android:text="@string/ram"
-        android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/ram_logo"
-        app:layout_constraintStart_toStartOf="@+id/ram_logo"
-        app:layout_constraintTop_toBottomOf="@+id/ram_sensor" />
+        <TextView
+            android:id="@+id/ram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/anton_regular"
+            android:text="@string/ram"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/ram_logo"
+            app:layout_constraintStart_toStartOf="@+id/ram_logo"
+            app:layout_constraintTop_toBottomOf="@+id/ram_sensor" />
 
-    <TextView
-        android:id="@+id/current_ram"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
-        android:fontFamily="@font/anton_regular"
-        android:text="@string/not_available"
-        android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ram_logo"
-        app:layout_constraintEnd_toEndOf="@+id/ram_logo"
-        app:layout_constraintStart_toStartOf="@+id/ram_logo"
-        app:layout_constraintTop_toBottomOf="@+id/ram" />
+        <TextView
+            android:id="@+id/current_ram"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="90dp"
+            android:fontFamily="@font/anton_regular"
+            android:text="@string/not_available"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="@+id/ram_logo"
+            app:layout_constraintEnd_toEndOf="@+id/ram_logo"
+            app:layout_constraintStart_toStartOf="@+id/ram_logo"
+            app:layout_constraintTop_toBottomOf="@+id/ram" />
 
         <com.google.android.gms.ads.AdView
             android:id="@+id/adView"

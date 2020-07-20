@@ -8,9 +8,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.media.AudioAttributes
-import android.media.MediaPlayer
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -32,6 +29,8 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
+import okhttp3.OkHttpClient
+import java.io.File
 
 class PressureActivity : AppCompatActivity(), SensorEventListener {
 
@@ -98,6 +97,7 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         currentPressure = findViewById<View>(R.id.current_pressure) as TextView
     }
 
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onSensorChanged(event: SensorEvent) {
 
@@ -121,6 +121,8 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         // Create the TaskStackBuilder and add the intent, which inflates the back stack
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addNextIntentWithParentStack(resultIntent)
+
+
 
         // Get the PendingIntent containing the entire back stack
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)

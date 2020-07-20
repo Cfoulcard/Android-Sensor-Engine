@@ -5,7 +5,8 @@
     android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@color/common_google_signin_btn_text_light_pressed"
+    android:alpha="9"
+    android:background="@drawable/drawable_gradient_grey"
     android:orientation="vertical"
     android:padding="5dp">
 

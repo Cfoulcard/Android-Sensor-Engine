@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/drawable_gradient_dark"
+    android:background="@drawable/mainbackground"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity">
 
@@ -37,7 +37,7 @@
         android:onClick="showHumidityDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/humidity_sensor"
         app:layout_constraintTop_toTopOf="@+id/humidity_sensor"
-        app:srcCompat="@drawable/ic_question_icon" />
+        app:srcCompat="@drawable/question" />
 
     <ImageView
     android:id="@+id/humidity_logo"
@@ -50,17 +50,17 @@
     app:layout_constraintHorizontal_bias="0.5"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toBottomOf="@+id/humidity_sensor"
-    app:srcCompat="@drawable/ic_humidity_icon_2" />
+    app:srcCompat="@drawable/humidityicon2" />
 
     <TextView
         android:id="@+id/humidity"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="46dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/humidity"
         android:textColor="@color/white"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="@+id/humidity_logo"
         app:layout_constraintStart_toStartOf="@+id/humidity_logo"
         app:layout_constraintTop_toBottomOf="@+id/humidity_sensor" />
@@ -69,7 +69,7 @@
     android:id="@+id/current_humidity"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginTop="120dp"
+    android:layout_marginTop="95dp"
     android:fontFamily="@font/anton_regular"
     android:text="@string/not_available"
     android:textColor="@color/white"

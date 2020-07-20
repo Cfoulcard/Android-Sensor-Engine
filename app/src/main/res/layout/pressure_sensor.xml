@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/drawable_gradient_dark"
+    android:background="@drawable/mainbackground"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.PressureActivity">
 
@@ -37,7 +37,7 @@
         android:onClick="showPressureDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/pressure_sensor"
         app:layout_constraintTop_toTopOf="@+id/pressure_sensor"
-        app:srcCompat="@drawable/ic_question_icon" />
+        app:srcCompat="@drawable/question" />
 
     <ImageView
         android:id="@+id/pressure_logo"
@@ -50,13 +50,13 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pressure_sensor"
-        app:srcCompat="@drawable/ic_pressure_icon_2" />
+        app:srcCompat="@drawable/barometericon2" />
 
     <TextView
         android:id="@+id/pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/level"
         android:textColor="@color/white"
@@ -69,7 +69,7 @@
         android:id="@+id/current_pressure"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="120dp"
+        android:layout_marginTop="85dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/not_available"
         android:textColor="@color/white"
