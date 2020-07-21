@@ -348,4 +348,6 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
         //ID used for notifications
         private const val CHANNEL_ID = "2"
     }
+
+
 }

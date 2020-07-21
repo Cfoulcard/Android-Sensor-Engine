@@ -28,12 +28,12 @@
 
     <style name="AppThemeSensors" parent="@style/Theme.AppCompat.Light.DarkActionBar">
 
-        <item name="colorPrimary">@color/colorPrimaryGrey</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimary">@color/grand_sky_blue</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
 
         <!--The following 2 lines are used to make the Status Bar and Nav Bar Transparent-->
-       <item name="android:windowTranslucentStatus">true</item>
+
         <item name="android:windowTranslucentNavigation">true</item>
         <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
     </style>
