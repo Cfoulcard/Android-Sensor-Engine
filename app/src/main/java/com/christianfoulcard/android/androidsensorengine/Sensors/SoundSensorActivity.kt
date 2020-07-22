@@ -26,7 +26,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.skyfishjy.library.RippleBackground
 import java.io.IOException
 
 //TODO: Take out a permission
@@ -64,7 +63,7 @@ class SoundSensorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         //Enable for fade in transition
-        // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+        // overridePendingTransition(R.anim.fadein, R.anim.fadeout)
 
         setContentView(R.layout.sound_sensor)
 
@@ -122,9 +121,10 @@ class SoundSensorActivity : AppCompatActivity() {
                 }
             }
             (runner as Thread).start()
-            Log.d("Noise", "start runner()")
+         //   Log.d("Noise", "start runner()")
         }
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     //Microphone recording starts
@@ -137,6 +137,7 @@ class SoundSensorActivity : AppCompatActivity() {
             return
         }
         startRecorder()
+
     }
 
     //Stops microphone from recording when user exits activity
