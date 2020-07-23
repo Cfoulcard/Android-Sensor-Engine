@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.Manifest
+import android.app.ActivityOptions
 import android.app.Dialog
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -20,6 +21,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.christianfoulcard.android.androidsensorengine.MainActivity
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.android.gms.ads.AdRequest
@@ -123,6 +125,7 @@ class SoundSensorActivity : AppCompatActivity() {
             (runner as Thread).start()
          //   Log.d("Noise", "start runner()")
         }
+
     }
 
 

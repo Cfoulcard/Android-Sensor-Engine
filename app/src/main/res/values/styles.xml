@@ -38,9 +38,11 @@
         <!--<item name="android:windowBackground">@drawable/launch_screen</item>-->
     </style>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+    <!--This is used for the transition effect when switching from the sensor select screen to sensor activities-->
     <style name="MaterialAnimations" parent="@style/Theme.AppCompat.Light.DarkActionBar">
-        <!--This is used for the transition effect when switching from the sensor select screen to sensor activities-->
         <item name="android:windowContentTransitions">true</item>
+
+
             ...
     </style>
 ////////////////////////////////////////////////////////////////////////////////////////////////////
