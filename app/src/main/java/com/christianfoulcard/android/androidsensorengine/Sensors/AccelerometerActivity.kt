@@ -113,7 +113,6 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
         val lm = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
-        onLocationChanged(null)
     }
 
 
@@ -156,23 +155,23 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     //Speed Formula for the Accelerometer
-    override fun onLocationChanged(location: Location?) {
+    override fun onLocationChanged(p0: Location) {
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
 
         //Get the string data from the Preferences
         val unit = settings.getString("speedunit", "")
 
-        if (location == null) {
+        if (p0 == null) {
             when (unit) {
                 "MPH", "KM/H", "M/S", "FT/S", "knots" -> currentSpeed!!.text = "0 $unit"
             }
         } else {
-            val speedMs = location.speed.toInt() // This is the standard which returns meters per second.
-            val speedMph = (location.speed * 2.2369).toInt() // This is speed in mph
-            val speedKm = (location.speed * 3600 / 1000).toInt() // This is speed in km/h
-            val speedFts = (location.speed * 3.2808).toInt() // This is speed in Feet per second
-            val speedKnot = (location.speed * 1.9438).toInt() // This is speed in knots
+            val speedMs = p0.speed.toInt() // This is the standard which returns meters per second.
+            val speedMph = (p0.speed * 2.2369).toInt() // This is speed in mph
+            val speedKm = (p0.speed * 3600 / 1000).toInt() // This is speed in km/h
+            val speedFts = (p0.speed * 3.2808).toInt() // This is speed in Feet per second
+            val speedKnot = (p0.speed * 1.9438).toInt() // This is speed in knots
             when (unit) {
                 "MPH" -> currentSpeed!!.text = "$speedMph $unit"
                 "KM/H" -> currentSpeed!!.text = "$speedKm $unit"
