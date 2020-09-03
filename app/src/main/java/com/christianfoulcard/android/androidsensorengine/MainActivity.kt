@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine
 
 import android.app.ActivityOptions
+import android.app.PendingIntent
 import android.app.usage.UsageStatsManager
 import android.content.Intent
 import android.content.pm.ShortcutInfo
@@ -50,13 +51,10 @@ class MainActivity : AppCompatActivity() {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
 
-
     }
 
     override fun onStart() {
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            sensorShortcuts()
-        }
+
         super.onStart()
     }
 
@@ -137,36 +135,7 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    private fun sensorShortcuts() {
-        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < N_MR1")
-        }
-
-        val soundIntentShortcut = Intent(this, SoundSensorActivity::class.java)
-        soundIntentShortcut.setAction("Sound Sensor")
-
-        val tempIntentShortcut = Intent(this, TemperatureActivity::class.java)
-        tempIntentShortcut.setAction("Temperature Sensor")
-
-        val shortcut = ShortcutInfo.Builder(this, "id1")
-                .setShortLabel("Sound Sensor")
-                .setLongLabel("Sound Sensor")
-                .setIcon(Icon.createWithResource(this, R.drawable.sound_icon))
-                .setIntent(soundIntentShortcut)
-                .build()
-
-        val shortcutTwo = ShortcutInfo.Builder(this, "id2")
-                .setShortLabel("Temperature Sensor")
-                .setLongLabel("Temperature Sensor")
-                .setIcon(Icon.createWithResource(this, R.drawable.temp_icon))
-                .setIntent(tempIntentShortcut)
-                .build()
-
-        shortcutManager!!.dynamicShortcuts = mutableListOf(shortcut,shortcutTwo)
-    }
-
 
 }
+
+

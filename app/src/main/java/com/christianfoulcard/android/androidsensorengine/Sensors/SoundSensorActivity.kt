@@ -3,8 +3,12 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 import android.Manifest
 import android.app.ActivityOptions
 import android.app.Dialog
+import android.app.PendingIntent
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
@@ -15,9 +19,11 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -28,7 +34,9 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
+import kotlinx.android.synthetic.main.sound_sensor.*
 import java.io.IOException
+import java.util.*
 
 //TODO: Take out a permission
 
@@ -50,6 +58,12 @@ class SoundSensorActivity : AppCompatActivity() {
     var soundInfo: ImageView? = null
     var soundLogo: ImageView? = null
 
+    //Button
+    var pinShortcut: Button? = null
+
+
+
+
     //For sound recording + converting to sound data
     var mRecorder: MediaRecorder? = null
     var runner: Thread? = null
@@ -60,6 +74,7 @@ class SoundSensorActivity : AppCompatActivity() {
     private lateinit var mAdView : AdView
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
@@ -88,6 +103,12 @@ class SoundSensorActivity : AppCompatActivity() {
         //ImageViews
         soundInfo = findViewById<View>(R.id.info_button) as ImageView
         soundLogo = findViewById<View>(R.id.sound_logo) as ImageView
+
+        //Button Test
+       // pinShortcut = findViewById<View>(R.id.button) as Button
+
+
+        
 
         //Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
@@ -130,6 +151,13 @@ class SoundSensorActivity : AppCompatActivity() {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+    public override fun onStart() {
+
+        super.onStart()
+    }
+
     //Microphone recording starts
     public override fun onResume() {
         super.onResume()
@@ -307,6 +335,58 @@ class SoundSensorActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun pinShortcut(v: View?) {
+            sensorShortcut()
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sensorShortcut() {
+        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        } else {
+            TODO("VERSION.SDK_INT < N_MR1")
+        }
+
+        val soundIntent = Intent(this, SoundSensorActivity::class.java)
+                .setAction("Sound")
+
+        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    shortcutManager!!.isRequestPinShortcutSupported
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }) {
+            // Assumes there's already a shortcut with the ID "my-shortcut".
+            // The shortcut must be enabled.
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
+                    .setShortLabel(getString(R.string.sound_sensor))
+                    .setLongLabel(getString(R.string.sound_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.sound_icon))
+                    .setIntent(soundIntent)
+                    .build()
+
+            // Create the PendingIntent object only if your app needs to be notified
+            // that the user allowed the shortcut to be pinned. Note that, if the
+            // pinning operation fails, your app isn't notified. We assume here that the
+            // app has implemented a method called createShortcutResultIntent() that
+            // returns a broadcast intent.
+            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+
+            // Configure the intent so that your app's broadcast receiver gets
+            // the callback successfully.For details, see PendingIntent.getBroadcast().
+            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                    pinnedShortcutCallbackIntent, /* flags */ 0)
+
+            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                    successCallback.intentSender)
+
+        }
+
+
+    }
+
+
 
     //Sound Test provided by MediaPlayer
     /*    public void playSound(View v) {
