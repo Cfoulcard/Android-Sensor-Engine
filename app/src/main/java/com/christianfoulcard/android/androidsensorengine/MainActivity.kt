@@ -33,8 +33,6 @@ class MainActivity : AppCompatActivity() {
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
 
         // Make sure this theme is before calling super.onCreate
@@ -49,12 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
-
-
     }
 
     override fun onStart() {
-
         super.onStart()
     }
 
@@ -133,9 +128,6 @@ class MainActivity : AppCompatActivity() {
         val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, sharedView, transitionName)
         this.startActivity(walkIntent, transitionActivityOptions.toBundle())
     }
-
-
-
 }
 
 
