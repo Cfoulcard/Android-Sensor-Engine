@@ -1,5 +1,5 @@
 # **Android Sensor Engine**
-📱 An Android App Engineered to Utilize Smartphone Sensors ~ **Currently in Beta**
+📱 An Android App Engineered to Utilize Smartphone Sensors
 
 [<img src="https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.christianfoulcard.android.androidsensorengine)
 
