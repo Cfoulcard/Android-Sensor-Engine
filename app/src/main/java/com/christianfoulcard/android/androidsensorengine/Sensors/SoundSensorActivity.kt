@@ -47,25 +47,19 @@ class SoundSensorActivity : AppCompatActivity() {
     //MediaPlayer mp;
 
     //Dialog popup info
-    var soundInfoDialog: Dialog? = null
+    private var soundInfoDialog: Dialog? = null
 
     //TextView Data
-    var configuredDecibel: TextView? = null
-    var decibels: TextView? = null
-    var soundSensor: TextView? = null
+    private var configuredDecibel: TextView? = null
+    private var decibels: TextView? = null
+    private var soundSensor: TextView? = null
 
     //Image Views
-    var soundInfo: ImageView? = null
-    var soundLogo: ImageView? = null
-
-    //Button
-    var pinShortcut: Button? = null
-
-
-
+    private var soundInfo: ImageView? = null
+    private var soundLogo: ImageView? = null
 
     //For sound recording + converting to sound data
-    var mRecorder: MediaRecorder? = null
+    private var mRecorder: MediaRecorder? = null
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
@@ -93,8 +87,6 @@ class SoundSensorActivity : AppCompatActivity() {
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-
-
         //TextViews
         configuredDecibel = findViewById<View>(R.id.current_decibel) as TextView
         decibels = findViewById<View>(R.id.decibels) as TextView
@@ -104,11 +96,10 @@ class SoundSensorActivity : AppCompatActivity() {
         soundInfo = findViewById<View>(R.id.info_button) as ImageView
         soundLogo = findViewById<View>(R.id.sound_logo) as ImageView
 
-        //Button Test
-       // pinShortcut = findViewById<View>(R.id.button) as Button
-
-
-        
+        //Opens Pin Shortcut menu after long pressing the logo
+        soundLogo!!.setOnLongClickListener() {
+            sensorShortcut()
+        }
 
         //Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
@@ -151,8 +142,6 @@ class SoundSensorActivity : AppCompatActivity() {
 
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-
-
     public override fun onStart() {
 
         super.onStart()
@@ -336,13 +325,10 @@ class SoundSensorActivity : AppCompatActivity() {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Adds Pin Shortcut Functionality
     @RequiresApi(Build.VERSION_CODES.O)
-    fun pinShortcut(v: View?) {
-            sensorShortcut()
-    }
-
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun sensorShortcut() {
+    private fun sensorShortcut(): Boolean {
         val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
             getSystemService<ShortcutManager>(ShortcutManager::class.java)
         } else {
@@ -380,11 +366,10 @@ class SoundSensorActivity : AppCompatActivity() {
 
             shortcutManager.requestPinShortcut(pinShortcutInfo,
                     successCallback.intentSender)
-
         }
-
-
+        return true
     }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
