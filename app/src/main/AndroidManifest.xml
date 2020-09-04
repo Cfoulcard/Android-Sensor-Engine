@@ -48,6 +48,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            
+            <!-- This is used for parsing shortcuts to the app icon on launcher screen -->
+            <meta-data android:name="android.app.shortcuts"
+                android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".Sensors.SoundSensorActivity"
@@ -107,6 +111,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
         <service android:name=".ShowNotification" />
+
     </application>
 
 </manifest>
