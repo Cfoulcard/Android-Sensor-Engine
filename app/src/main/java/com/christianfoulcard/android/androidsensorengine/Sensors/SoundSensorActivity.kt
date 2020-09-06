@@ -343,8 +343,7 @@ class SoundSensorActivity : AppCompatActivity() {
                 } else {
                     TODO("VERSION.SDK_INT < O")
                 }) {
-            // Assumes there's already a shortcut with the ID "my-shortcut".
-            // The shortcut must be enabled.
+
             val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
                     .setShortLabel(getString(R.string.sound_sensor))
                     .setLongLabel(getString(R.string.sound_sensor))

@@ -2,12 +2,17 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.annotation.SuppressLint
 import android.app.Dialog
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,6 +22,7 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
@@ -31,12 +37,13 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     var lightInfoDialog: Dialog? = null
 
     //TextViews
-    var luminosity: TextView? = null
-    var currentLux: TextView? = null
-    var lightSensor: TextView? = null
+    private var luminosity: TextView? = null
+    private var currentLux: TextView? = null
+    private var lightSensor: TextView? = null
 
     //ImageViews
-    var lightInfo: ImageView? = null
+    private var lightInfo: ImageView? = null
+    private var lightLogo: ImageView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -49,6 +56,7 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     private lateinit var mAdView : AdView
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
@@ -67,9 +75,15 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
 
         //ImageViews
         lightInfo = findViewById<View>(R.id.info_button) as ImageView
+        lightLogo = findViewById<View>(R.id.lux_sensor_logo) as ImageView
 
         //Dialog Box for Temperature Info
         lightInfoDialog = Dialog(this)
+
+        //Opens Pin Shortcut menu after long pressing the logo
+        lightLogo!!.setOnLongClickListener() {
+            sensorShortcut()
+        }
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -151,4 +165,49 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Adds Pin Shortcut Functionality
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sensorShortcut(): Boolean {
+        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        } else {
+            TODO("VERSION.SDK_INT < N_MR1")
+        }
+
+        val lightIntent = Intent(this, LightSensorActivity::class.java)
+                .setAction("Light")
+
+        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    shortcutManager!!.isRequestPinShortcutSupported
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }) {
+
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "light-shortcut")
+                    .setShortLabel(getString(R.string.lux_sensor))
+                    .setLongLabel(getString(R.string.lux_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.light_icon))
+                    .setIntent(lightIntent)
+                    .build()
+
+            // Create the PendingIntent object only if your app needs to be notified
+            // that the user allowed the shortcut to be pinned. Note that, if the
+            // pinning operation fails, your app isn't notified. We assume here that the
+            // app has implemented a method called createShortcutResultIntent() that
+            // returns a broadcast intent.
+            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+
+            // Configure the intent so that your app's broadcast receiver gets
+            // the callback successfully.For details, see PendingIntent.getBroadcast().
+            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                    pinnedShortcutCallbackIntent, /* flags */ 0)
+
+            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                    successCallback.intentSender)
+        }
+        return true
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }

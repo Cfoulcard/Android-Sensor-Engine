@@ -1,13 +1,18 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.app.*
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.preference.PreferenceManager
@@ -19,12 +24,15 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.work.*
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.Sensors.PressureActivity
+import com.christianfoulcard.android.androidsensorengine.UploadWorker
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -35,15 +43,16 @@ import java.io.File
 class PressureActivity : AppCompatActivity(), SensorEventListener {
 
     //Dialog popup info
-    var pressureInfoDialog: Dialog? = null
+    private var pressureInfoDialog: Dialog? = null
 
     //TextViews
-    var pressure_text: TextView? = null
-    var currentPressure: TextView? = null
-    var pressureLevel: TextView? = null
+    private var pressure_text: TextView? = null
+    private var currentPressure: TextView? = null
+    private var pressureLevel: TextView? = null
 
     //ImageViews
-    var pressureInfo: ImageView? = null
+    private var pressureInfo: ImageView? = null
+    private var pressureLogo: ImageView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -60,7 +69,14 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     //For Ads
     private lateinit var mAdView : AdView
 
+/*    override fun startService(service: Intent?): ComponentName? {
+        return super.startService(service)
+    }*/
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
@@ -79,9 +95,15 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
 
         //ImageViews
         pressureInfo = findViewById<View>(R.id.info_button) as ImageView
+        pressureLogo = findViewById<View>(R.id.pressure_logo) as ImageView
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        //Opens Pin Shortcut menu after long pressing the logo
+        pressureLogo!!.setOnLongClickListener() {
+            sensorShortcut()
+        }
 
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
@@ -186,6 +208,7 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         createNotificationChannel()
         super.onStart()
         sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
+
     }
 
     override fun onResume() {
@@ -200,7 +223,7 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         // Unregisters the sensor when the activity pauses.
-        sensorManager!!.unregisterListener(this)
+      //  sensorManager!!.unregisterListener(this)
     }
 
     fun showPressureDialogPopup(v: View?) {
@@ -231,6 +254,51 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Adds Pin Shortcut Functionality
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sensorShortcut(): Boolean {
+        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        } else {
+            TODO("VERSION.SDK_INT < N_MR1")
+        }
+
+        val pressureIntent = Intent(this, PressureActivity::class.java)
+                .setAction("Pressure")
+
+        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    shortcutManager!!.isRequestPinShortcutSupported
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }) {
+
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
+                    .setShortLabel(getString(R.string.pressure_sensor))
+                    .setLongLabel(getString(R.string.pressure_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.barometer_icon))
+                    .setIntent(pressureIntent)
+                    .build()
+
+            // Create the PendingIntent object only if your app needs to be notified
+            // that the user allowed the shortcut to be pinned. Note that, if the
+            // pinning operation fails, your app isn't notified. We assume here that the
+            // app has implemented a method called createShortcutResultIntent() that
+            // returns a broadcast intent.
+            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+
+            // Configure the intent so that your app's broadcast receiver gets
+            // the callback successfully.For details, see PendingIntent.getBroadcast().
+            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                    pinnedShortcutCallbackIntent, /* flags */ 0)
+
+            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                    successCallback.intentSender)
+        }
+        return true
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 
     companion object {
         //ID used for notifications

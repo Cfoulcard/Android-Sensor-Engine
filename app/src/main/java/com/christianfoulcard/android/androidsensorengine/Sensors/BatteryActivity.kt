@@ -3,6 +3,9 @@ package com.christianfoulcard.android.androidsensorengine.Sensors
 import android.annotation.SuppressLint
 import android.app.*
 import android.content.*
+import android.content.pm.ShortcutInfo
+import android.content.pm.ShortcutManager
+import android.graphics.drawable.Icon
 import android.os.BatteryManager
 import android.os.Build
 import android.os.Bundle
@@ -13,6 +16,7 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
@@ -31,15 +35,16 @@ class BatteryActivity : AppCompatActivity() {
     var batteryInfoDialog: Dialog? = null
 
     //TextViews
-    internal lateinit var battery_text: TextView
-    internal lateinit var currentBattery: TextView
-    internal lateinit var batterySensor: TextView
+    private lateinit var battery_text: TextView
+    private lateinit var currentBattery: TextView
+    private lateinit var batterySensor: TextView
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
 
     //ImageViews
-    var batteryInfo: ImageView? = null
+    private var batteryInfo: ImageView? = null
+    private var batteryLogo: ImageView? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
@@ -52,6 +57,7 @@ class BatteryActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
@@ -71,12 +77,18 @@ class BatteryActivity : AppCompatActivity() {
 
         //ImageViews
         batteryInfo = findViewById<View>(R.id.info_button) as ImageView
+        batteryLogo = findViewById<View>(R.id.battery_logo) as ImageView
 
         //Dialog Box for Temperature Info
         batteryInfoDialog = Dialog(this)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        //Opens Pin Shortcut menu after long pressing the logo
+        batteryLogo!!.setOnLongClickListener() {
+            sensorShortcut()
+        }
 
        // currentBattery = findViewById(R.id.current_battery)
       //  registerMyReceiver()
@@ -283,4 +295,49 @@ class BatteryActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    // Adds Pin Shortcut Functionality
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sensorShortcut(): Boolean {
+        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        } else {
+            TODO("VERSION.SDK_INT < N_MR1")
+        }
+
+        val batteryIntent = Intent(this, BatteryActivity::class.java)
+                .setAction("Battery")
+
+        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                    shortcutManager!!.isRequestPinShortcutSupported
+                } else {
+                    TODO("VERSION.SDK_INT < O")
+                }) {
+
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "battery-shortcut")
+                    .setShortLabel(getString(R.string.battery_sensor))
+                    .setLongLabel(getString(R.string.battery_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.battery_icon))
+                    .setIntent(batteryIntent)
+                    .build()
+
+            // Create the PendingIntent object only if your app needs to be notified
+            // that the user allowed the shortcut to be pinned. Note that, if the
+            // pinning operation fails, your app isn't notified. We assume here that the
+            // app has implemented a method called createShortcutResultIntent() that
+            // returns a broadcast intent.
+            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+
+            // Configure the intent so that your app's broadcast receiver gets
+            // the callback successfully.For details, see PendingIntent.getBroadcast().
+            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                    pinnedShortcutCallbackIntent, /* flags */ 0)
+
+            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                    successCallback.intentSender)
+        }
+        return true
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////////////
 }
