@@ -1,5 +1,5 @@
 # **Android Sensor Engine**
-📱 An Android App Engineered to Utilize Smartphone Sensors ~ **Currently in Beta**
+📱 An Android App Engineered to Utilize Smartphone Sensors
 
 [<img src="https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.christianfoulcard.android.androidsensorengine)
 
@@ -40,8 +40,8 @@ There's a world of features I'd like to implement into this app over time. Here'
 - Smooth animations and a more "vibrantly" lively experience
 - Localize throughout the world
 
-## Beta
-This app is currently in Beta for testing/feedback. During this phase I'll also add language support along with various optimization.
+## Currently Working On
+Pinned Shortcuts for easy access to the different sensors. These can be added to the home screen upon long pressing a sensor's logo.
 
 ## Other info
 This project is built using Java, Kotlin, and XML. Designs were made/modified in Affinity Designer.
