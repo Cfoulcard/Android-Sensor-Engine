@@ -11,6 +11,7 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.media.MediaRecorder
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -97,9 +98,12 @@ class SoundSensorActivity : AppCompatActivity() {
         soundLogo = findViewById<View>(R.id.sound_logo) as ImageView
 
         //Opens Pin Shortcut menu after long pressing the logo
-        soundLogo!!.setOnLongClickListener() {
-            sensorShortcut()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+            soundLogo!!.setOnLongClickListener() {
+                sensorShortcut()
+            }
         }
+
 
         //Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
@@ -137,7 +141,6 @@ class SoundSensorActivity : AppCompatActivity() {
             (runner as Thread).start()
          //   Log.d("Noise", "start runner()")
         }
-
     }
 
 
@@ -157,7 +160,6 @@ class SoundSensorActivity : AppCompatActivity() {
             return
         }
         startRecorder()
-
     }
 
     //Stops microphone from recording when user exits activity
@@ -327,47 +329,38 @@ class SoundSensorActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Adds Pin Shortcut Functionality
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun sensorShortcut(): Boolean {
-        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < N_MR1")
-        }
+     @RequiresApi(Build.VERSION_CODES.O)
+     fun sensorShortcut(): Boolean {
+         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+         val soundIntent = Intent(this, SoundSensorActivity::class.java)
+                 .setAction("Sound")
 
-        val soundIntent = Intent(this, SoundSensorActivity::class.java)
-                .setAction("Sound")
+             if (shortcutManager!!.isRequestPinShortcutSupported) {
 
-        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    shortcutManager!!.isRequestPinShortcutSupported
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }) {
+                 val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
+                         .setShortLabel(getString(R.string.sound_sensor))
+                         .setLongLabel(getString(R.string.sound_sensor))
+                         .setIcon(Icon.createWithResource(this, R.drawable.sound_icon))
+                         .setIntent(soundIntent)
+                         .build()
 
-            val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
-                    .setShortLabel(getString(R.string.sound_sensor))
-                    .setLongLabel(getString(R.string.sound_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.sound_icon))
-                    .setIntent(soundIntent)
-                    .build()
+                 // Create the PendingIntent object only if your app needs to be notified
+                 // that the user allowed the shortcut to be pinned. Note that, if the
+                 // pinning operation fails, your app isn't notified. We assume here that the
+                 // app has implemented a method called createShortcutResultIntent() that
+                 // returns a broadcast intent.
+                 val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
 
-            // Create the PendingIntent object only if your app needs to be notified
-            // that the user allowed the shortcut to be pinned. Note that, if the
-            // pinning operation fails, your app isn't notified. We assume here that the
-            // app has implemented a method called createShortcutResultIntent() that
-            // returns a broadcast intent.
-            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+                 // Configure the intent so that your app's broadcast receiver gets
+                 // the callback successfully.For details, see PendingIntent.getBroadcast().
+                 val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                         pinnedShortcutCallbackIntent, /* flags */ 0)
 
-            // Configure the intent so that your app's broadcast receiver gets
-            // the callback successfully.For details, see PendingIntent.getBroadcast().
-            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
-                    pinnedShortcutCallbackIntent, /* flags */ 0)
-
-            shortcutManager.requestPinShortcut(pinShortcutInfo,
-                    successCallback.intentSender)
-        }
-        return true
-    }
+                 shortcutManager.requestPinShortcut(pinShortcutInfo,
+                         successCallback.intentSender)
+             }
+         return true
+     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
 
