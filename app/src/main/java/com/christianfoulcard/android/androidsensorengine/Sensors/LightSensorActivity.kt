@@ -81,8 +81,10 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
         lightInfoDialog = Dialog(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        lightLogo!!.setOnLongClickListener() {
-            sensorShortcut()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            lightLogo!!.setOnLongClickListener() {
+                sensorShortcut()
+            }
         }
 
         // Obtain the FirebaseAnalytics instance.
@@ -169,27 +171,19 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Adds Pin Shortcut Functionality
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun sensorShortcut(): Boolean {
-        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < N_MR1")
-        }
+    fun sensorShortcut(): Boolean {
 
-        val lightIntent = Intent(this, LightSensorActivity::class.java)
+        val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        val intent = Intent(this, LightSensorActivity::class.java)
                 .setAction("Light")
 
-        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    shortcutManager!!.isRequestPinShortcutSupported
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }) {
+        if (shortcutManager!!.isRequestPinShortcutSupported) {
 
             val pinShortcutInfo = ShortcutInfo.Builder(this, "light-shortcut")
                     .setShortLabel(getString(R.string.lux_sensor))
                     .setLongLabel(getString(R.string.lux_sensor))
                     .setIcon(Icon.createWithResource(this, R.drawable.light_icon))
-                    .setIntent(lightIntent)
+                    .setIntent(intent)
                     .build()
 
             // Create the PendingIntent object only if your app needs to be notified
