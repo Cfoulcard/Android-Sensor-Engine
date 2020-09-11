@@ -98,7 +98,7 @@ class SoundSensorActivity : AppCompatActivity() {
         soundLogo = findViewById<View>(R.id.sound_logo) as ImageView
 
         //Opens Pin Shortcut menu after long pressing the logo
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             soundLogo!!.setOnLongClickListener() {
                 sensorShortcut()
             }
@@ -331,8 +331,9 @@ class SoundSensorActivity : AppCompatActivity() {
     // Adds Pin Shortcut Functionality
      @RequiresApi(Build.VERSION_CODES.O)
      fun sensorShortcut(): Boolean {
-         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-         val soundIntent = Intent(this, SoundSensorActivity::class.java)
+
+        val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        val soundIntent = Intent(this, SoundSensorActivity::class.java)
                  .setAction("Sound")
 
              if (shortcutManager!!.isRequestPinShortcutSupported) {
