@@ -101,8 +101,10 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        pressureLogo!!.setOnLongClickListener() {
-            sensorShortcut()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            pressureLogo!!.setOnLongClickListener() {
+                sensorShortcut()
+            }
         }
 
         // Get an instance of the sensor service, and use that to get an instance of
@@ -258,27 +260,19 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Adds Pin Shortcut Functionality
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun sensorShortcut(): Boolean {
-        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < N_MR1")
-        }
+    fun sensorShortcut(): Boolean {
 
-        val pressureIntent = Intent(this, PressureActivity::class.java)
+        val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        val intent = Intent(this, PressureActivity::class.java)
                 .setAction("Pressure")
 
-        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    shortcutManager!!.isRequestPinShortcutSupported
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }) {
+        if (shortcutManager!!.isRequestPinShortcutSupported) {
 
             val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
                     .setShortLabel(getString(R.string.pressure_sensor))
                     .setLongLabel(getString(R.string.pressure_sensor))
                     .setIcon(Icon.createWithResource(this, R.drawable.barometer_icon))
-                    .setIntent(pressureIntent)
+                    .setIntent(intent)
                     .build()
 
             // Create the PendingIntent object only if your app needs to be notified
