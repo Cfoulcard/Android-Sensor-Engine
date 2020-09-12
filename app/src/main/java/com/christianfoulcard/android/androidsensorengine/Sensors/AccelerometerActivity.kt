@@ -91,8 +91,10 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        speedLogo!!.setOnLongClickListener() {
-            sensorShortcut()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            speedLogo!!.setOnLongClickListener() {
+                sensorShortcut()
+            }
         }
 
         //Calls the location permission dialog box upon opening this activity
@@ -358,27 +360,19 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Adds Pin Shortcut Functionality
     @RequiresApi(Build.VERSION_CODES.O)
-    private fun sensorShortcut(): Boolean {
-        val shortcutManager = if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N_MR1) {
-            getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        } else {
-            TODO("VERSION.SDK_INT < N_MR1")
-        }
+    fun sensorShortcut(): Boolean {
 
-        val speedIntent = Intent(this, AccelerometerActivity::class.java)
-                .setAction("Speed")
+        val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
+        val intent = Intent(this, AccelerometerActivity::class.java)
+                .setAction("Accelerometer")
 
-        if (if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-                    shortcutManager!!.isRequestPinShortcutSupported
-                } else {
-                    TODO("VERSION.SDK_INT < O")
-                }) {
+        if (shortcutManager!!.isRequestPinShortcutSupported) {
 
             val pinShortcutInfo = ShortcutInfo.Builder(this, "speed-shortcut")
                     .setShortLabel(getString(R.string.accelerometer_sensor))
                     .setLongLabel(getString(R.string.accelerometer_sensor))
                     .setIcon(Icon.createWithResource(this, R.drawable.speed_icon))
-                    .setIntent(speedIntent)
+                    .setIntent(intent)
                     .build()
 
             // Create the PendingIntent object only if your app needs to be notified
