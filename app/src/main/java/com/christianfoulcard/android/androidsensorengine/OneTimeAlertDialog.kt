@@ -3,6 +3,7 @@ package com.christianfoulcard.android.androidsensorengine
 import android.app.AlertDialog
 import android.content.Context
 import android.content.DialogInterface
+import android.os.Handler
 import android.preference.PreferenceManager
 import androidx.annotation.Nullable
 
@@ -51,7 +52,14 @@ import androidx.annotation.Nullable
 ` *
  *
  */
+
+
+
 class OneTimeAlertDialog : AlertDialog {
+
+
+
+
     /** The value to be stored and checked in the default SharedPreferences.  */
     private var mPrefsKey: String? = null
 
@@ -75,10 +83,19 @@ class OneTimeAlertDialog : AlertDialog {
     /** Creates and shows the dialog if the key is not marked as shown. If marked as shown, then
      * nothing happens.  */
     override fun show() {
+
         if (!isKeyInPrefs(context, mPrefsKey)) {
+
+
             super.show()
-            markShown()
+
+
+                markShown()
+
+
         }
+        val handler = Handler()
+        handler.postDelayed({ show() }, 10000) // 10 seconds
     }
 
     /** Manually mark this dialog as already shown. The next time `show()` is called with this key
@@ -113,11 +130,19 @@ class OneTimeAlertDialog : AlertDialog {
          * nothing happens.  */
         @Nullable
         override fun show(): AlertDialog? {
+
+
+
             if (!isKeyInPrefs(context, prefsKey)) {
                 super.show()
                 markShown()
+
+
+
             }
+
             return null
+
         }
 
         /** This operation is not supported. Use `show()` instead.
@@ -140,4 +165,8 @@ class OneTimeAlertDialog : AlertDialog {
             return PreferenceManager.getDefaultSharedPreferences(context).getBoolean(key, false)
         }
     }
+}
+
+private fun Handler.postDelayed(function: () -> Unit) {
+
 }
