@@ -1,7 +1,6 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.Manifest
-import android.app.ActivityOptions
 import android.app.Dialog
 import android.app.PendingIntent
 import android.content.Intent
@@ -11,7 +10,6 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.media.MediaRecorder
 import android.os.Build
-import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -20,7 +18,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
@@ -28,16 +25,14 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import com.christianfoulcard.android.androidsensorengine.MainActivity
+import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.sound_sensor.*
 import java.io.IOException
-import java.util.*
 
 //TODO: Take out a permission
 
@@ -64,6 +59,8 @@ class SoundSensorActivity : AppCompatActivity() {
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
+
+
 
     //For Ads
     private lateinit var mAdView : AdView
@@ -100,6 +97,7 @@ class SoundSensorActivity : AppCompatActivity() {
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             soundLogo!!.setOnLongClickListener() {
+
                 sensorShortcut()
             }
         }
@@ -147,6 +145,7 @@ class SoundSensorActivity : AppCompatActivity() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public override fun onStart() {
 
+
         super.onStart()
     }
 
@@ -160,6 +159,11 @@ class SoundSensorActivity : AppCompatActivity() {
             return
         }
         startRecorder()
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val handler = Handler()
+            handler.postDelayed({ alertDialog() }, 10000) // 1500 seconds
+        }
     }
 
     //Stops microphone from recording when user exits activity
@@ -345,6 +349,9 @@ class SoundSensorActivity : AppCompatActivity() {
                          .setIntent(soundIntent)
                          .build()
 
+
+
+
                  // Create the PendingIntent object only if your app needs to be notified
                  // that the user allowed the shortcut to be pinned. Note that, if the
                  // pinning operation fails, your app isn't notified. We assume here that the
@@ -363,6 +370,15 @@ class SoundSensorActivity : AppCompatActivity() {
          return true
      }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    private fun alertDialog() {
+
+        OneTimeAlertDialog.Builder(this, "my_dialog_key")
+                .setTitle("My Title")
+                .setMessage("Howdy")
+                .show()
+    }
+
 
 
 
