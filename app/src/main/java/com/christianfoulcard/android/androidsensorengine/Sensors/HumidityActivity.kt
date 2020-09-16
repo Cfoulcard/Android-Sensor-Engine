@@ -13,6 +13,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
@@ -26,6 +27,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity
@@ -199,6 +201,13 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onResume() {
         super.onResume()
+
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 10 seconds of opening activity
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val handler = Handler()
+            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+        }
     }
 
     override fun onPause() {
@@ -276,6 +285,15 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
         return true
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Pin Shortcut Dialog Data
+    private fun alertDialog() {
+
+        OneTimeAlertDialog.Builder(this, "my_dialog_key")
+                .setTitle(getString(R.string.pin_shortcut_title))
+                .setMessage(getString(R.string.pin_shortut_message))
+                .show()
+    }
 
     companion object {
         //ID used for notifications

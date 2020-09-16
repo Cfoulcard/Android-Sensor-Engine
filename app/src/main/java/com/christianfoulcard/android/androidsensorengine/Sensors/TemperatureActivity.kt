@@ -41,7 +41,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     private var tempInfoDialog: Dialog? = null
 
     //TextViews
-    private var temperature_text: TextView? = null
+    private var temperatureText: TextView? = null
     private var currentDegrees: TextView? = null
     private var airTemp: TextView? = null
 
@@ -75,7 +75,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         mAdView.loadAd(adRequest)
 
         //TextViews
-        temperature_text = findViewById<View>(R.id.temperature) as TextView
+        temperatureText = findViewById<View>(R.id.temperature) as TextView
         currentDegrees = findViewById<View>(R.id.current_temp) as TextView
         airTemp = findViewById<View>(R.id.temperature_sensor) as TextView
 
@@ -115,7 +115,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         //Controls Fade in Animation upon opening app
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        temperature_text!!.startAnimation(`in`)
+        temperatureText!!.startAnimation(`in`)
         currentDegrees!!.startAnimation(`in`)
         airTemp!!.startAnimation(`in`)
         tempInfo!!.startAnimation(`in`)
@@ -347,11 +347,12 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Pin Shortcut Dialog Data
     private fun alertDialog() {
 
         OneTimeAlertDialog.Builder(this, "my_dialog_key")
-                .setTitle("My Title")
-                .setMessage("Howdy")
+                .setTitle(getString(R.string.pin_shortcut_title))
+                .setMessage(getString(R.string.pin_shortut_message))
                 .show()
     }
 

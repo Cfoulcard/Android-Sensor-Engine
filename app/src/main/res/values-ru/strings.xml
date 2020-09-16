@@ -116,6 +116,8 @@
     <string name="notify_speed_message">Ваша скорость достигла</string>
     <string name="notify_pressure_message">Атмосферное давление достигло</string>
     <string name="notify_humidity_message">Относительная влажность достигла</string>
+    <string name="pin_shortcut_title">Быстрый доступ к датчику</string>
+    <string name="pin_shortut_message">Вы можете закрепить любой датчик на главном экране, долгое нажатие на значок</string>
 
 
 </resources>

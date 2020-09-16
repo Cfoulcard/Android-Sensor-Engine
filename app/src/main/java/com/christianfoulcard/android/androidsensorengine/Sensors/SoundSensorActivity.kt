@@ -160,9 +160,11 @@ class SoundSensorActivity : AppCompatActivity() {
         }
         startRecorder()
 
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 10 seconds of opening activity
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             val handler = Handler()
-            handler.postDelayed({ alertDialog() }, 10000) // 1500 seconds
+            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
         }
     }
 
@@ -371,11 +373,12 @@ class SoundSensorActivity : AppCompatActivity() {
      }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    //Pin Shortcut Dialog Data
     private fun alertDialog() {
 
         OneTimeAlertDialog.Builder(this, "my_dialog_key")
-                .setTitle("My Title")
-                .setMessage("Howdy")
+                .setTitle(getString(R.string.pin_shortcut_title))
+                .setMessage(getString(R.string.pin_shortut_message))
                 .show()
     }
 

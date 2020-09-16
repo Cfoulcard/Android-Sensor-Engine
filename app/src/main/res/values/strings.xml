@@ -143,6 +143,8 @@
     <string name="notify_speed_message">Your speed has reached</string>
     <string name="notify_pressure_message">The atmospheric pressure has reached</string>
     <string name="notify_humidity_message">The relative humidity has reached</string>
+    <string name="pin_shortut_message">You can pin any sensor to your home screen by long pressing the icon</string>
+    <string name="pin_shortcut_title">Quick Sensor Access</string>
 
 
 </resources>

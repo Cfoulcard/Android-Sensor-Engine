@@ -117,5 +117,7 @@
     <string name="notify_speed_message">Kecepatan Anda telah mencapai</string>
     <string name="notify_battery_message">Baterai perangkat Anda telah mencapai</string>
     <string name="notify_air_message">Suhu udara sekitar telah mencapai</string>
+    <string name="pin_shortcut_title">Akses Sensor Cepat</string>
+    <string name="pin_shortut_message">Anda dapat menyematkan sensor apa pun ke layar beranda dengan menekan lama ikon</string>
 
 </resources>

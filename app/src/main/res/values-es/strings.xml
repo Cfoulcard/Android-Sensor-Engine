@@ -117,6 +117,8 @@
     <string name="notify_speed_message">Tu velocidad ha alcanzado</string>
     <string name="notify_battery_message">La batería de su dispositivo ha alcanzado</string>
     <string name="notify_air_message">La temperatura ambiente ha alcanzado</string>
+    <string name="pin_shortcut_title">Acceso rápido al sensor</string>
+    <string name="pin_shortut_message">Puede anclar cualquier sensor a su pantalla de inicio presionando prolongadamente el ícono</string>
 
 
 </resources>

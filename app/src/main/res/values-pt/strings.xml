@@ -117,6 +117,8 @@
     <string name="notify_speed_message">Sua velocidade atingiu</string>
     <string name="notify_pressure_message">A pressão atmosférica atingiu</string>
     <string name="notify_humidity_message">A umidade relativa atingiu</string>
+    <string name="pin_shortcut_title">Acesso rápido ao sensor</string>
+    <string name="pin_shortut_message">Você pode fixar qualquer sensor em sua tela inicial mantendo o ícone pressionado</string>
 
 
 </resources>

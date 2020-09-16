@@ -13,6 +13,7 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
@@ -28,6 +29,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
+import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.android.gms.ads.AdRequest
@@ -127,7 +129,15 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
         val lm = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
+
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 10 seconds of opening activity
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val handler = Handler()
+            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+        }
     }
+
 
 
     public override fun onPause() {
@@ -393,6 +403,15 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
         return true
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Pin Shortcut Dialog Data
+    private fun alertDialog() {
+
+        OneTimeAlertDialog.Builder(this, "my_dialog_key")
+                .setTitle(getString(R.string.pin_shortcut_title))
+                .setMessage(getString(R.string.pin_shortut_message))
+                .show()
+    }
 
     companion object {
         //ID used for notifications

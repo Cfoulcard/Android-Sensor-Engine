@@ -14,6 +14,7 @@ import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,6 +25,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.google.android.gms.ads.AdRequest
@@ -131,6 +133,13 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
         super.onResume()
         // Register a listener for the sensor.
         sensorManager!!.registerListener(this, light, SensorManager.SENSOR_DELAY_NORMAL)
+
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 10 seconds of opening activity
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val handler = Handler()
+            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+        }
     }
 
     override fun onPause() {
@@ -204,4 +213,13 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
         return true
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
+
+    //Pin Shortcut Dialog Data
+    private fun alertDialog() {
+
+        OneTimeAlertDialog.Builder(this, "my_dialog_key")
+                .setTitle(getString(R.string.pin_shortcut_title))
+                .setMessage(getString(R.string.pin_shortut_message))
+                .show()
+    }
 }
