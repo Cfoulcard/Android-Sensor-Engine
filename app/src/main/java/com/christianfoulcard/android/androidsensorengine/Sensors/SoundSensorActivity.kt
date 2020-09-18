@@ -144,8 +144,6 @@ class SoundSensorActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public override fun onStart() {
-
-
         super.onStart()
     }
 

@@ -4,12 +4,15 @@ import android.app.ActivityOptions
 import android.app.PendingIntent
 import android.app.usage.UsageStatsManager
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.preference.PreferenceFragment
+import android.preference.PreferenceManager
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
@@ -17,6 +20,9 @@ import android.widget.Button
 import android.widget.ImageView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.preference.PreferenceManager.getDefaultSharedPreferences
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
+import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity.SettingsFragment
 import com.christianfoulcard.android.androidsensorengine.Sensors.*
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.util.*
@@ -47,6 +53,7 @@ class MainActivity : AppCompatActivity() {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
     }
 
     override fun onStart() {
