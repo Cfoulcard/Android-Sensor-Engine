@@ -136,9 +136,6 @@ class OneTimeAlertDialog : AlertDialog {
             if (!isKeyInPrefs(context, prefsKey)) {
                 super.show()
                 markShown()
-
-
-
             }
 
             return null
