@@ -101,12 +101,12 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
         // appear
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        this.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
         if (sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
-        // Ambient Temperature measures the temperature around the device
+        // Gets data from the step counter sensor
         steps = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
         currentSteps = findViewById<View>(R.id.current_steps) as TextView
     }
@@ -138,7 +138,7 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         walkInfo!!.startAnimation(`in`)
 
         // Register a listener for the sensor.
-        sensorManager!!.registerListener(this, steps, SensorManager.SENSOR_DELAY_FASTEST)
+        sensorManager!!.registerListener(this, steps, SensorManager.SENSOR_DELAY_NORMAL)
         super.onStart()
     }
 
