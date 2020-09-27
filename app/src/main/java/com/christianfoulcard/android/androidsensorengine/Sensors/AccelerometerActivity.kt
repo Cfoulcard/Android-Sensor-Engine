@@ -196,7 +196,9 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
             val speedKm = (p0.speed * 3600 / 1000).toInt() // This is speed in km/h
             val speedFts = (p0.speed * 3.2808).toInt() // This is speed in Feet per second
             val speedKnot = (p0.speed * 1.9438).toInt() // This is speed in knots
+            val speedMphString = "MPH"
             when (unit) {
+                "" -> currentSpeed!!.text = "$speedMph $speedMphString"
                 "MPH" -> currentSpeed!!.text = "$speedMph $unit"
                 "KM/H" -> currentSpeed!!.text = "$speedKm $unit"
                 "M/S" -> currentSpeed!!.text = "$speedMs $unit"
