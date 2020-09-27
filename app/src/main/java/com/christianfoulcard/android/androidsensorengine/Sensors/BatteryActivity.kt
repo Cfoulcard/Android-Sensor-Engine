@@ -123,6 +123,13 @@ class BatteryActivity : AppCompatActivity() {
             currentBattery.text = registerMyReceiver().toString()
         }
 
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 10 seconds of opening activity
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            val handler = Handler()
+            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+        }
+
         createNotificationChannel()
         super.onStart()
     }
@@ -130,12 +137,7 @@ class BatteryActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-        // Creates a dialog explaining how to pin the sensor to the home screen
-        // Appears after 10 seconds of opening activity
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val handler = Handler()
-            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
-        }
+
     }
 
     override fun onPause() {
@@ -189,6 +191,7 @@ class BatteryActivity : AppCompatActivity() {
             val celsiusLevel = level / 10
             val fahrenheitLevel = celsiusLevel * 9 / 5 + 32
             val kelvinLevel = celsiusLevel + 273
+            val celsiusString = "C°"
 
             // Get the instance of SharedPreferences object
             //Note the original context was "this". This caused a Null Pointer error
@@ -197,6 +200,7 @@ class BatteryActivity : AppCompatActivity() {
 
             //Finds the preference string value and links it with the appropriate temperature calc formula
             when (val unit = settings.getString("batterytempunit", "")) {
+                "" -> currentBattery.setText(celsiusLevel.toString() + " " + celsiusString)
                 "C°" -> currentBattery.setText(celsiusLevel.toString() + " " + unit)
                 "F°" -> currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
                 "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)

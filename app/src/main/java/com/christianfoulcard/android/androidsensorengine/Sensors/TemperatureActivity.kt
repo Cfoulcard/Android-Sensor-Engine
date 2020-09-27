@@ -29,7 +29,6 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -105,9 +104,11 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
+        // Get the instance of SharedPreferences object
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
+
         // Ambient Temperature measures the temperature around the device
         temperature = sensorManager!!.getDefaultSensor(Sensor.TYPE_AMBIENT_TEMPERATURE)
-        currentDegrees = findViewById<View>(R.id.current_temp) as TextView
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -120,11 +121,11 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         airTemp!!.startAnimation(`in`)
         tempInfo!!.startAnimation(`in`)
 
-        // Register a listener for the sensor.
-        sensorManager!!.registerListener(this, temperature, SensorManager.SENSOR_DELAY_NORMAL)
-
         //Enables notifications if they are switched on
         createNotificationChannel()
+
+        // Register a listener for the sensor.
+        sensorManager!!.registerListener(this, temperature, SensorManager.SENSOR_DELAY_FASTEST)
 
         super.onStart()
     }
@@ -178,9 +179,13 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         //Calculates Kelvin
         val k = (c + 273.15).toInt()
 
+        //String Data for when sensor does not update
+        val celsiusString = "C°"
+
         //Finds the preference string value and links it with the appropriate temperature calc formula
         if (event.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
             when (unit) {
+                "" -> currentDegrees!!.text = "$c $celsiusString"
                 "C°" -> currentDegrees!!.text = "$c $unit"
                 "F°" -> currentDegrees!!.text = "$f $unit"
                 "K°" -> currentDegrees!!.text = "$k $unit"
@@ -192,7 +197,6 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
             // Create an Intent for the activity you want to start
             val resultIntent = Intent(this, TemperatureActivity::class.java)
             // Create the TaskStackBuilder and add the intent, which inflates the back stack
-
             val stackBuilder = TaskStackBuilder.create(this)
             stackBuilder.addNextIntentWithParentStack(resultIntent)
 
@@ -355,7 +359,6 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
                 .setMessage(getString(R.string.pin_shortut_message))
                 .show()
     }
-
 
     companion object {
         //ID used for notifications
