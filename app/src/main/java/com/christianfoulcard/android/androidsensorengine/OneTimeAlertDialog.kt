@@ -85,17 +85,9 @@ class OneTimeAlertDialog : AlertDialog {
     override fun show() {
 
         if (!isKeyInPrefs(context, mPrefsKey)) {
-
-
             super.show()
-
-
                 markShown()
-
-
         }
-        val handler = Handler()
-        handler.postDelayed({ show() }, 10000) // 10 seconds
     }
 
     /** Manually mark this dialog as already shown. The next time `show()` is called with this key
