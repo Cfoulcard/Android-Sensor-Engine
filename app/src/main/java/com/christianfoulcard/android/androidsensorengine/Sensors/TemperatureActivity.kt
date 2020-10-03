@@ -60,6 +60,11 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     //For Ads
     private lateinit var mAdView : AdView
 
+    //Handler for dialog pin shortcut dialog box
+    val handler = Handler()
+
+
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -134,16 +139,19 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         super.onResume()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
-        // Appears after 10 seconds of opening activity
+        // Appears after 1 second of opening activity
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val handler = Handler()
-            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+            handler.postDelayed({ alertDialog() }, 1000) // 1 second
         }
     }
 
 
     override fun onPause() {
         super.onPause()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     override fun onDestroy() {
@@ -354,10 +362,11 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     //Pin Shortcut Dialog Data
     private fun alertDialog() {
 
-        OneTimeAlertDialog.Builder(this, "my_dialog_key")
-                .setTitle(getString(R.string.pin_shortcut_title))
-                .setMessage(getString(R.string.pin_shortut_message))
-                .show()
+        val dialog = OneTimeAlertDialog.Builder(this, "my_dialog_key")
+
+                dialog.setTitle(getString(R.string.pin_shortcut_title))
+                dialog.setMessage(getString(R.string.pin_shortut_message))
+                dialog.show()
     }
 
     companion object {

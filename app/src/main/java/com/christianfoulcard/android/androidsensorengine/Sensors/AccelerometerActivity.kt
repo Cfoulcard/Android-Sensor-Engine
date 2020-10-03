@@ -64,6 +64,9 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     //For Ads
     private lateinit var mAdView : AdView
 
+    //Handler for dialog pin shortcut dialog box
+    val handler = Handler()
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -131,10 +134,9 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
         lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
 
         // Creates a dialog explaining how to pin the sensor to the home screen
-        // Appears after 10 seconds of opening activity
+        // Appears after 1 second of opening activity
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val handler = Handler()
-            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
+            handler.postDelayed({ alertDialog() }, 1000) // 1 second
         }
     }
 

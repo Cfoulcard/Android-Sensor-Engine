@@ -57,6 +57,9 @@ class BatteryActivity : AppCompatActivity() {
     //For Ads
     private lateinit var mAdView : AdView
 
+    //Handler for dialog pin shortcut dialog box
+    val handler = Handler()
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     @RequiresApi(Build.VERSION_CODES.O)
@@ -123,13 +126,6 @@ class BatteryActivity : AppCompatActivity() {
             currentBattery.text = registerMyReceiver().toString()
         }
 
-        // Creates a dialog explaining how to pin the sensor to the home screen
-        // Appears after 10 seconds of opening activity
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            val handler = Handler()
-            handler.postDelayed({ alertDialog() }, 10000) // 10 seconds
-        }
-
         createNotificationChannel()
         super.onStart()
     }
@@ -137,7 +133,11 @@ class BatteryActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
 
-
+        // Creates a dialog explaining how to pin the sensor to the home screen
+        // Appears after 1 second of opening activity
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            handler.postDelayed({ alertDialog() }, 1000) // 1 second
+        }
     }
 
     override fun onPause() {
