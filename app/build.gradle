@@ -6,7 +6,6 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.firebase-perf'
 apply plugin: 'com.google.firebase.crashlytics'
 
-
 android {
 
     signingConfigs {
@@ -24,8 +23,8 @@ android {
         applicationId "com.christianfoulcard.android.androidsensorengine"
         minSdkVersion 21 // Lollipop Version. Users can at least get their lick on
         targetSdkVersion 30
-        versionCode 10
-        versionName "6.5"
+        versionCode 11
+        versionName "6.6"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
