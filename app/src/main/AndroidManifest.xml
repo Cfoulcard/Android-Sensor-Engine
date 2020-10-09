@@ -24,6 +24,9 @@
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
 
 
+
+
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -32,6 +35,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <!-- You don't need to include android:required="false" if your app's
+ minSdkVersion is 28 or higher. -->
+        <uses-library android:name="android.test.runner"/>
 
         <!--Ad Mob-->
         <meta-data

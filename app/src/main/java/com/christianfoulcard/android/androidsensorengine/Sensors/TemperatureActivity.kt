@@ -26,6 +26,8 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.work.WorkerParameters
+import com.christianfoulcard.android.androidsensorengine.BackgroundWorker
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
@@ -33,6 +35,7 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
+import timber.log.Timber
 
 class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
@@ -92,6 +95,8 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -264,6 +269,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
                             .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                             .setOnlyAlertOnce(true)
                     val notificationManager = NotificationManagerCompat.from(this)
+
 
                     // notificationId is a unique int for each notification that you must define
                     notificationManager.notify(CHANNEL_ID.toInt(), builder.build())

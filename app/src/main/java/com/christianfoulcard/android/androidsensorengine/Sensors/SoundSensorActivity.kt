@@ -225,17 +225,14 @@ class SoundSensorActivity : AppCompatActivity() {
             try {
                 mRecorder!!.prepare()
             } catch (ioe: IOException) {
-                Log.e("[Monkey]", "IOException: " +
-                        Log.getStackTraceString(ioe))
+
             } catch (e: SecurityException) {
-                Log.e("[Monkey]", "SecurityException: " +
-                        Log.getStackTraceString(e))
+
             }
             try {
                 mRecorder!!.start()
             } catch (e: SecurityException) {
-                Log.e("[Monkey]", "SecurityException: " +
-                        Log.getStackTraceString(e))
+
             }
         }
     }
