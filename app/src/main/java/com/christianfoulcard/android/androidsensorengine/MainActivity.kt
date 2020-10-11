@@ -56,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Intents to start the sensor activities
 
-
     fun soundIconIntent(view: View?) {
         val soundIntent = Intent(this, SoundSensorActivity::class.java)
         val sharedView = findViewById<ImageView>(R.id.sound_icon)
