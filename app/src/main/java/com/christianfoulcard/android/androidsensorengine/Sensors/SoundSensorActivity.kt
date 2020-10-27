@@ -33,6 +33,7 @@ import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.io.IOException
+import kotlin.math.log10
 
 //TODO: Take out a permission
 
@@ -215,7 +216,7 @@ class SoundSensorActivity : AppCompatActivity() {
     }
 
     //Properties of the microphone
-    private fun startRecorder() {
+    fun startRecorder() {
         if (mRecorder == null) {
             mRecorder = MediaRecorder()
             mRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
@@ -261,8 +262,8 @@ class SoundSensorActivity : AppCompatActivity() {
         //configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
     }
 
-    private fun soundDb(): Int {
-        return (20 * Math.log10(amplitudeEMA.toDouble())).toInt()
+    fun soundDb(): Int {
+        return (20 * log10(amplitudeEMA.toDouble())).toInt()
     }
 
     //Calculates the decibel valve

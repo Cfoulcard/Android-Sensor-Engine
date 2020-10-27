@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
         this.startActivity(speedIntent, transitionActivityOptions.toBundle())
     }
 
-    fun humidityIconIntent(view: View?) {
+    infix fun humidityIconIntent(view: View?) {
         val humidityIntent = Intent(this, HumidityActivity::class.java)
         val sharedView = findViewById<ImageView>(R.id.humidity_icon)
         val transitionName = ""
