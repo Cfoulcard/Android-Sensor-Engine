@@ -91,6 +91,8 @@ dependencies {
 
     //RippleBackground Library
     implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
+    androidTestImplementation 'androidx.test:rules:1.3.0-beta01'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0-beta01'
 
     // Kotlin + coroutines Work Manager
     def work_version = "2.4.0"
