@@ -21,10 +21,13 @@ import android.view.animation.Animation
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
@@ -39,6 +42,10 @@ import kotlin.math.log10
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class SoundSensorActivity : AppCompatActivity() {
+
+    // Use the 'by viewModels()' Kotlin property delegate
+    // from the activity-ktx artifact
+    private val model: DataViewModel by viewModels()
 
     //Initiates the Media Player to play raw files
     //MediaPlayer mp;
@@ -70,11 +77,18 @@ class SoundSensorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-
         //Enable for fade in transition
         // overridePendingTransition(R.anim.fadein, R.anim.fadeout)
-
         setContentView(R.layout.sound_sensor)
+
+        // Create the observer which updates the UI.
+        val nameObserver = Observer<String> { newName ->
+            // Update the UI, in this case, a TextView.
+            configuredDecibel?.text = newName
+        }
+
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        model.currentName.observe(this, nameObserver)
 
         // Initialize Ads
         MobileAds.initialize(this) {} //ADMOB App ID
