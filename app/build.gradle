@@ -14,6 +14,7 @@ android {
         }
     }
     buildFeatures {
+        viewBinding true
     }
 
     // To publish an app on Google Play be sure the API targets Android 9 (28) or higher
@@ -88,11 +89,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     //For Ads
     implementation 'com.google.android.gms:play-services-ads:19.3.0'
-
-    //RippleBackground Library
-    implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
-    androidTestImplementation 'androidx.test:rules:1.3.0-beta01'
-    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0-beta01'
 
     // Kotlin + coroutines Work Manager
     def work_version = "2.4.0"

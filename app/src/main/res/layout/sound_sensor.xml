@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<com.skyfishjy.library.RippleBackground
+
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:id="@+id/content">
-
-<ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
@@ -127,4 +124,3 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
-</com.skyfishjy.library.RippleBackground>
