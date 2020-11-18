@@ -79,14 +79,6 @@ class SoundSensorActivity : AppCompatActivity() {
         //Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
 
-        //Animation that plays fading animation when entering/exiting Activity
-        val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
-        `in`.duration = 1500
-        binding.currentDecibel.startAnimation(`in`)
-        binding.decibels.startAnimation(`in`)
-        binding.soundSensor.startAnimation(`in`)
-        binding.infoButton.startAnimation(`in`)
-
         //To request audio permissions upon opening activity
         requestAudioPermissions()
 
@@ -114,6 +106,13 @@ class SoundSensorActivity : AppCompatActivity() {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public override fun onStart() {
         super.onStart()
+        //Animation that plays fading animation when entering/exiting Activity
+        val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
+        `in`.duration = 1500
+        binding.currentDecibel.startAnimation(`in`)
+        binding.decibels.startAnimation(`in`)
+        binding.soundSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
     }
 
     //Microphone recording starts
