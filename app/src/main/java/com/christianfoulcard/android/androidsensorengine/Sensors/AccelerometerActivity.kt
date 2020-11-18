@@ -20,8 +20,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -32,37 +30,27 @@ import androidx.core.content.ContextCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.AccelerometerSensorBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //LocationListener needed to track speed
 class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: AccelerometerSensorBinding
+
     //Dialog popup info
     private var accelerometerInfoDialog: Dialog? = null
 
-    //TextViews
-    private var accelerometer_sensor: TextView? = null
-    private var accelerometer: TextView? = null
-    private var currentSpeed: TextView? = null
-
+    //Sensor Data
     var mlocListener: LocationListener? = null
-
-    //ImageViews
-    private var accelerometerInfo: ImageView? = null
-    private var speedLogo: ImageView? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     //Needed for location permission
     private val REQUESTLOCATIONPERMISSION = 1
-
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -72,32 +60,24 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.accelerometer_sensor)
+        binding = AccelerometerSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //ImageViews
-        accelerometerInfo = findViewById<View>(R.id.info_button) as ImageView
-        speedLogo = findViewById<View>(R.id.accelerometer_logo) as ImageView
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         accelerometerInfoDialog = Dialog(this)
-
-        //TextViews
-        accelerometer = findViewById<View>(R.id.accelerometer) as TextView
-        currentSpeed = findViewById<View>(R.id.current_speed) as TextView
-        accelerometer_sensor = findViewById<View>(R.id.accelerometer_sensor) as TextView
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            speedLogo!!.setOnLongClickListener() {
+            binding.accelerometerLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -112,10 +92,10 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
         //Animation fade in for UI elements
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        accelerometer!!.startAnimation(`in`)
-        currentSpeed!!.startAnimation(`in`)
-        accelerometer_sensor!!.startAnimation(`in`)
-        accelerometerInfo!!.startAnimation(`in`)
+        binding.accelerometer.startAnimation(`in`)
+        binding.currentSpeed.startAnimation(`in`)
+        binding.accelerometerSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
         createNotificationChannel()
     }
 
@@ -190,7 +170,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
         if (p0 == null) {
             when (unit) {
-                "MPH", "KM/H", "M/S", "FT/S", "knots" -> currentSpeed!!.text = "0 $unit"
+                "MPH", "KM/H", "M/S", "FT/S", "knots" -> binding.currentSpeed.text = "0 $unit"
             }
         } else {
             val speedMs = p0.speed.toInt() // This is the standard which returns meters per second.
@@ -200,12 +180,12 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
             val speedKnot = (p0.speed * 1.9438).toInt() // This is speed in knots
             val speedMphString = "MPH"
             when (unit) {
-                "" -> currentSpeed!!.text = "$speedMph $speedMphString"
-                "MPH" -> currentSpeed!!.text = "$speedMph $unit"
-                "KM/H" -> currentSpeed!!.text = "$speedKm $unit"
-                "M/S" -> currentSpeed!!.text = "$speedMs $unit"
-                "FT/S" -> currentSpeed!!.text = "$speedFts $unit"
-                "Knots" -> currentSpeed!!.text = "$speedKnot $unit"
+                "" -> binding.currentSpeed.text = "$speedMph $speedMphString"
+                "MPH" -> binding.currentSpeed.text = "$speedMph $unit"
+                "KM/H" -> binding.currentSpeed.text = "$speedKm $unit"
+                "M/S" -> binding.currentSpeed.text = "$speedMs $unit"
+                "FT/S" -> binding.currentSpeed.text = "$speedFts $unit"
+                "Knots" -> binding.currentSpeed.text = "$speedKnot $unit"
             }
 
             //Gets the unit of measurement from the speedunit key in root_preferences.xml

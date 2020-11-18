@@ -20,32 +20,22 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.LuxSensorBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class LightSensorActivity : AppCompatActivity(), SensorEventListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: LuxSensorBinding
+
     //Dialog popup info
-    var lightInfoDialog: Dialog? = null
-
-    //TextViews
-    private var luminosity: TextView? = null
-    private var currentLux: TextView? = null
-    private var lightSensor: TextView? = null
-
-    //ImageViews
-    private var lightInfo: ImageView? = null
-    private var lightLogo: ImageView? = null
+    private var lightInfoDialog: Dialog? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -53,9 +43,6 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -65,29 +52,21 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.lux_sensor)
+        binding = LuxSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        luminosity = findViewById(R.id.luminosity)
-        currentLux = findViewById(R.id.current_lux)
-        lightSensor = findViewById(R.id.lux_sensor)
-
-        //ImageViews
-        lightInfo = findViewById<View>(R.id.info_button) as ImageView
-        lightLogo = findViewById<View>(R.id.lux_sensor_logo) as ImageView
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         lightInfoDialog = Dialog(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            lightLogo!!.setOnLongClickListener() {
+            binding.luxSensorLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -105,7 +84,7 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
 
         //Light sensor to measure light
         light = sensorManager!!.getDefaultSensor(Sensor.TYPE_LIGHT)
-        currentLux = findViewById(R.id.current_lux)
+       // currentLux = findViewById(R.id.current_lux)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -117,19 +96,19 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     @SuppressLint("SetTextI18n")
     override fun onSensorChanged(event: SensorEvent) {
         if (event.sensor.type == Sensor.TYPE_LIGHT) {
-            currentLux!!.text = event.values[0].toString() + " lux"
+            binding.currentLux.text = event.values[0].toString() + " lux"
         }
     }
 
     override fun onStart() {
         super.onStart()
+        //Animation that plays fading animation when entering/exiting Activity
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-
-        luminosity?.startAnimation(`in`)
-        currentLux?.startAnimation(`in`)
-        lightSensor?.startAnimation(`in`)
-        lightInfo?.startAnimation(`in`)
+        binding.luminosity.startAnimation(`in`)
+        binding.currentLux.startAnimation(`in`)
+        binding.luxSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
     }
 
     override fun onResume() {

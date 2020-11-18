@@ -20,34 +20,27 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.christianfoulcard.android.androidsensorengine.BuildConfig
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.christianfoulcard.android.androidsensorengine.databinding.PressureSensorBinding
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class PressureActivity : AppCompatActivity(), SensorEventListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: PressureSensorBinding
+
     //Dialog popup info
     private var pressureInfoDialog: Dialog? = null
-
-    //TextViews
-    private var pressure_text: TextView? = null
-    private var currentPressure: TextView? = null
-    private var pressureLevel: TextView? = null
-
-    //ImageViews
-    private var pressureInfo: ImageView? = null
-    private var pressureLogo: ImageView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -61,8 +54,6 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -78,29 +69,21 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.pressure_sensor)
+        binding = PressureSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
         MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        pressure_text = findViewById<View>(R.id.pressure) as TextView
-        currentPressure = findViewById<View>(R.id.current_pressure) as TextView
-        pressureLevel = findViewById<View>(R.id.pressure_sensor) as TextView
-
-        //ImageViews
-        pressureInfo = findViewById<View>(R.id.info_button) as ImageView
-        pressureLogo = findViewById<View>(R.id.pressure_logo) as ImageView
+        binding.adView.loadAd(adRequest)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            pressureLogo!!.setOnLongClickListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.pressureLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -108,15 +91,16 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
         // appear
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        assert(sensorManager != null)
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        if (BuildConfig.DEBUG && sensorManager == null) {
+            error("Assertion failed")
+        }
         if (sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
         // Ambient Temperature measures the temperature around the device
         pressure = sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE)
-        currentPressure = findViewById<View>(R.id.current_pressure) as TextView
     }
 
 
@@ -134,7 +118,7 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         val pressure_level = event.values[0].toInt()
 
         if (event.sensor.type == Sensor.TYPE_PRESSURE) {
-            currentPressure!!.text = "$pressure_level hPa"
+            binding.currentPressure.text = "$pressure_level hPa"
         }
 
         // Create an Intent for the activity you want to start
@@ -195,20 +179,20 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
     override fun onStart() {
+        super.onStart()
         //Dialog Box for Temperature Info
         pressureInfoDialog = Dialog(this)
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        pressure_text!!.startAnimation(`in`)
-        currentPressure!!.startAnimation(`in`)
-        pressureLevel!!.startAnimation(`in`)
-        pressureInfo!!.startAnimation(`in`)
+        binding.pressure.startAnimation(`in`)
+        binding.currentPressure.startAnimation(`in`)
+        binding.pressureSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
 
         // Register a listener for the sensor.
         createNotificationChannel()
-        super.onStart()
-        sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
 
+        sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onResume() {

@@ -20,8 +20,6 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -31,24 +29,16 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.HumiditySensorBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: HumiditySensorBinding
+
     //Dialog popup info
     private var humidityInfoDialog: Dialog? = null
-
-    //TextViews
-    private var humidity_text: TextView? = null
-    private var currentHumidity: TextView? = null
-    private var humidityAmount: TextView? = null
-
-    //ImageViews
-    private var humidityInfo: ImageView? = null
-    private var humidityLogo: ImageView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -62,9 +52,6 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //For Ads
-    private lateinit var mAdView : AdView
-
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
 
@@ -73,22 +60,14 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.humidity_sensor)
+        binding = HumiditySensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {}  //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        humidity_text = findViewById<View>(R.id.humidity) as TextView
-        currentHumidity = findViewById<View>(R.id.current_humidity) as TextView
-        humidityAmount = findViewById<View>(R.id.humidity_sensor) as TextView
-
-        //ImageViews
-        humidityInfo = findViewById<View>(R.id.info_button) as ImageView
-        humidityLogo = findViewById<View>(R.id.humidity_logo) as ImageView
+//        MobileAds.initialize(this) {}  //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         humidityInfoDialog = Dialog(this)
@@ -98,7 +77,7 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            humidityLogo!!.setOnLongClickListener() {
+            binding.humidityLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -113,7 +92,6 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
         // Ambient Temperature measures the temperature around the device
         humidity = sensorManager!!.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
-        currentHumidity = findViewById<View>(R.id.current_humidity) as TextView
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -132,7 +110,7 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
         //Gets sensor data for humidity
         if (event.sensor.type == Sensor.TYPE_RELATIVE_HUMIDITY) {
-            currentHumidity!!.text = "$waterVapor%"
+            binding.currentHumidity.text = "$waterVapor%"
         }
 
         //Gets the string value from the edit_text_humidity key in root_preferences.xml
@@ -192,10 +170,10 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     override fun onStart() {
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        humidity_text!!.startAnimation(`in`)
-        currentHumidity!!.startAnimation(`in`)
-        humidityAmount!!.startAnimation(`in`)
-        humidityInfo!!.startAnimation(`in`)
+        binding.humidity.startAnimation(`in`)
+        binding.currentHumidity.startAnimation(`in`)
+        binding.humiditySensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
 
         createNotificationChannel()
         super.onStart()

@@ -21,28 +21,24 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.christianfoulcard.android.androidsensorengine.databinding.WalkSensorBinding
 import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
 
 class WalkActivity : AppCompatActivity(), SensorEventListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: WalkSensorBinding
+
     //Dialog popup info
     private var walkInfoDialog: Dialog? = null
-
-    //TextViews
-    private var steps_text: TextView? = null
-    private var currentSteps: TextView? = null
-    private var stepAmount: TextView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -50,18 +46,11 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //ImageViews
-    private var walkInfo: ImageView? = null
-    private var walkLogo: ImageView? = null
-
     //Gets settings from preference
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -71,22 +60,14 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.walk_sensor)
+        binding = WalkSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
         MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
         val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        steps_text = findViewById<View>(R.id.walk_sensor) as TextView
-        currentSteps = findViewById<View>(R.id.current_steps) as TextView
-        stepAmount = findViewById<View>(R.id.steps) as TextView
-
-        //ImageViews
-        walkInfo = findViewById<View>(R.id.info_button) as ImageView
-        walkLogo = findViewById<View>(R.id.walk_logo) as ImageView
+        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         walkInfoDialog = Dialog(this)
@@ -96,7 +77,7 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            walkLogo!!.setOnLongClickListener() {
+            binding.walkLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -111,7 +92,6 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
 
         // Gets data from the step counter sensor
         steps = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
-        currentSteps = findViewById<View>(R.id.current_steps) as TextView
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -126,23 +106,24 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         val stepCounter = event.values[0].toInt()
 
         if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
-            currentSteps!!.text = stepCounter.toString() + "" //Crashes without ""
+            binding.currentSteps.text = stepCounter.toString() + "" //Crashes without ""
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
     override fun onStart() {
+        super.onStart()
+
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        steps_text!!.startAnimation(`in`)
-        currentSteps!!.startAnimation(`in`)
-        stepAmount!!.startAnimation(`in`)
-        walkInfo!!.startAnimation(`in`)
+        binding.walkSensor.startAnimation(`in`)
+        binding.currentSteps.startAnimation(`in`)
+        binding.steps.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
 
         // Register a listener for the sensor.
         sensorManager!!.registerListener(this, steps, SensorManager.SENSOR_DELAY_NORMAL)
-        super.onStart()
     }
 
     override fun onResume() {

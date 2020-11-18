@@ -24,6 +24,9 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.christianfoulcard.android.androidsensorengine.databinding.BatterySensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.RamSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -33,29 +36,22 @@ import java.util.*
 
 class BatteryActivity : AppCompatActivity() {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: BatterySensorBinding
+
     //Dialog popup info
     var batteryInfoDialog: Dialog? = null
 
-    //TextViews
-    private lateinit var battery_text: TextView
-    private lateinit var currentBattery: TextView
-    private lateinit var batterySensor: TextView
+    //Sensor Data
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
-
-    //ImageViews
-    private var batteryInfo: ImageView? = null
-    private var batteryLogo: ImageView? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     //Channel ID for notifications
     private val ID = "3"
-
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -67,22 +63,14 @@ class BatteryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.battery_sensor)
+        binding = BatterySensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        battery_text = findViewById(R.id.battery) as TextView
-        currentBattery = findViewById(R.id.current_battery) as TextView
-        batterySensor = findViewById(R.id.battery_sensor) as TextView
-
-        //ImageViews
-        batteryInfo = findViewById<View>(R.id.info_button) as ImageView
-        batteryLogo = findViewById<View>(R.id.battery_logo) as ImageView
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         batteryInfoDialog = Dialog(this)
@@ -92,15 +80,10 @@ class BatteryActivity : AppCompatActivity() {
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            batteryLogo!!.setOnLongClickListener() {
+            binding.batteryLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
-
-       // currentBattery = findViewById(R.id.current_battery)
-      //  registerMyReceiver()
-
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -113,21 +96,22 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     override fun onStart() {
+        super.onStart()
+
         val `in` = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        battery_text.startAnimation(`in`)
-        currentBattery.startAnimation(`in`)
-        batterySensor.startAnimation(`in`)
-        batteryInfo!!.startAnimation(`in`)
+        binding.battery.startAnimation(`in`)
+        binding.currentBattery.startAnimation(`in`)
+        binding.batterySensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
 
         //Registers the sensor
         registerMyReceiver()
-        if (currentBattery.text  == registerMyReceiver().toString()) {
-            currentBattery.text = registerMyReceiver().toString()
+        if (binding.currentBattery.text  == registerMyReceiver().toString()) {
+            binding.currentBattery.text = registerMyReceiver().toString()
         }
 
         createNotificationChannel()
-        super.onStart()
     }
 
     override fun onResume() {
@@ -200,10 +184,10 @@ class BatteryActivity : AppCompatActivity() {
 
             //Finds the preference string value and links it with the appropriate temperature calc formula
             when (val unit = settings.getString("batterytempunit", "")) {
-                "" -> currentBattery.setText(celsiusLevel.toString() + " " + celsiusString)
-                "C°" -> currentBattery.setText(celsiusLevel.toString() + " " + unit)
-                "F°" -> currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
-                "K°" -> currentBattery.setText(kelvinLevel.toString() + " " + unit)
+                "" -> binding.currentBattery.setText(celsiusLevel.toString() + " " + celsiusString)
+                "C°" -> binding.currentBattery.setText(celsiusLevel.toString() + " " + unit)
+                "F°" -> binding.currentBattery.setText(fahrenheitLevel.toString() + " " + unit)
+                "K°" -> binding.currentBattery.setText(kelvinLevel.toString() + " " + unit)
             }
 
             ////////////////////////////////////////////////////////////////////////////////////////

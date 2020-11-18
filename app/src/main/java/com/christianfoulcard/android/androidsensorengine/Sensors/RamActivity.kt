@@ -17,16 +17,12 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.RamSensorBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 
@@ -34,23 +30,14 @@ class RamActivity : AppCompatActivity() {
 
     //TODO: Add preferences for Ram data
 
+    //View Binding to call the layout's views
+    private lateinit var binding: RamSensorBinding
+
     //Dialog popup info
     private var ramInfoDialog: Dialog? = null
 
-    //TextViews
-    private var ramText: TextView? = null
-    private var currentRam: TextView? = null
-    private var ramSensor: TextView? = null
-
-    //ImageViews
-    private var ramInfo: ImageView? = null
-    private var ramLogo: ImageView? = null
-
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
-    //For Ads
-    private lateinit var mAdView : AdView
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -61,29 +48,21 @@ class RamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.ram_sensor)
+        binding = RamSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        ramText = findViewById(R.id.ram)
-        currentRam = findViewById(R.id.current_ram)
-        ramSensor = findViewById(R.id.ram_sensor)
-
-        //ImageViews
-        ramInfo = findViewById<View>(R.id.info_button) as ImageView
-        ramLogo = findViewById<View>(R.id.ram_logo) as ImageView
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         ramInfoDialog = Dialog(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            ramLogo!!.setOnLongClickListener() {
+            binding.ramLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -97,15 +76,15 @@ class RamActivity : AppCompatActivity() {
         //Animation for TextView fade in
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        ramText?.startAnimation(`in`)
-        currentRam?.startAnimation(`in`)
-        ramSensor?.startAnimation(`in`)
-        ramInfo!!.startAnimation(`in`)
+        binding.ram.startAnimation(`in`)
+        binding.currentRam.startAnimation(`in`)
+        binding.ramSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
     }
 
     override fun onResume() {
         val i = memorySize().toLong()
-        currentRam!!.text = "$i mB"
+        binding.currentRam.text = "$i mB"
         super.onResume()
 
         // Creates a dialog explaining how to pin the sensor to the home screen

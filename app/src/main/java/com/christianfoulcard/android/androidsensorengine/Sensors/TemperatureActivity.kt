@@ -19,25 +19,16 @@ import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.work.WorkerParameters
-import com.christianfoulcard.android.androidsensorengine.BackgroundWorker
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
 import com.christianfoulcard.android.androidsensorengine.databinding.TemperatureSensorBinding
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
 import com.google.firebase.analytics.FirebaseAnalytics
-import timber.log.Timber
 
 class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
