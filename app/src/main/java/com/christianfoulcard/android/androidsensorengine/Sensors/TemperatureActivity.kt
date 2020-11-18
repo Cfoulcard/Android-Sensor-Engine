@@ -31,6 +31,8 @@ import com.christianfoulcard.android.androidsensorengine.BackgroundWorker
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
+import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.TemperatureSensorBinding
 import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
@@ -39,17 +41,11 @@ import timber.log.Timber
 
 class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
+    //View Binding to call the layout's views
+    private lateinit var binding: TemperatureSensorBinding
+
     //Dialog popup info
     private var tempInfoDialog: Dialog? = null
-
-    //TextViews
-    private var temperatureText: TextView? = null
-    private var currentDegrees: TextView? = null
-    private var airTemp: TextView? = null
-
-    //ImageViews
-    private var tempInfo: ImageView? = null
-    private var tempLogo: ImageView? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
@@ -60,35 +56,23 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //For Ads
-    private lateinit var mAdView : AdView
-
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.temperature_sensor)
+        binding = TemperatureSensorBinding.inflate(layoutInflater)
+        val view = binding.root
+        setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        mAdView = findViewById(R.id.adView)
-        val adRequest = AdRequest.Builder().build()
-        mAdView.loadAd(adRequest)
-
-        //TextViews
-        temperatureText = findViewById<View>(R.id.temperature) as TextView
-        currentDegrees = findViewById<View>(R.id.current_temp) as TextView
-        airTemp = findViewById<View>(R.id.temperature_sensor) as TextView
-
-        //ImageViews
-        tempInfo = findViewById<View>(R.id.info_button) as ImageView
-        tempLogo = findViewById<View>(R.id.temperature_logo) as ImageView
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        mAdView = findViewById(R.id.adView)
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         tempInfoDialog = Dialog(this)
@@ -96,11 +80,9 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-
-
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            tempLogo!!.setOnLongClickListener() {
+            binding.temperatureLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -123,21 +105,21 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onStart() {
+        super.onStart()
+
         //Controls Fade in Animation upon opening app
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        temperatureText!!.startAnimation(`in`)
-        currentDegrees!!.startAnimation(`in`)
-        airTemp!!.startAnimation(`in`)
-        tempInfo!!.startAnimation(`in`)
+        binding.temperature.startAnimation(`in`)
+        binding.currentTemp.startAnimation(`in`)
+        binding.temperatureSensor.startAnimation(`in`)
+        binding.infoButton.startAnimation(`in`)
 
         //Enables notifications if they are switched on
         createNotificationChannel()
 
         // Register a listener for the sensor.
         sensorManager!!.registerListener(this, temperature, SensorManager.SENSOR_DELAY_FASTEST)
-
-        super.onStart()
     }
 
     override fun onResume() {
@@ -198,10 +180,10 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         //Finds the preference string value and links it with the appropriate temperature calc formula
         if (event.sensor.type == Sensor.TYPE_AMBIENT_TEMPERATURE) {
             when (unit) {
-                "" -> currentDegrees!!.text = "$c $celsiusString"
-                "C°" -> currentDegrees!!.text = "$c $unit"
-                "F°" -> currentDegrees!!.text = "$f $unit"
-                "K°" -> currentDegrees!!.text = "$k $unit"
+                "" -> binding.currentTemp.text = "$c $celsiusString"
+                "C°" -> binding.currentTemp.text = "$c $unit"
+                "F°" -> binding.currentTemp.text = "$f $unit"
+                "K°" -> binding.currentTemp.text = "$k $unit"
             }
 
             //Gets the string value from the edit_text_air_temp key in root_preferences.xml
