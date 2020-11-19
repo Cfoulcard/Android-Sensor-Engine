@@ -18,15 +18,19 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.Observer
+import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
 import com.google.firebase.analytics.FirebaseAnalytics
+import kotlinx.android.synthetic.main.sound_sensor.*
 import java.io.IOException
 import kotlin.math.log10
 
@@ -37,7 +41,7 @@ class SoundSensorActivity : AppCompatActivity() {
 
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
-    //  private val model: DataViewModel by viewModels()
+      private val model: DataViewModel by viewModels()
 
     //View Binding to call the layout's views
     private lateinit var binding: SoundSensorBinding
@@ -60,6 +64,15 @@ class SoundSensorActivity : AppCompatActivity() {
         binding = SoundSensorBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        // Create the observer which updates the UI.
+        val nameObserver = Observer<String> { newName ->
+            // Update the UI, in this case, a TextView.
+            current_decibel.text = newName
+        }
+
+        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
+        model.currentName.observe(this, nameObserver)
 
         // Initialize Ads
 //        MobileAds.initialize(this) {} //ADMOB App ID
