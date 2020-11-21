@@ -135,9 +135,9 @@ class SoundSensorActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
-            return
+            return startRecorder()
         }
-        startRecorder()
+
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
