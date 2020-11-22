@@ -65,9 +65,9 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
         walkInfoDialog = Dialog(this)

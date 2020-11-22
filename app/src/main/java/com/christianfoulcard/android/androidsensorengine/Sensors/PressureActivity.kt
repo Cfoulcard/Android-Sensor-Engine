@@ -74,9 +74,9 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         setContentView(view)
 
         // Initialize Ads
-        MobileAds.initialize(this) {} //ADMOB App ID
-        val adRequest = AdRequest.Builder().build()
-        binding.adView.loadAd(adRequest)
+//        MobileAds.initialize(this) {} //ADMOB App ID
+//        val adRequest = AdRequest.Builder().build()
+//        binding.adView.loadAd(adRequest)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
