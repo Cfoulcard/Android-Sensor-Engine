@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
     android:fillViewport="true"
-    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.PressureActivity">
+    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorBatteryActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,16 +14,16 @@
 
 
     <TextView
-        android:id="@+id/pressure_sensor"
+        android:id="@+id/battery_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/pressure_sensor"
+        android:text="@string/battery_sensor"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -32,52 +32,52 @@
         android:id="@+id/info_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:onClick="showPressureDialogPopup"
-        app:layout_constraintStart_toEndOf="@+id/pressure_sensor"
-        app:layout_constraintTop_toTopOf="@+id/pressure_sensor"
+        android:onClick="showBatteryDialogPopup"
+        app:layout_constraintStart_toEndOf="@+id/battery_sensor"
+        app:layout_constraintTop_toTopOf="@+id/battery_sensor"
         app:srcCompat="@drawable/question" />
 
     <ImageView
-        android:id="@+id/pressure_logo"
+        android:id="@+id/battery_logo"
         style="@style/MaterialAnimations"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:contentDescription="@string/pressure_sensor"
-        android:transitionName="@string/pressure_anim"
+        android:contentDescription="@string/battery_sensor"
+        android:transitionName="@string/battery_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/pressure_sensor"
-        app:srcCompat="@drawable/barometericon2" />
+        app:layout_constraintTop_toBottomOf="@+id/battery_sensor"
+        app:srcCompat="@drawable/batteryicon2" />
 
     <TextView
-        android:id="@+id/pressure"
+        android:id="@+id/battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/level"
+        android:text="@string/battery"
         android:textColor="@color/white"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="@+id/pressure_logo"
-        app:layout_constraintStart_toStartOf="@+id/pressure_logo"
-        app:layout_constraintTop_toBottomOf="@+id/pressure_sensor" />
+        android:textSize="24sp"
+        app:layout_constraintEnd_toEndOf="@+id/battery_logo"
+        app:layout_constraintStart_toStartOf="@+id/battery_logo"
+        app:layout_constraintTop_toBottomOf="@+id/battery_sensor" />
 
     <TextView
-        android:id="@+id/current_pressure"
+        android:id="@+id/current_battery"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="100dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/pressure_logo"
-        app:layout_constraintEnd_toEndOf="@+id/pressure_logo"
-        app:layout_constraintStart_toStartOf="@+id/pressure_logo"
-        app:layout_constraintTop_toBottomOf="@+id/pressure" />
+        app:layout_constraintBottom_toBottomOf="@+id/battery_logo"
+        app:layout_constraintEnd_toEndOf="@+id/battery_logo"
+        app:layout_constraintStart_toStartOf="@+id/battery_logo"
+        app:layout_constraintTop_toBottomOf="@+id/battery" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

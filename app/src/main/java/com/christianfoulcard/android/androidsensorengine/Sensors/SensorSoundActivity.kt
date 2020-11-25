@@ -8,7 +8,6 @@ import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
-import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -28,30 +27,33 @@ import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
+import com.christianfoulcard.android.androidsensorengine.Sensordata.SoundSensorData
+import com.christianfoulcard.android.androidsensorengine.Sensordata.mRecorder
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
 import com.google.firebase.analytics.FirebaseAnalytics
-import kotlinx.android.synthetic.main.sound_sensor.*
-import java.io.IOException
 import kotlin.math.log10
 
 //TODO: Take out a permission
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-class SoundSensorActivity : AppCompatActivity() {
+class SensorSoundActivity : AppCompatActivity() {
 
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
       private val model: DataViewModel by viewModels()
 
     //View Binding to call the layout's views
-    private lateinit var binding: SoundSensorBinding
+    private lateinit var binding: ActivitySoundBinding
 
     //Dialog popup info
     private var soundInfoDialog: Dialog? = null
 
+    //All Sound sensor data is located here
+    private val soundSensorData: SoundSensorData? = null
+
     //For sound recording + converting to sound data
     //Handler is also used for pin shortcut dialog box
-    private var mRecorder: MediaRecorder? = null
+
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
@@ -61,18 +63,9 @@ class SoundSensorActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = SoundSensorBinding.inflate(layoutInflater)
+        binding = ActivitySoundBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        // Create the observer which updates the UI.
-        val nameObserver = Observer<String> { newName ->
-            // Update the UI, in this case, a TextView.
-            current_decibel.text = newName
-        }
-
-        // Observe the LiveData, passing in this activity as the LifecycleOwner and the observer.
-        model.currentName.observe(this, nameObserver)
 
         // Initialize Ads
 //        MobileAds.initialize(this) {} //ADMOB App ID
@@ -135,7 +128,7 @@ class SoundSensorActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
-            return startRecorder()
+            return soundSensorData?.startRecorder()!!
         }
 
 
@@ -149,7 +142,7 @@ class SoundSensorActivity : AppCompatActivity() {
     //Stops microphone from recording when user exits activity
     public override fun onPause() {
         super.onPause()
-        stopRecorder()
+        soundSensorData?.stopRecorder()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -193,38 +186,6 @@ class SoundSensorActivity : AppCompatActivity() {
                 }
                 return
             }
-        }
-    }
-
-    //Properties of the microphone
-    private fun startRecorder() {
-        if (mRecorder == null) {
-            mRecorder = MediaRecorder()
-            mRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
-            mRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-            mRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
-            mRecorder!!.setOutputFile("/dev/null")
-            try {
-                mRecorder!!.prepare()
-            } catch (ioe: IOException) {
-
-            } catch (e: SecurityException) {
-
-            }
-            try {
-                mRecorder!!.start()
-            } catch (e: SecurityException) {
-
-            }
-        }
-    }
-
-    //Releases microphone
-    private fun stopRecorder() {
-        if (mRecorder != null) {
-            mRecorder!!.stop()
-            mRecorder!!.release()
-            mRecorder = null
         }
     }
 
@@ -280,12 +241,12 @@ private fun updateTv() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     fun showSoundDialogPopup(v: View?) {
-        soundInfoDialog!!.setContentView(R.layout.sound_popup_info)
+        soundInfoDialog!!.setContentView(R.layout.dialog_sound)
         soundInfoDialog!!.show()
     }
 
     fun closeSoundDialogPopup(v: View?) {
-        soundInfoDialog!!.setContentView(R.layout.sound_popup_info)
+        soundInfoDialog!!.setContentView(R.layout.dialog_sound)
         soundInfoDialog!!.dismiss()
     }
 
@@ -313,7 +274,7 @@ private fun updateTv() {
      fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val soundIntent = Intent(this, SoundSensorActivity::class.java)
+        val soundIntent = Intent(this, SensorSoundActivity::class.java)
                  .setAction("Sound")
 
              if (shortcutManager!!.isRequestPinShortcutSupported) {

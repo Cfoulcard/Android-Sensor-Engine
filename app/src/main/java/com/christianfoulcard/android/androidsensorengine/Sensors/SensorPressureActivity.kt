@@ -25,59 +25,63 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import com.christianfoulcard.android.androidsensorengine.BuildConfig
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.Sensors.HumidityActivity
-import com.christianfoulcard.android.androidsensorengine.databinding.HumiditySensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityPressureBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class HumidityActivity : AppCompatActivity(), SensorEventListener {
+class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: HumiditySensorBinding
+    private lateinit var binding: ActivityPressureBinding
 
     //Dialog popup info
-    private var humidityInfoDialog: Dialog? = null
+    private var pressureInfoDialog: Dialog? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
-    private var humidity: Sensor? = null
+    private var pressure: Sensor? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //Gets the setting preferences
+    //Get the preference settings
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
+
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
+
+/*    override fun startService(service: Intent?): ComponentName? {
+        return super.startService(service)
+    }*/
+
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = HumiditySensorBinding.inflate(layoutInflater)
+        binding = ActivityPressureBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         // Initialize Ads
-//        MobileAds.initialize(this) {}  //ADMOB App ID
+//        MobileAds.initialize(this) {} //ADMOB App ID
 //        val adRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
-
-        //Dialog Box for Temperature Info
-        humidityInfoDialog = Dialog(this)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            binding.humidityLogo.setOnLongClickListener() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            binding.pressureLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -85,53 +89,58 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
         // appear
-        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) == null) {
+        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
+        if (BuildConfig.DEBUG && sensorManager == null) {
+            error("Assertion failed")
+        }
+        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
         // Ambient Temperature measures the temperature around the device
-        humidity = sensorManager!!.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
+        pressure = sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE)
     }
+
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onSensorChanged(event: SensorEvent) {
+
         // Get the application context
         mContext = applicationContext
 
         // Get the activity
-        mActivity = this@HumidityActivity
+        mActivity = this@SensorPressureActivity
 
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
+        val pressure_level = event.values[0].toInt()
 
-        //Get Humidity from the sensor
-        val waterVapor = event.values[0].toInt()
-
-        //Gets sensor data for humidity
-        if (event.sensor.type == Sensor.TYPE_RELATIVE_HUMIDITY) {
-            binding.currentHumidity.text = "$waterVapor%"
+        if (event.sensor.type == Sensor.TYPE_PRESSURE) {
+            binding.currentPressure.text = "$pressure_level hPa"
         }
 
-        //Gets the string value from the edit_text_humidity key in root_preferences.xml
-        val vaporNumber = settings.getString("edit_text_humidity", "")
-
         // Create an Intent for the activity you want to start
-        val resultIntent = Intent(this, HumidityActivity::class.java)
+        val resultIntent = Intent(this, SensorPressureActivity::class.java)
 
         // Create the TaskStackBuilder and add the intent, which inflates the back stack
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addNextIntentWithParentStack(resultIntent)
 
+
+
         // Get the PendingIntent containing the entire back stack
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        //Checks to see if the humidity alert notifications are turned on in root_preferences.xml
-        if (settings.getBoolean("switch_preference_humidity", true)) {
+        //Checks to see if the pressure alert notifications are turned on in root_preferences.xml
+        if (settings.getBoolean("switch_preference_pressure", true)) {
+            //Gets the string value from the edit_text_pressure key in root_preferences.xml
+            val pressureNumber = settings.getString("edit_text_pressure", "")
+
             //Conditions that must be true for the notifications to work
-            if (vaporNumber == waterVapor.toString()) {
+            if (pressure_level.toString() == pressureNumber) {
                 val textTitle = "Android Sensor Engine"
-                val textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%"
+                val textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa"
+
                 val builder = NotificationCompat.Builder(this, CHANNEL_ID)
                         .setSmallIcon(R.drawable.notification_logo)
                         .setContentTitle(textTitle)
@@ -140,8 +149,8 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
                         .setAutoCancel(true)
                         .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                         .setOnlyAlertOnce(true)
-
                 val notificationManager = NotificationManagerCompat.from(this)
+
                 // notificationId is a unique int for each notification that you must define
                 notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
             }
@@ -153,8 +162,8 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name: CharSequence = getString(R.string.channel_name_humidity)
-            val description = getString(R.string.channel_description_humidity)
+            val name: CharSequence = getString(R.string.channel_name_pressure)
+            val description = getString(R.string.channel_description_pressure)
             val importance = NotificationManager.IMPORTANCE_DEFAULT
             val channel = NotificationChannel(CHANNEL_ID, name, importance)
             channel.description = description
@@ -168,20 +177,25 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
     override fun onStart() {
+        super.onStart()
+        //Dialog Box for Temperature Info
+        pressureInfoDialog = Dialog(this)
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        binding.humidity.startAnimation(`in`)
-        binding.currentHumidity.startAnimation(`in`)
-        binding.humiditySensor.startAnimation(`in`)
+        binding.pressure.startAnimation(`in`)
+        binding.currentPressure.startAnimation(`in`)
+        binding.pressureSensor.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
 
+        // Register a listener for the sensor.
         createNotificationChannel()
-        super.onStart()
-        sensorManager!!.registerListener(this, humidity, SensorManager.SENSOR_DELAY_NORMAL)
+
+        sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onResume() {
         super.onResume()
+        // mAdView.resume()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
@@ -195,19 +209,19 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     }
 
     override fun onDestroy() {
-        // Unregisters the sensor when the activity pauses.
         super.onDestroy()
-        sensorManager!!.unregisterListener(this)
+        // Unregisters the sensor when the activity pauses.
+      //  sensorManager!!.unregisterListener(this)
     }
 
-    fun showHumidityDialogPopup(v: View?) {
-        humidityInfoDialog!!.setContentView(R.layout.humidity_popup_info)
-        humidityInfoDialog!!.show()
+    fun showPressureDialogPopup(v: View?) {
+        pressureInfoDialog!!.setContentView(R.layout.dialog_pressure)
+        pressureInfoDialog!!.show()
     }
 
-    fun closeHumidityDialogPopup(v: View?) {
-        humidityInfoDialog!!.setContentView(R.layout.humidity_popup_info)
-        humidityInfoDialog!!.dismiss()
+    fun closePressureDialogPopup(v: View?) {
+        pressureInfoDialog!!.setContentView(R.layout.dialog_pressure)
+        pressureInfoDialog!!.dismiss()
     }
 
     //This will add functionality to the menu button within the action bar
@@ -235,15 +249,15 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, HumidityActivity::class.java)
-                .setAction("Humidity")
+        val intent = Intent(this, SensorPressureActivity::class.java)
+                .setAction("Pressure")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {
 
-            val pinShortcutInfo = ShortcutInfo.Builder(this, "humidity-shortcut")
-                    .setShortLabel(getString(R.string.humidity_sensor))
-                    .setLongLabel(getString(R.string.humidity_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.humidity_icon))
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
+                    .setShortLabel(getString(R.string.pressure_sensor))
+                    .setLongLabel(getString(R.string.pressure_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.barometer_icon))
                     .setIntent(intent)
                     .build()
 
@@ -277,6 +291,6 @@ class HumidityActivity : AppCompatActivity(), SensorEventListener {
 
     companion object {
         //ID used for notifications
-        private const val CHANNEL_ID = "5"
+        private const val CHANNEL_ID = "4"
     }
 }

@@ -22,16 +22,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.RamSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityRamBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 
-class RamActivity : AppCompatActivity() {
+class SensorRamActivity : AppCompatActivity() {
 
     //TODO: Add preferences for Ram data
 
     //View Binding to call the layout's views
-    private lateinit var binding: RamSensorBinding
+    private lateinit var binding: ActivityRamBinding
 
     //Dialog popup info
     private var ramInfoDialog: Dialog? = null
@@ -48,7 +48,7 @@ class RamActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = RamSensorBinding.inflate(layoutInflater)
+        binding = ActivityRamBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -121,12 +121,12 @@ class RamActivity : AppCompatActivity() {
     private fun unbindService(activityService: String) {}
 
     fun showRamDialogPopup(v: View?) {
-        ramInfoDialog!!.setContentView(R.layout.ram_popup_info)
+        ramInfoDialog!!.setContentView(R.layout.dialog_ram)
         ramInfoDialog!!.show()
     }
 
     fun closeRamDialogPopup(v: View?) {
-        ramInfoDialog!!.setContentView(R.layout.ram_popup_info)
+        ramInfoDialog!!.setContentView(R.layout.dialog_ram)
         ramInfoDialog!!.dismiss()
     }
 
@@ -154,7 +154,7 @@ class RamActivity : AppCompatActivity() {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, RamActivity::class.java)
+        val intent = Intent(this, SensorRamActivity::class.java)
                 .setAction("Ram")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {

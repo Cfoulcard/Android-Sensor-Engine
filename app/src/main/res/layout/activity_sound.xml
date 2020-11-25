@@ -10,7 +10,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
     android:fillViewport="true"
-    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity">
+    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorSoundActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

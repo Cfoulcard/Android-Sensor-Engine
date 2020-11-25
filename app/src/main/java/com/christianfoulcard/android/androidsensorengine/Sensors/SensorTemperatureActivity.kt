@@ -27,13 +27,13 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.TemperatureSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityTemperatureBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class TemperatureActivity : AppCompatActivity(), SensorEventListener {
+class SensorTemperatureActivity : AppCompatActivity(), SensorEventListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: TemperatureSensorBinding
+    private lateinit var binding: ActivityTemperatureBinding
 
     //Dialog popup info
     private var tempInfoDialog: Dialog? = null
@@ -55,7 +55,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = TemperatureSensorBinding.inflate(layoutInflater)
+        binding = ActivityTemperatureBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -150,7 +150,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
         mContext = applicationContext
 
         // Get the activity
-        mActivity = this@TemperatureActivity
+        mActivity = this@SensorTemperatureActivity
 
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
@@ -181,7 +181,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
             val airNumber = settings.getString("edit_text_air_temp", "")
 
             // Create an Intent for the activity you want to start
-            val resultIntent = Intent(this, TemperatureActivity::class.java)
+            val resultIntent = Intent(this, SensorTemperatureActivity::class.java)
             // Create the TaskStackBuilder and add the intent, which inflates the back stack
             val stackBuilder = TaskStackBuilder.create(this)
             stackBuilder.addNextIntentWithParentStack(resultIntent)
@@ -270,12 +270,12 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     fun showTempDialogPopup(v: View?) {
-        tempInfoDialog!!.setContentView(R.layout.temperature_popup_info)
+        tempInfoDialog!!.setContentView(R.layout.dialog_temperature)
         tempInfoDialog!!.show()
     }
 
     fun closeTempDialogPopup(v: View?) {
-        tempInfoDialog!!.setContentView(R.layout.temperature_popup_info)
+        tempInfoDialog!!.setContentView(R.layout.dialog_temperature)
         tempInfoDialog!!.dismiss()
     }
 
@@ -307,7 +307,7 @@ class TemperatureActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, TemperatureActivity::class.java)
+        val intent = Intent(this, SensorTemperatureActivity::class.java)
                 .setAction("Temp")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {

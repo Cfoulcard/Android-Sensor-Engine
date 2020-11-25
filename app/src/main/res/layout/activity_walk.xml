@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
     android:fillViewport="true"
-    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.BatteryActivity">
+    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorWalkActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,14 +14,14 @@
 
 
     <TextView
-        android:id="@+id/battery_sensor"
+        android:id="@+id/walk_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/battery_sensor"
+        android:text="@string/walk_sensor"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,39 +34,39 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:onClick="showBatteryDialogPopup"
-        app:layout_constraintStart_toEndOf="@+id/battery_sensor"
-        app:layout_constraintTop_toTopOf="@+id/battery_sensor"
+        android:onClick="showWalkDialogPopup"
+        app:layout_constraintStart_toEndOf="@+id/walk_sensor"
+        app:layout_constraintTop_toTopOf="@+id/walk_sensor"
         app:srcCompat="@drawable/question" />
 
     <ImageView
-        android:id="@+id/battery_logo"
+        android:id="@+id/walk_logo"
         style="@style/MaterialAnimations"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:contentDescription="@string/battery_sensor"
-        android:transitionName="@string/battery_anim"
+        android:contentDescription="@string/walk_sensor"
+        android:transitionName="@string/walk_anim"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/battery_sensor"
-        app:srcCompat="@drawable/batteryicon2" />
+        app:layout_constraintTop_toBottomOf="@+id/walk_sensor"
+        app:srcCompat="@drawable/walkicon2" />
 
     <TextView
-        android:id="@+id/battery"
+        android:id="@+id/steps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="36dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/battery"
+        android:text="@string/steps"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="@+id/battery_logo"
-        app:layout_constraintStart_toStartOf="@+id/battery_logo"
-        app:layout_constraintTop_toBottomOf="@+id/battery_sensor" />
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="@+id/walk_logo"
+        app:layout_constraintStart_toStartOf="@+id/walk_logo"
+        app:layout_constraintTop_toBottomOf="@+id/walk_sensor" />
 
     <TextView
-        android:id="@+id/current_battery"
+        android:id="@+id/current_steps"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="100dp"
@@ -74,10 +74,10 @@
         android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/battery_logo"
-        app:layout_constraintEnd_toEndOf="@+id/battery_logo"
-        app:layout_constraintStart_toStartOf="@+id/battery_logo"
-        app:layout_constraintTop_toBottomOf="@+id/battery" />
+        app:layout_constraintBottom_toBottomOf="@+id/walk_logo"
+        app:layout_constraintEnd_toEndOf="@+id/walk_logo"
+        app:layout_constraintStart_toStartOf="@+id/walk_logo"
+        app:layout_constraintTop_toBottomOf="@+id/steps" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

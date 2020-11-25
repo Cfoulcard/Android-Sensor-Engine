@@ -1,8 +1,6 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
-import android.app.Activity
-import android.app.Dialog
-import android.app.PendingIntent
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -16,6 +14,7 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -24,29 +23,30 @@ import android.view.animation.Animation
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.WalkSensorBinding
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityBatteryBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityHumidityBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class WalkActivity : AppCompatActivity(), SensorEventListener {
+class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: WalkSensorBinding
+    private lateinit var binding: ActivityHumidityBinding
 
     //Dialog popup info
-    private var walkInfoDialog: Dialog? = null
+    private var humidityInfoDialog: Dialog? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
-    private var steps: Sensor? = null
+    private var humidity: Sensor? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //Gets settings from preference
+    //Gets the setting preferences
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
@@ -60,24 +60,24 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = WalkSensorBinding.inflate(layoutInflater)
+        binding = ActivityHumidityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         // Initialize Ads
-//        MobileAds.initialize(this) {} //ADMOB App ID
+//        MobileAds.initialize(this) {}  //ADMOB App ID
 //        val adRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
 
         //Dialog Box for Temperature Info
-        walkInfoDialog = Dialog(this)
+        humidityInfoDialog = Dialog(this)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
-            binding.walkLogo.setOnLongClickListener() {
+            binding.humidityLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -85,13 +85,13 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
         // appear
-        this.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) == null) {
+        sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
-        // Gets data from the step counter sensor
-        steps = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
+        // Ambient Temperature measures the temperature around the device
+        humidity = sensorManager!!.getDefaultSensor(Sensor.TYPE_RELATIVE_HUMIDITY)
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -100,30 +100,84 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
         mContext = applicationContext
 
         // Get the activity
-        mActivity = this@WalkActivity
+        mActivity = this@SensorHumidityActivity
 
-        //Turns sensor data into walking data
-        val stepCounter = event.values[0].toInt()
+        // Get the instance of SharedPreferences object
+        val settings = PreferenceManager.getDefaultSharedPreferences(this)
 
-        if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
-            binding.currentSteps.text = stepCounter.toString() + "" //Crashes without ""
+        //Get Humidity from the sensor
+        val waterVapor = event.values[0].toInt()
+
+        //Gets sensor data for humidity
+        if (event.sensor.type == Sensor.TYPE_RELATIVE_HUMIDITY) {
+            binding.currentHumidity.text = "$waterVapor%"
+        }
+
+        //Gets the string value from the edit_text_humidity key in root_preferences.xml
+        val vaporNumber = settings.getString("edit_text_humidity", "")
+
+        // Create an Intent for the activity you want to start
+        val resultIntent = Intent(this, SensorHumidityActivity::class.java)
+
+        // Create the TaskStackBuilder and add the intent, which inflates the back stack
+        val stackBuilder = TaskStackBuilder.create(this)
+        stackBuilder.addNextIntentWithParentStack(resultIntent)
+
+        // Get the PendingIntent containing the entire back stack
+        val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+
+        //Checks to see if the humidity alert notifications are turned on in root_preferences.xml
+        if (settings.getBoolean("switch_preference_humidity", true)) {
+            //Conditions that must be true for the notifications to work
+            if (vaporNumber == waterVapor.toString()) {
+                val textTitle = "Android Sensor Engine"
+                val textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%"
+                val builder = NotificationCompat.Builder(this, CHANNEL_ID)
+                        .setSmallIcon(R.drawable.notification_logo)
+                        .setContentTitle(textTitle)
+                        .setContentText(textContent)
+                        .setContentIntent(resultPendingIntent)
+                        .setAutoCancel(true)
+                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                        .setOnlyAlertOnce(true)
+
+                val notificationManager = NotificationManagerCompat.from(this)
+                // notificationId is a unique int for each notification that you must define
+                notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
+            }
+        }
+    }
+
+    //For handling notifications
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name: CharSequence = getString(R.string.channel_name_humidity)
+            val description = getString(R.string.channel_description_humidity)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(CHANNEL_ID, name, importance)
+            channel.description = description
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            val notificationManager = getSystemService(NotificationManager::class.java)!!
+            notificationManager.createNotificationChannel(channel)
         }
     }
 
     override fun onAccuracyChanged(sensor: Sensor, accuracy: Int) {}
 
     override fun onStart() {
-        super.onStart()
-
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        binding.walkSensor.startAnimation(`in`)
-        binding.currentSteps.startAnimation(`in`)
-        binding.steps.startAnimation(`in`)
+        binding.humidity.startAnimation(`in`)
+        binding.currentHumidity.startAnimation(`in`)
+        binding.humiditySensor.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
 
-        // Register a listener for the sensor.
-        sensorManager!!.registerListener(this, steps, SensorManager.SENSOR_DELAY_NORMAL)
+        createNotificationChannel()
+        super.onStart()
+        sensorManager!!.registerListener(this, humidity, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onResume() {
@@ -138,18 +192,22 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
-        // No need to unregister. Step counter will stop if uncommented
-        // sensorManager.unregisterListener(this);
     }
 
-    fun showWalkDialogPopup(v: View?) {
-        walkInfoDialog!!.setContentView(R.layout.walk_popup_info)
-        walkInfoDialog!!.show()
+    override fun onDestroy() {
+        // Unregisters the sensor when the activity pauses.
+        super.onDestroy()
+        sensorManager!!.unregisterListener(this)
     }
 
-    fun closeWalkDialogPopup(v: View?) {
-        walkInfoDialog!!.setContentView(R.layout.walk_popup_info)
-        walkInfoDialog!!.dismiss()
+    fun showHumidityDialogPopup(v: View?) {
+        humidityInfoDialog!!.setContentView(R.layout.dialog_humidity)
+        humidityInfoDialog!!.show()
+    }
+
+    fun closeHumidityDialogPopup(v: View?) {
+        humidityInfoDialog!!.setContentView(R.layout.dialog_humidity)
+        humidityInfoDialog!!.dismiss()
     }
 
     //This will add functionality to the menu button within the action bar
@@ -177,15 +235,15 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, WalkActivity::class.java)
-                .setAction("Walk")
+        val intent = Intent(this, SensorHumidityActivity::class.java)
+                .setAction("Humidity")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {
 
-            val pinShortcutInfo = ShortcutInfo.Builder(this, "walk-shortcut")
-                    .setShortLabel(getString(R.string.walk_sensor))
-                    .setLongLabel(getString(R.string.walk_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.walk_icon))
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "humidity-shortcut")
+                    .setShortLabel(getString(R.string.humidity_sensor))
+                    .setLongLabel(getString(R.string.humidity_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.humidity_icon))
                     .setIntent(intent)
                     .build()
 
@@ -215,5 +273,10 @@ class WalkActivity : AppCompatActivity(), SensorEventListener {
                 .setTitle(getString(R.string.pin_shortcut_title))
                 .setMessage(getString(R.string.pin_shortut_message))
                 .show()
+    }
+
+    companion object {
+        //ID used for notifications
+        private const val CHANNEL_ID = "5"
     }
 }

@@ -1,6 +1,8 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
-import android.app.*
+import android.app.Activity
+import android.app.Dialog
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -14,7 +16,6 @@ import android.hardware.SensorManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.preference.PreferenceManager
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -23,53 +24,41 @@ import android.view.animation.Animation
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
-import com.christianfoulcard.android.androidsensorengine.BuildConfig
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.PressureSensorBinding
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityWalkBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class PressureActivity : AppCompatActivity(), SensorEventListener {
+class SensorWalkActivity : AppCompatActivity(), SensorEventListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: PressureSensorBinding
+    private lateinit var binding: ActivityWalkBinding
 
     //Dialog popup info
-    private var pressureInfoDialog: Dialog? = null
+    private var walkInfoDialog: Dialog? = null
 
     //Sensor initiation
     private var sensorManager: SensorManager? = null
-    private var pressure: Sensor? = null
+    private var steps: Sensor? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //Get the preference settings
+    //Gets settings from preference
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
-
-/*    override fun startService(service: Intent?): ComponentName? {
-        return super.startService(service)
-    }*/
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = PressureSensorBinding.inflate(layoutInflater)
+        binding = ActivityWalkBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -78,12 +67,15 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
 //        val adRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
 
+        //Dialog Box for Temperature Info
+        walkInfoDialog = Dialog(this)
+
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            binding.pressureLogo.setOnLongClickListener() {
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            binding.walkLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
@@ -91,88 +83,28 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
         // Get an instance of the sensor service, and use that to get an instance of
         // the relative temperature. If device does not support this sensor a toast message will
         // appear
-        sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        if (BuildConfig.DEBUG && sensorManager == null) {
-            error("Assertion failed")
-        }
-        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE) == null) {
+        this.sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
+        if (sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }
 
-        // Ambient Temperature measures the temperature around the device
-        pressure = sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE)
+        // Gets data from the step counter sensor
+        steps = sensorManager!!.getDefaultSensor(Sensor.TYPE_STEP_COUNTER)
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     override fun onSensorChanged(event: SensorEvent) {
-
         // Get the application context
         mContext = applicationContext
 
         // Get the activity
-        mActivity = this@PressureActivity
+        mActivity = this@SensorWalkActivity
 
-        // Get the instance of SharedPreferences object
-        val settings = PreferenceManager.getDefaultSharedPreferences(this)
-        val pressure_level = event.values[0].toInt()
+        //Turns sensor data into walking data
+        val stepCounter = event.values[0].toInt()
 
-        if (event.sensor.type == Sensor.TYPE_PRESSURE) {
-            binding.currentPressure.text = "$pressure_level hPa"
-        }
-
-        // Create an Intent for the activity you want to start
-        val resultIntent = Intent(this, PressureActivity::class.java)
-
-        // Create the TaskStackBuilder and add the intent, which inflates the back stack
-        val stackBuilder = TaskStackBuilder.create(this)
-        stackBuilder.addNextIntentWithParentStack(resultIntent)
-
-
-
-        // Get the PendingIntent containing the entire back stack
-        val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
-
-        //Checks to see if the pressure alert notifications are turned on in root_preferences.xml
-        if (settings.getBoolean("switch_preference_pressure", true)) {
-            //Gets the string value from the edit_text_pressure key in root_preferences.xml
-            val pressureNumber = settings.getString("edit_text_pressure", "")
-
-            //Conditions that must be true for the notifications to work
-            if (pressure_level.toString() == pressureNumber) {
-                val textTitle = "Android Sensor Engine"
-                val textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa"
-
-                val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.notification_logo)
-                        .setContentTitle(textTitle)
-                        .setContentText(textContent)
-                        .setContentIntent(resultPendingIntent)
-                        .setAutoCancel(true)
-                        .setPriority(NotificationCompat.PRIORITY_DEFAULT)
-                        .setOnlyAlertOnce(true)
-                val notificationManager = NotificationManagerCompat.from(this)
-
-                // notificationId is a unique int for each notification that you must define
-                notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
-            }
-        }
-    }
-
-    //For handling notifications
-    private fun createNotificationChannel() {
-        // Create the NotificationChannel, but only on API 26+ because
-        // the NotificationChannel class is new and not in the support library
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val name: CharSequence = getString(R.string.channel_name_pressure)
-            val description = getString(R.string.channel_description_pressure)
-            val importance = NotificationManager.IMPORTANCE_DEFAULT
-            val channel = NotificationChannel(CHANNEL_ID, name, importance)
-            channel.description = description
-            // Register the channel with the system; you can't change the importance
-            // or other notification behaviors after this
-            val notificationManager = getSystemService(NotificationManager::class.java)!!
-            notificationManager.createNotificationChannel(channel)
+        if (event.sensor.type == Sensor.TYPE_STEP_COUNTER) {
+            binding.currentSteps.text = stepCounter.toString() + "" //Crashes without ""
         }
     }
 
@@ -180,24 +112,20 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onStart() {
         super.onStart()
-        //Dialog Box for Temperature Info
-        pressureInfoDialog = Dialog(this)
+
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
-        binding.pressure.startAnimation(`in`)
-        binding.currentPressure.startAnimation(`in`)
-        binding.pressureSensor.startAnimation(`in`)
+        binding.walkSensor.startAnimation(`in`)
+        binding.currentSteps.startAnimation(`in`)
+        binding.steps.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
 
         // Register a listener for the sensor.
-        createNotificationChannel()
-
-        sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
+        sensorManager!!.registerListener(this, steps, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
     override fun onResume() {
         super.onResume()
-        // mAdView.resume()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
@@ -208,22 +136,18 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
 
     override fun onPause() {
         super.onPause()
+        // No need to unregister. Step counter will stop if uncommented
+        // sensorManager.unregisterListener(this);
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        // Unregisters the sensor when the activity pauses.
-      //  sensorManager!!.unregisterListener(this)
+    fun showWalkDialogPopup(v: View?) {
+        walkInfoDialog!!.setContentView(R.layout.dialog_walk)
+        walkInfoDialog!!.show()
     }
 
-    fun showPressureDialogPopup(v: View?) {
-        pressureInfoDialog!!.setContentView(R.layout.pressure_popup_info)
-        pressureInfoDialog!!.show()
-    }
-
-    fun closePressureDialogPopup(v: View?) {
-        pressureInfoDialog!!.setContentView(R.layout.pressure_popup_info)
-        pressureInfoDialog!!.dismiss()
+    fun closeWalkDialogPopup(v: View?) {
+        walkInfoDialog!!.setContentView(R.layout.dialog_walk)
+        walkInfoDialog!!.dismiss()
     }
 
     //This will add functionality to the menu button within the action bar
@@ -251,15 +175,15 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, PressureActivity::class.java)
-                .setAction("Pressure")
+        val intent = Intent(this, SensorWalkActivity::class.java)
+                .setAction("Walk")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {
 
-            val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
-                    .setShortLabel(getString(R.string.pressure_sensor))
-                    .setLongLabel(getString(R.string.pressure_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.barometer_icon))
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "walk-shortcut")
+                    .setShortLabel(getString(R.string.walk_sensor))
+                    .setLongLabel(getString(R.string.walk_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.walk_icon))
                     .setIntent(intent)
                     .build()
 
@@ -289,10 +213,5 @@ class PressureActivity : AppCompatActivity(), SensorEventListener {
                 .setTitle(getString(R.string.pin_shortcut_title))
                 .setMessage(getString(R.string.pin_shortut_message))
                 .show()
-    }
-
-    companion object {
-        //ID used for notifications
-        private const val CHANNEL_ID = "4"
     }
 }

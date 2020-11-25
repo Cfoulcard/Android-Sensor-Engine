@@ -15,8 +15,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.animation.AlphaAnimation
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
@@ -24,20 +22,14 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.BatterySensorBinding
-import com.christianfoulcard.android.androidsensorengine.databinding.RamSensorBinding
-import com.christianfoulcard.android.androidsensorengine.databinding.SoundSensorBinding
-import com.google.android.gms.ads.AdRequest
-import com.google.android.gms.ads.AdView
-import com.google.android.gms.ads.MobileAds
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityBatteryBinding
 import com.google.firebase.analytics.FirebaseAnalytics
-import java.util.*
 
 
-class BatteryActivity : AppCompatActivity() {
+class SensorBatteryActivity : AppCompatActivity() {
 
     //View Binding to call the layout's views
-    private lateinit var binding: BatterySensorBinding
+    private lateinit var binding: ActivityBatteryBinding
 
     //Dialog popup info
     var batteryInfoDialog: Dialog? = null
@@ -63,7 +55,7 @@ class BatteryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = BatterySensorBinding.inflate(layoutInflater)
+        binding = ActivityBatteryBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -135,12 +127,12 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     fun showBatteryDialogPopup(v: View?) {
-        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.setContentView(R.layout.dialog_battery)
         batteryInfoDialog?.show()
     }
 
     fun closeBatteryDialogPopup(v: View?) {
-        batteryInfoDialog?.setContentView(R.layout.battery_popup_info)
+        batteryInfoDialog?.setContentView(R.layout.dialog_battery)
         batteryInfoDialog?.dismiss()
     }
 
@@ -180,7 +172,7 @@ class BatteryActivity : AppCompatActivity() {
             // Get the instance of SharedPreferences object
             //Note the original context was "this". This caused a Null Pointer error
             //Used this@BatteryActivity to fix the issue
-            val settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@BatteryActivity)
+            val settings: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(this@SensorBatteryActivity)
 
             //Finds the preference string value and links it with the appropriate temperature calc formula
             when (val unit = settings.getString("batterytempunit", "")) {
@@ -200,7 +192,7 @@ class BatteryActivity : AppCompatActivity() {
             val battNumber = settings.getString("edit_text_battery_temp", "")
 
             // Create an Intent for the activity you want to start
-            val resultIntent = Intent(this, BatteryActivity::class.java)
+            val resultIntent = Intent(this, SensorBatteryActivity::class.java)
 
             // Create the TaskStackBuilder and add the intent, which inflates the back stack
             val stackBuilder = TaskStackBuilder.create(context)
@@ -271,8 +263,8 @@ class BatteryActivity : AppCompatActivity() {
     }
 
     //This is needed to help open the activity from the notifications
-    private fun Intent(broadcastReceiver: BroadcastReceiver, java: Class<BatteryActivity>): Intent? {
-    return Intent(this, BatteryActivity::class.java)
+    private fun Intent(broadcastReceiver: BroadcastReceiver, java: Class<SensorBatteryActivity>): Intent? {
+    return Intent(this, SensorBatteryActivity::class.java)
     }
 
 
@@ -301,7 +293,7 @@ class BatteryActivity : AppCompatActivity() {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, BatteryActivity::class.java)
+        val intent = Intent(this, SensorBatteryActivity::class.java)
                 .setAction("Battery")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {

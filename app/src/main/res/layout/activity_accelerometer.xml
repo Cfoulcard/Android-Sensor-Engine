@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/mainbackground"
     android:fillViewport="true"
-    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.WalkActivity">
+    tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorAccelerometerActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -14,14 +14,14 @@
 
 
     <TextView
-        android:id="@+id/walk_sensor"
+        android:id="@+id/accelerometer_sensor"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="128dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/walk_sensor"
+        android:text="@string/accelerometer_sensor"
         android:textColor="@color/white"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -34,50 +34,50 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="16dp"
-        android:onClick="showWalkDialogPopup"
-        app:layout_constraintStart_toEndOf="@+id/walk_sensor"
-        app:layout_constraintTop_toTopOf="@+id/walk_sensor"
+        android:onClick="showAccelerometerDialogPopup"
+        app:layout_constraintStart_toEndOf="@+id/accelerometer_sensor"
+        app:layout_constraintTop_toTopOf="@+id/accelerometer_sensor"
         app:srcCompat="@drawable/question" />
 
     <ImageView
-        android:id="@+id/walk_logo"
+        android:id="@+id/accelerometer_logo"
         style="@style/MaterialAnimations"
         android:layout_width="300dp"
         android:layout_height="300dp"
-        android:contentDescription="@string/walk_sensor"
-        android:transitionName="@string/walk_anim"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/accelerometer_sensor"
+        android:transitionName="@string/speed_anim"
+        app:layout_constraintEnd_toEndOf="@+id/accelerometer_sensor"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/walk_sensor"
-        app:srcCompat="@drawable/walkicon2" />
+        app:layout_constraintStart_toStartOf="@+id/accelerometer_sensor"
+        app:layout_constraintTop_toBottomOf="@+id/accelerometer_sensor"
+        app:srcCompat="@drawable/speedicon2" />
 
     <TextView
-        android:id="@+id/steps"
+        android:id="@+id/accelerometer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="32dp"
         android:fontFamily="@font/anton_regular"
-        android:text="@string/steps"
+        android:text="@string/accelerometer"
         android:textColor="@color/white"
-        android:textSize="22sp"
-        app:layout_constraintEnd_toEndOf="@+id/walk_logo"
-        app:layout_constraintStart_toStartOf="@+id/walk_logo"
-        app:layout_constraintTop_toBottomOf="@+id/walk_sensor" />
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="@+id/accelerometer_logo"
+        app:layout_constraintStart_toStartOf="@+id/accelerometer_logo"
+        app:layout_constraintTop_toBottomOf="@+id/accelerometer_sensor" />
 
     <TextView
-        android:id="@+id/current_steps"
+        android:id="@+id/current_speed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="90dp"
         android:fontFamily="@font/anton_regular"
         android:text="@string/not_available"
         android:textColor="@color/white"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/walk_logo"
-        app:layout_constraintEnd_toEndOf="@+id/walk_logo"
-        app:layout_constraintStart_toStartOf="@+id/walk_logo"
-        app:layout_constraintTop_toBottomOf="@+id/steps" />
+        app:layout_constraintBottom_toBottomOf="@+id/accelerometer_logo"
+        app:layout_constraintEnd_toEndOf="@+id/accelerometer"
+        app:layout_constraintStart_toStartOf="@+id/accelerometer"
+        app:layout_constraintTop_toBottomOf="@+id/accelerometer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

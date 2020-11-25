@@ -1,6 +1,7 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
 import android.Manifest.permission
+import android.annotation.SuppressLint
 import android.app.*
 import android.content.Context
 import android.content.Intent
@@ -30,15 +31,15 @@ import androidx.core.content.ContextCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.AccelerometerSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityAccelerometerBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 //LocationListener needed to track speed
-class AccelerometerActivity : AppCompatActivity(), LocationListener {
+class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: AccelerometerSensorBinding
+    private lateinit var binding: ActivityAccelerometerBinding
 
     //Dialog popup info
     private var accelerometerInfoDialog: Dialog? = null
@@ -56,11 +57,12 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     val handler = Handler()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
+    @SuppressLint("MissingPermission")
     @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = AccelerometerSensorBinding.inflate(layoutInflater)
+        binding = ActivityAccelerometerBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -84,6 +86,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
 
         //Calls the location permission dialog box upon opening this activity
         requestLocationPermissions()
+
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -131,12 +134,12 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
     fun showAccelerometerDialogPopup(v: View?) {
-        accelerometerInfoDialog!!.setContentView(R.layout.accelerometer_popup_info)
+        accelerometerInfoDialog!!.setContentView(R.layout.dialog_accelerometer)
         accelerometerInfoDialog!!.show()
     }
 
     fun closeAccelerometerDialogPopup(v: View?) {
-        accelerometerInfoDialog!!.setContentView(R.layout.accelerometer_popup_info)
+        accelerometerInfoDialog!!.setContentView(R.layout.dialog_accelerometer)
         accelerometerInfoDialog!!.dismiss()
     }
 
@@ -192,7 +195,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
             val speedNumber = settings.getString("edit_text_speed", "")
 
             // Create an Intent for the activity you want to start
-            val resultIntent = Intent(this, AccelerometerActivity::class.java)
+            val resultIntent = Intent(this, SensorAccelerometerActivity::class.java)
 
             // Create the TaskStackBuilder and add the intent, which inflates the back stack
             val stackBuilder = TaskStackBuilder.create(this)
@@ -357,7 +360,7 @@ class AccelerometerActivity : AppCompatActivity(), LocationListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, AccelerometerActivity::class.java)
+        val intent = Intent(this, SensorAccelerometerActivity::class.java)
                 .setAction("Accelerometer")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {

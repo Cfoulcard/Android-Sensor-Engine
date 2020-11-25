@@ -26,13 +26,13 @@ import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.LuxSensorBinding
+import com.christianfoulcard.android.androidsensorengine.databinding.ActivityLightBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-class LightSensorActivity : AppCompatActivity(), SensorEventListener {
+class SensorLightActivity : AppCompatActivity(), SensorEventListener {
 
     //View Binding to call the layout's views
-    private lateinit var binding: LuxSensorBinding
+    private lateinit var binding: ActivityLightBinding
 
     //Dialog popup info
     private var lightInfoDialog: Dialog? = null
@@ -52,7 +52,7 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.AppThemeSensors)
         super.onCreate(savedInstanceState)
-        binding = LuxSensorBinding.inflate(layoutInflater)
+        binding = ActivityLightBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
@@ -130,12 +130,12 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     }
 
     fun showLightDialogPopup(v: View?) {
-        lightInfoDialog!!.setContentView(R.layout.lux_popup_info)
+        lightInfoDialog!!.setContentView(R.layout.dialog_light)
         lightInfoDialog!!.show()
     }
 
     fun closeLightDialogPopup(v: View?) {
-        lightInfoDialog!!.setContentView(R.layout.lux_popup_info)
+        lightInfoDialog!!.setContentView(R.layout.dialog_light)
         lightInfoDialog!!.dismiss()
     }
 
@@ -164,7 +164,7 @@ class LightSensorActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, LightSensorActivity::class.java)
+        val intent = Intent(this, SensorLightActivity::class.java)
                 .setAction("Light")
 
         if (shortcutManager!!.isRequestPinShortcutSupported) {
