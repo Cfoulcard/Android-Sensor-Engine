@@ -1,12 +1,6 @@
 package com.christianfoulcard.android.androidsensorengine
 
-import android.app.ActivityOptions
-import android.content.Intent
-import android.provider.Settings.Global.getString
-import android.view.View
-import android.widget.ImageView
-import com.christianfoulcard.android.androidsensorengine.Sensors.SoundSensorActivity
-import org.hamcrest.MatcherAssert.assertThat
+import com.christianfoulcard.android.androidsensorengine.Sensors.SensorSoundActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -17,11 +11,11 @@ import org.junit.runners.JUnit4
         public class TestMainActivity {
 
            private var mainActivity: MainActivity? = null
-           private var soundActivity: SoundSensorActivity? = null
+           private var soundActivity: SensorSoundActivity? = null
 
     @Before
 //    open fun setUp() { mainActivity = MainActivity() }
-    fun setUp() { soundActivity = SoundSensorActivity() }
+    fun setUp() { soundActivity = SensorSoundActivity() }
 
     @Test
     fun soundActivityTester() {

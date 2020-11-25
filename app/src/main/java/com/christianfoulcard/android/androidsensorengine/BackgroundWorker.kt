@@ -2,20 +2,20 @@ package com.christianfoulcard.android.androidsensorengine
 
 import android.content.Context
 import androidx.work.*
-import com.christianfoulcard.android.androidsensorengine.Sensors.TemperatureActivity
+import com.christianfoulcard.android.androidsensorengine.Sensors.SensorPressureActivity
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
+
+val SENSOR_PRESSURE_ACTIVITY: SensorPressureActivity? = null
 
 class BackgroundWorker (appContext: Context, workerParams: WorkerParameters):
         Worker(appContext, workerParams) {
     override fun doWork(): Result {
         try {
 
-          //    runTemperatureInBackground()
-
             //Creates the work request
             val uploadWorkRequest =
-                    PeriodicWorkRequestBuilder<BackgroundWorker>(1, TimeUnit.MINUTES)
+                    PeriodicWorkRequestBuilder<BackgroundWorker>(15, TimeUnit.MINUTES)
                             .build()
 
             val myWorkRequest = WorkManager.getInstance(applicationContext)

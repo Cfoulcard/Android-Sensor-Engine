@@ -27,8 +27,6 @@
 
 
 
-
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -65,27 +63,27 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".Sensors.SoundSensorActivity"
+            android:name=".Sensors.SensorSoundActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Temperature Sensor Activity -->
         <activity
-            android:name=".Sensors.TemperatureActivity"
+            android:name=".Sensors.SensorTemperatureActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Light Sensor Activity -->
         <activity
-            android:name=".Sensors.LightSensorActivity"
+            android:name=".Sensors.SensorLightActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Ram Sensor Activity -->
         <activity
-            android:name=".Sensors.RamActivity"
+            android:name=".Sensors.SensorRamActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Battery Sensor Activity -->
         <activity
-            android:name=".Sensors.BatteryActivity"
+            android:name=".Sensors.SensorBatteryActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity>
@@ -94,22 +92,22 @@
 
         <!-- Speed Sensor Activity -->
         <activity
-            android:name=".Sensors.AccelerometerActivity"
+            android:name=".Sensors.SensorAccelerometerActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Humidity Sensor Activity -->
         <activity
-            android:name=".Sensors.HumidityActivity"
+            android:name=".Sensors.SensorHumidityActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- Pressure Sensor Activity -->
         <activity
-            android:name=".Sensors.PressureActivity"
+            android:name=".Sensors.SensorPressureActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- Steps Sensor Activity -->
         <activity
-            android:name=".Sensors.WalkActivity"
+            android:name=".Sensors.SensorWalkActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
@@ -121,7 +119,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-        <service android:name=".ShowNotification" />
+
 
     </application>
 
