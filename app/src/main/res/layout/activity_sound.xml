@@ -8,7 +8,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainbackground"
+    android:background="@drawable/background_main"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorSoundActivity">
 
@@ -30,7 +30,7 @@
                 app:layout_constraintEnd_toEndOf="@+id/sound_sensor"
                 app:layout_constraintStart_toStartOf="@+id/sound_sensor"
                 app:layout_constraintTop_toBottomOf="@+id/sound_sensor"
-                app:srcCompat="@drawable/soundicon2"
+                app:srcCompat="@drawable/ic_sound_icon_2"
                 />
 
 
@@ -45,7 +45,7 @@
         android:onClick="showSoundDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/sound_sensor"
         app:layout_constraintTop_toTopOf="@+id/sound_sensor"
-        app:srcCompat="@drawable/question" />
+        app:srcCompat="@drawable/ic_question" />
 
     <TextView
         android:id="@+id/sound_sensor"
@@ -79,10 +79,10 @@
         android:layout_width="0dp"
         android:layout_height="14dp"
         android:layout_marginTop="280dp"
-        android:background="@drawable/drawable_gradient_slidebar"
+        android:background="@drawable/gradient_red_purple"
         android:interpolator="@android:interpolator/anticipate"
         android:max="90"
-        android:progressDrawable="@drawable/drawable_gradient_slidebar"
+        android:progressDrawable="@drawable/gradient_red_purple"
         android:requiresFadingEdge="horizontal"
         android:soundEffectsEnabled="true"
         android:thumbOffset="32dp"

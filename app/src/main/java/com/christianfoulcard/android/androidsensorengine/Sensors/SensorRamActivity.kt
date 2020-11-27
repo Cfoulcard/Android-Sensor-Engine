@@ -162,7 +162,7 @@ class SensorRamActivity : AppCompatActivity() {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "ram-shortcut")
                     .setShortLabel(getString(R.string.ram_sensor))
                     .setLongLabel(getString(R.string.ram_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.ram_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_ram_icon))
                     .setIntent(intent)
                     .build()
 

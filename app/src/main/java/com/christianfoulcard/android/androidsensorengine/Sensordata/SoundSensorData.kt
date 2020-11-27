@@ -1,12 +1,19 @@
 package com.christianfoulcard.android.androidsensorengine.Sensordata
 
+import android.content.Context
 import android.media.MediaRecorder
-import android.os.Handler
+import android.widget.Toast
 import java.io.IOException
+
 
 var mRecorder: MediaRecorder? = null
 
+//For sound recording + converting to sound data
+//Handler is also used for pin shortcut dialog box
+
 class SoundSensorData {
+
+
 
     //Properties of the microphone to start
      fun startRecorder() {

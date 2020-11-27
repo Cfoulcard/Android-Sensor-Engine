@@ -212,7 +212,7 @@ class SensorBatteryActivity : AppCompatActivity() {
 
                         val builder = NotificationCompat.Builder(context, ID)
 
-                                .setSmallIcon(R.drawable.notification_logo)
+                                .setSmallIcon(R.drawable.ic_notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
@@ -229,7 +229,7 @@ class SensorBatteryActivity : AppCompatActivity() {
                         val textContent = getString(R.string.notify_battery_message) + " " + fahrenheitLevel + " " + unit
 
                         val builder = NotificationCompat.Builder(context, ID)
-                                .setSmallIcon(R.drawable.notification_logo)
+                                .setSmallIcon(R.drawable.ic_notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
@@ -246,7 +246,7 @@ class SensorBatteryActivity : AppCompatActivity() {
                         val textContent = getString(R.string.notify_battery_message) + " " + battNumber + " " + unit
 
                         val builder = NotificationCompat.Builder(context, ID)
-                                .setSmallIcon(R.drawable.notification_logo)
+                                .setSmallIcon(R.drawable.ic_notification_logo)
                                 .setContentTitle(textTitle)
                                 .setContentText(textContent)
                                 .setContentIntent(resultPendingIntent)
@@ -301,7 +301,7 @@ class SensorBatteryActivity : AppCompatActivity() {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "battery-shortcut")
                     .setShortLabel(getString(R.string.battery_sensor))
                     .setLongLabel(getString(R.string.battery_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.battery_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_battery_icon))
                     .setIntent(intent)
                     .build()
 

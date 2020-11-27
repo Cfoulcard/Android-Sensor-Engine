@@ -22,7 +22,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.lifecycle.Observer
 import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
@@ -282,7 +281,7 @@ private fun updateTv() {
                  val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
                          .setShortLabel(getString(R.string.sound_sensor))
                          .setLongLabel(getString(R.string.sound_sensor))
-                         .setIcon(Icon.createWithResource(this, R.drawable.sound_icon))
+                         .setIcon(Icon.createWithResource(this, R.drawable.ic_sound_icon))
                          .setIntent(soundIntent)
                          .build()
 

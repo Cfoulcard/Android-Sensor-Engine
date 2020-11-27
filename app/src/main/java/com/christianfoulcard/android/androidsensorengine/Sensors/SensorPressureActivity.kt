@@ -142,7 +142,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
                 val textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa"
 
                 val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.notification_logo)
+                        .setSmallIcon(R.drawable.ic_notification_logo)
                         .setContentTitle(textTitle)
                         .setContentText(textContent)
                         .setContentIntent(resultPendingIntent)
@@ -257,7 +257,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
                     .setShortLabel(getString(R.string.pressure_sensor))
                     .setLongLabel(getString(R.string.pressure_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.barometer_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_barometer_icon))
                     .setIntent(intent)
                     .build()
 

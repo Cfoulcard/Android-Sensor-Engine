@@ -6,7 +6,7 @@
     <shortcut
         android:shortcutId="Preferences"
         android:enabled="true"
-        android:icon="@drawable/pref_icon"
+
         android:shortcutShortLabel="@string/preferences"
         android:shortcutLongLabel="@string/preferences"
         tools:targetApi="n_mr1">

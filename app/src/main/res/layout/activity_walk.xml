@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainbackground"
+    android:background="@drawable/background_main"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorWalkActivity">
 
@@ -37,7 +37,7 @@
         android:onClick="showWalkDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/walk_sensor"
         app:layout_constraintTop_toTopOf="@+id/walk_sensor"
-        app:srcCompat="@drawable/question" />
+        app:srcCompat="@drawable/ic_question" />
 
     <ImageView
         android:id="@+id/walk_logo"
@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/walk_sensor"
-        app:srcCompat="@drawable/walkicon2" />
+        app:srcCompat="@drawable/ic_walk_icon_2" />
 
     <TextView
         android:id="@+id/steps"

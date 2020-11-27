@@ -198,7 +198,7 @@ class SensorTemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.notification_logo)
+                            .setSmallIcon(R.drawable.ic_notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -216,7 +216,7 @@ class SensorTemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.notification_logo)
+                            .setSmallIcon(R.drawable.ic_notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -234,7 +234,7 @@ class SensorTemperatureActivity : AppCompatActivity(), SensorEventListener {
                     val textContent = getString(R.string.notify_air_message) + " " + airNumber + " " + unit
 
                     val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                            .setSmallIcon(R.drawable.notification_logo)
+                            .setSmallIcon(R.drawable.ic_notification_logo)
                             .setContentTitle(textTitle)
                             .setContentText(textContent)
                             .setContentIntent(resultPendingIntent)
@@ -315,7 +315,7 @@ class SensorTemperatureActivity : AppCompatActivity(), SensorEventListener {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "temp-shortcut")
                     .setShortLabel(getString(R.string.phone_temp_sensor))
                     .setLongLabel(getString(R.string.phone_temp_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.temp_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_temp_icon))
                     .setIntent(intent)
                     .build()
 

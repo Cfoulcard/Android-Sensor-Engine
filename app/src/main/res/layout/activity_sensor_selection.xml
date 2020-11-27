@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center|center_vertical"
-    android:background="@drawable/mainbackground"
+    android:background="@drawable/background_main"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.MainActivity">
 
@@ -45,7 +45,7 @@
             android:transitionName="@string/sound_anim"
             app:layout_constraintEnd_toStartOf="@+id/temp_icon"
             app:layout_constraintTop_toTopOf="@+id/temp_icon"
-            app:srcCompat="@drawable/sound_icon" />
+            app:srcCompat="@drawable/ic_sound_icon" />
 
         <ImageView
             android:id="@+id/temp_icon"
@@ -60,7 +60,7 @@
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sensor_select_text"
-            app:srcCompat="@drawable/temp_icon" />
+            app:srcCompat="@drawable/ic_temp_icon" />
 
         <ImageView
             android:id="@+id/light_icon"
@@ -73,7 +73,7 @@
             android:transitionName="@string/light_anim"
             app:layout_constraintStart_toEndOf="@+id/temp_icon"
             app:layout_constraintTop_toTopOf="@+id/temp_icon"
-            app:srcCompat="@drawable/light_icon" />
+            app:srcCompat="@drawable/ic_light_icon" />
 
         <ImageView
             android:id="@+id/ram_icon"
@@ -86,7 +86,7 @@
             android:transitionName="@string/ram_anim"
             app:layout_constraintEnd_toStartOf="@+id/battery_icon"
             app:layout_constraintTop_toTopOf="@+id/battery_icon"
-            app:srcCompat="@drawable/ram_icon" />
+            app:srcCompat="@drawable/ic_ram_icon" />
 
         <ImageView
             android:id="@+id/battery_icon"
@@ -100,7 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/temp_icon"
-            app:srcCompat="@drawable/battery_icon" />
+            app:srcCompat="@drawable/ic_battery_icon" />
 
         <ImageView
             android:id="@+id/speed_icon"
@@ -113,7 +113,7 @@
             android:transitionName="@string/speed_anim"
             app:layout_constraintStart_toEndOf="@+id/battery_icon"
             app:layout_constraintTop_toTopOf="@+id/battery_icon"
-            app:srcCompat="@drawable/speed_icon" />
+            app:srcCompat="@drawable/ic_speed_icon" />
 
         <ImageView
             android:id="@+id/humidity_icon"
@@ -127,7 +127,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/battery_icon"
-            app:srcCompat="@drawable/humidity_icon" />
+            app:srcCompat="@drawable/ic_humidity_icon" />
 
         <ImageView
             android:id="@+id/pressure_icon"
@@ -139,7 +139,7 @@
             android:onClick="pressureIconIntent"
             app:layout_constraintEnd_toStartOf="@+id/humidity_icon"
             app:layout_constraintTop_toTopOf="@+id/humidity_icon"
-            app:srcCompat="@drawable/barometer_icon" />
+            app:srcCompat="@drawable/ic_barometer_icon" />
 
         <ImageView
             android:id="@+id/walk_icon"
@@ -151,7 +151,7 @@
             android:onClick="walkIconIntent"
             app:layout_constraintStart_toEndOf="@+id/humidity_icon"
             app:layout_constraintTop_toTopOf="@+id/humidity_icon"
-            app:srcCompat="@drawable/walk_icon" />
+            app:srcCompat="@drawable/ic_walk_icon" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

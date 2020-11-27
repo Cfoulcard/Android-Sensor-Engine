@@ -172,7 +172,7 @@ class SensorLightActivity : AppCompatActivity(), SensorEventListener {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "light-shortcut")
                     .setShortLabel(getString(R.string.lux_sensor))
                     .setLongLabel(getString(R.string.lux_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.light_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_light_icon))
                     .setIntent(intent)
                     .build()
 

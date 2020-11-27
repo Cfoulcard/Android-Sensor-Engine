@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mainbackground"
+    android:background="@drawable/background_main"
     android:fillViewport="true"
     tools:context="com.christianfoulcard.android.androidsensorengine.Sensors.SensorRamActivity">
 
@@ -37,7 +37,7 @@
         android:onClick="showRamDialogPopup"
         app:layout_constraintStart_toEndOf="@+id/ram_sensor"
         app:layout_constraintTop_toTopOf="@+id/ram_sensor"
-        app:srcCompat="@drawable/question" />
+        app:srcCompat="@drawable/ic_question" />
 
     <ImageView
         android:id="@+id/ram_logo"
@@ -50,7 +50,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ram_sensor"
-        app:srcCompat="@drawable/ramicon2" />
+        app:srcCompat="@drawable/ic_ram_icon_2" />
 
         <TextView
             android:id="@+id/ram"

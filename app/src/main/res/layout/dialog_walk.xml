@@ -5,7 +5,7 @@
     android:layout_width="360dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/drawable_gradient_angled"
+    android:background="@drawable/gradient_angled"
     android:orientation="vertical"
     android:padding="5dp">
 
@@ -29,7 +29,7 @@
         android:id="@+id/dismiss_dialog"
         android:layout_width="0dp"
         android:layout_height="36dp"
-        android:background="@drawable/drawable_gradient_dark"
+        android:background="@drawable/gradient_grey_black"
         android:fontFamily="@font/quantico"
         android:onClick="closeWalkDialogPopup"
         android:shadowColor="@color/grand_sky_blue"

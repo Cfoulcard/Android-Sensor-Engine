@@ -28,7 +28,6 @@ import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.databinding.ActivityBatteryBinding
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityHumidityBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
@@ -133,7 +132,7 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
                 val textTitle = "Android Sensor Engine"
                 val textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%"
                 val builder = NotificationCompat.Builder(this, CHANNEL_ID)
-                        .setSmallIcon(R.drawable.notification_logo)
+                        .setSmallIcon(R.drawable.ic_notification_logo)
                         .setContentTitle(textTitle)
                         .setContentText(textContent)
                         .setContentIntent(resultPendingIntent)
@@ -243,7 +242,7 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "humidity-shortcut")
                     .setShortLabel(getString(R.string.humidity_sensor))
                     .setLongLabel(getString(R.string.humidity_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.humidity_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_humidity_icon))
                     .setIntent(intent)
                     .build()
 

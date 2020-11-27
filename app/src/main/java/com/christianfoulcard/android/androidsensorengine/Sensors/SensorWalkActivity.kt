@@ -183,7 +183,7 @@ class SensorWalkActivity : AppCompatActivity(), SensorEventListener {
             val pinShortcutInfo = ShortcutInfo.Builder(this, "walk-shortcut")
                     .setShortLabel(getString(R.string.walk_sensor))
                     .setLongLabel(getString(R.string.walk_sensor))
-                    .setIcon(Icon.createWithResource(this, R.drawable.walk_icon))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_walk_icon))
                     .setIntent(intent)
                     .build()
 
