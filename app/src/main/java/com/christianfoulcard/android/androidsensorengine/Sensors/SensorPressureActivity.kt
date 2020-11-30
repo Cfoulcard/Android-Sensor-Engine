@@ -125,9 +125,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         // Create the TaskStackBuilder and add the intent, which inflates the back stack
         val stackBuilder = TaskStackBuilder.create(this)
         stackBuilder.addNextIntentWithParentStack(resultIntent)
-
-
-
+        
         // Get the PendingIntent containing the entire back stack
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 

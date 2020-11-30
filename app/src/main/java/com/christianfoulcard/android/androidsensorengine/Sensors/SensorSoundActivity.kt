@@ -1,5 +1,9 @@
 package com.christianfoulcard.android.androidsensorengine.Sensors
 
+import AUDIO_RECORD_REQUEST_CODE
+import EMA
+import EMA_FILTER
+import MY_PERMISSIONS_REQUEST_RECORD_AUDIO
 import android.Manifest
 import android.app.Dialog
 import android.app.PendingIntent
@@ -8,6 +12,7 @@ import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
 import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
+import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -26,20 +31,20 @@ import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
-import com.christianfoulcard.android.androidsensorengine.Sensordata.SoundSensorData
-import com.christianfoulcard.android.androidsensorengine.Sensordata.mRecorder
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
 import com.google.firebase.analytics.FirebaseAnalytics
+import java.io.IOException
 import kotlin.math.log10
 
 //TODO: Take out a permission
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////
 class SensorSoundActivity : AppCompatActivity() {
 
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
-      private val model: DataViewModel by viewModels()
+    private val model: DataViewModel by viewModels()
 
     //View Binding to call the layout's views
     private lateinit var binding: ActivitySoundBinding
@@ -47,12 +52,9 @@ class SensorSoundActivity : AppCompatActivity() {
     //Dialog popup info
     private var soundInfoDialog: Dialog? = null
 
-    //All Sound sensor data is located here
-    private val soundSensorData: SoundSensorData? = null
-
     //For sound recording + converting to sound data
     //Handler is also used for pin shortcut dialog box
-
+    private var mRecorder: MediaRecorder? = null
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
     val mHandler = Handler()
@@ -103,7 +105,7 @@ class SensorSoundActivity : AppCompatActivity() {
                 }
             }
             (runner as Thread).start()
-         //   Log.d("Noise", "start runner()")
+            //   Log.d("Noise", "start runner()")
         }
     }
 
@@ -127,9 +129,9 @@ class SensorSoundActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
-            return soundSensorData?.startRecorder()!!
+            return
         }
-
+        startRecorder()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
@@ -141,7 +143,7 @@ class SensorSoundActivity : AppCompatActivity() {
     //Stops microphone from recording when user exits activity
     public override fun onPause() {
         super.onPause()
-        soundSensorData?.stopRecorder()
+        stopRecorder()
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -188,12 +190,44 @@ class SensorSoundActivity : AppCompatActivity() {
         }
     }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////
+    //Properties of the microphone
+    private fun startRecorder() {
+        if (mRecorder == null) {
+            mRecorder = MediaRecorder()
+            mRecorder!!.setAudioSource(MediaRecorder.AudioSource.MIC)
+            mRecorder!!.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
+            mRecorder!!.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+            mRecorder!!.setOutputFile("/dev/null")
+            try {
+                mRecorder!!.prepare()
+            } catch (ioe: IOException) {
+
+            } catch (e: SecurityException) {
+
+            }
+            try {
+                mRecorder!!.start()
+            } catch (e: SecurityException) {
+
+            }
+        }
+    }
+
+    //Releases microphone
+    private fun stopRecorder() {
+        if (mRecorder != null) {
+            mRecorder!!.stop()
+            mRecorder!!.release()
+            mRecorder = null
+        }
+    }
+
+    ///////////////////////////////////////////////////////////////////////////////////////////////////
 //This section controls the decibel properties picked up by the microphone
 //The formula attempts to emulate SPL (Sound Pressure Level)
 //Read up more at https://www.wikiwand.com/en/Sound_pressure
 //For more decibel detail change Integer to Double
-private fun updateTv() {
+    private fun updateTv() {
         if (soundDb() > 0) {
             binding.currentDecibel.text = Integer.toString(soundDb()) + " dB"
         }
@@ -213,8 +247,8 @@ private fun updateTv() {
     private val amplitudeEMA: Int
         get() {
             val amp = amplitude
-            mEMA = EMA_FILTER * amp + (1 - EMA_FILTER) * mEMA
-            return mEMA.toInt()
+            EMA = EMA_FILTER * amp + (1 - EMA_FILTER) * EMA
+            return EMA.toInt()
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -269,39 +303,39 @@ private fun updateTv() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // Adds Pin Shortcut Functionality
-     @RequiresApi(Build.VERSION_CODES.O)
-     fun sensorShortcut(): Boolean {
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
         val soundIntent = Intent(this, SensorSoundActivity::class.java)
-                 .setAction("Sound")
+                .setAction("Sound")
 
-             if (shortcutManager!!.isRequestPinShortcutSupported) {
+        if (shortcutManager!!.isRequestPinShortcutSupported) {
 
-                 val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
-                         .setShortLabel(getString(R.string.sound_sensor))
-                         .setLongLabel(getString(R.string.sound_sensor))
-                         .setIcon(Icon.createWithResource(this, R.drawable.ic_sound_icon))
-                         .setIntent(soundIntent)
-                         .build()
+            val pinShortcutInfo = ShortcutInfo.Builder(this, "sound-shortcut")
+                    .setShortLabel(getString(R.string.sound_sensor))
+                    .setLongLabel(getString(R.string.sound_sensor))
+                    .setIcon(Icon.createWithResource(this, R.drawable.ic_sound_icon))
+                    .setIntent(soundIntent)
+                    .build()
 
-                 // Create the PendingIntent object only if your app needs to be notified
-                 // that the user allowed the shortcut to be pinned. Note that, if the
-                 // pinning operation fails, your app isn't notified. We assume here that the
-                 // app has implemented a method called createShortcutResultIntent() that
-                 // returns a broadcast intent.
-                 val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
+            // Create the PendingIntent object only if your app needs to be notified
+            // that the user allowed the shortcut to be pinned. Note that, if the
+            // pinning operation fails, your app isn't notified. We assume here that the
+            // app has implemented a method called createShortcutResultIntent() that
+            // returns a broadcast intent.
+            val pinnedShortcutCallbackIntent = shortcutManager.createShortcutResultIntent(pinShortcutInfo)
 
-                 // Configure the intent so that your app's broadcast receiver gets
-                 // the callback successfully.For details, see PendingIntent.getBroadcast().
-                 val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
-                         pinnedShortcutCallbackIntent, /* flags */ 0)
+            // Configure the intent so that your app's broadcast receiver gets
+            // the callback successfully.For details, see PendingIntent.getBroadcast().
+            val successCallback = PendingIntent.getBroadcast(this, /* request code */ 0,
+                    pinnedShortcutCallbackIntent, /* flags */ 0)
 
-                 shortcutManager.requestPinShortcut(pinShortcutInfo,
-                         successCallback.intentSender)
-             }
-         return true
-     }
+            shortcutManager.requestPinShortcut(pinShortcutInfo,
+                    successCallback.intentSender)
+        }
+        return true
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
     //Pin Shortcut Dialog Data
@@ -318,13 +352,5 @@ private fun updateTv() {
 //Measure dB
 //https://stackoverflow.com/questions/15693990/measuring-decibels-with-mobile-phone
 
-    companion object {
-        //Notification ID
-        private const val CHANNEL_ID = "123"
-        private var mEMA = 0.0
-        private const val EMA_FILTER = 0.6
-        //Used for record audio permission
-        const val AUDIO_RECORD_REQUEST_CODE = 122
-        const val MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 99
-    }
+
 }
