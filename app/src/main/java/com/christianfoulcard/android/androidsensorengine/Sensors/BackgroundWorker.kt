@@ -7,13 +7,15 @@ import com.christianfoulcard.android.androidsensorengine.Sensors.SensorPressureA
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
-val SENSOR_PRESSURE_ACTIVITY: SensorPressureActivity? = null
+var sensorBatteryActivity:  SensorBatteryActivity? = null
 
 class BackgroundWorker (appContext: Context, workerParams: WorkerParameters):
         Worker(appContext, workerParams) {
 
     override fun doWork(): Result {
         try {
+            sensorBatteryActivity?.registerMyReceiver()
+            sensorBatteryActivity?.createNotificationChannel()
 
 
 
@@ -35,6 +37,8 @@ class BackgroundWorker (appContext: Context, workerParams: WorkerParameters):
         }
     }
 }
+
+
 
 private fun WorkManager.enqueueUniquePeriodicWork(uploadWorkRequest: PeriodicWorkRequest) {
 

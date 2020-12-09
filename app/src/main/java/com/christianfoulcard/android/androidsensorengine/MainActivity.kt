@@ -15,8 +15,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 //TODO: Fix animations
 //TODO: Update ram activity parsing
 
-
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class MainActivity : AppCompatActivity() {
 
@@ -44,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 //        }
 
         // Obtain the FirebaseAnalytics instance.
+
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
 

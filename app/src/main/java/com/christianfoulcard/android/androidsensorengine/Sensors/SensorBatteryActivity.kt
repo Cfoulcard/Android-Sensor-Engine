@@ -80,7 +80,7 @@ class SensorBatteryActivity : AppCompatActivity() {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private fun registerMyReceiver(): BroadcastReceiver {
+    fun registerMyReceiver(): BroadcastReceiver {
         ifilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         registerReceiver(mBatteryReceiver, ifilter)
 
@@ -122,7 +122,7 @@ class SensorBatteryActivity : AppCompatActivity() {
 
     override fun onDestroy() {
         //Unregister the Sensor
-        unregisterReceiver(registerMyReceiver())
+       // unregisterReceiver(registerMyReceiver())
         super.onDestroy()
     }
 
@@ -137,7 +137,7 @@ class SensorBatteryActivity : AppCompatActivity() {
     }
 
     //For handling the notifications
-    private fun createNotificationChannel() {
+     fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
