@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.work.OneTimeWorkRequestBuilder
 import com.christianfoulcard.android.androidsensorengine.Sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -44,6 +45,15 @@ class MainActivity : AppCompatActivity() {
         // Obtain the FirebaseAnalytics instance.
 
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+
+        // Add WorkRequest to save the image to the filesystem
+        val save = OneTimeWorkRequestBuilder<BackgroundWorker>()
+                .build()
+      //  continuation = continuation.then(save)
+
+        // Actually start the work
+        val backGround : BackgroundWorker? = null
+        backGround?.startWork()
     }
 
     override fun onStart() {

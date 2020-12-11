@@ -1,7 +1,9 @@
 @file:JvmName("Constants")
 
 //Notification ID
-private const val CHANNEL_ID = "123"
+const val CHANNEL_ID = "123"
+const val VERBOSE_NOTIFICATION_CHANNEL_NAME = "Work Notification"
+const val VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION = "Work Notification Testing"
 
 //Used to help with Sound Sensor's Audio parsing
 var EMA = 0.0

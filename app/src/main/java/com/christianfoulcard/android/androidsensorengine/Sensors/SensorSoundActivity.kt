@@ -16,6 +16,7 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -27,11 +28,13 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.work.OneTimeWorkRequestBuilder
 import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
+import com.christianfoulcard.android.androidsensorengine.makeStatusNotification
 import com.google.firebase.analytics.FirebaseAnalytics
 import java.io.IOException
 import kotlin.math.log10
@@ -49,6 +52,8 @@ class SensorSoundActivity : AppCompatActivity() {
 
     //Dialog popup info
     private var soundInfoDialog: Dialog? = null
+
+   // var backgroundWorker: BackgroundWorker? = null
 
     //For sound recording + converting to sound data
     //Handler is also used for pin shortcut dialog box
@@ -72,7 +77,7 @@ class SensorSoundActivity : AppCompatActivity() {
 //        binding.adView.loadAd(adRequest)
 
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
-        val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+      //  val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -95,7 +100,7 @@ class SensorSoundActivity : AppCompatActivity() {
                     while (runner != null) {
                         try {
                             sleep(500)
-                            // Log.i("Noise", "Tock");
+                          //   Log.i("Noise", "Tock");
                         } catch (e: InterruptedException) {
                         }
                         mHandler.post(updater)
@@ -103,7 +108,7 @@ class SensorSoundActivity : AppCompatActivity() {
                 }
             }
             (runner as Thread).start()
-            //   Log.d("Noise", "start runner()")
+          //     Log.d("Noise", "start runner()")
         }
     }
 
@@ -127,9 +132,10 @@ class SensorSoundActivity : AppCompatActivity() {
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
-            return
+            startRecorder()
         }
-        startRecorder()
+        val blurBuilder = OneTimeWorkRequestBuilder<BackgroundWorker>()
+        blurBuilder.build()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
