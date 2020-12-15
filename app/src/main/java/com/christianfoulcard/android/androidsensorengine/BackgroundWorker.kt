@@ -1,3 +1,4 @@
+/*
 package com.christianfoulcard.android.androidsensorengine
 
 import CHANNEL_ID
@@ -5,16 +6,13 @@ import VERBOSE_NOTIFICATION_CHANNEL_DESCRIPTION
 import VERBOSE_NOTIFICATION_CHANNEL_NAME
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.os.Build
-import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
-import com.christianfoulcard.android.androidsensorengine.Sensors.SensorBatteryActivity
+import com.christianfoulcard.android.androidsensorengine.sensors.SensorBatteryActivity
 import java.lang.Exception
-import java.util.concurrent.TimeUnit
 
 var sensorBatteryActivity: SensorBatteryActivity? = null
 val register = sensorBatteryActivity?.registerMyReceiver()
@@ -87,3 +85,4 @@ fun batteryInfo() {
 }
 
 
+*/
