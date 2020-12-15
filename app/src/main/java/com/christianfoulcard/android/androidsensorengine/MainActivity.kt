@@ -7,7 +7,7 @@ import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.work.OneTimeWorkRequestBuilder
-import com.christianfoulcard.android.androidsensorengine.Sensors.*
+import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 

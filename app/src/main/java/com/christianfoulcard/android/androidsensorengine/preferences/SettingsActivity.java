@@ -1,13 +1,9 @@
-package com.christianfoulcard.android.androidsensorengine.Preferences;
+package com.christianfoulcard.android.androidsensorengine.preferences;
 
 import android.app.Dialog;
-import android.app.Presentation;
-import android.content.Context;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -15,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.preference.EditTextPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceManager;
 import androidx.preference.SwitchPreference;
 
 import com.christianfoulcard.android.androidsensorengine.R;

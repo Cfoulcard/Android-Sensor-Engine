@@ -63,27 +63,27 @@
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
-            android:name=".Sensors.SensorSoundActivity"
+            android:name=".sensors.SensorSoundActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Temperature Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorTemperatureActivity"
+            android:name=".sensors.SensorTemperatureActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Light Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorLightActivity"
+            android:name=".sensors.SensorLightActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Ram Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorRamActivity"
+            android:name=".sensors.SensorRamActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Battery Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorBatteryActivity"
+            android:name=".sensors.SensorBatteryActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity>
@@ -92,27 +92,27 @@
 
         <!-- Speed Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorAccelerometerActivity"
+            android:name=".sensors.SensorAccelerometerActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait"></activity> <!-- Humidity Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorHumidityActivity"
+            android:name=".sensors.SensorHumidityActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- Pressure Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorPressureActivity"
+            android:name=".sensors.SensorPressureActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- Steps Sensor Activity -->
         <activity
-            android:name=".Sensors.SensorWalkActivity"
+            android:name=".sensors.SensorWalkActivity"
             android:label=""
             android:parentActivityName=".MainActivity"
             android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
         <activity
-            android:name=".Preferences.SettingsActivity"
+            android:name=".preferences.SettingsActivity"
             android:label="@string/preferences"
             android:screenOrientation="portrait" />
 

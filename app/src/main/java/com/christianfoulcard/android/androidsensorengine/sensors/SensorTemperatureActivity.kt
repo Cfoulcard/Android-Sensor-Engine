@@ -1,4 +1,4 @@
-package com.christianfoulcard.android.androidsensorengine.Sensors
+package com.christianfoulcard.android.androidsensorengine.sensors
 
 import android.app.*
 import android.content.Context
@@ -25,7 +25,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
-import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
+import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityTemperatureBinding
 import com.google.firebase.analytics.FirebaseAnalytics

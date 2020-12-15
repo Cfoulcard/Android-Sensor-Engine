@@ -1,4 +1,4 @@
-package com.christianfoulcard.android.androidsensorengine.Sensors
+package com.christianfoulcard.android.androidsensorengine.sensors
 
 import android.app.Activity
 import android.app.Dialog
@@ -25,7 +25,7 @@ import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
-import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
+import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityWalkBinding
 import com.google.firebase.analytics.FirebaseAnalytics

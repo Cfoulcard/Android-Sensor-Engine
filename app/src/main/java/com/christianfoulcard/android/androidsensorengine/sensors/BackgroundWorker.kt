@@ -1,9 +1,7 @@
-package com.christianfoulcard.android.androidsensorengine.Sensors
+package com.christianfoulcard.android.androidsensorengine.sensors
 
 import android.content.Context
-import android.hardware.SensorEvent
 import androidx.work.*
-import com.christianfoulcard.android.androidsensorengine.Sensors.SensorPressureActivity
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 

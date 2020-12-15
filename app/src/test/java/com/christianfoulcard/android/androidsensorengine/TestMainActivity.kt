@@ -1,6 +1,6 @@
 package com.christianfoulcard.android.androidsensorengine
 
-import com.christianfoulcard.android.androidsensorengine.Sensors.SensorSoundActivity
+import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActivity
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith

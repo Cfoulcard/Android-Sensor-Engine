@@ -1,4 +1,4 @@
-package com.christianfoulcard.android.androidsensorengine.Sensors
+package com.christianfoulcard.android.androidsensorengine.sensors
 
 import android.annotation.SuppressLint
 import android.app.*
@@ -20,7 +20,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
-import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
+import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityBatteryBinding
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -28,13 +28,13 @@ import com.google.firebase.analytics.FirebaseAnalytics
 
 class SensorBatteryActivity : AppCompatActivity() {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivityBatteryBinding
 
-    //Dialog popup info
+    // Dialog popup info
     var batteryInfoDialog: Dialog? = null
 
-    //Sensor Data
+    // Sensor Data
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
@@ -42,10 +42,10 @@ class SensorBatteryActivity : AppCompatActivity() {
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //Channel ID for notifications
+    // Channel ID for notifications
     private val ID = "3"
 
-    //Handler for dialog pin shortcut dialog box
+    // Handler for dialog pin shortcut dialog box
     val handler = Handler()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
