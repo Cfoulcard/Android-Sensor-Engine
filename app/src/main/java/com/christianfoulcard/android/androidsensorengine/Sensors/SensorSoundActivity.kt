@@ -1,4 +1,4 @@
-package com.christianfoulcard.android.androidsensorengine.Sensors
+package com.christianfoulcard.android.androidsensorengine.sensors
 
 import AUDIO_RECORD_REQUEST_CODE
 import EMA
@@ -16,7 +16,6 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -31,32 +30,29 @@ import androidx.core.content.ContextCompat
 import androidx.work.OneTimeWorkRequestBuilder
 import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
-import com.christianfoulcard.android.androidsensorengine.Preferences.SettingsActivity
+import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
-import com.christianfoulcard.android.androidsensorengine.makeStatusNotification
-import com.google.firebase.analytics.FirebaseAnalytics
 import java.io.IOException
 import kotlin.math.log10
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////
+/** Uses the MediaRecorder to retrieve decibels */
 class SensorSoundActivity : AppCompatActivity() {
 
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
     private val model: DataViewModel by viewModels()
 
-    //View Binding to call the layout's views
+    // Use View Binding to call the layout's views
     private lateinit var binding: ActivitySoundBinding
 
-    //Dialog popup info
+    // Dialog popup info
     private var soundInfoDialog: Dialog? = null
 
-   // var backgroundWorker: BackgroundWorker? = null
+    // var backgroundWorker: BackgroundWorker? = null
 
-    //For sound recording + converting to sound data
-    //Handler is also used for pin shortcut dialog box
+    // For sound recording + converting to sound data
+    // Handler is also used for pin shortcut dialog box
     private var mRecorder: MediaRecorder? = null
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
@@ -72,35 +68,35 @@ class SensorSoundActivity : AppCompatActivity() {
         setContentView(view)
 
         // Initialize Ads
-//        MobileAds.initialize(this) {} //ADMOB App ID
-//        val adRequest = AdRequest.Builder().build()
-//        binding.adView.loadAd(adRequest)
+        // MobileAds.initialize(this) {} //ADMOB App ID
+        // val adRequest = AdRequest.Builder().build()
+        // binding.adView.loadAd(adRequest)
 
         // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
-      //  val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
+        // val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        //Opens Pin Shortcut menu after long pressing the logo
+        // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             binding.soundLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
 
-        //Dialog Box for Sound Info
+        // Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
 
-        //To request audio permissions upon opening activity
+        // To request audio permissions upon opening activity
         requestAudioPermissions()
 
-        //This section is used to pick up sound from the user's microphone
-        //Adjust milliseconds to change refresh rate of decibel tracker
+        // This section is used to pick up sound from the user's microphone
+        // Adjust milliseconds to change refresh rate of decibel tracker
         if (runner == null) {
             runner = object : Thread() {
                 override fun run() {
                     while (runner != null) {
                         try {
                             sleep(500)
-                          //   Log.i("Noise", "Tock");
+                          // Log.i("Noise", "Tock");
                         } catch (e: InterruptedException) {
                         }
                         mHandler.post(updater)
@@ -108,15 +104,14 @@ class SensorSoundActivity : AppCompatActivity() {
                 }
             }
             (runner as Thread).start()
-          //     Log.d("Noise", "start runner()")
+          // Log.d("Noise", "start runner()")
         }
     }
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     public override fun onStart() {
         super.onStart()
-        //Animation that plays fading animation when entering/exiting Activity
+        // Animation that plays fading animation when entering/exiting Activity
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
         binding.currentDecibel.startAnimation(`in`)
@@ -125,7 +120,7 @@ class SensorSoundActivity : AppCompatActivity() {
         binding.infoButton.startAnimation(`in`)
     }
 
-    //Microphone recording starts
+    // Microphone recording starts
     public override fun onResume() {
         super.onResume()
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
@@ -144,24 +139,24 @@ class SensorSoundActivity : AppCompatActivity() {
         }
     }
 
-    //Stops microphone from recording when user exits activity
+    // Stops microphone from recording when user exits activity
     public override fun onPause() {
         super.onPause()
         stopRecorder()
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////
     private fun requestAudioPermissions() {
         if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
 
-            //When permission is not granted by user, show them message why this permission is needed.
+            // When permission is not granted by user, show them message why this permission is needed.
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             Manifest.permission.RECORD_AUDIO)) {
 
                 // Toast.makeText(this, "Please grant permission to measure sound", Toast.LENGTH_LONG).show();
-                //Give user option to still opt-in the permissions
+                // Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO),
                         MY_PERMISSIONS_REQUEST_RECORD_AUDIO)
             } else {
@@ -172,7 +167,7 @@ class SensorSoundActivity : AppCompatActivity() {
         } else if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED) {
-            //Go ahead with recording audio now
+            // Go ahead with recording audio now
         }
     }
 
@@ -194,7 +189,7 @@ class SensorSoundActivity : AppCompatActivity() {
         }
     }
 
-    //Properties of the microphone
+    /** Properties of the microphone. This will start the recorder to gather sound data. */
     private fun startRecorder() {
         if (mRecorder == null) {
             mRecorder = MediaRecorder()
@@ -217,7 +212,7 @@ class SensorSoundActivity : AppCompatActivity() {
         }
     }
 
-    //Releases microphone
+    /** Stops the microphone from recording sound data. */
     private fun stopRecorder() {
         if (mRecorder != null) {
             mRecorder!!.stop()
@@ -226,25 +221,25 @@ class SensorSoundActivity : AppCompatActivity() {
         }
     }
 
-    ///////////////////////////////////////////////////////////////////////////////////////////////////
-//This section controls the decibel properties picked up by the microphone
-//The formula attempts to emulate SPL (Sound Pressure Level)
-//Read up more at https://www.wikiwand.com/en/Sound_pressure
-//For more decibel detail change Integer to Double
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+   /** Controls the decibel properties picked up by the microphone
+    * The formula attempts to emulate SPL (Sound Pressure Level)
+    * Read up more at https://www.wikiwand.com/en/Sound_pressure
+    * For more decibel detail change Integer to Double */
     private fun updateTv() {
         if (soundDb() > 0) {
             binding.currentDecibel.text = Integer.toString(soundDb()) + " dB"
         }
 
-        //Alternate decibel measurement
-        //configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
+        // Alternate decibel measurement
+        // configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
     }
 
     fun soundDb(): Int {
         return (20 * log10(amplitudeEMA.toDouble())).toInt()
     }
 
-    //Calculates the decibel valve
+    // Calculates the decibel valve
     private val amplitude: Int
         get() = if (mRecorder != null) mRecorder!!.maxAmplitude else 0
 
@@ -256,8 +251,8 @@ class SensorSoundActivity : AppCompatActivity() {
         }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    //Record Audio Permission
-    //Upon opening this activity user will be promoted to allow audio recording
+    // Record Audio Permission
+    // Upon opening this activity user will be promoted to allow audio recording
     private val isRecordAudioPermissionGranted: Boolean
         get() = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
@@ -287,13 +282,13 @@ class SensorSoundActivity : AppCompatActivity() {
         soundInfoDialog!!.dismiss()
     }
 
-    //This will add functionality to the menu button within the action bar
+    // This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean { // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation_menu, menu)
         return true
     }
 
-    //The following is for the menu items within the navigation_menu.xml file
+    // The following is for the menu items within the navigation_menu.xml file
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.preferences -> {
@@ -342,7 +337,7 @@ class SensorSoundActivity : AppCompatActivity() {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Pin Shortcut Dialog Data
+    // Pin Shortcut Dialog Data
     private fun alertDialog() {
 
         OneTimeAlertDialog.Builder(this, "my_dialog_key")
@@ -353,8 +348,8 @@ class SensorSoundActivity : AppCompatActivity() {
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 // Helpful Resources
-//Measure dB
-//https://stackoverflow.com/questions/15693990/measuring-decibels-with-mobile-phone
+// Measure dB
+// https://stackoverflow.com/questions/15693990/measuring-decibels-with-mobile-phone
 
 
 }
