@@ -35,25 +35,25 @@ import com.christianfoulcard.android.androidsensorengine.databinding.ActivityAcc
 import com.google.firebase.analytics.FirebaseAnalytics
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
-//LocationListener needed to track speed
+/** Tracks speed using the LocationListener and GPS data */
 class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivityAccelerometerBinding
 
-    //Dialog popup info
+    // Dialog popup info
     private var accelerometerInfoDialog: Dialog? = null
 
-    //Sensor Data
+    // Sensor Data
     var mlocListener: LocationListener? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //Needed for location permission
+    // Needed for location permission
     private val REQUESTLOCATIONPERMISSION = 1
 
-    //Handler for dialog pin shortcut dialog box
+    // Handler for dialog pin shortcut dialog box
     val handler = Handler()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -67,26 +67,25 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
         setContentView(view)
 
         // Initialize Ads
-//        MobileAds.initialize(this) {} //ADMOB App ID
-//        val adRequest = AdRequest.Builder().build()
-//        binding.adView.loadAd(adRequest)
+        // MobileAds.initialize(this) {} //ADMOB App ID
+        // val adRequest = AdRequest.Builder().build()
+        // binding.adView.loadAd(adRequest)
 
-        //Dialog Box for Temperature Info
+        // Dialog Box for Temperature Info
         accelerometerInfoDialog = Dialog(this)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        //Opens Pin Shortcut menu after long pressing the logo
+        // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             binding.accelerometerLogo.setOnLongClickListener() {
                 sensorShortcut()
             }
         }
 
-        //Calls the location permission dialog box upon opening this activity
+        // Calls the location permission dialog box upon opening this activity
         requestLocationPermissions()
-
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -105,7 +104,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
     public override fun onResume() {
         super.onResume()
-        //This section parses the speed data when the permissions are granted
+        // This section parses the speed data when the permissions are granted
         if (ActivityCompat.checkSelfPermission(this, permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED &&
                 ActivityCompat.checkSelfPermission(this, permission.ACCESS_COARSE_LOCATION)
@@ -127,8 +126,8 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
     public override fun onPause() {
         super.onPause()
-        //Upon leaving the activity the location data will terminate
-        //Used to free memory/battery usage
+        // Upon leaving the activity the location data will terminate
+        // Used to free memory/battery usage
         val lm = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
         lm.removeUpdates(this)
     }
@@ -144,13 +143,13 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-//This will add functionality to the menu button within the action bar
+    // This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean { // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation_menu, menu)
         return true
     }
 
-    //The following is for the menu items within the navigation_menu.xml file
+    // The following is for the menu items within the navigation_menu.xml file
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.preferences -> {
@@ -163,7 +162,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Speed Formula for the Accelerometer
+    // Speed Formula for the Accelerometer
     override fun onLocationChanged(p0: Location) {
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
@@ -191,7 +190,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
                 "Knots" -> binding.currentSpeed.text = "$speedKnot $unit"
             }
 
-            //Gets the unit of measurement from the speedunit key in root_preferences.xml
+            // Gets the unit of measurement from the speedunit key in root_preferences.xml
             val speedNumber = settings.getString("edit_text_speed", "")
 
             // Create an Intent for the activity you want to start
@@ -204,10 +203,10 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
             // Get the PendingIntent containing the entire back stack
             val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-            //Checks to see if the temperature alert notifications are turned on in root_preferences.xml
+            // Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_speed", true)) {
-                //Conditions that must be true for the notifications to work
-                //If MPH is chosen as the unit of measurement
+                // Conditions that must be true for the notifications to work
+                // If MPH is chosen as the unit of measurement
                 if (speedNumber == speedMph.toString() && unit == "MPH") {
                     val textTitle = "Android Sensor Engine"
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
@@ -224,7 +223,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
                     val notificationManager = NotificationManagerCompat.from(this)
                     notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
 
-                    //If KM/H is chosen as the unit of measurement
+                    // If KM/H is chosen as the unit of measurement
                 } else if (speedNumber == speedKm.toString() && unit == "KM/H") {
                     val textTitle = "Android Sensor Engine"
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
@@ -241,7 +240,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
                     val notificationManager = NotificationManagerCompat.from(this)
                     notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
 
-                    //If M/S is chosen as the unit of measurement
+                    // If M/S is chosen as the unit of measurement
                 } else if (speedNumber == speedMs.toString() && unit == "M/S") {
                     val textTitle = "Android Sensor Engine"
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
@@ -258,7 +257,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
                     val notificationManager = NotificationManagerCompat.from(this)
                     notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
 
-                    //If FT/S is chosen as the unit of measurement
+                    // If FT/S is chosen as the unit of measurement
                 } else if (speedNumber == speedFts.toString() && unit == "FT/S") {
                     val textTitle = "Android Sensor Engine"
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
@@ -275,7 +274,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
                     val notificationManager = NotificationManagerCompat.from(this)
                     notificationManager.notify(CHANNEL_ID.toInt(), builder.build())
 
-                    //If Knots is chosen as the unit of measurement
+                    // If Knots is chosen as the unit of measurement
                 } else if (speedNumber == speedKnot.toString() && unit == "Knots") {
                     val textTitle = "Android Sensor Engine"
                     val textContent = getString(R.string.notify_speed_message) + " " + speedNumber + " " + unit
@@ -316,16 +315,16 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     override fun onProviderDisabled(provider: String) {}
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    //This section is is dedicated for the location permission properties
+    // This section is is dedicated for the location permission properties
     private fun requestLocationPermissions() {
         if (ContextCompat.checkSelfPermission(this,
                         permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
-            //When permission is not granted by user, show them message why this permission is needed.
+            // When permission is not granted by user, show them message why this permission is needed.
             if (ActivityCompat.shouldShowRequestPermissionRationale(this,
                             permission.ACCESS_FINE_LOCATION)) {
-                //  Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
-                //Give user option to still opt-in the permissions
+                // Toast.makeText(this, "Please grant permission to measure your speed", Toast.LENGTH_LONG).show();
+                // Give user option to still opt-in the permissions
                 ActivityCompat.requestPermissions(this, arrayOf(permission.ACCESS_FINE_LOCATION),
                         REQUESTLOCATIONPERMISSION)
             } else {
@@ -391,7 +390,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Pin Shortcut Dialog Data
+    // Pin Shortcut Dialog Data
     private fun alertDialog() {
 
         OneTimeAlertDialog.Builder(this, "my_dialog_key")
@@ -401,7 +400,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
     companion object {
-        //ID used for notifications
+        // ID used for notifications
         private const val CHANNEL_ID = "2"
     }
 
