@@ -32,35 +32,29 @@ import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityPressureBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
+/** Gathers pressure information from the environment */
 class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivityPressureBinding
 
-    //Dialog popup info
+    // Dialog popup info
     private var pressureInfoDialog: Dialog? = null
 
-    //Sensor initiation
+    // Sensor initiation
     private var sensorManager: SensorManager? = null
     private var pressure: Sensor? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //Get the preference settings
+    // Get the preference settings
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-
-    //Handler for dialog pin shortcut dialog box
+    // Handler for dialog pin shortcut dialog box
     val handler = Handler()
-
-/*    override fun startService(service: Intent?): ComponentName? {
-        return super.startService(service)
-    }*/
-
-
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
@@ -79,7 +73,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        //Opens Pin Shortcut menu after long pressing the logo
+        // Opens Pin Shortcut menu after long pressing the logo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             binding.pressureLogo.setOnLongClickListener() {
                 sensorShortcut()
@@ -87,7 +81,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         }
 
         // Get an instance of the sensor service, and use that to get an instance of
-        // the relative temperature. If device does not support this sensor a toast message will
+        // the relative pressure. If device does not support this sensor a toast message will
         // appear
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
         if (BuildConfig.DEBUG && sensorManager == null) {
@@ -129,12 +123,12 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         // Get the PendingIntent containing the entire back stack
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        //Checks to see if the pressure alert notifications are turned on in root_preferences.xml
+        // Checks to see if the pressure alert notifications are turned on in root_preferences.xml
         if (settings.getBoolean("switch_preference_pressure", true)) {
-            //Gets the string value from the edit_text_pressure key in root_preferences.xml
+            // Gets the string value from the edit_text_pressure key in root_preferences.xml
             val pressureNumber = settings.getString("edit_text_pressure", "")
 
-            //Conditions that must be true for the notifications to work
+            // Conditions that must be true for the notifications to work
             if (pressure_level.toString() == pressureNumber) {
                 val textTitle = "Android Sensor Engine"
                 val textContent = getString(R.string.notify_pressure_message) + " " + pressureNumber + " " + "hPa"
@@ -155,7 +149,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    //For handling notifications
+    // For handling notifications
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -178,6 +172,8 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         super.onStart()
         //Dialog Box for Temperature Info
         pressureInfoDialog = Dialog(this)
+
+        // Fade out animation effects
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
         `in`.duration = 1500
         binding.pressure.startAnimation(`in`)
@@ -185,9 +181,9 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         binding.pressureSensor.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
 
-        // Register a listener for the sensor.
         createNotificationChannel()
 
+        // Register a listener for the sensor.
         sensorManager!!.registerListener(this, pressure, SensorManager.SENSOR_DELAY_NORMAL)
     }
 
@@ -209,7 +205,7 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
     override fun onDestroy() {
         super.onDestroy()
         // Unregisters the sensor when the activity pauses.
-      //  sensorManager!!.unregisterListener(this)
+        //  sensorManager!!.unregisterListener(this)
     }
 
     fun showPressureDialogPopup(v: View?) {
@@ -222,14 +218,14 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         pressureInfoDialog!!.dismiss()
     }
 
-    //This will add functionality to the menu button within the action bar
+    // This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation_menu, menu)
         return true
     }
 
-    //The following is for the menu items within the navigation_menu.xml file
+    // The following is for the menu items within the navigation_menu.xml file
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.preferences -> {

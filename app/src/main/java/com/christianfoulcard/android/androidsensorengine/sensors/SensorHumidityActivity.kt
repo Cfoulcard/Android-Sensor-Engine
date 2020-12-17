@@ -31,27 +31,28 @@ import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityHumidityBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
+/** Gather information from ambient environment to calculate water vapor */
 class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivityHumidityBinding
 
-    //Dialog popup info
+    // Dialog popup info
     private var humidityInfoDialog: Dialog? = null
 
-    //Sensor initiation
+    // Sensor initiation
     private var sensorManager: SensorManager? = null
     private var humidity: Sensor? = null
     private var mContext: Context? = null
     private var mActivity: Activity? = null
 
-    //Gets the setting preferences
+    // Gets the setting preferences
     private val mSharedPreferences: SharedPreferences? = null
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
-    //Handler for dialog pin shortcut dialog box
+    // Handler for dialog pin shortcut dialog box
     val handler = Handler()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
@@ -68,13 +69,13 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
 //        val adRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
 
-        //Dialog Box for Temperature Info
+        // Dialog Box for Temperature Info
         humidityInfoDialog = Dialog(this)
 
         // Obtain the FirebaseAnalytics instance.
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
-        //Opens Pin Shortcut menu after long pressing the logo
+        // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
             binding.humidityLogo.setOnLongClickListener() {
                 sensorShortcut()
@@ -104,15 +105,15 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
         // Get the instance of SharedPreferences object
         val settings = PreferenceManager.getDefaultSharedPreferences(this)
 
-        //Get Humidity from the sensor
+        // Get Humidity from the sensor
         val waterVapor = event.values[0].toInt()
 
-        //Gets sensor data for humidity
+        // Gets sensor data for humidity
         if (event.sensor.type == Sensor.TYPE_RELATIVE_HUMIDITY) {
             binding.currentHumidity.text = "$waterVapor%"
         }
 
-        //Gets the string value from the edit_text_humidity key in root_preferences.xml
+        // Gets the string value from the edit_text_humidity key in root_preferences.xml
         val vaporNumber = settings.getString("edit_text_humidity", "")
 
         // Create an Intent for the activity you want to start
@@ -125,9 +126,9 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
         // Get the PendingIntent containing the entire back stack
         val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        //Checks to see if the humidity alert notifications are turned on in root_preferences.xml
+        // Checks to see if the humidity alert notifications are turned on in root_preferences.xml
         if (settings.getBoolean("switch_preference_humidity", true)) {
-            //Conditions that must be true for the notifications to work
+            // Conditions that must be true for the notifications to work
             if (vaporNumber == waterVapor.toString()) {
                 val textTitle = "Android Sensor Engine"
                 val textContent = getString(R.string.notify_humidity_message) + " " + vaporNumber + "%"
@@ -147,7 +148,7 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
         }
     }
 
-    //For handling notifications
+    // For handling notifications
     private fun createNotificationChannel() {
         // Create the NotificationChannel, but only on API 26+ because
         // the NotificationChannel class is new and not in the support library
@@ -209,14 +210,14 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
         humidityInfoDialog!!.dismiss()
     }
 
-    //This will add functionality to the menu button within the action bar
+    // This will add functionality to the menu button within the action bar
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
         menuInflater.inflate(R.menu.navigation_menu, menu)
         return true
     }
 
-    //The following is for the menu items within the navigation_menu.xml file
+    // The following is for the menu items within the navigation_menu.xml file
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.preferences -> {
@@ -265,7 +266,7 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
     }
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //Pin Shortcut Dialog Data
+    // Pin Shortcut Dialog Data
     private fun alertDialog() {
 
         OneTimeAlertDialog.Builder(this, "my_dialog_key")
@@ -275,7 +276,7 @@ class SensorHumidityActivity : AppCompatActivity(), SensorEventListener {
     }
 
     companion object {
-        //ID used for notifications
+        // ID used for notifications
         private const val CHANNEL_ID = "5"
     }
 }
