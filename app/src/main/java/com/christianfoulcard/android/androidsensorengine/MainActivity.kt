@@ -11,22 +11,21 @@ import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
-//TODO: Show user a list of sensors their device can use
-//TODO: Add elevation/sea level sensor?
-//TODO: Fix animations
-//TODO: Update ram activity parsing
+// TODO: Show user a list of sensors their device can use
+// TODO: Add elevation/sea level sensor?
+// TODO: Fix animations
+// TODO: Update ram activity parsing
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 class MainActivity : AppCompatActivity() {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivitySensorSelectionBinding
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
@@ -38,22 +37,17 @@ class MainActivity : AppCompatActivity() {
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
 
-//        if (BuildConfig.DEBUG) {
-//            Timber.plant(DebugTree())
-//        }
-
         // Obtain the FirebaseAnalytics instance.
-
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Add WorkRequest to save the image to the filesystem
-        val save = OneTimeWorkRequestBuilder<BackgroundWorker>()
-                .build()
-      //  continuation = continuation.then(save)
+        // val save = OneTimeWorkRequestBuilder<BackgroundWorker>()
+                // .build()
+        //  continuation = continuation.then(save)
 
         // Actually start the work
-        val backGround : BackgroundWorker? = null
-        backGround?.startWork()
+        // val backGround : BackgroundWorker? = null
+        // backGround?.startWork()
     }
 
     override fun onStart() {
@@ -61,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
-    // Intents to start the sensor activities
+    // Intents to start the sensor activities. These are called in the sensor selection XML file
 
     fun soundIconIntent(view: View?) {
         val soundIntent = Intent(this, SensorSoundActivity::class.java)
@@ -105,7 +99,7 @@ class MainActivity : AppCompatActivity() {
         this.startActivity(speedIntent, transitionActivityOptions.toBundle())
     }
 
-    infix fun humidityIconIntent(view: View?) {
+    fun humidityIconIntent(view: View?) {
         val humidityIntent = Intent(this, SensorHumidityActivity::class.java)
         val transitionName = ""
         val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.humidityIcon, transitionName)

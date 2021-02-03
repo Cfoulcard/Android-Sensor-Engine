@@ -29,15 +29,16 @@ import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityLightBinding
 import com.google.firebase.analytics.FirebaseAnalytics
 
+/** Gathers Light data from the device's sensor using SensorManager */
 class SensorLightActivity : AppCompatActivity(), SensorEventListener {
 
-    //View Binding to call the layout's views
+    // View Binding to call the layout's views
     private lateinit var binding: ActivityLightBinding
 
-    //Dialog popup info
+    // Dialog popup info
     private var lightInfoDialog: Dialog? = null
 
-    //Sensor initiation
+    // Sensor initiation
     private var sensorManager: SensorManager? = null
     private var light: Sensor? = null
 
