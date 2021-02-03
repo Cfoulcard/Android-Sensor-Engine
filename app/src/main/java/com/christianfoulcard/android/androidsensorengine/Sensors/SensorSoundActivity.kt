@@ -132,8 +132,6 @@ class SensorSoundActivity : AppCompatActivity() {
     public override fun onResume() {
         super.onResume()
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED &&
-                ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
                 != PackageManager.PERMISSION_GRANTED) {
             startRecorder()
         }
