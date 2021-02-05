@@ -12,8 +12,6 @@ import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
-import android.os.Looper
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -25,7 +23,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.work.OneTimeWorkRequestBuilder
 import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
@@ -46,7 +43,7 @@ const val MY_PERMISSIONS_REQUEST_RECORD_AUDIO = 99
 class SensorSoundActivity : AppCompatActivity() {
 
     //Used to help with Sound Sensor's Audio parsing
-    var EMA = 0.0
+    private var EMA = 0.0
 
     // Use the 'by viewModels()' Kotlin property delegate
     // from the activity-ktx artifact
@@ -65,7 +62,7 @@ class SensorSoundActivity : AppCompatActivity() {
     private var mRecorder: MediaRecorder? = null
     var runner: Thread? = null
     val updater = Runnable { updateTv() }
-    val mHandler = Handler()
+    private val mHandler = Handler()
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     @RequiresApi(Build.VERSION_CODES.O)
@@ -91,23 +88,6 @@ class SensorSoundActivity : AppCompatActivity() {
             }
         }
 
-        if (runner == null) {
-            runner = object : Thread() {
-                override fun run() {
-                    while (runner != null) {
-                        try {
-                            sleep(500)
-                            // Log.i("Noise", "Tock");
-                        } catch (e: InterruptedException) {
-                        }
-                        mHandler.post(updater)
-                    }
-                }
-            }
-            (runner as Thread).start()
-            //   Log.d("Noise", "start runner()")
-        }
-
         // Dialog Box for Sound Info
         soundInfoDialog = Dialog(this)
 
@@ -126,16 +106,35 @@ class SensorSoundActivity : AppCompatActivity() {
         binding.soundSensor.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
 
+//        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+//                != PackageManager.PERMISSION_GRANTED) {
+//                    return
+//        }
+
     }
 
     // Microphone recording starts
     public override fun onResume() {
         super.onResume()
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
-                != PackageManager.PERMISSION_GRANTED) {
-            startRecorder()
-        }
 
+        if (runner == null) {
+            runner = object : Thread() {
+                override fun run() {
+                    while (runner != null) {
+                        try {
+                            sleep(500)
+
+                            //  Log.i("Noise", "Tock");
+                        } catch (e: InterruptedException) {
+                        }
+                        mHandler.post(updater)
+                    }
+                }
+            }
+            (runner as Thread).start()
+            //   Log.d("Noise", "start runner()")
+        }
+        startRecorder()
 
 
 
@@ -216,7 +215,6 @@ class SensorSoundActivity : AppCompatActivity() {
             try {
                 mRecorder!!.start()
             } catch (e: SecurityException) {
-
             }
         }
     }
