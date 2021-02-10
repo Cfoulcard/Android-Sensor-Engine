@@ -5,6 +5,7 @@ ext {
 
 buildscript {
     ext.kotlin_version = '1.4.10'
+    ext.hilt_version = '2.31.2-alpha'
     repositories {
         google()
         jcenter()
@@ -17,7 +18,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.firebase:perf-plugin:1.3.4'
         // Add the Crashlytics Gradle plugin.
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'// Crashlytics plugin
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.4.1'
+        //Adds the Hilt Dependency
+        classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
+
 
 
         // NOTE: Do not place your application dependencies here; they belong
