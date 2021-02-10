@@ -3,6 +3,7 @@ package com.christianfoulcard.android.androidsensorengine
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,6 +11,10 @@ import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActi
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 import com.google.firebase.analytics.FirebaseAnalytics
+import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.HiltAndroidApp
+import timber.log.Timber
+import javax.inject.Inject
 
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?
@@ -17,14 +22,20 @@ import com.google.firebase.analytics.FirebaseAnalytics
 // TODO: Update ram activity parsing
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
+
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    //Hilt Testing
+    @Inject
+    lateinit var logHilt: HiltTesting
 
     // View Binding to call the layout's views
     private lateinit var binding: ActivitySensorSelectionBinding
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
+    
     override fun onCreate(savedInstanceState: Bundle?) {
         // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme)
@@ -32,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         binding = ActivitySensorSelectionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        Log.e("Hi", logHilt.logString())
+        Log.e("Second Hi", logHilt.logOtherString())
 
         // This will make the Status Bar completely transparent
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
