@@ -45,4 +45,3 @@ Pinned Shortcuts for easy access to the different sensors. These can be added to
 
 ## Other info
 This project is built using Java, Kotlin, and XML. Designs were made/modified in Affinity Designer.
-
