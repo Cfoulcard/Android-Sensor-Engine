@@ -58,5 +58,5 @@ There will be future support for more languages beyond what's currently offered.
 
 ## Contributing
 
-Because this is an open source project, anyone familiar with the technologies used to build Android Apps is allowed to help. To contribute, please view the [contributing guidelines](https://github.com/Cfoulcard/Android-Sensor-Engine/blob/main/contributing.md)!
+Because this is an open source project, anyone familiar with the technologies used to build Android Apps is allowed to help. To contribute, please view the [contributing guidelines](https://github.com/Cfoulcard/Android-Sensor-Engine/blob/master/contributing.md)!
 
