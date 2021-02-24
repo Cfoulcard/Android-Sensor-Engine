@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
 
     // Initiate Firebase Analytics
     private var mFirebaseAnalytics: FirebaseAnalytics? = null
-    
+
     override fun onCreate(savedInstanceState: Bundle?) {
         // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme)
