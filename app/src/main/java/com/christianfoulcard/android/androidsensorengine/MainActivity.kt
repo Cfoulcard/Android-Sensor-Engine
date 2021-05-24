@@ -11,8 +11,7 @@ import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActi
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 import com.google.firebase.analytics.FirebaseAnalytics
-import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.HiltAndroidApp
+
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,14 +20,7 @@ import javax.inject.Inject
 // TODO: Fix animations
 // TODO: Update ram activity parsing
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
-
-@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
-
-    //Hilt Testing
-    @Inject
-    lateinit var logHilt: HiltTesting
 
     // View Binding to call the layout's views
     private lateinit var binding: ActivitySensorSelectionBinding
@@ -43,9 +35,6 @@ class MainActivity : AppCompatActivity() {
         binding = ActivitySensorSelectionBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        Log.e("Hi", logHilt.logString())
-        Log.e("Second Hi", logHilt.logOtherString())
 
         // This will make the Status Bar completely transparent
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,

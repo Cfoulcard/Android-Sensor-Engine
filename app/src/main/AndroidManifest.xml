@@ -7,24 +7,17 @@
     >
 
     <!-- Add app intent link -->
-    <!--
- https://developer.android.com/guide/components/fundamentals#DeclaringRequirements
-     Above link for declaring app requirements on Google Play
-    -->
-    <!--
- Record Audio and Location is listed as a Dangerous Permission
- This will mean the user must explicitly grant access to use your feature
-    -->
+
+    <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-    <!--
- As of Android 10 the ACTIVITY_RECOGNITION is required to be declared to track steps.
+
+    <!-- As of Android 10 the ACTIVITY_RECOGNITION is required to be declared to track steps.
     This is for the Step Sensor to work on Android 10 Devices
     -->
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
-
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
@@ -32,7 +25,6 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:name=".HiltInjection"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
@@ -54,9 +46,9 @@
             android:name=".MainActivity"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             
