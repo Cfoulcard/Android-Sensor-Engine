@@ -12,7 +12,6 @@ import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 
 import timber.log.Timber
-import javax.inject.Inject
 
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?
