@@ -28,7 +28,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityWalkBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 class SensorWalkActivity : AppCompatActivity(), SensorEventListener {
 
@@ -46,9 +45,6 @@ class SensorWalkActivity : AppCompatActivity(), SensorEventListener {
 
     //Gets settings from preference
     private val mSharedPreferences: SharedPreferences? = null
-
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -69,9 +65,6 @@ class SensorWalkActivity : AppCompatActivity(), SensorEventListener {
 
         //Dialog Box for Temperature Info
         walkInfoDialog = Dialog(this)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         //Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

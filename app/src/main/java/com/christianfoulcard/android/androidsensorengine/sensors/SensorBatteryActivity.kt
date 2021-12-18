@@ -23,7 +23,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityBatteryBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 /** Gets a heat signature from the device's battery */
 class SensorBatteryActivity : AppCompatActivity() {
@@ -38,9 +37,6 @@ class SensorBatteryActivity : AppCompatActivity() {
     private val context: Context? = null
     private val mBatteryLevel: Int = 0
     private var ifilter: IntentFilter? = null
-
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     // Channel ID for notifications
     private val ID = "3"
@@ -66,9 +62,6 @@ class SensorBatteryActivity : AppCompatActivity() {
 
         // Dialog Box for Temperature Info
         batteryInfoDialog = Dialog(this)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

@@ -23,7 +23,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityRamBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 
 class SensorRamActivity : AppCompatActivity() {
@@ -35,9 +34,6 @@ class SensorRamActivity : AppCompatActivity() {
 
     //Dialog popup info
     private var ramInfoDialog: Dialog? = null
-
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -67,8 +63,6 @@ class SensorRamActivity : AppCompatActivity() {
             }
         }
 
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
     }
 
     override fun onStart() {

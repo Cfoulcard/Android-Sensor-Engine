@@ -30,7 +30,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityPressureBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 /** Gathers pressure information from the environment */
 class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
@@ -50,9 +49,6 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
     // Get the preference settings
     private val mSharedPreferences: SharedPreferences? = null
 
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
     // Handler for dialog pin shortcut dialog box
     val handler = Handler()
 
@@ -69,9 +65,6 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
 //        MobileAds.initialize(this) {} //ADMOB App ID
 //        val adRequest = AdRequest.Builder().build()
 //        binding.adView.loadAd(adRequest)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Opens Pin Shortcut menu after long pressing the logo
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

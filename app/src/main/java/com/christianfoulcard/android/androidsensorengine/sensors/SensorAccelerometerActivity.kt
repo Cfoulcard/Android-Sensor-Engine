@@ -32,7 +32,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityAccelerometerBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /** Tracks speed using the LocationListener and GPS data */
@@ -46,9 +45,6 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
     // Sensor Data
     var mlocListener: LocationListener? = null
-
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     // Needed for location permission
     private val REQUESTLOCATIONPERMISSION = 1
@@ -73,9 +69,6 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
         // Dialog Box for Temperature Info
         accelerometerInfoDialog = Dialog(this)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {

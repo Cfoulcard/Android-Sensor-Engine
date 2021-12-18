@@ -28,7 +28,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_sound.*
 import java.io.IOException
 import kotlin.math.log10
@@ -78,8 +77,6 @@ class SensorSoundActivity : AppCompatActivity() {
         // val adRequest = AdRequest.Builder().build()
         // binding.adView.loadAd(adRequest)
 
-        // Obtain the FirebaseAnalytics instance and Initiate Firebase Analytics
-         val mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Opens Pin Shortcut menu after long pressing the logo
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
@@ -134,7 +131,6 @@ class SensorSoundActivity : AppCompatActivity() {
             (runner as Thread).start()
             //   Log.d("Noise", "start runner()")
         }
-        startRecorder()
 
 
 
@@ -175,7 +171,7 @@ class SensorSoundActivity : AppCompatActivity() {
         } else if (ContextCompat.checkSelfPermission(this,
                         Manifest.permission.RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED) {
-            // Go ahead with recording audio now
+            startRecorder()
         }
     }
 

@@ -9,7 +9,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActivity
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?
@@ -22,9 +21,6 @@ class MainActivity : AppCompatActivity() {
     // View Binding to call the layout's views
     private lateinit var binding: ActivitySensorSelectionBinding
 
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         // Make sure this theme is before calling super.onCreate
         setTheme(R.style.AppTheme)
@@ -36,9 +32,6 @@ class MainActivity : AppCompatActivity() {
         // This will make the Status Bar completely transparent
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Add WorkRequest to save the image to the filesystem
         // val save = OneTimeWorkRequestBuilder<BackgroundWorker>()

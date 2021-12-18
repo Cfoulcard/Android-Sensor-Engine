@@ -27,7 +27,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityLightBinding
-import com.google.firebase.analytics.FirebaseAnalytics
 
 /** Gathers Light data from the device's sensor using SensorManager */
 class SensorLightActivity : AppCompatActivity(), SensorEventListener {
@@ -41,9 +40,6 @@ class SensorLightActivity : AppCompatActivity(), SensorEventListener {
     // Sensor initiation
     private var sensorManager: SensorManager? = null
     private var light: Sensor? = null
-
-    // Initiate Firebase Analytics
-    private var mFirebaseAnalytics: FirebaseAnalytics? = null
 
     //Handler for dialog pin shortcut dialog box
     val handler = Handler()
@@ -71,9 +67,6 @@ class SensorLightActivity : AppCompatActivity(), SensorEventListener {
                 sensorShortcut()
             }
         }
-
-        // Obtain the FirebaseAnalytics instance.
-        mFirebaseAnalytics = FirebaseAnalytics.getInstance(this)
 
         // Get an instance of the sensor service, and use that to get an instance of
         // the light sensor. If the device does not support this sensor a toast message
