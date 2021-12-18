@@ -3,6 +3,7 @@ package com.christianfoulcard.android.androidsensorengine
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -10,12 +11,14 @@ import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActi
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 
+import timber.log.Timber
+import javax.inject.Inject
+
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?
 // TODO: Fix animations
 // TODO: Update ram activity parsing
 
-////////////////////////////////////////////////////////////////////////////////////////////////////
 class MainActivity : AppCompatActivity() {
 
     // View Binding to call the layout's views
