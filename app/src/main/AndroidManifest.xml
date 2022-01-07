@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.christianfoulcard.android.androidsensorengine"
-    tools:ignore="ExtraText"
-    >
-
+    tools:ignore="ExtraText">
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -13,6 +11,9 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.ACTIVITY_RECOGNITION" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
     <application
         android:allowBackup="true"
@@ -22,80 +23,91 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity
+            android:name=".NewHomeScreenActivity"
+            android:exported="true"
+            android:label="@string/title_activity_new_home_screen"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
-        <uses-library android:name="android.test.runner"/>
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
 
-        <!--Ad Mob-->
+        <uses-library android:name="android.test.runner" /> <!-- Ad Mob -->
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9554686964642039~3021936665"/>
-
-        <!-- Sensor Selection Screen -->
+            android:value="ca-app-pub-9554686964642039~3021936665" /> <!-- Sensor Selection Screen -->
         <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
         <!-- AppTheme.Launcher is for the launcher screen -->
         <activity
-            android:name=".MainActivity"
+            android:name=".HomeScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            
+
             <!-- This is used for parsing shortcuts to the app icon on launcher screen -->
-            <meta-data android:name="android.app.shortcuts"
+            <meta-data
+                android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
         </activity>
         <activity
             android:name=".sensors.SensorSoundActivity"
+            android:exported="true"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity> <!-- Temperature Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- Temperature Sensor Activity -->
         <activity
             android:name=".sensors.SensorTemperatureActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity> <!-- Light Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait" /> <!-- Light Sensor Activity -->
         <activity
             android:name=".sensors.SensorLightActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity> <!-- Ram Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait" /> <!-- Ram Sensor Activity -->
         <activity
             android:name=".sensors.SensorRamActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity> <!-- Battery Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait" /> <!-- Battery Sensor Activity -->
         <activity
             android:name=".sensors.SensorBatteryActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity>
-
-
-
-        <!-- Speed Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait" /> <!-- Speed Sensor Activity -->
         <activity
             android:name=".sensors.SensorAccelerometerActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
-            android:screenOrientation="portrait"></activity> <!-- Humidity Sensor Activity -->
+            android:parentActivityName=".HomeScreenActivity"
+            android:screenOrientation="portrait" /> <!-- Humidity Sensor Activity -->
         <activity
             android:name=".sensors.SensorHumidityActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomeScreenActivity"
             android:screenOrientation="portrait" /> <!-- Pressure Sensor Activity -->
         <activity
             android:name=".sensors.SensorPressureActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomeScreenActivity"
             android:screenOrientation="portrait" /> <!-- Steps Sensor Activity -->
         <activity
             android:name=".sensors.SensorWalkActivity"
             android:label=""
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".HomeScreenActivity"
             android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
         <activity
             android:name=".preferences.SettingsActivity"
@@ -105,8 +117,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
-
     </application>
 
 </manifest>

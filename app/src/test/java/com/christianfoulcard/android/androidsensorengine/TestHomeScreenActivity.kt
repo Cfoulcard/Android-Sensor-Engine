@@ -8,9 +8,9 @@ import org.junit.runners.JUnit4
 
 @RunWith(JUnit4::class)
 // @SmallTest
-        public class TestMainActivity {
+        public class TestHomeScreenActivity {
 
-           private var mainActivity: MainActivity? = null
+           private var homeScreenActivity: HomeScreenActivity? = null
            private var soundActivity: SensorSoundActivity? = null
 
     @Before

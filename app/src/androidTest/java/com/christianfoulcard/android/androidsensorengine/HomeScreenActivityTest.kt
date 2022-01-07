@@ -2,7 +2,7 @@ package com.christianfoulcard.android.androidsensorengine
 
 import org.junit.Test
 
-class MainActivityTest {
+class HomeScreenActivityTest {
     @Test
     fun name() {
     }

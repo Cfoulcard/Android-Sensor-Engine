@@ -3,7 +3,6 @@ package com.christianfoulcard.android.androidsensorengine
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
@@ -11,14 +10,12 @@ import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActi
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 
-import timber.log.Timber
-
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?
 // TODO: Fix animations
 // TODO: Update ram activity parsing
 
-class MainActivity : AppCompatActivity() {
+class HomeScreenActivity : AppCompatActivity() {
 
     // View Binding to call the layout's views
     private lateinit var binding: ActivitySensorSelectionBinding
@@ -34,84 +31,74 @@ class MainActivity : AppCompatActivity() {
         // This will make the Status Bar completely transparent
         window.setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
                 WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-
-        // Add WorkRequest to save the image to the filesystem
-        // val save = OneTimeWorkRequestBuilder<BackgroundWorker>()
-                // .build()
-        //  continuation = continuation.then(save)
-
-        // Actually start the work
-        // val backGround : BackgroundWorker? = null
-        // backGround?.startWork()
     }
 
     override fun onStart() {
         super.onStart()
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////
     // Intents to start the sensor activities. These are called in the sensor selection XML file
 
     fun soundIconIntent(view: View?) {
         val soundIntent = Intent(this, SensorSoundActivity::class.java)
         val transitionName = getString(R.string.sound_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.soundIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.soundIcon, transitionName)
         this.startActivity(soundIntent, transitionActivityOptions.toBundle())
     }
 
     fun tempIconIntent(view: View?) {
         val tempIntent = Intent(this, SensorTemperatureActivity::class.java)
         val transitionName = getString(R.string.temp_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.tempIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.tempIcon, transitionName)
         this.startActivity(tempIntent, transitionActivityOptions.toBundle())
     }
 
     fun lightIconIntent(view: View?) {
         val lightIntent = Intent(this, SensorLightActivity::class.java)
         val transitionName = getString(R.string.light_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.lightIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.lightIcon, transitionName)
         this.startActivity(lightIntent, transitionActivityOptions.toBundle())
     }
 
     fun ramIconIntent(view: View?) {
         val ramIntent = Intent(this, SensorRamActivity::class.java)
         val transitionName = getString(R.string.ram_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.ramIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.ramIcon, transitionName)
         this.startActivity(ramIntent, transitionActivityOptions.toBundle())
     }
 
     fun batteryIconIntent(view: View?) {
         val batteryIntent = Intent(this, SensorBatteryActivity::class.java)
         val transitionName = getString(R.string.battery_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.batteryIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.batteryIcon, transitionName)
         this.startActivity(batteryIntent, transitionActivityOptions.toBundle())
     }
 
     fun speedIconIntent(view: View?) {
         val speedIntent = Intent(this, SensorAccelerometerActivity::class.java)
         val transitionName = getString(R.string.speed_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.speedIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.speedIcon, transitionName)
         this.startActivity(speedIntent, transitionActivityOptions.toBundle())
     }
 
     fun humidityIconIntent(view: View?) {
         val humidityIntent = Intent(this, SensorHumidityActivity::class.java)
         val transitionName = ""
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.humidityIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.humidityIcon, transitionName)
         this.startActivity(humidityIntent, transitionActivityOptions.toBundle())
     }
 
     fun pressureIconIntent(view: View?) {
         val pressureIntent = Intent(this, SensorPressureActivity::class.java)
         val transitionName = ""
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.pressureIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.pressureIcon, transitionName)
         this.startActivity(pressureIntent, transitionActivityOptions.toBundle())
     }
 
     fun walkIconIntent(view: View?) {
         val walkIntent = Intent(this, SensorWalkActivity::class.java)
         val transitionName = ""
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@MainActivity, binding.walkIcon, transitionName)
+        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.walkIcon, transitionName)
         this.startActivity(walkIntent, transitionActivityOptions.toBundle())
     }
 }
