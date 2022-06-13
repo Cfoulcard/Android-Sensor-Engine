@@ -194,7 +194,7 @@ class SensorBatteryActivity : AppCompatActivity() {
             stackBuilder.addNextIntentWithParentStack(resultIntent)
 
             // Get the PendingIntent containing the entire back stack
-            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
 
             // Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_battery", true)) {

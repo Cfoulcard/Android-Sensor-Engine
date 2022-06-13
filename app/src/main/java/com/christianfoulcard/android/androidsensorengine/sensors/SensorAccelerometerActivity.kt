@@ -194,7 +194,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
             stackBuilder.addNextIntentWithParentStack(resultIntent)
 
             // Get the PendingIntent containing the entire back stack
-            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            val resultPendingIntent = stackBuilder.getPendingIntent(0, PendingIntent.FLAG_IMMUTABLE)
 
             // Checks to see if the temperature alert notifications are turned on in root_preferences.xml
             if (settings.getBoolean("switch_preference_speed", true)) {
@@ -303,6 +303,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onStatusChanged(provider: String, status: Int, extras: Bundle) {}
     override fun onProviderEnabled(provider: String) {}
     override fun onProviderDisabled(provider: String) {}

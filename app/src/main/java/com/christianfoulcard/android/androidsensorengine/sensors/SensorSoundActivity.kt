@@ -30,7 +30,6 @@ import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySou
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
-import kotlinx.android.synthetic.main.activity_sound.*
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
@@ -132,7 +131,7 @@ class SensorSoundActivity : AppCompatActivity() {
                 Timber.d("start runner()")
             }
         } else {
-            current_decibel!!.text = "N/A"
+            binding.currentDecibel.text = "N/A"
         }
 
 
@@ -243,7 +242,7 @@ class SensorSoundActivity : AppCompatActivity() {
     * For more decibel detail change Integer to Double */
     private fun updateTv() {
 
-       current_decibel!!.text = Integer.toString(soundDb()) + " dB"
+       binding.currentDecibel.text = Integer.toString(soundDb()) + " dB"
 
         // Alternate decibel measurement
         // configuredDecibel.setText(Integer.toString((int) getAmplitudeEMA()) + " Current dB");
