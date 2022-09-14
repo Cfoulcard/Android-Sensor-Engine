@@ -3,12 +3,14 @@ package com.christianfoulcard.android.androidsensorengine
 import android.app.ActivityOptions
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.christianfoulcard.android.androidsensorengine.sensors.SensorSoundActivity
 import com.christianfoulcard.android.androidsensorengine.sensors.*
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
+import com.christianfoulcard.android.androidsensorengine.utils.LogUtils.TAG
 
 // TODO: Show user a list of sensors their device can use
 // TODO: Add elevation/sea level sensor?

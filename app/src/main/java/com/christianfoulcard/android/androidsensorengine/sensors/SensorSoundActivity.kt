@@ -1,6 +1,5 @@
 package com.christianfoulcard.android.androidsensorengine.sensors
 
-import android.Manifest
 import android.Manifest.permission.RECORD_AUDIO
 import android.app.Dialog
 import android.app.PendingIntent
@@ -11,7 +10,6 @@ import android.graphics.drawable.Icon
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.os.Handler
 import android.util.Log
 import android.view.Menu
@@ -20,10 +18,8 @@ import android.view.View
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import com.christianfoulcard.android.androidsensorengine.DataViewModel
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
@@ -31,8 +27,6 @@ import com.christianfoulcard.android.androidsensorengine.preferences.SettingsAct
 import com.vmadalin.easypermissions.EasyPermissions
 import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import timber.log.Timber
-import java.io.File
-import java.io.IOException
 import java.util.*
 import kotlin.math.log10
 
@@ -46,10 +40,6 @@ class SensorSoundActivity : AppCompatActivity() {
 
     // Used to help with Sound Sensor's Audio parsing
     private var EMA = 0.0
-
-    // Use the 'by viewModels()' Kotlin property delegate
-    // from the activity-ktx artifact
-    private val model: DataViewModel by viewModels()
 
     // Use View Binding to call the layout's views
     private lateinit var binding: ActivitySoundBinding

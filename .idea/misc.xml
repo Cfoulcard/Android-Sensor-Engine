@@ -10,6 +10,9 @@
       <map>
         <entry key="../../../../../layout/compose-model-1642988618765.xml" value="0.8700361010830325" />
         <entry key="../../../../../layout/compose-model-1643596389283.xml" value="0.7442680776014109" />
+        <entry key="app/src/main/res/drawable/background_launch_screen.xml" value="0.418" />
+        <entry key="app/src/main/res/drawable/background_launcher_screen.xml" value="0.45" />
+        <entry key="app/src/main/res/drawable/background_main.xml" value="0.447" />
       </map>
     </option>
   </component>

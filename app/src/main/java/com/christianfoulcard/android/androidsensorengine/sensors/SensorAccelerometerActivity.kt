@@ -3,7 +3,6 @@ package com.christianfoulcard.android.androidsensorengine.sensors
 import android.Manifest.permission
 import android.annotation.SuppressLint
 import android.app.*
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.pm.ShortcutInfo
@@ -11,7 +10,6 @@ import android.content.pm.ShortcutManager
 import android.graphics.drawable.Icon
 import android.location.Location
 import android.location.LocationListener
-import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.Handler
@@ -32,6 +30,7 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivityAccelerometerBinding
+import com.christianfoulcard.android.androidsensorengine.utils.AccelerometerSensor
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 /** Tracks speed using the LocationListener and GPS data */
@@ -82,7 +81,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////
-    public override fun onStart() {
+    override fun onStart() {
         super.onStart()
         //Animation fade in for UI elements
         val `in`: Animation = AlphaAnimation(0.0f, 1.0f)
@@ -95,7 +94,7 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
     }
 
 
-    public override fun onResume() {
+    override fun onResume() {
         super.onResume()
         // This section parses the speed data when the permissions are granted
         if (ActivityCompat.checkSelfPermission(this, permission.ACCESS_FINE_LOCATION)
@@ -105,8 +104,8 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
             return
         }
 
-        val lm = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0f, this)
+        AccelerometerSensor(this).getLocationManager()
+        AccelerometerSensor(this).requestLocationUpdates()
 
         // Creates a dialog explaining how to pin the sensor to the home screen
         // Appears after 1 second of opening activity
@@ -117,12 +116,16 @@ class SensorAccelerometerActivity : AppCompatActivity(), LocationListener {
 
 
 
-    public override fun onPause() {
+    override fun onPause() {
+        AccelerometerSensor(this).removeLocationManager()
+
         super.onPause()
         // Upon leaving the activity the location data will terminate
         // Used to free memory/battery usage
-        val lm = this.getSystemService(Context.LOCATION_SERVICE) as LocationManager
-        lm.removeUpdates(this)
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     fun showAccelerometerDialogPopup(v: View?) {
