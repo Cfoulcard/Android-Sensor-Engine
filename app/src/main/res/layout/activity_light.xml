@@ -78,17 +78,5 @@
             app:layout_constraintStart_toStartOf="@+id/lux_sensor_logo"
             app:layout_constraintTop_toBottomOf="@+id/luminosity" />
 
-        <com.google.android.gms.ads.AdView
-            android:id="@+id/adView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:adSize="SMART_BANNER"
-            app:adUnitId="ca-app-pub-9554686964642039/4406352283"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.504"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/current_lux"
-            app:layout_constraintVertical_bias="0.708" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

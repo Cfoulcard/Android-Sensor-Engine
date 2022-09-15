@@ -1,6 +1,5 @@
 package com.christianfoulcard.android.androidsensorengine.sensors
 
-import android.Manifest.permission.RECORD_AUDIO
 import android.app.Dialog
 import android.app.PendingIntent
 import android.content.Intent
@@ -24,8 +23,6 @@ import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySoundBinding
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
-import com.vmadalin.easypermissions.EasyPermissions
-import com.vmadalin.easypermissions.annotations.AfterPermissionGranted
 import timber.log.Timber
 import java.util.*
 import kotlin.math.log10
@@ -90,8 +87,6 @@ class SensorSoundActivity : AppCompatActivity() {
         binding.decibels.startAnimation(`in`)
         binding.soundSensor.startAnimation(`in`)
         binding.infoButton.startAnimation(`in`)
-
-        enableRecordingPermissionCheck()
 
     }
 
@@ -159,34 +154,12 @@ class SensorSoundActivity : AppCompatActivity() {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         // EasyPermissions handles the request result.
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
 
         if (grantResults.isEmpty()) {
             Toast.makeText(this, R.string.sound_permission_denied, Toast.LENGTH_LONG).show()
         }
 }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    @AfterPermissionGranted(AUDIO_RECORD_REQUEST_CODE)
-    private fun enableRecordingPermissionCheck() {
-        if (EasyPermissions.hasPermissions(this, RECORD_AUDIO)) {
-
-            mRecorder = MediaRecorder()
-
-           // if (mRecorder != null) {
-                startRecorder()
-         //   }
-        } else {
-            // Do not have permissions, request them now
-            EasyPermissions.requestPermissions(
-                host = this@SensorSoundActivity,
-                rationale = "Enabling the microphone will allow your device to pick up sounds",
-                requestCode = AUDIO_RECORD_REQUEST_CODE,
-                RECORD_AUDIO
-            )
-            Timber.d("Helloooooo")
-        }
-    }
 
     /** Properties of the microphone. This will start the recorder to gather sound data. */
     @RequiresApi(Build.VERSION_CODES.O)

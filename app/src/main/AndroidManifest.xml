@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.christianfoulcard.android.androidsensorengine"
     tools:ignore="ExtraText">
+
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -23,6 +24,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
         <activity
             android:name=".NewHomeScreenActivity"
             android:exported="true"
@@ -35,10 +37,8 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="android.test.runner" /> <!-- Ad Mob -->
-        <meta-data
-            android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-9554686964642039~3021936665" /> <!-- Sensor Selection Screen -->
+        <uses-library android:name="android.test.runner" />
+
         <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
         <!-- AppTheme.Launcher is for the launcher screen -->
         <activity
@@ -56,7 +56,9 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
+
         </activity>
+
         <activity
             android:name=".sensors.SensorSoundActivity"
             android:exported="true"
