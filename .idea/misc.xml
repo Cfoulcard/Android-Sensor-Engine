@@ -13,6 +13,7 @@
         <entry key="app/src/main/res/drawable/background_launch_screen.xml" value="0.418" />
         <entry key="app/src/main/res/drawable/background_launcher_screen.xml" value="0.45" />
         <entry key="app/src/main/res/drawable/background_main.xml" value="0.447" />
+        <entry key="app/src/main/res/layout/activity_light.xml" value="0.24895833333333334" />
       </map>
     </option>
   </component>

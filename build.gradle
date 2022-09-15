@@ -7,9 +7,11 @@ ext {
 buildscript {
 
     ext {
-        compose_version = '1.1.1'
+        build_gradle_version = '7.2.2'
+        compose_version = '1.2.1'
+        kotlin_version = '1.6.10'
+        google_services_version = '4.3.13'
     }
-    ext.kotlin_version = '1.7.0'
 
     repositories {
         google()
@@ -17,21 +19,16 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
-        classpath 'com.google.gms:google-services:4.3.10'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
+        classpath "com.android.tools.build:gradle:$build_gradle_version"
+        classpath "com.google.gms:google-services:$google_services_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
-
-/*plugins {
-    id 'com.gradle.build-scan' version '2.1'
-}*/
 
 allprojects {
     repositories {
         google()
         mavenCentral()
-
     }
 }
 
