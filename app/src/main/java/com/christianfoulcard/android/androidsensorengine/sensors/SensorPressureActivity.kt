@@ -2,6 +2,7 @@ package com.christianfoulcard.android.androidsensorengine.sensors
 
 import android.app.*
 import android.content.Context
+import android.content.Context.SENSOR_SERVICE
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.ShortcutInfo
@@ -25,7 +26,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import com.christianfoulcard.android.androidsensorengine.BuildConfig
+import androidx.viewbinding.BuildConfig
 import com.christianfoulcard.android.androidsensorengine.OneTimeAlertDialog
 import com.christianfoulcard.android.androidsensorengine.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
@@ -236,10 +237,9 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
     fun sensorShortcut(): Boolean {
 
         val shortcutManager = getSystemService<ShortcutManager>(ShortcutManager::class.java)
-        val intent = Intent(this, SensorPressureActivity::class.java)
-                .setAction("Pressure")
+        val intent = Intent(this, SensorPressureActivity::class.java).setAction("Pressure")
 
-        if (shortcutManager!!.isRequestPinShortcutSupported) {
+        if (shortcutManager?.isRequestPinShortcutSupported == true) {
 
             val pinShortcutInfo = ShortcutInfo.Builder(this, "pressure-shortcut")
                     .setShortLabel(getString(R.string.pressure_sensor))
