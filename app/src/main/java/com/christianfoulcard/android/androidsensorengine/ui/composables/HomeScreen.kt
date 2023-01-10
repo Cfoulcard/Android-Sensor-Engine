@@ -1,6 +1,5 @@
 package com.christianfoulcard.android.androidsensorengine.ui.composables
 
-import android.graphics.drawable.Drawable
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.MaterialTheme
@@ -13,7 +12,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.christianfoulcard.android.androidsensorengine.R
 
     @Composable
     fun SensorDiagnosisRow(text: String, drawable: Int) {
@@ -24,7 +22,7 @@ import com.christianfoulcard.android.androidsensorengine.R
             Text(
                 text = text,
                 fontSize = 18.sp,
-                textAlign = TextAlign.Center,
+                textAlign = TextAlign.Start,
                 modifier = Modifier.padding(4.dp),
                 style = MaterialTheme.typography.h1,
             )

@@ -20,6 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,6 +36,7 @@ class NewHomeScreenActivity : ComponentActivity() {
         setContent {
             AndroidSensorEngineTheme {
                 MainGradientBackground()
+                HalfCircleBackground()
                 Column(
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
@@ -72,8 +74,8 @@ class NewHomeScreenActivity : ComponentActivity() {
         val data by remember { mutableStateOf(listOf("1", "2", "3", "4", "5", "6", "7", "8", "9")) }
 
         LazyVerticalGrid(
-            columns = GridCells.Adaptive(100.dp),
-            modifier = Modifier.padding(vertical = 72.dp),
+            columns = GridCells.Adaptive(minSize = 100.dp),
+            modifier = Modifier.padding(vertical = 72.dp, horizontal = 36.dp),
         ) {
 
             items(data) { item ->
@@ -101,7 +103,7 @@ class NewHomeScreenActivity : ComponentActivity() {
     fun SensorDiagnosisView() {
         Surface(
             modifier = Modifier
-                .padding(horizontal = 24.dp)
+                .padding(horizontal = 36.dp)
                 .fillMaxSize(),
             shape = HomeScreenShapes.medium,
             color = pureWhite,
@@ -118,7 +120,7 @@ class NewHomeScreenActivity : ComponentActivity() {
                     text = "Sensor Diagnosis",
                     fontSize = 36.sp,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(16.dp),
+                    modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
                     style = MaterialTheme.typography.h1
                 )
                 SensorDiagnosisRow("Sound and Audio", R.drawable.green_circle)
@@ -134,11 +136,24 @@ class NewHomeScreenActivity : ComponentActivity() {
         }
     }
 
+    @Composable
+    fun HalfCircleBackground() {
+        Surface(
+            modifier = Modifier
+                .fillMaxHeight(.75f)
+                .fillMaxWidth(1f)
+                .alpha(.35f),
+            shape = HomeScreenShapes.large,
+            color = pureWhite,
+        ) { }
+    }
+
     @Preview(showBackground = true)
     @Composable
     fun DefaultPreview() {
         AndroidSensorEngineTheme {
             MainGradientBackground()
+            HalfCircleBackground()
             Column(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
