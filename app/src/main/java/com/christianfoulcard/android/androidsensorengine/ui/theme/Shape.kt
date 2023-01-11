@@ -14,5 +14,8 @@ val HomeScreenShapes = Shapes(
     small = RoundedCornerShape(25.dp),
     medium = RoundedCornerShape(25.dp, 25.dp, 0.dp, 0.dp),
     large = RoundedCornerShape(0.dp, 0.dp, 100.dp, 100.dp)
+)
 
+val BackgroundShapes = Shapes(
+    small = RoundedCornerShape(0.dp, 0.dp, 300.dp, 300.dp)
 )

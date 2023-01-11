@@ -2,8 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.christianfoulcard.android.androidsensorengine"
-    tools:ignore="ExtraText">
-
+    tools:ignore="ExtraText" >
     <!-- Permissions -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
@@ -24,13 +23,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
-
+        tools:ignore="GoogleAppIndexingWarning" >
         <activity
-            android:name=".NewHomeScreenActivity"
+            android:name=".ui.NewHomeScreenActivity"
             android:exported="true"
             android:label="@string/title_activity_new_home_screen"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,15 +36,19 @@
             </intent-filter>
         </activity>
 
-        <uses-library android:name="android.test.runner" />
+        <activity
+            android:name=".ui.sensors.SoundSensor"
+            android:label=""
+            android:parentActivityName=".ui.NewHomeScreenActivity"
+            android:screenOrientation="portrait" />
 
-        <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
+        <uses-library android:name="android.test.runner" /> <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
         <!-- AppTheme.Launcher is for the launcher screen -->
         <activity
             android:name=".HomeScreenActivity"
             android:exported="true"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Launcher">
+            android:theme="@style/AppTheme.Launcher" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -57,15 +59,13 @@
             <meta-data
                 android:name="android.app.shortcuts"
                 android:resource="@xml/shortcuts" />
-
         </activity>
-
         <activity
             android:name=".sensors.SensorSoundActivity"
             android:exported="true"
             android:label=""
             android:parentActivityName=".HomeScreenActivity"
-            android:screenOrientation="portrait">
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

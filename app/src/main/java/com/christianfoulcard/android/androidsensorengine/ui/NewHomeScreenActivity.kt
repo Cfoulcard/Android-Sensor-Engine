@@ -1,10 +1,9 @@
-package com.christianfoulcard.android.androidsensorengine
+package com.christianfoulcard.android.androidsensorengine.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -20,14 +19,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.christianfoulcard.android.androidsensorengine.R
+import com.christianfoulcard.android.androidsensorengine.ui.composables.HalfCircleBackground
+import com.christianfoulcard.android.androidsensorengine.ui.composables.MainGradientBackground
 import com.christianfoulcard.android.androidsensorengine.ui.composables.SensorDiagnosisRow
-import com.christianfoulcard.android.androidsensorengine.ui.theme.*
+import com.christianfoulcard.android.androidsensorengine.ui.composables.SensorIcon
+import com.christianfoulcard.android.androidsensorengine.ui.theme.AndroidSensorEngineTheme
+import com.christianfoulcard.android.androidsensorengine.ui.theme.HomeScreenShapes
+import com.christianfoulcard.android.androidsensorengine.ui.theme.pureWhite
 
 class NewHomeScreenActivity : ComponentActivity() {
 
@@ -50,23 +53,6 @@ class NewHomeScreenActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun MainGradientBackground() {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(0.dp)
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            skyBabyBlue,
-                            cloudPink
-                        )
-                    )
-                )
-        ) {
-        }
-    }
 
     @Composable
     fun HomeScreenSensorGrid() {
@@ -79,22 +65,30 @@ class NewHomeScreenActivity : ComponentActivity() {
         ) {
 
             items(data) { item ->
-                Card(
-                    modifier = Modifier
-                        .padding(16.dp)
-                        .size(100.dp),
-                    backgroundColor = pureWhite,
-                    shape = HomeScreenShapes.small,
-                    elevation = 12.dp,
-                ) {
-                    Text(
-                        text = item,
-                        fontSize = 24.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier.padding(32.dp),
-                        style = MaterialTheme.typography.h1
-                    )
+                when (item) {
+                    "1" -> {
+                        SensorIcon(this@NewHomeScreenActivity, R.drawable.ic_sound_wave)
+                    }
+                    else -> {
+                    Card(
+                        modifier = Modifier
+                            .padding(16.dp)
+                            .size(100.dp),
+                        backgroundColor = pureWhite,
+                        shape = HomeScreenShapes.small,
+                        elevation = 12.dp,
+                    ) {
+                        Text(
+                            text = item,
+                            fontSize = 24.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(32.dp),
+                            style = MaterialTheme.typography.h1
+                        )
+                    }
                 }
+                }
+
             }
         }
     }
@@ -136,17 +130,7 @@ class NewHomeScreenActivity : ComponentActivity() {
         }
     }
 
-    @Composable
-    fun HalfCircleBackground() {
-        Surface(
-            modifier = Modifier
-                .fillMaxHeight(.75f)
-                .fillMaxWidth(1f)
-                .alpha(.35f),
-            shape = HomeScreenShapes.large,
-            color = pureWhite,
-        ) { }
-    }
+
 
     @Preview(showBackground = true)
     @Composable
