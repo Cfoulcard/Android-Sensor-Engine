@@ -41,18 +41,38 @@
         <entry key="../../../../../layout/compose-model-1673408265313.xml" value="0.5" />
         <entry key="../../../../../layout/compose-model-1673408583460.xml" value="0.3998316498316498" />
         <entry key="../../../../../layout/compose-model-1673411935900.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1673411951261.xml" value="0.375" />
+        <entry key="../../../../../layout/compose-model-1673577089557.xml" value="0.4006734006734007" />
+        <entry key="../../../../../layout/compose-model-1673577307814.xml" value="0.4006734006734007" />
+        <entry key="../../../../../layout/compose-model-1674261509858.xml" value="0.4006734006734007" />
+        <entry key="../../../../../layout/compose-model-1674261561196.xml" value="0.4006734006734007" />
+        <entry key="../../../../../layout/compose-model-1674264219837.xml" value="0.4006734006734007" />
+        <entry key="../../../../../layout/compose-model-1674516713670.xml" value="0.3998316498316498" />
+        <entry key="../../../../../layout/compose-model-1674517621957.xml" value="0.45" />
+        <entry key="../../../../../layout/compose-model-1674518047107.xml" value="0.375" />
+        <entry key="../../../../../layout/compose-model-1674518567125.xml" value="0.375" />
+        <entry key="../../../../../layout/compose-model-1674520361222.xml" value="0.375" />
+        <entry key="../../../../../layout/compose-model-1674520733307.xml" value="1.0" />
+        <entry key="../../../../../layout/compose-model-1674520740505.xml" value="0.375" />
+        <entry key="../../../../../layout/compose-model-1674533627469.xml" value="0.45" />
+        <entry key="../../../../../layout/compose-model-1674621726798.xml" value="0.3998316498316498" />
+        <entry key="../../../../../layout/compose-model-1674627426362.xml" value="0.45" />
         <entry key="app/src/main/res/drawable/background_launch_screen.xml" value="0.418" />
         <entry key="app/src/main/res/drawable/background_launcher_screen.xml" value="0.45" />
         <entry key="app/src/main/res/drawable/background_main.xml" value="0.447" />
         <entry key="app/src/main/res/drawable/gradient_angled.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/gradient_skyblue.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic__icon__info.xml" value="0.1815" />
+        <entry key="app/src/main/res/drawable/ic_back_circle.xml" value="0.38" />
         <entry key="app/src/main/res/drawable/ic_barometer_icon.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_battery_icon_2.xml" value="0.2215" />
+        <entry key="app/src/main/res/drawable/ic_comet_circle.xml" value="0.2585" />
+        <entry key="app/src/main/res/drawable/ic_comet_gradient.xml" value="0.38" />
         <entry key="app/src/main/res/drawable/ic_sound_icon.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_sound_icon_2.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_sound_wave.xml" value="0.2215" />
         <entry key="app/src/main/res/drawable/ic_top_circle.xml" value="0.3035" />
+        <entry key="app/src/main/res/drawable/ic_top_circle_dark.xml" value="0.2265" />
         <entry key="app/src/main/res/layout/activity_light.xml" value="0.24895833333333334" />
         <entry key="app/src/main/res/layout/activity_sound_sensor.xml" value="0.40353260869565216" />
         <entry key="app/src/main/res/layout/content_sound_sensor.xml" value="0.40353260869565216" />
