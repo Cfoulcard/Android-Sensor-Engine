@@ -10,6 +10,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -71,6 +72,7 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
             modifier = Modifier.size(360.dp),
             alignment = Alignment.Center,
         )
+        SensorCometBackgroundForCentralGraphic()
         Image(
             painter = painterResource(R.drawable.ic_top_circle_dark),
             contentDescription = "topCircle",
@@ -122,21 +124,38 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
             }
         }
     }
+}
 
+@Composable
+fun SensorCometBackgroundForCentralGraphic() {
+    Image(
+        painter = painterResource(R.drawable.ic_comet_fade),
+        contentDescription = "cometGradient",
+        contentScale = ContentScale.Fit,
+        modifier = Modifier.fillMaxHeight(.5f).fillMaxWidth(1f).fillMaxSize().blur(12.dp).alpha(1f).offset(y = (-150).dp),
+        alignment = Alignment.Center,
+    )
+    Image(
+        painter = painterResource(R.drawable.ic_comet_fade),
+        contentDescription = "cometGradient",
+        contentScale = ContentScale.Fit,
+        modifier = Modifier.fillMaxHeight(0.5f).fillMaxWidth(1f).fillMaxSize().offset(y = (-150).dp),
+        alignment = Alignment.Center,
+    )
 }
 
 @Composable
 fun FirstInfoLabelGroup(description: String?, value: String?) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .offset(y = (-60).dp),
+        .offset(y = (-100).dp),
         contentAlignment = Alignment.Center) {
         Card(
-            elevation = 24.dp,
+            elevation = 12.dp,
             modifier = Modifier
-                .width(width = 272.dp)
+                .width(width = 290.dp)
                 .height(height = 44.dp)
-                .fillMaxWidth(1f),
+                .fillMaxWidth(1f).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -148,7 +167,7 @@ fun FirstInfoLabelGroup(description: String?, value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Left,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.padding(start = 16.dp)
@@ -169,7 +188,7 @@ fun FirstInfoLabelGroupValue(value: String?) {
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 72.dp)
-                .height(height = 44.dp),
+                .height(height = 44.dp).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -183,7 +202,7 @@ fun FirstInfoLabelGroupValue(value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Center,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
 
@@ -198,14 +217,14 @@ fun FirstInfoLabelGroupValue(value: String?) {
 fun SecondInfoLabelGroup(description: String?, value: String?) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .offset(y = (-40).dp),
+        .offset(y = (-80).dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
             modifier = Modifier
-                .width(width = 228.dp)
-                .height(height = 36.dp)
-                .fillMaxWidth(1f),
+                .width(width = 240.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -217,7 +236,7 @@ fun SecondInfoLabelGroup(description: String?, value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Left,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.padding(start = 16.dp)
@@ -238,7 +257,7 @@ fun SecondInfoLabelGroupValue(value: String?) {
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 60.dp)
-                .height(height = 36.dp),
+                .height(height = 44.dp).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -252,7 +271,7 @@ fun SecondInfoLabelGroupValue(value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Center,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
 
@@ -267,14 +286,14 @@ fun SecondInfoLabelGroupValue(value: String?) {
 fun ThirdInfoLabelGroup(description: String?, value: String?) {
     Box(modifier = Modifier
         .fillMaxWidth()
-        .offset(y = (-20).dp),
+        .offset(y = (-60).dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
             modifier = Modifier
-                .width(width = 176.dp)
-                .height(height = 36.dp)
-                .fillMaxWidth(1f),
+                .width(width = 190.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -286,7 +305,7 @@ fun ThirdInfoLabelGroup(description: String?, value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Left,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
                         modifier = Modifier.padding(start = 16.dp)
@@ -307,7 +326,7 @@ fun ThirdInfoLabelGroupValue(value: String?) {
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 47.dp)
-                .height(height = 36.dp),
+                .height(height = 44.dp).shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -321,10 +340,9 @@ fun ThirdInfoLabelGroupValue(value: String?) {
                         color = Color(0xff292929),
                         textAlign = TextAlign.Center,
                         style = TextStyle(
-                            fontSize = 14.sp,
+                            fontSize = 16.sp,
                             fontWeight = FontWeight.Bold
                         ),
-
                         )
                 }
             }
@@ -332,3 +350,41 @@ fun ThirdInfoLabelGroupValue(value: String?) {
     }
 }
 
+@Composable
+fun PowerButton() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth().fillMaxHeight(),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        Image(
+            painter = painterResource(R.drawable.ic_power_button),
+            contentDescription = "cometGradient",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxHeight(.43f).fillMaxWidth(1f).fillMaxSize().alpha(1f).blur(12.dp),
+            alignment = Alignment.Center,
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_power_button),
+            contentDescription = "cometGradient",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxHeight(.4f).fillMaxWidth(1f).fillMaxSize(),
+            alignment = Alignment.Center,
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_settings_icon),
+            contentDescription = "cometGradient",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxHeight(.35f).fillMaxWidth(1f).fillMaxSize().offset(y = (-15).dp).blur(12.dp),
+            alignment = Alignment.CenterEnd,
+        )
+        Image(
+            painter = painterResource(R.drawable.ic_settings_icon),
+            contentDescription = "cometGradient",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.fillMaxHeight(.35f).fillMaxWidth(1f).fillMaxSize().offset(y = (-15).dp),
+            alignment = Alignment.CenterEnd,
+        )
+
+    }
+}

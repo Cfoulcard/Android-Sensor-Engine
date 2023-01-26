@@ -45,6 +45,7 @@ class SoundSensor: ComponentActivity() {
                             SecondInfoLabelGroup("Peak Loudness", "85")
                             ThirdInfoLabelGroup("Lowest Decibel", "27")
                     }
+                    PowerButton()
                 }
             }
         }
@@ -75,6 +76,7 @@ class SoundSensor: ComponentActivity() {
                     SecondInfoLabelGroup("Peak Loudness", "85")
                     ThirdInfoLabelGroup("Lowest Decibel", "27")
                 }
+                PowerButton()
             }
         }
     }
