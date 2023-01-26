@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
@@ -49,6 +50,13 @@ fun navigateToSoundSensor(context: Context) {
 
 @Composable
 fun SensorCometBackground() {
+    Image(
+        painter = painterResource(R.drawable.ic_comet_shadow),
+        contentDescription = "cometGradient",
+        contentScale = ContentScale.Fit,
+        modifier = Modifier.fillMaxHeight(0.43f).fillMaxWidth(1f).fillMaxSize().blur(8.dp).alpha(1f),
+        alignment = Alignment.Center,
+    )
     Image(
         painter = painterResource(R.drawable.ic_comet_gradient),
         contentDescription = "cometGradient",

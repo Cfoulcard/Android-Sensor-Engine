@@ -11,7 +11,8 @@ import com.christianfoulcard.android.androidsensorengine.R
 val Cairo = FontFamily(
     Font(R.font.cairo_regular),
     Font(R.font.cairo_bold, FontWeight.Bold),
-    Font(R.font.cairo_semibold, FontWeight.SemiBold)
+    Font(R.font.cairo_semibold, FontWeight.SemiBold),
+    Font(R.font.cairo_black, FontWeight.Bold),
 )
 
 // Set of Material typography styles to start with
@@ -24,6 +25,11 @@ val Typography = Typography(
     h2 = TextStyle(
         fontFamily = Cairo,
         fontWeight = FontWeight.SemiBold,
+        fontSize = 24.sp
+    ),
+    h3 = TextStyle(
+        fontFamily = Cairo,
+        fontWeight = FontWeight.ExtraBold,
         fontSize = 24.sp
     ),
     body1 = TextStyle(

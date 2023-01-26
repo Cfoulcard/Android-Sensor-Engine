@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -12,10 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
@@ -26,6 +30,7 @@ import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
+import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.christianfoulcard.android.androidsensorengine.R
 
 class SoundSensor: ComponentActivity() {
@@ -47,6 +52,7 @@ class SoundSensor: ComponentActivity() {
                     InfoIcon()
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         TopCircle()
+                        Group()
                     }
                 }
             }
@@ -121,11 +127,11 @@ class SoundSensor: ComponentActivity() {
                                 fontSize = 48.sp)) { append("75") }
                             withStyle(style = SpanStyle(
                                 fontSize = 14.sp,
-                                baselineShift = BaselineShift(+0.65f)
+                                baselineShift = BaselineShift(+1f)
                             )) { append("db") }
                         },
                         textAlign = TextAlign.Center,
-                        style = MaterialTheme.typography.h1,
+                        style = MaterialTheme.typography.h3,
 
                     )
                 Text(
@@ -137,7 +143,35 @@ class SoundSensor: ComponentActivity() {
                 )
             }
         }
+
     }
+
+    @Composable
+    fun Group() {
+        Card(
+            elevation = 24.dp,
+            modifier = Modifier
+                .width(width = 272.dp)
+                .height(height = 44.dp),
+            shape = HomeScreenShapes.small
+        ) {
+            Box(contentAlignment = Alignment.Center) {
+                Row(horizontalArrangement = Arrangement.SpaceBetween) {
+                    Text(
+                        text = "Average Decibel Reading",
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Left,
+                        style = TextStyle(
+                            fontSize = 14.sp,
+                            fontWeight = FontWeight.Bold
+                        )
+                    )
+                }
+            }
+        }
+    }
+
+
 
     @Preview(showBackground = true)
     @Composable
@@ -154,8 +188,10 @@ class SoundSensor: ComponentActivity() {
             ) {
                 DisplayTitle()
                 InfoIcon()
+
                 Column(modifier = Modifier.padding(top = 90.dp)) {
                     TopCircle()
+                    Group()
                 }
             }
         }
