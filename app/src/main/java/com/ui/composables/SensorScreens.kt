@@ -6,6 +6,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
+import com.ui.sensors.viewmodels.SoundSensorViewModel
 
 @Composable
 fun DisplaySensorTitle(text: String) {
@@ -52,7 +55,10 @@ fun InfoIcon() {
 }
 
 @Composable
-fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?) {
+fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: SoundSensorViewModel) {
+
+    val updatedString by viewModel.decibelLiveData.observeAsState()
+
     Box(
         modifier = Modifier
             .fillMaxWidth(),
@@ -62,7 +68,10 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
             painter = painterResource(R.drawable.ic_back_circle_dark),
             contentDescription = "backCircle",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(370.dp).blur(8.dp).alpha(0.75f),
+            modifier = Modifier
+                .size(370.dp)
+                .blur(8.dp)
+                .alpha(0.75f),
             alignment = Alignment.Center,
         )
         Image(
@@ -77,7 +86,10 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
             painter = painterResource(R.drawable.ic_top_circle_dark),
             contentDescription = "topCircle",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(260.dp).blur(16.dp).alpha(.90f),
+            modifier = Modifier
+                .size(260.dp)
+                .blur(16.dp)
+                .alpha(.90f),
             alignment = Alignment.Center,
         )
         Image(
@@ -91,12 +103,13 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
             modifier = Modifier.absoluteOffset(4.dp, (-4).dp)
         ) {
             Text(
+
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(
                         fontSize = 48.sp)
                     ) {
                         if (largeInfoString != null) {
-                            append(largeInfoString)
+                            updatedString?.let { append(it) }
                         }
                     }
                     withStyle(style = SpanStyle(
@@ -123,6 +136,7 @@ fun CentralGraphicSensorInfo(largeInfoString: String?, superScript: String?, des
                 )
             }
         }
+
     }
 }
 
@@ -132,14 +146,24 @@ fun SensorCometBackgroundForCentralGraphic() {
         painter = painterResource(R.drawable.ic_comet_fade),
         contentDescription = "cometGradient",
         contentScale = ContentScale.Fit,
-        modifier = Modifier.fillMaxHeight(.5f).fillMaxWidth(1f).fillMaxSize().blur(12.dp).alpha(1f).offset(y = (-150).dp),
+        modifier = Modifier
+            .fillMaxHeight(.5f)
+            .fillMaxWidth(1f)
+            .fillMaxSize()
+            .blur(12.dp)
+            .alpha(1f)
+            .offset(y = (-150).dp),
         alignment = Alignment.Center,
     )
     Image(
         painter = painterResource(R.drawable.ic_comet_fade),
         contentDescription = "cometGradient",
         contentScale = ContentScale.Fit,
-        modifier = Modifier.fillMaxHeight(0.5f).fillMaxWidth(1f).fillMaxSize().offset(y = (-150).dp),
+        modifier = Modifier
+            .fillMaxHeight(0.5f)
+            .fillMaxWidth(1f)
+            .fillMaxSize()
+            .offset(y = (-150).dp),
         alignment = Alignment.Center,
     )
 }
@@ -155,7 +179,8 @@ fun FirstInfoLabelGroup(description: String?, value: String?) {
             modifier = Modifier
                 .width(width = 290.dp)
                 .height(height = 44.dp)
-                .fillMaxWidth(1f).shadow(24.dp, clip = false),
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -188,7 +213,8 @@ fun FirstInfoLabelGroupValue(value: String?) {
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 72.dp)
-                .height(height = 44.dp).shadow(24.dp, clip = false),
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -214,7 +240,7 @@ fun FirstInfoLabelGroupValue(value: String?) {
 }
 
 @Composable
-fun SecondInfoLabelGroup(description: String?, value: String?) {
+fun SecondInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .offset(y = (-80).dp),
@@ -224,7 +250,8 @@ fun SecondInfoLabelGroup(description: String?, value: String?) {
             modifier = Modifier
                 .width(width = 240.dp)
                 .height(height = 44.dp)
-                .fillMaxWidth(1f).shadow(24.dp, clip = false),
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -242,22 +269,26 @@ fun SecondInfoLabelGroup(description: String?, value: String?) {
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                SecondInfoLabelGroupValue(value)
+                SecondInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun SecondInfoLabelGroupValue(value: String?) {
+fun SecondInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
     Box(
         contentAlignment = Alignment.Center
     ) {
+
+        val updatedString by viewModel.highestDecibelLiveData.observeAsState()
+
         Card(
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 60.dp)
-                .height(height = 44.dp).shadow(24.dp, clip = false),
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -266,16 +297,18 @@ fun SecondInfoLabelGroupValue(value: String?) {
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-                    Text(
-                        text = value,
-                        color = Color(0xff292929),
-                        textAlign = TextAlign.Center,
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
 
-                        )
+                            )
+                    }
                 }
             }
         }
@@ -293,7 +326,8 @@ fun ThirdInfoLabelGroup(description: String?, value: String?) {
             modifier = Modifier
                 .width(width = 190.dp)
                 .height(height = 44.dp)
-                .fillMaxWidth(1f).shadow(24.dp, clip = false),
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -326,7 +360,8 @@ fun ThirdInfoLabelGroupValue(value: String?) {
             elevation = 12.dp,
             modifier = Modifier
                 .width(width = 47.dp)
-                .height(height = 44.dp).shadow(24.dp, clip = false),
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
             backgroundColor = pureWhite,
         ) {
@@ -354,35 +389,53 @@ fun ThirdInfoLabelGroupValue(value: String?) {
 fun PowerButton() {
     Box(
         modifier = Modifier
-            .fillMaxWidth().fillMaxHeight(),
+            .fillMaxWidth()
+            .fillMaxHeight(),
         contentAlignment = Alignment.BottomCenter
     ) {
         Image(
             painter = painterResource(R.drawable.ic_power_button),
             contentDescription = "cometGradient",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.fillMaxHeight(.43f).fillMaxWidth(1f).fillMaxSize().alpha(1f).blur(12.dp),
+            modifier = Modifier
+                .fillMaxHeight(.43f)
+                .fillMaxWidth(1f)
+                .fillMaxSize()
+                .alpha(1f)
+                .blur(12.dp),
             alignment = Alignment.Center,
         )
         Image(
             painter = painterResource(R.drawable.ic_power_button),
             contentDescription = "cometGradient",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.fillMaxHeight(.4f).fillMaxWidth(1f).fillMaxSize(),
+            modifier = Modifier
+                .fillMaxHeight(.4f)
+                .fillMaxWidth(1f)
+                .fillMaxSize(),
             alignment = Alignment.Center,
         )
         Image(
             painter = painterResource(R.drawable.ic_settings_icon),
             contentDescription = "cometGradient",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.fillMaxHeight(.35f).fillMaxWidth(1f).fillMaxSize().offset(y = (-15).dp).blur(12.dp),
+            modifier = Modifier
+                .fillMaxHeight(.35f)
+                .fillMaxWidth(1f)
+                .fillMaxSize()
+                .offset(y = (-15).dp)
+                .blur(12.dp),
             alignment = Alignment.CenterEnd,
         )
         Image(
             painter = painterResource(R.drawable.ic_settings_icon),
             contentDescription = "cometGradient",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.fillMaxHeight(.35f).fillMaxWidth(1f).fillMaxSize().offset(y = (-15).dp),
+            modifier = Modifier
+                .fillMaxHeight(.35f)
+                .fillMaxWidth(1f)
+                .fillMaxSize()
+                .offset(y = (-15).dp),
             alignment = Alignment.CenterEnd,
         )
 
