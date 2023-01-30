@@ -14,22 +14,15 @@ import kotlin.math.log10
 object AudioDecibels {
 
     var audioDecibels : Int? = null
+    private var highestDecibel = Int.MIN_VALUE
+    private var lowestDecibel = Int.MAX_VALUE
     var isMuted : Boolean = false
 
     private var audioTimerPeriod : Long = 100 // in milliseconds
     private var baseAudio = 0.0
 
-    fun highestDecibelReading() : String {
-        if (audioDecibels != null) {
-            var number = Int.MIN_VALUE
-            val current = audioDecibels
-            if (current != null) {
-                if (current > number) { number = current }
-            }
-            return number.toString()
-        }
-        return ""
-    }
+    private var count = 0
+    private var sum = 0
 
     /** Returns the traditional audio format of a decibel. This number will be limited to a maximum
      * of 90 on most devices due to hardware and software limitations. There's a chance we may pick up
@@ -103,6 +96,49 @@ object AudioDecibels {
             Log.e("Media", "getAudioAmplitude: ${e.message}", )
          //   Toast.makeText(T2DApplication.getAppContext(), "An error occurred while analyzing audio", Toast.LENGTH_SHORT).show()
             0
+        }
+    }
+
+    fun averageDecibelReading(): String {
+        addCurrentDecibel()
+        return if (count == 0) {
+            "0"
+        } else {
+            (sum / count).toString()
+        }
+    }
+
+    fun highestDecibelReading(): String {
+        return if (highestDecibel == 0) {
+            highestDecibel = audioDecibels!!
+            highestDecibel.toString()
+        } else {
+            highestDecibel = audioDecibels?.let { Integer.max(highestDecibel, it) }!!
+            highestDecibel.toString()
+        }
+    }
+
+    fun lowestDecibelReading(): String {
+        return if (lowestDecibel == 0) {
+            lowestDecibel = audioDecibels!!
+            lowestDecibel.toString()
+        } else {
+            lowestDecibel = audioDecibels?.let { Integer.min(lowestDecibel, it) }!!
+            lowestDecibel.toString()
+        }
+    }
+
+    fun resetDecibelReadings() {
+        highestDecibel = 0
+        lowestDecibel = 0
+        sum = 0
+        count = 0
+    }
+
+    private fun addCurrentDecibel() {
+        if (audioDecibels != null) {
+            count++
+            sum += audioDecibels!!
         }
     }
 }

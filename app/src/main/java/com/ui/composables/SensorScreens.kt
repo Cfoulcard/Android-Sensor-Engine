@@ -169,7 +169,7 @@ fun SensorCometBackgroundForCentralGraphic() {
 }
 
 @Composable
-fun FirstInfoLabelGroup(description: String?, value: String?) {
+fun FirstInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .offset(y = (-100).dp),
@@ -198,14 +198,17 @@ fun FirstInfoLabelGroup(description: String?, value: String?) {
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                FirstInfoLabelGroupValue(value)
+                FirstInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun FirstInfoLabelGroupValue(value: String?) {
+fun FirstInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
+
+    val updatedString by viewModel.averageDecibelLiveData.observeAsState()
+
     Box(
         contentAlignment = Alignment.Center
     ) {
@@ -223,16 +226,18 @@ fun FirstInfoLabelGroupValue(value: String?) {
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-                    Text(
-                        text = value,
-                        color = Color(0xff292929),
-                        textAlign = TextAlign.Center,
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
 
-                        )
+                            )
+                    }
                 }
             }
         }
@@ -309,14 +314,14 @@ fun SecondInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
 
                             )
                     }
+                    }
                 }
             }
         }
-    }
 }
 
 @Composable
-fun ThirdInfoLabelGroup(description: String?, value: String?) {
+fun ThirdInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth()
         .offset(y = (-60).dp),
@@ -345,14 +350,17 @@ fun ThirdInfoLabelGroup(description: String?, value: String?) {
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                ThirdInfoLabelGroupValue(value)
+                ThirdInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun ThirdInfoLabelGroupValue(value: String?) {
+fun ThirdInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
+
+    val updatedString by viewModel.lowestDecibelLiveData.observeAsState()
+
     Box(
         contentAlignment = Alignment.Center
     ) {
@@ -370,15 +378,17 @@ fun ThirdInfoLabelGroupValue(value: String?) {
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-                    Text(
-                        text = value,
-                        color = Color(0xff292929),
-                        textAlign = TextAlign.Center,
-                        style = TextStyle(
-                            fontSize = 16.sp,
-                            fontWeight = FontWeight.Bold
-                        ),
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
                         )
+                    }
                 }
             }
         }

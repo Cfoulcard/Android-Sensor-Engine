@@ -55,9 +55,9 @@ class SoundSensor: ComponentActivity() {
                             description = "Loudness",
                             viewModel
                         )
-                        FirstInfoLabelGroup("Average Decibel Reading", "67")
+                        FirstInfoLabelGroup("Average Decibel Reading", "67", viewModel)
                         SecondInfoLabelGroup("Peak Loudness", "85", viewModel)
-                        ThirdInfoLabelGroup("Lowest Decibel", "27")
+                        ThirdInfoLabelGroup("Lowest Decibel", "27", viewModel)
                     }
                     PowerButton()
                 }
@@ -91,6 +91,7 @@ class SoundSensor: ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         viewModel.destroyRecorder()
+        viewModel.resetDecibelReading()
     }
 
     private fun updateUI(updateMilli: Long) {
@@ -98,7 +99,9 @@ class SoundSensor: ComponentActivity() {
             while (isActive) {
                 delay(updateMilli)
                 viewModel.decibelLiveData.postValue(viewModel.currentAudioDecibels())
+                viewModel.averageDecibelLiveData.postValue(viewModel.averageDecibelReading())
                 viewModel.highestDecibelLiveData.postValue(viewModel.highestDecibelReading())
+                viewModel.lowestDecibelLiveData.postValue(viewModel.lowestDecibelReading())
             }
         }
     }
@@ -145,9 +148,9 @@ class SoundSensor: ComponentActivity() {
                         description = "Loudness",
                         viewModel
                     )
-                    FirstInfoLabelGroup("Average Decibel Reading", "67")
+                    FirstInfoLabelGroup("Average Decibel Reading", "67", viewModel)
                     SecondInfoLabelGroup("Peak Loudness", "85", viewModel)
-                    ThirdInfoLabelGroup("Lowest Decibel", "27")
+                    ThirdInfoLabelGroup("Lowest Decibel", "27", viewModel)
                 }
                 PowerButton()
             }

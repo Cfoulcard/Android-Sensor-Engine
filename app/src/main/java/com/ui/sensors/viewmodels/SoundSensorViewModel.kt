@@ -10,7 +10,9 @@ import com.sensors.audio.AudioRecorder
 class SoundSensorViewModel: ViewModel() {
 
     val decibelLiveData = MutableLiveData<String>("0")
+    val averageDecibelLiveData = MutableLiveData<String>("0")
     val highestDecibelLiveData = MutableLiveData<String>("0")
+    val lowestDecibelLiveData = MutableLiveData<String>("0")
 
     fun createRecorder(activity: Activity) { AudioRecorder().createRecorder(activity) }
 
@@ -34,6 +36,12 @@ class SoundSensorViewModel: ViewModel() {
         }
     }
 
-    fun highestDecibelReading(): String { return AudioDecibels.highestDecibelReading()}
+    fun averageDecibelReading(): String { return AudioDecibels.averageDecibelReading()}
+
+    fun highestDecibelReading(): String { return AudioDecibels.highestDecibelReading() }
+
+    fun lowestDecibelReading(): String { return AudioDecibels.lowestDecibelReading() }
+
+    fun resetDecibelReading() { AudioDecibels.resetDecibelReadings() }
 
 }
