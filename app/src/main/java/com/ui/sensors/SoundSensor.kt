@@ -23,6 +23,7 @@ import com.androidsensorengine.utils.Constants.AUDIO_PERMISSION_REQUEST_CODE
 import com.ui.composables.*
 import com.ui.sensors.viewmodels.SoundSensorViewModel
 import com.utils.PermissionUtils.requestAudioPermission
+import com.utils.SystemUi
 import kotlinx.coroutines.*
 
 class SoundSensor: ComponentActivity() {
@@ -32,11 +33,13 @@ class SoundSensor: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        SystemUi().hideSystemUI(this)
         viewModel.createRecorder(this)
 
         setContent {
+
             AndroidSensorEngineTheme {
+
                 MainGradientBackground()
                 HalfCircleBackgroundLonger()
                 SensorCometBackground()

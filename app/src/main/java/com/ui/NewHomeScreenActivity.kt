@@ -23,7 +23,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.christianfoulcard.android.androidsensorengine.R
 import com.androidsensorengine.ui.composables.HalfCircleBackground
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorDiagnosisRow
@@ -31,11 +30,14 @@ import com.androidsensorengine.ui.composables.SensorIcon
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
+import com.christianfoulcard.android.androidsensorengine.R
+import com.utils.SystemUi
 
 class NewHomeScreenActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        SystemUi().hideSystemUI(this)
         setContent {
             AndroidSensorEngineTheme {
                 MainGradientBackground()
