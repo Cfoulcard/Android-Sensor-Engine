@@ -57,6 +57,7 @@ object AudioDecibels {
         return 0
     }
 
+    /** Implements a timer task which will update our decibel data */
     fun listenForAudioDecibels(activity: ComponentActivity, mediaRecorder: MediaRecorder?) {
         val timer = Timer()
 
@@ -99,6 +100,9 @@ object AudioDecibels {
         }
     }
 
+    /** Obtains the average decibel reading we've obtained so far by dividing the sum of our decibels
+     * by the amount of times decibel readings have occurred
+     */
     fun averageDecibelReading(): String {
         addCurrentDecibel()
         return if (count == 0) {
@@ -108,6 +112,7 @@ object AudioDecibels {
         }
     }
 
+    /** Finds the highest decibel */
     fun highestDecibelReading(): String {
         return if (highestDecibel == 0) {
             highestDecibel = audioDecibels!!
@@ -118,6 +123,7 @@ object AudioDecibels {
         }
     }
 
+    /** Finds the lowest decibel */
     fun lowestDecibelReading(): String {
         return if (lowestDecibel == 0) {
             lowestDecibel = audioDecibels!!
@@ -128,6 +134,7 @@ object AudioDecibels {
         }
     }
 
+    /** Helper to reset the variables used to make decibel reading work */
     fun resetDecibelReadings() {
         highestDecibel = 0
         lowestDecibel = 0
