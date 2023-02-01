@@ -9,6 +9,12 @@ import androidx.core.view.WindowCompat
 
 class SystemUi {
 
+    fun hideSystemUIFull(activity: Activity) {
+        activity.window.setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+
     fun hideSystemUI(activity: Activity) {
 
         // Hides action bar
@@ -26,4 +32,7 @@ class SystemUi {
             }
         }
     }
+
+
+
 }

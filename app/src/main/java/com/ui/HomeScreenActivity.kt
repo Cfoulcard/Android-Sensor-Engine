@@ -33,11 +33,11 @@ import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
 import com.utils.SystemUi
 
-class NewHomeScreenActivity : ComponentActivity() {
+class HomeScreenActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SystemUi().hideSystemUI(this)
+        SystemUi().hideSystemUIFull(this)
         setContent {
             AndroidSensorEngineTheme {
                 MainGradientBackground()
@@ -69,7 +69,7 @@ class NewHomeScreenActivity : ComponentActivity() {
             items(data) { item ->
                 when (item) {
                     "1" -> {
-                        SensorIcon(this@NewHomeScreenActivity, R.drawable.ic_sound_wave)
+                        SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
                     }
                     else -> {
                     Card(

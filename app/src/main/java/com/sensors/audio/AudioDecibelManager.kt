@@ -11,14 +11,14 @@ import kotlin.math.log10
 /** Decibels are a way to measure how loud or quiet something is. This Contains the properties we
  * need to measure sound decibels. As long as a [MediaRecorder] is provided, we can measure
  * decibels with no problem. */
-object AudioDecibels {
+object AudioDecibelManager {
 
     var audioDecibels : Int? = null
     private var highestDecibel = Int.MIN_VALUE
     private var lowestDecibel = Int.MAX_VALUE
     var isMuted : Boolean = false
 
-    private var audioTimerPeriod : Long = 100 // in milliseconds
+    private var audioTimerPeriod : Long = 100
     private var baseAudio = 0.0
 
     private var count = 0
@@ -31,24 +31,14 @@ object AudioDecibels {
     private fun parseDecibelReading(mediaRecorder: MediaRecorder?): Int {
         try {
             return if (mediaRecorder != null) {
-                Log.d("Media", "parseDecibelReading: test 1")
                 val decibelLevel =
                     (20 * log10(amplitudeAudioFilter(mediaRecorder).toDouble())).toInt()
                 if (decibelLevel >= 1) {
-                    Log.d("Media", "parseDecibelReading: test 3")
-
                     decibelLevel
                 } else {
-                    Log.d(
-                        "Media",
-                        "parseDecibelReading: test 4 - max is ${mediaRecorder.maxAmplitude}"
-                    )
-
                     0
                 }
             } else {
-                Log.d("Media", "parseDecibelReading: test 2")
-
                 0
             }
         } catch (e: IllegalStateException) {
@@ -71,7 +61,7 @@ object AudioDecibels {
                     timer.cancel()
                     timer.purge()
                 } else if (!isMuted) {
-                    Log.d("Hello", "run: $audioDecibels")
+                  //  Timber.tag(TAG).d("current decibel:: %s", audioDecibels)
                     audioDecibels = parseDecibelReading(mediaRecorder)
                 }
             }

@@ -33,7 +33,7 @@ class SoundSensor: ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SystemUi().hideSystemUI(this)
+        SystemUi().hideSystemUIFull(this)
         viewModel.createRecorder(this)
 
         setContent {
@@ -58,9 +58,9 @@ class SoundSensor: ComponentActivity() {
                             description = "Loudness",
                             viewModel
                         )
-                        FirstInfoLabelGroup("Average Decibel Reading", "67", viewModel)
-                        SecondInfoLabelGroup("Peak Loudness", "85", viewModel)
-                        ThirdInfoLabelGroup("Lowest Decibel", "27", viewModel)
+                        FirstInfoLabelGroup("Average Decibel Reading", "0", viewModel)
+                        SecondInfoLabelGroup("Peak Loudness", "0", viewModel)
+                        ThirdInfoLabelGroup("Lowest Decibel", "0", viewModel)
                     }
                     PowerButton()
                 }
@@ -76,14 +76,12 @@ class SoundSensor: ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-     //   viewModel.resumeRecorder()
         viewModel.measureDecibels(this)
         updateUI(500)
     }
 
     override fun onPause() {
         super.onPause()
-    //    viewModel.pauseRecorder()
         stopUpdatingUI()
     }
 
@@ -119,10 +117,8 @@ class SoundSensor: ComponentActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.size > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    Toast.makeText(this, "Permission is granted", Toast.LENGTH_LONG).show()
-
                 } else {
-                    Toast.makeText(this, "Audio permission must be granted", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Audio permission must be granted to use this sensor", Toast.LENGTH_LONG).show()
                 }
                 return
             }

@@ -4,7 +4,7 @@ import android.app.Activity
 import androidx.activity.ComponentActivity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.sensors.AudioDecibels
+import com.sensors.AudioDecibelManager
 import com.sensors.audio.AudioRecorder
 
 class SoundSensorViewModel: ViewModel() {
@@ -25,23 +25,23 @@ class SoundSensorViewModel: ViewModel() {
     fun destroyRecorder() { AudioRecorder().destroyRecorder() }
 
     fun measureDecibels(activity: ComponentActivity) {
-        AudioDecibels.listenForAudioDecibels(activity, AudioRecorder.recorder)
+        AudioDecibelManager.listenForAudioDecibels(activity, AudioRecorder.recorder)
     }
 
     fun currentAudioDecibels(): String {
-       return when (AudioDecibels.audioDecibels) {
+       return when (AudioDecibelManager.audioDecibels) {
             null -> "N/A"
             0 -> "0"
-            else -> AudioDecibels.audioDecibels.toString()
+            else -> AudioDecibelManager.audioDecibels.toString()
         }
     }
 
-    fun averageDecibelReading(): String { return AudioDecibels.averageDecibelReading()}
+    fun averageDecibelReading(): String { return AudioDecibelManager.averageDecibelReading()}
 
-    fun highestDecibelReading(): String { return AudioDecibels.highestDecibelReading() }
+    fun highestDecibelReading(): String { return AudioDecibelManager.highestDecibelReading() }
 
-    fun lowestDecibelReading(): String { return AudioDecibels.lowestDecibelReading() }
+    fun lowestDecibelReading(): String { return AudioDecibelManager.lowestDecibelReading() }
 
-    fun resetDecibelReading() { AudioDecibels.resetDecibelReadings() }
+    fun resetDecibelReading() { AudioDecibelManager.resetDecibelReadings() }
 
 }
