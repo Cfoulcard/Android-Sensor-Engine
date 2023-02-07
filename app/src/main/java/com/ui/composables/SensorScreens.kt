@@ -1,6 +1,8 @@
 package com.ui.composables
 
+import android.app.Activity
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
@@ -25,10 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.fragment.app.FragmentManager
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.sensors.viewmodels.SoundSensorViewModel
+import com.utils.CustomDialog.Companion.displayCustomDialog
 
 @Composable
 fun DisplaySensorTitle(text: String) {
@@ -42,14 +46,14 @@ fun DisplaySensorTitle(text: String) {
 }
 
 @Composable
-fun InfoIcon() {
+fun InfoIcon(fragmentManager: FragmentManager, activity: Activity) {
     Image(
         painter = painterResource(R.drawable.ic_icon_info),
         contentDescription = "info",
         contentScale = ContentScale.Fit,
         modifier = Modifier
             .size(32.dp)
-            .fillMaxSize(),
+            .fillMaxSize().clickable { displayCustomDialog("Test", activity.getString(R.string.sound_desc_3), 0, true, fragmentManager, "info", activity) },
         alignment = Alignment.Center,
     )
 }

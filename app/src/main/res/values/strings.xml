@@ -75,6 +75,7 @@
     <!--Sound Sensor-->
     <string name="sound_desc_1">This sensor measures spatial sound information around you. Your device uses the microphone to make this work. The sound information is then converted into decibels (dB).</string>
     <string name="sound_desc_2">A decibel is a logarithmic unit of measurement used to measure the loudness of sound. Whether you\'re close up or far away from a sound source you can use this to get an idea of how intense the sound is. Note that Android microphones are limited to a maximum of 90 dB!</string>
+    <string name="sound_desc_3">This sensor measures spatial sound information around you. Your device uses the microphone to make this work. The sound information is then converted into decibels (dB). A decibel is a logarithmic unit of measurement used to measure the loudness of sound. Whether you\'re close up or far away from a sound source you can use this to get an idea of how intense the sound is. Note that Android microphones are limited to a maximum of 90 dB!</string>
 
     <!--Temperature Sensor-->
     <string name="temp_desc_1">The Air Temperature sensor uses your phone\'s hardware to find the ambient temperature you\'re currently in. This will work anywhere even without being connected to an internet source!</string>

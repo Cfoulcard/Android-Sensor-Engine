@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,8 +14,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.fragment.app.FragmentManager
 import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
@@ -26,7 +29,7 @@ import com.utils.PermissionUtils.requestAudioPermission
 import com.utils.SystemUi
 import kotlinx.coroutines.*
 
-class SoundSensor: ComponentActivity() {
+class SoundSensor: AppCompatActivity() {
 
     private val viewModel: SoundSensorViewModel by viewModels()
     private var uiUpdaterJob: Job? = null
@@ -50,7 +53,7 @@ class SoundSensor: ComponentActivity() {
                         .fillMaxSize()
                 ) {
                     DisplaySensorTitle("Sound Sensor")
-                    InfoIcon()
+                    InfoIcon(supportFragmentManager, this@SoundSensor)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralGraphicSensorInfo(
                             largeInfoString = "0",
@@ -139,7 +142,7 @@ class SoundSensor: ComponentActivity() {
                     .fillMaxSize()
             ) {
                 DisplaySensorTitle("Sound Sensor")
-                InfoIcon()
+               // InfoIcon(activity.supportFragmentManager, this@SoundSensor)
                 Column(modifier = Modifier.padding(top = 90.dp)) {
                     CentralGraphicSensorInfo(
                         largeInfoString = "0",

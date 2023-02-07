@@ -11,3 +11,6 @@
 /build
 /captures
 .externalNativeBuild
+app/src/main/java/com/utils/CustomDialog.kt
+app/src/main/java/com/utils/LayoutSizingUtils.kt
+app/src/main/res/layout/dialog_fragment.xml

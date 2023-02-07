@@ -6,6 +6,8 @@ import android.view.animation.Animation
 
 object AnimationUtils {
 
+    //TODO dialog fragment animation migration
+
     /** Fades out a UI element from the screen */
     fun fadeOut(
         fromAlpha: Float,
