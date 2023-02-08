@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -142,7 +143,7 @@ class SoundSensor: AppCompatActivity() {
                     .fillMaxSize()
             ) {
                 DisplaySensorTitle("Sound Sensor")
-               // InfoIcon(activity.supportFragmentManager, this@SoundSensor)
+                InfoIcon(supportFragmentManager, this@SoundSensor)
                 Column(modifier = Modifier.padding(top = 90.dp)) {
                     CentralGraphicSensorInfo(
                         largeInfoString = "0",
@@ -150,9 +151,9 @@ class SoundSensor: AppCompatActivity() {
                         description = "Loudness",
                         viewModel
                     )
-                    FirstInfoLabelGroup("Average Decibel Reading", "67", viewModel)
-                    SecondInfoLabelGroup("Peak Loudness", "85", viewModel)
-                    ThirdInfoLabelGroup("Lowest Decibel", "27", viewModel)
+                    FirstInfoLabelGroup("Average Decibel Reading", "0", viewModel)
+                    SecondInfoLabelGroup("Peak Loudness", "0", viewModel)
+                    ThirdInfoLabelGroup("Lowest Decibel", "0", viewModel)
                 }
                 PowerButton()
             }

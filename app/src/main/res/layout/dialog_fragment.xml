@@ -9,14 +9,14 @@
 
     <ImageView
         android:id="@+id/image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginTop="16dp"
         android:contentDescription="Image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_battery_icon" />
+        app:srcCompat="@drawable/ic_icon_info" />
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/title_name"
@@ -29,8 +29,8 @@
         android:paddingEnd="16dp"
         android:text="Title Name"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
-        android:textColor="@color/dark_grey"
-        android:textSize="16sp"
+        android:textColor="@color/darker_grey"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:fontFamily="@font/cairo_bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,6 +48,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:text="Description Text"
+        android:textColor="@color/dark_grey"
         android:textAppearance="@style/TextAppearance.AppCompat.Small"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,11 +59,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:background="@drawable/dialog_background"
-        android:fontFamily="@font/cairo_bold"
+        android:background="@drawable/dialog_background_ok_btn"
+        android:fontFamily="@font/cairo_black"
         android:text="OK"
-        android:textColor="@color/dark_grey"
-        android:textSize="16sp"
+        android:textColor="@color/darker_grey"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/description_text" />

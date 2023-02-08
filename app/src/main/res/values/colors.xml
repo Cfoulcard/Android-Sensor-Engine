@@ -18,6 +18,7 @@
 
     <!-- Individual Sensor Gradient Color -->
     <color name="dark_grey">#393939</color>
+    <color name="darker_grey">#191919</color>
     <color name="near_midnight_grey">#000000</color>
 
     <!-- Slide Bar Color -->
@@ -26,4 +27,5 @@
 
     <!-- Simple colors -->
     <color name="white">#FFFFFF</color>
+    <color name="transparent">#000000</color>
 </resources>

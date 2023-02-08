@@ -1,0 +1,21 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <!-- Border -->
+<item>
+<shape>
+    <solid android:color="@color/white"/>
+    <stroke android:color="@color/candy_purple" android:width="4dp" />
+    <corners android:bottomLeftRadius="14dp" android:bottomRightRadius="14dp" />
+</shape>
+</item>
+    <!-- Body -->
+<item android:left="0dp"
+    android:top="2dp"
+    android:right="0dp"
+    android:bottom="0dp">
+<shape>
+<solid android:color="@color/white"/>
+<corners android:bottomLeftRadius="14dp" android:bottomRightRadius="14dp" />
+</shape>
+    </item>
+
+    </layer-list>

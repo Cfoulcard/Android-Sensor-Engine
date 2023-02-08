@@ -138,7 +138,7 @@ fun HalfCircleBackgroundLonger() {
         modifier = Modifier
             .fillMaxHeight(.85f)
             .fillMaxWidth(1f)
-            .alpha(.65f),
+            .alpha(.50f),
         shape = BackgroundShapes.small,
         color = pureWhite,
     ) { }

@@ -53,7 +53,7 @@ fun InfoIcon(fragmentManager: FragmentManager, activity: Activity) {
         contentScale = ContentScale.Fit,
         modifier = Modifier
             .size(32.dp)
-            .fillMaxSize().clickable { displayCustomDialog("Test", activity.getString(R.string.sound_desc_3), 0, true, fragmentManager, "info", activity) },
+            .fillMaxSize().clickable { displayCustomDialog("Information", activity.getString(R.string.sound_desc_3), 0, true, fragmentManager, "info", activity) },
         alignment = Alignment.Center,
     )
 }
@@ -175,8 +175,7 @@ fun SensorCometBackgroundForCentralGraphic() {
 @Composable
 fun FirstInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .offset(y = (-100).dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 12.dp,
@@ -251,8 +250,7 @@ fun FirstInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
 @Composable
 fun SecondInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .offset(y = (-80).dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
@@ -327,8 +325,7 @@ fun SecondInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
 @Composable
 fun ThirdInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .offset(y = (-60).dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
