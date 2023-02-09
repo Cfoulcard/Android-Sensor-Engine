@@ -1,8 +1,10 @@
 package com.application
 
 import android.app.Application
+import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
+@HiltAndroidApp
 class AndroidSensorEngine: Application() {
 
     override fun onCreate() {

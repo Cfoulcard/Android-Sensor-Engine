@@ -19,8 +19,10 @@ import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.composables.*
 import com.ui.sensors.viewmodels.LightSensorViewModel
 import com.utils.SystemUi
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 
+@AndroidEntryPoint
 class LightSensor: AppCompatActivity() {
 
     private val viewModel: LightSensorViewModel by viewModels()
@@ -61,5 +63,16 @@ class LightSensor: AppCompatActivity() {
             }
         }
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.startListening()
+
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.stopListening()
     }
 }

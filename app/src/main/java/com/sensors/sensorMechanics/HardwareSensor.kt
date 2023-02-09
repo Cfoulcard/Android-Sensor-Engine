@@ -33,7 +33,7 @@ abstract class HardwareSensor(
     }
 
     override fun stopListening() {
-        if (!doesSensorExist || ::sensorManager.isInitialized) {
+        if (!doesSensorExist || !::sensorManager.isInitialized) {
             return
         }
         sensorManager.unregisterListener(this)

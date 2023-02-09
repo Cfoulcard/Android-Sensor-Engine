@@ -86,6 +86,7 @@ fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?
                     ) {
                         if (largeInfoString != null) {
                           //  updatedString?.let { append(it) }
+                            append(viewModel.currentLux)
                         }
                     }
                     withStyle(style = SpanStyle(
@@ -173,18 +174,16 @@ fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMode
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//
-//                            )
-//                    }
+                        Text(
+                            text = viewModel.currentLux,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+
+                            )
                 }
             }
         }

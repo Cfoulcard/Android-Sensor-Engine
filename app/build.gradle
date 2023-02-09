@@ -2,6 +2,7 @@ plugins {
    id 'com.android.application'
    id 'kotlin-android'
    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
 }
 
 android {
@@ -78,6 +79,7 @@ dependencies {
     def activity_compose_version = "1.5.1"
     def animation_compose_version = "1.2.1"
     def lifecycle_viewmodel_compose_version = "2.5.1"
+    def hilt_version = "2.44.2"
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -119,8 +121,14 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation "androidx.preference:preference-ktx:$ktx_preference_version"
 
-    //Timber Logging Library
+    // Timber Logging Library
     implementation "com.jakewharton.timber:timber:$timber_version"
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-android-compiler:$hilt_version"
+   // implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    kapt "androidx.hilt:hilt-compiler:1.0.0"
 }
 
 repositories {
