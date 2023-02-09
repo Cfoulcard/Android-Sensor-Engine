@@ -1,4 +1,4 @@
-package com.androidsensorengine.utils.sensor_mechanics
+package com.sensors.sensorMechanics
 
 abstract class ObserveSensor(protected val sensorType: Int) {
 

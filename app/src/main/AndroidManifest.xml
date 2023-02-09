@@ -38,7 +38,13 @@
         </activity>
 
         <activity
-            android:name="com.androidsensorengine.ui.sensors.SoundSensor"
+            android:name="com.ui.sensors.SoundSensor"
+            android:label=""
+            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name="com.ui.sensors.LightSensor"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />

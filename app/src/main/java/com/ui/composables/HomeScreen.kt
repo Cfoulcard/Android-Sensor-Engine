@@ -17,9 +17,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.androidsensorengine.ui.sensors.SoundSensor
+import com.ui.sensors.SoundSensor
 import com.androidsensorengine.ui.theme.*
 import com.christianfoulcard.android.androidsensorengine.R
+import com.ui.sensors.LightSensor
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -44,9 +45,36 @@ fun SensorIcon(context: Context, drawable: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LightIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToLightSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize(),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
 fun navigateToSoundSensor(context: Context) {
     context.startActivity(Intent(context, SoundSensor::class.java))
     }
+
+fun navigateToLightSensor(context: Context) {
+    context.startActivity(Intent(context, LightSensor::class.java))
+}
 
 @Composable
 fun SensorCometBackground() {

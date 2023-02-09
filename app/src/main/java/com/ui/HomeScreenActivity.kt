@@ -23,10 +23,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.androidsensorengine.ui.composables.HalfCircleBackground
-import com.androidsensorengine.ui.composables.MainGradientBackground
-import com.androidsensorengine.ui.composables.SensorDiagnosisRow
-import com.androidsensorengine.ui.composables.SensorIcon
+import com.androidsensorengine.ui.composables.*
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
@@ -70,6 +67,9 @@ class HomeScreenActivity : ComponentActivity() {
                 when (item) {
                     "1" -> {
                         SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
+                    }
+                    "2" -> {
+                        LightIcon(this@HomeScreenActivity, R.drawable.ic_lighticon_2)
                     }
                     else -> {
                     Card(
@@ -116,7 +116,9 @@ class HomeScreenActivity : ComponentActivity() {
                     text = "Sensor Diagnosis",
                     fontSize = 36.sp,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(top = 16.dp).fillMaxWidth(),
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
                     style = MaterialTheme.typography.h1
                 )
                 SensorDiagnosisRow("Sound and Audio", R.drawable.green_circle)
