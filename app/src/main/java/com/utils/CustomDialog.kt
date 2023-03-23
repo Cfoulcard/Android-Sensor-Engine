@@ -2,6 +2,7 @@ package com.utils
 
 import android.app.Activity
 import android.os.Bundle
+import android.text.Html
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import android.view.animation.AlphaAnimation
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.androidsensorengine.utils.LogUtils.TAG
+import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.DialogFragmentBinding
 import com.utils.LayoutSizingUtil.configureDefaultDialogLayoutSize
 import timber.log.Timber
@@ -85,7 +87,7 @@ class CustomDialog : DialogFragment() {
     private fun configureViews() {
         setDismissDialogProperties()
         binding.titleName.text= titleName
-        binding.descriptionText.text = descriptionName
+        binding.descriptionText.text = (Html.fromHtml(descriptionName))
         setImageProperties()
         setOkButtonProperties()
         setBackButtonClickProperties()

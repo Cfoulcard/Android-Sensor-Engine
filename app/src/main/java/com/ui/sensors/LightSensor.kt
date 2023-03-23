@@ -20,7 +20,7 @@ import com.ui.composables.*
 import com.ui.sensors.viewmodels.LightSensorViewModel
 import com.utils.SystemUi
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 
 @AndroidEntryPoint
 class LightSensor: AppCompatActivity() {
@@ -46,7 +46,7 @@ class LightSensor: AppCompatActivity() {
                         .fillMaxSize()
                 ) {
                     DisplaySensorTitle("Light Sensor")
-                    InfoIcon(supportFragmentManager, this@LightSensor, R.string.sound_desc_3)
+                    InfoIcon(supportFragmentManager, this@LightSensor, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralLightGraphicSensorInfo(
                             largeInfoString = "0",
@@ -68,11 +68,24 @@ class LightSensor: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.startListening()
-
+        updateUI(500)
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.stopListening()
+        stopUpdatingUI()
     }
+
+    private fun updateUI(updateMilli: Long) {
+        uiUpdaterJob = CoroutineScope(Dispatchers.Main).launch {
+            while (isActive) {
+                delay(updateMilli)
+                viewModel.averageLightLiveData.postValue(viewModel.averageLightReading())
+            }
+        }
+    }
+
+    private fun stopUpdatingUI() { uiUpdaterJob?.cancel() }
+
 }

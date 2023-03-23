@@ -49,7 +49,7 @@ class SoundSensor: AppCompatActivity() {
                         .fillMaxSize()
                 ) {
                     DisplaySensorTitle("Sound Sensor")
-                    InfoIcon(supportFragmentManager, this@SoundSensor, R.string.sound_desc_3)
+                    InfoIcon(supportFragmentManager, this@SoundSensor, R.string.sound_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralSoundGraphicSensorInfo(
                             largeInfoString = "0",

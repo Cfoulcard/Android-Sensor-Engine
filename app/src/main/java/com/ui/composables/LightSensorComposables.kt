@@ -33,8 +33,6 @@ import com.ui.sensors.viewmodels.LightSensorViewModel
 @Composable
 fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: LightSensorViewModel) {
 
-   // val updatedString by viewModel.decibelLiveData.observeAsState()
-
     Box(
         modifier = Modifier
             .fillMaxWidth(),
@@ -79,13 +77,11 @@ fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?
             modifier = Modifier.absoluteOffset(4.dp, (-4).dp)
         ) {
             Text(
-
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(
                         fontSize = 48.sp)
                     ) {
                         if (largeInfoString != null) {
-                          //  updatedString?.let { append(it) }
                             append(viewModel.currentLux)
                         }
                     }
@@ -154,8 +150,7 @@ fun FirstLightInfoLabelGroup(description: String?, value: String?, viewModel: Li
 
 @Composable
 fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
-
-   // val updatedString by viewModel.averageDecibelLiveData.observeAsState()
+    val updatedString by viewModel.averageLightLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -174,8 +169,9 @@ fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMode
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
+                    updatedString?.let {
                         Text(
-                            text = viewModel.currentLux,
+                            text = it,
                             color = Color(0xff292929),
                             textAlign = TextAlign.Center,
                             style = TextStyle(
@@ -184,6 +180,7 @@ fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMode
                             ),
 
                             )
+                    }
                 }
             }
         }
@@ -230,8 +227,6 @@ fun SecondLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMod
     Box(
         contentAlignment = Alignment.Center
     ) {
-
-     //   val updatedString by viewModel.highestDecibelLiveData.observeAsState()
 
         Card(
             elevation = 12.dp,
