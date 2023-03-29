@@ -25,6 +25,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning" >
+
+<!--        Home Screen and Launcher Name-->
         <activity
             android:name="com.androidsensorengine.ui.HomeScreenActivity"
             android:exported="true"
@@ -32,7 +34,6 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -49,35 +50,24 @@
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
-        <uses-library android:name="android.test.runner" /> <!-- Change the theme to AppTheme to go straight to the Sensor Select Screen -->
-        <!-- AppTheme.Launcher is for the launcher screen -->
         <activity
-            android:name="com.HomeScreenActivity"
-            android:exported="true"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Launcher" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name="com.ui.sensors.PressureSensor"
+            android:label=""
+            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:screenOrientation="portrait" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
 
-            <!-- This is used for parsing shortcuts to the app icon on launcher screen -->
-            <meta-data
-                android:name="android.app.shortcuts"
-                android:resource="@xml/shortcuts" />
-        </activity>
+<!--        Delete Below-->
+
         <activity
             android:name="com.androidsensorengine.sensors.SensorSoundActivity"
             android:exported="true"
             android:label=""
             android:parentActivityName="com.HomeScreenActivity"
             android:screenOrientation="portrait" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity> <!-- Temperature Sensor Activity -->
         <activity
             android:name="com.androidsensorengine.sensors.SensorTemperatureActivity"
@@ -124,9 +114,6 @@
             android:label="@string/preferences"
             android:screenOrientation="portrait" />
 
-        <meta-data
-            android:name="preloaded_fonts"
-            android:resource="@array/preloaded_fonts" />
     </application>
 
 </manifest>

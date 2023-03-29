@@ -149,7 +149,7 @@
     <string name="notify_humidity_message">The relative humidity has reached</string>
     <string name="pin_shortut_message">You can pin any sensor to your home screen by long pressing the icon</string>
     <string name="pin_shortcut_title">Quick Sensor Access</string>
-    <string name="title_activity_new_home_screen">NewHomeScreenActivity</string>
+    <string name="title_activity_new_home_screen">Sensor Engine</string>
     <string name="information">Information</string>
 
 

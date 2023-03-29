@@ -28,10 +28,10 @@ import androidx.compose.ui.unit.sp
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.sensors.viewmodels.LightSensorViewModel
+import com.ui.sensors.viewmodels.PressureSensorViewModel
 
 @Composable
-fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: LightSensorViewModel) {
+fun CentralPressureGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: PressureSensorViewModel) {
 
     Box(
         modifier = Modifier
@@ -82,7 +82,7 @@ fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?
                         fontSize = 48.sp)
                     ) {
                         if (largeInfoString != null) {
-                            append(viewModel.currentLux)
+                            append(viewModel.currentPressure)
                         }
                     }
                     withStyle(style = SpanStyle(
@@ -114,7 +114,7 @@ fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?
 }
 
 @Composable
-fun FirstLightInfoLabelGroup(description: String?, value: String?, viewModel: LightSensorViewModel) {
+fun FirstPressureInfoLabelGroup(description: String?, value: String?, viewModel: PressureSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
@@ -142,15 +142,15 @@ fun FirstLightInfoLabelGroup(description: String?, value: String?, viewModel: Li
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                FirstLightInfoLabelGroupValue(value, viewModel)
+                FirstPressureInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
-    val updatedString by viewModel.averageLightLiveData.observeAsState()
+fun FirstPressureInfoLabelGroupValue(value: String?, viewModel: PressureSensorViewModel) {
+    val updatedString by viewModel.averagePressureLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -188,7 +188,7 @@ fun FirstLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMode
 }
 
 @Composable
-fun SecondLightInfoLabelGroup(description: String?, value: String?, viewModel: LightSensorViewModel) {
+fun SecondPressureInfoLabelGroup(description: String?, value: String?, viewModel: PressureSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
@@ -216,15 +216,15 @@ fun SecondLightInfoLabelGroup(description: String?, value: String?, viewModel: L
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                SecondLightInfoLabelGroupValue(value, viewModel)
+                SecondPressureInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun SecondLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
-    val updatedString by viewModel.highestLightLiveData.observeAsState()
+fun SecondPressureInfoLabelGroupValue(value: String?, viewModel: PressureSensorViewModel) {
+    val updatedString by viewModel.highestPressureLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -263,7 +263,7 @@ fun SecondLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMod
 }
 
 @Composable
-fun ThirdLightInfoLabelGroup(description: String?, value: String?, viewModel: LightSensorViewModel) {
+fun ThirdPressureInfoLabelGroup(description: String?, value: String?, viewModel: PressureSensorViewModel) {
     Box(modifier = Modifier
         .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
@@ -291,15 +291,15 @@ fun ThirdLightInfoLabelGroup(description: String?, value: String?, viewModel: Li
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                ThirdLightInfoLabelGroupValue(value, viewModel)
+                ThirdPressureInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun ThirdLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
-    val updatedString by viewModel.lowestLightLiveData.observeAsState()
+fun ThirdPressureInfoLabelGroupValue(value: String?, viewModel: PressureSensorViewModel) {
+    val updatedString by viewModel.lowestPressureLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,6 +12,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.BaseSensorActivity
 import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
@@ -22,17 +22,14 @@ import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.composables.*
 import com.ui.sensors.viewmodels.SoundSensorViewModel
 import com.utils.PermissionUtils.requestAudioPermission
-import com.utils.SystemUi
-import kotlinx.coroutines.*
+import com.utils.UIUpdater
 
-class SoundSensor: AppCompatActivity() {
+class SoundSensor: BaseSensorActivity() {
 
     private val viewModel: SoundSensorViewModel by viewModels()
-    private var uiUpdaterJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        SystemUi().hideSystemUIFull(this)
         viewModel.createRecorder(this)
 
         setContent {
@@ -76,12 +73,12 @@ class SoundSensor: AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.measureDecibels(this)
-        updateUI(500)
+        UIUpdater().startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
-        stopUpdatingUI()
+        UIUpdater().stopUpdatingUI()
     }
 
     override fun onStop() {
@@ -94,19 +91,13 @@ class SoundSensor: AppCompatActivity() {
         viewModel.resetDecibelReading()
     }
 
-    private fun updateUI(updateMilli: Long) {
-        uiUpdaterJob = CoroutineScope(Dispatchers.Main).launch {
-            while (isActive) {
-                delay(updateMilli)
-                viewModel.decibelLiveData.postValue(viewModel.currentAudioDecibels())
-                viewModel.averageDecibelLiveData.postValue(viewModel.averageDecibelReading())
-                viewModel.highestDecibelLiveData.postValue(viewModel.highestDecibelReading())
-                viewModel.lowestDecibelLiveData.postValue(viewModel.lowestDecibelReading())
-            }
-        }
+    private fun startLiveData() {
+        viewModel.decibelLiveData.postValue(viewModel.currentAudioDecibels())
+        viewModel.averageDecibelLiveData.postValue(viewModel.averageDecibelReading())
+        viewModel.highestDecibelLiveData.postValue(viewModel.highestDecibelReading())
+        viewModel.lowestDecibelLiveData.postValue(viewModel.lowestDecibelReading())
     }
 
-    private fun stopUpdatingUI() { uiUpdaterJob?.cancel() }
 
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {

@@ -17,14 +17,14 @@ import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.composables.*
-import com.ui.sensors.viewmodels.LightSensorViewModel
+import com.ui.sensors.viewmodels.PressureSensorViewModel
 import com.utils.UIUpdater
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LightSensor: BaseSensorActivity() {
+class PressureSensor: BaseSensorActivity() {
 
-    private val viewModel: LightSensorViewModel by viewModels()
+    private val viewModel: PressureSensorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,18 +42,18 @@ class LightSensor: BaseSensorActivity() {
                     modifier = Modifier
                         .fillMaxSize()
                 ) {
-                    DisplaySensorTitle("Light Sensor")
-                    InfoIcon(supportFragmentManager, this@LightSensor, R.string.light_desc)
+                    DisplaySensorTitle("Pressure Sensor")
+                    InfoIcon(supportFragmentManager, this@PressureSensor, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
-                        CentralLightGraphicSensorInfo(
+                        CentralPressureGraphicSensorInfo(
                             largeInfoString = "0",
-                            superScript = "lux",
-                            description = "Brightness",
+                            superScript = "Pressure",
+                            description = "hPa",
                             viewModel
                         )
-                        FirstLightInfoLabelGroup("Average Lux", "0", viewModel)
-                        SecondLightInfoLabelGroup("Peak Lux", "0", viewModel)
-                        ThirdLightInfoLabelGroup("Lowest Lux", "0", viewModel)
+                        FirstPressureInfoLabelGroup("Average Pressure", "0", viewModel)
+                        SecondPressureInfoLabelGroup("Peak Pressure", "0", viewModel)
+                        ThirdPressureInfoLabelGroup("Lowest Pressure", "0", viewModel)
                     }
                     PowerButton()
                 }
@@ -75,9 +75,9 @@ class LightSensor: BaseSensorActivity() {
     }
 
     private fun startLiveData() {
-        viewModel.averageLightLiveData.postValue(viewModel.averageLightReading())
-        viewModel.highestLightLiveData.postValue(viewModel.highestLightReading())
-        viewModel.lowestLightLiveData.postValue(viewModel.lowestLightReading())
+        viewModel.averagePressureLiveData.postValue(viewModel.averagePressureReading())
+        viewModel.highestPressureLiveData.postValue(viewModel.highestPressureReading())
+        viewModel.lowestPressureLiveData.postValue(viewModel.lowestPressureReading())
     }
 
 }

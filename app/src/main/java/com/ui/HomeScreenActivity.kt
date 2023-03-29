@@ -69,7 +69,10 @@ class HomeScreenActivity : ComponentActivity() {
                         SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
                     }
                     "2" -> {
-                        LightIcon(this@HomeScreenActivity, R.drawable.ic_lighticon_2)
+                        LightIcon(this@HomeScreenActivity, R.drawable.brightness_icon)
+                    }
+                    "3" -> {
+                        PressureIcon(this@HomeScreenActivity, R.drawable.ic_barometer_icon_2)
                     }
                     else -> {
                     Card(
