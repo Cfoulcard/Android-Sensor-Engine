@@ -20,6 +20,14 @@ object SensorModule {
     @Retention(AnnotationRetention.RUNTIME)
     annotation class PressureSensor
 
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class AmbientTemperatureSensor
+
+    @Qualifier
+    @Retention(AnnotationRetention.RUNTIME)
+    annotation class HumiditySensor
+
     @Provides
     @Singleton
     @LightSensor
@@ -34,15 +42,16 @@ object SensorModule {
         return PressureSensor(app)
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideAmbientTemperatureSensor(app: Application) : ObserveSensor {
-//        return AmbientTemperatureSensor(app)
-//    }
-//
-//    @Provides
-//    @Singleton
-//    fun provideHumiditySensor(app: Application) : ObserveSensor {
-//        return HumiditySensor(app)
-//    }
+    @Provides
+    @Singleton
+    @AmbientTemperatureSensor
+    fun provideAmbientTemperatureSensor(app: Application) : ObserveSensor {
+        return AmbientTemperatureSensor(app)
+    }
+
+    @Provides
+    @Singleton
+    fun provideHumiditySensor(app: Application) : ObserveSensor {
+        return HumiditySensor(app)
+    }
 }

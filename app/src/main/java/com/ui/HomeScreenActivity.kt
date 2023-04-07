@@ -74,6 +74,9 @@ class HomeScreenActivity : ComponentActivity() {
                     "3" -> {
                         PressureIcon(this@HomeScreenActivity, R.drawable.ic_barometer_icon_2)
                     }
+                    "4" -> {
+                        AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.ic_temp_icon_2)
+                    }
                     else -> {
                     Card(
                         modifier = Modifier

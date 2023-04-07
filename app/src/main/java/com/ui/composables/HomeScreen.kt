@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.androidsensorengine.ui.theme.*
 import com.christianfoulcard.android.androidsensorengine.R
+import com.ui.sensors.AmbientTemperatureSensor
 import com.ui.sensors.LightSensor
 import com.ui.sensors.PressureSensor
 import com.ui.sensors.SoundSensor
@@ -92,6 +93,29 @@ fun PressureIcon(context: Context, drawable: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun AmbientTemperatureIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToAmbientTemperatureSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize(),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
 fun navigateToSoundSensor(context: Context) {
     context.startActivity(Intent(context, SoundSensor::class.java))
     }
@@ -102,6 +126,10 @@ fun navigateToLightSensor(context: Context) {
 
 fun navigateToPressureSensor(context: Context) {
     context.startActivity(Intent(context, PressureSensor::class.java))
+}
+
+fun navigateToAmbientTemperatureSensor(context: Context) {
+    context.startActivity(Intent(context, AmbientTemperatureSensor::class.java))
 }
 
 @Composable
