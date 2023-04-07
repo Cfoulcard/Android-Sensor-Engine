@@ -77,6 +77,9 @@ class HomeScreenActivity : ComponentActivity() {
                     "4" -> {
                         AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.ic_temp_icon_2)
                     }
+                    "5" -> {
+                        BatteryIcon(this@HomeScreenActivity, R.drawable.ic_battery_icon_2)
+                    }
                     else -> {
                     Card(
                         modifier = Modifier
