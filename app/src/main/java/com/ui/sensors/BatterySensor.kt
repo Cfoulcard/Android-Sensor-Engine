@@ -18,20 +18,19 @@ import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
+import com.sensors.battery.BatteryInfoListener
 import com.sensors.battery.BatteryInfoReceiver
 import com.ui.composables.*
 import com.ui.sensors.viewmodels.BatterySensorViewModel
 
-class BatterySensor: BaseSensorActivity() {
+class BatterySensor: BaseSensorActivity(), BatteryInfoListener {
 
     private val viewModel: BatterySensorViewModel by viewModels()
     private lateinit var batteryInfoReceiver: BatteryInfoReceiver
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        batteryInfoReceiver = BatteryInfoReceiver()
-
+        batteryInfoReceiver = BatteryInfoReceiver(this)
 
         setContent {
 
@@ -51,13 +50,13 @@ class BatterySensor: BaseSensorActivity() {
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralBatteryGraphicSensorInfo(
                             largeInfoString = "0",
-                            superScript = "lux",
-                            description = "Brightness",
+                            superScript = "°",
+                            description = "Celsius",
                             viewModel
                         )
-                        FirstBatteryInfoLabelGroup("Average Lux", "0", viewModel)
-                        SecondBatteryInfoLabelGroup("Peak Lux", "0", viewModel)
-                        ThirdBatteryInfoLabelGroup("Lowest Lux", "0", viewModel)
+                        FirstBatteryInfoLabelGroup("Current %", "0", viewModel)
+                        SecondBatteryInfoLabelGroup("Battery Voltage", "0", viewModel)
+                        ThirdBatteryInfoLabelGroup("Battery Health", "Unknown", viewModel)
                     }
                     PowerButton()
                 }
@@ -69,23 +68,32 @@ class BatterySensor: BaseSensorActivity() {
     override fun onResume() {
         super.onResume()
         registerReceiver(batteryInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
-
-        //  viewModel.startListening()
-     //   UIUpdater().startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
         unregisterReceiver(batteryInfoReceiver)
-
-        //  viewModel.stopListening()
-       // UIUpdater().stopUpdatingUI()
     }
 
-//    private fun startLiveData() {
-//        viewModel.averageLightLiveData.postValue(viewModel.averageLightReading())
-//        viewModel.highestLightLiveData.postValue(viewModel.highestLightReading())
-//        viewModel.lowestLightLiveData.postValue(viewModel.lowestLightReading())
-//    }
+    override fun retrieveBatteryTemperatureName(name: String) {
+        viewModel.batteryTemperatureName = name
+    }
+
+    override fun onBatteryTemperatureUpdated(temperature: Float) {
+        viewModel.batteryTemperature = temperature.toInt()
+    }
+
+    override fun onBatteryLevelPercentageUpdated(batteryPercent: Float) {
+        viewModel.batteryPercentageLiveData.postValue(batteryPercent)
+    }
+
+    override fun onBatteryVoltageUpdated(voltage: Int) {
+        viewModel.batteryVoltageLiveData.postValue(voltage)
+    }
+
+    override fun onBatteryHealthUpdated(health: String) {
+        viewModel.batteryHealthLiveData.postValue(health)
+    }
+
 
 }

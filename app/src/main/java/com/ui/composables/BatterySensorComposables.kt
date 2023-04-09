@@ -6,6 +6,8 @@ import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -80,12 +82,12 @@ fun CentralBatteryGraphicSensorInfo(largeInfoString: String?, superScript: Strin
                         fontSize = 48.sp)
                     ) {
                         if (largeInfoString != null) {
-                          //  append(viewModel.currentLux)
+                            append(viewModel.batteryTemperature.toString())
                         }
                     }
                     withStyle(style = SpanStyle(
-                        fontSize = 14.sp,
-                        baselineShift = BaselineShift(+1f)
+                        fontSize = 22.sp,
+                        baselineShift = BaselineShift(+0.7f)
                     )
                     ) {
                         if (superScript != null) {
@@ -99,7 +101,7 @@ fun CentralBatteryGraphicSensorInfo(largeInfoString: String?, superScript: Strin
                 )
             if (description != null) {
                 Text(
-                    text = description,
+                    text = viewModel.batteryTemperatureName,
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h1,
@@ -148,7 +150,7 @@ fun FirstBatteryInfoLabelGroup(description: String?, value: String?, viewModel: 
 
 @Composable
 fun FirstBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
-   // val updatedString by viewModel.averageLightLiveData.observeAsState()
+    val updatedString by viewModel.batteryPercentageLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -156,7 +158,7 @@ fun FirstBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorView
         Card(
             elevation = 12.dp,
             modifier = Modifier
-                .width(width = 72.dp)
+                .width(width = 145.dp)
                 .height(height = 44.dp)
                 .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
@@ -167,18 +169,15 @@ fun FirstBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorView
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//
-//                            )
-//                    }
+                        Text(
+                            text = "${updatedString.toString()} %",
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                        )
                 }
             }
         }
@@ -193,7 +192,7 @@ fun SecondBatteryInfoLabelGroup(description: String?, value: String?, viewModel:
         Card(
             elevation = 24.dp,
             modifier = Modifier
-                .width(width = 240.dp)
+                .width(width = 290.dp)
                 .height(height = 44.dp)
                 .fillMaxWidth(1f)
                 .shadow(24.dp, clip = false),
@@ -222,7 +221,7 @@ fun SecondBatteryInfoLabelGroup(description: String?, value: String?, viewModel:
 
 @Composable
 fun SecondBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
-    //val updatedString by viewModel.highestLightLiveData.observeAsState()
+    val updatedString by viewModel.batteryVoltageLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -231,7 +230,7 @@ fun SecondBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorVie
         Card(
             elevation = 12.dp,
             modifier = Modifier
-                .width(width = 60.dp)
+                .width(width = 145.dp)
                 .height(height = 44.dp)
                 .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
@@ -242,18 +241,15 @@ fun SecondBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorVie
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//
-//                            )
-//                    }
+                        Text(
+                            text = "${updatedString.toString()} mV",
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                        )
                 }
             }
         }
@@ -268,7 +264,7 @@ fun ThirdBatteryInfoLabelGroup(description: String?, value: String?, viewModel: 
         Card(
             elevation = 24.dp,
             modifier = Modifier
-                .width(width = 190.dp)
+                .width(width = 290.dp)
                 .height(height = 44.dp)
                 .fillMaxWidth(1f)
                 .shadow(24.dp, clip = false),
@@ -297,7 +293,7 @@ fun ThirdBatteryInfoLabelGroup(description: String?, value: String?, viewModel: 
 
 @Composable
 fun ThirdBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
-  //  val updatedString by viewModel.lowestLightLiveData.observeAsState()
+    val updatedString by viewModel.batteryHealthLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -305,7 +301,7 @@ fun ThirdBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorView
         Card(
             elevation = 12.dp,
             modifier = Modifier
-                .width(width = 47.dp)
+                .width(width = 145.dp)
                 .height(height = 44.dp)
                 .shadow(24.dp, clip = false),
             shape = HomeScreenShapes.small,
@@ -316,17 +312,15 @@ fun ThirdBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorView
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//                        )
-//                    }
+                        Text(
+                            text = updatedString.toString(),
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                        )
                 }
             }
         }
