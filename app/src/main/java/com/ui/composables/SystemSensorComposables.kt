@@ -14,7 +14,6 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -29,12 +28,11 @@ import androidx.compose.ui.unit.sp
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.sensors.viewmodels.SoundSensorViewModel
+import com.ui.sensors.viewmodels.SystemSensorViewModel
 
 @Composable
-fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: SoundSensorViewModel) {
-
-    val updatedString by viewModel.decibelLiveData.observeAsState()
+fun CentralSystemGraphicSensorInfo(largeInfoString: String?, superScript: String?, description: String?, viewModel: SystemSensorViewModel) {
+    val updatedString by viewModel.availableMemoryLiveData.observeAsState()
 
     Box(
         modifier = Modifier
@@ -66,7 +64,6 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
             modifier = Modifier
                 .size(260.dp)
                 .blur(16.dp)
-                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
                 .alpha(.90f),
             alignment = Alignment.Center,
         )
@@ -74,18 +71,13 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
             painter = painterResource(R.drawable.ic_top_circle),
             contentDescription = "topCircle",
             contentScale = ContentScale.Fit,
-            modifier =
-            Modifier
-                .size(250.dp)
-                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000)),
+            modifier = Modifier.size(250.dp),
             alignment = Alignment.Center,
         )
         Column(
             modifier = Modifier.absoluteOffset(4.dp, (-4).dp)
         ) {
-
             Text(
-
                 text = buildAnnotatedString {
                     withStyle(style = SpanStyle(
                         fontSize = 48.sp)
@@ -106,7 +98,6 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
                 },
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h3,
-                modifier = Modifier.graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
 
                 )
             if (description != null) {
@@ -115,9 +106,7 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h1,
-                    modifier = Modifier
-                        .absoluteOffset(y = (-26).dp)
-                        .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
+                    modifier = Modifier.absoluteOffset(y = (-26).dp)
                 )
             }
         }
@@ -126,10 +115,9 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
 }
 
 @Composable
-fun FirstSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
+fun FirstSystemInfoLabelGroup(description: String?, value: String?, viewModel: SystemSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .height(75.dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 12.dp,
@@ -155,16 +143,15 @@ fun FirstSoundInfoLabelGroup(description: String?, value: String?, viewModel: So
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                FirstSoundInfoLabelGroupValue(value, viewModel)
+                FirstSystemInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun FirstSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
-
-    val updatedString by viewModel.averageDecibelLiveData.observeAsState()
+fun FirstSystemInfoLabelGroupValue(value: String?, viewModel: SystemSensorViewModel) {
+    val updatedString by viewModel.totalMemoryLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -202,10 +189,9 @@ fun FirstSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMode
 }
 
 @Composable
-fun SecondSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
+fun SecondSystemInfoLabelGroup(description: String?, value: String?, viewModel: SystemSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .height(75.dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
@@ -231,19 +217,19 @@ fun SecondSoundInfoLabelGroup(description: String?, value: String?, viewModel: S
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                SecondSoundInfoLabelGroupValue(value, viewModel)
+                SecondSystemInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun SecondSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
+fun SecondSystemInfoLabelGroupValue(value: String?, viewModel: SystemSensorViewModel) {
+    val updatedString by viewModel.thresholdMemoryLiveData.observeAsState()
+
     Box(
         contentAlignment = Alignment.Center
     ) {
-
-        val updatedString by viewModel.highestDecibelLiveData.observeAsState()
 
         Card(
             elevation = 12.dp,
@@ -268,7 +254,6 @@ fun SecondSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMod
                                 fontSize = 16.sp,
                                 fontWeight = FontWeight.Bold
                             ),
-
                             )
                     }
                 }
@@ -278,10 +263,9 @@ fun SecondSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMod
 }
 
 @Composable
-fun ThirdSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
+fun ThirdSystemInfoLabelGroup(description: String?, value: String?, viewModel: SystemSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth()
-        .height(75.dp),
+        .fillMaxWidth().height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
@@ -307,16 +291,15 @@ fun ThirdSoundInfoLabelGroup(description: String?, value: String?, viewModel: So
                         modifier = Modifier.padding(start = 16.dp)
                     )
                 }
-                ThirdSoundInfoLabelGroupValue(value, viewModel)
+                ThirdSystemInfoLabelGroupValue(value, viewModel)
             }
         }
     }
 }
 
 @Composable
-fun ThirdSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewModel) {
-
-    val updatedString by viewModel.lowestDecibelLiveData.observeAsState()
+fun ThirdSystemInfoLabelGroupValue(value: String?, viewModel: SystemSensorViewModel) {
+  //  val updatedString by viewModel.lowestSystemLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -335,17 +318,17 @@ fun ThirdSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMode
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-                    updatedString?.let {
-                        Text(
-                            text = it,
-                            color = Color(0xff292929),
-                            textAlign = TextAlign.Center,
-                            style = TextStyle(
-                                fontSize = 16.sp,
-                                fontWeight = FontWeight.Bold
-                            ),
-                        )
-                    }
+//                    updatedString?.let {
+//                        Text(
+//                            text = it,
+//                            color = Color(0xff292929),
+//                            textAlign = TextAlign.Center,
+//                            style = TextStyle(
+//                                fontSize = 16.sp,
+//                                fontWeight = FontWeight.Bold
+//                            ),
+//                        )
+//                    }
                 }
             }
         }

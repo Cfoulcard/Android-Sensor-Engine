@@ -55,14 +55,16 @@ class BatterySensor: BaseSensorActivity(), BatteryInfoListener {
                             viewModel
                         )
                         FirstBatteryInfoLabelGroup("Current %", "0", viewModel)
-                        SecondBatteryInfoLabelGroup("Battery Voltage", "0", viewModel)
-                        ThirdBatteryInfoLabelGroup("Battery Health", "Unknown", viewModel)
+                        SecondBatteryInfoLabelGroup("Voltage", "0", viewModel)
+                        ThirdBatteryInfoLabelGroup("Health", "Unknown", viewModel)
+                        FourthBatteryInfoLabelGroup("Status", "Unknown", viewModel)
+                        SixthBatteryInfoLabelGroup("Plug Status", "Unknown", viewModel)
+                        FifthBatteryInfoLabelGroup("Technology", "Unknown", viewModel)
                     }
                     PowerButton()
                 }
             }
         }
-
     }
 
     override fun onResume() {
@@ -93,6 +95,18 @@ class BatterySensor: BaseSensorActivity(), BatteryInfoListener {
 
     override fun onBatteryHealthUpdated(health: String) {
         viewModel.batteryHealthLiveData.postValue(health)
+    }
+
+    override fun onBatteryStatusUpdated(status: String) {
+        viewModel.batteryStatusLiveData.postValue(status)
+    }
+
+    override fun retrieveBatteryTechnologyInfo(technology: String) {
+        viewModel.batteryTechnologyLiveData.postValue(technology)
+    }
+
+    override fun onPluggedUpdated(pluggedString: String) {
+        viewModel.batteryPluggedLiveData.postValue(pluggedString)
     }
 
 

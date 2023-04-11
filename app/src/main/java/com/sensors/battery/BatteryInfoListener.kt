@@ -6,4 +6,7 @@ interface BatteryInfoListener {
     fun onBatteryLevelPercentageUpdated(batteryPercent: Float)
     fun onBatteryVoltageUpdated(voltage: Int)
     fun onBatteryHealthUpdated(health: String)
+    fun onBatteryStatusUpdated(status: String)
+    fun retrieveBatteryTechnologyInfo(technology: String)
+    fun onPluggedUpdated(pluggedString: String)
 }

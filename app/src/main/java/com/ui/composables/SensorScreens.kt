@@ -4,35 +4,20 @@ import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.shadow
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.BaselineShift
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.fragment.app.FragmentManager
-import com.androidsensorengine.ui.theme.HomeScreenShapes
-import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.sensors.viewmodels.SoundSensorViewModel
 import com.utils.CustomDialog.Companion.displayCustomDialog
 
 @Composable
@@ -92,6 +77,7 @@ fun SensorCometBackgroundForCentralGraphic() {
             .fillMaxSize()
             .offset(y = (-150).dp),
         alignment = Alignment.Center,
+
     )
 }
 

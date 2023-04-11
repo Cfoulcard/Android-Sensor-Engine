@@ -136,6 +136,29 @@ fun BatteryIcon(context: Context, drawable: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun SystemIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToSystemSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize(),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
 fun navigateToSoundSensor(context: Context) {
     context.startActivity(Intent(context, SoundSensor::class.java))
     }
@@ -154,6 +177,10 @@ fun navigateToAmbientTemperatureSensor(context: Context) {
 
 fun navigateToBatterySensor(context: Context) {
     context.startActivity(Intent(context, BatterySensor::class.java))
+}
+
+fun navigateToSystemSensor(context: Context) {
+    context.startActivity(Intent(context, SystemSensor::class.java))
 }
 
 @Composable

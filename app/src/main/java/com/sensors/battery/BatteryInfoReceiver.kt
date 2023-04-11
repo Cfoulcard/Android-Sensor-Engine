@@ -4,8 +4,6 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.BatteryManager
-import com.androidsensorengine.utils.LogUtils.TAG
-import timber.log.Timber
 
 class BatteryInfoReceiver(private val listener: BatteryInfoListener) : BroadcastReceiver() {
 
@@ -33,18 +31,13 @@ class BatteryInfoReceiver(private val listener: BatteryInfoListener) : Broadcast
 
     private fun getMaximumBatteryLevelPercentage(intent: Intent) {
         val batteryScale = intent.getIntExtra(BatteryManager.EXTRA_SCALE, -1)
-        Timber.tag(TAG).d("Scale is $batteryScale")
-
         val batteryLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
         val batteryPercentage = batteryLevel.toFloat() / batteryScale.toFloat() * 100
-        Timber.tag(TAG).d("Battery level is $batteryLevel")
-        Timber.tag(TAG).d("Battery percentage is $batteryPercentage")
         listener.onBatteryLevelPercentageUpdated(batteryPercentage)
     }
 
     private fun getBatteryVoltage(intent: Intent) {
         val batteryVoltage = intent.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1)
-        Timber.tag(TAG).d("Battery voltage is $batteryVoltage mV")
         listener.onBatteryVoltageUpdated(batteryVoltage)
     }
 
@@ -58,7 +51,6 @@ class BatteryInfoReceiver(private val listener: BatteryInfoListener) : Broadcast
             BatteryManager.BATTERY_HEALTH_UNSPECIFIED_FAILURE -> "Unspecified failure"
             else -> "Unknown"
         }
-        Timber.tag(TAG).d("Battery health is $healthString")
         listener.onBatteryHealthUpdated(healthString)
     }
 
@@ -71,12 +63,16 @@ class BatteryInfoReceiver(private val listener: BatteryInfoListener) : Broadcast
             BatteryManager.BATTERY_STATUS_UNKNOWN -> "Unknown"
             else -> "Unknown"
         }
-        Timber.tag(TAG).d("Battery status is $statusString")
+        listener.onBatteryStatusUpdated(statusString)
     }
 
     private fun getBatteryTechnologyInfo(intent: Intent) {
         val batteryTechnology = intent.getStringExtra(BatteryManager.EXTRA_TECHNOLOGY)
-        Timber.tag(TAG).d("Battery technology is $batteryTechnology")
+        if (batteryTechnology != null) {
+            listener.retrieveBatteryTechnologyInfo(batteryTechnology)
+        } else {
+            listener.retrieveBatteryTechnologyInfo("Unknown")
+        }
     }
 
     private fun getPluggedInType(intent: Intent) {
@@ -87,7 +83,6 @@ class BatteryInfoReceiver(private val listener: BatteryInfoListener) : Broadcast
             0 -> "Not plugged"
             else -> "Unknown"
         }
-
-        Timber.tag(TAG).d("Battery plugged is $pluggedString")
+        listener.onPluggedUpdated(pluggedString)
     }
 }

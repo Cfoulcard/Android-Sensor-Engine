@@ -16,6 +16,7 @@
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
 
+
     <application
         android:name="com.application.AndroidSensorEngine"
         android:allowBackup="true"
@@ -63,6 +64,11 @@
             android:screenOrientation="portrait" />
 
         <activity android:name="com.ui.sensors.BatterySensor"
+            android:label=""
+            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:screenOrientation="portrait" />
+
+        <activity android:name="com.ui.sensors.SystemSensor"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />

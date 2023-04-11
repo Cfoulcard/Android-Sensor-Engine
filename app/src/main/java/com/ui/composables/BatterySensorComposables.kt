@@ -326,3 +326,216 @@ fun ThirdBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorView
         }
     }
 }
+
+@Composable
+fun FourthBatteryInfoLabelGroup(description: String?, value: String?, viewModel: BatterySensorViewModel) {
+    Box(modifier = Modifier
+        .fillMaxWidth().height(75.dp),
+        contentAlignment = Alignment.Center) {
+        Card(
+            elevation = 24.dp,
+            modifier = Modifier
+                .width(width = 290.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                if (description != null) {
+                    Text(
+                        text = description,
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Left,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+                FourthBatteryInfoLabelGroupValue(value, viewModel)
+            }
+        }
+    }
+}
+
+@Composable
+fun FourthBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
+    val updatedString by viewModel.batteryStatusLiveData.observeAsState()
+
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            elevation = 12.dp,
+            modifier = Modifier
+                .width(width = 145.dp)
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                if (value != null) {
+                    Text(
+                        text = updatedString.toString(),
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun FifthBatteryInfoLabelGroup(description: String?, value: String?, viewModel: BatterySensorViewModel) {
+    Box(modifier = Modifier
+        .fillMaxWidth().height(75.dp),
+        contentAlignment = Alignment.Center) {
+        Card(
+            elevation = 24.dp,
+            modifier = Modifier
+                .width(width = 290.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                if (description != null) {
+                    Text(
+                        text = description,
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Left,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+                FifthBatteryInfoLabelGroupValue(value, viewModel)
+            }
+        }
+    }
+}
+
+@Composable
+fun FifthBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
+    val updatedString by viewModel.batteryTechnologyLiveData.observeAsState()
+
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            elevation = 12.dp,
+            modifier = Modifier
+                .width(width = 145.dp)
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                if (value != null) {
+                    Text(
+                        text = updatedString.toString(),
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun SixthBatteryInfoLabelGroup(description: String?, value: String?, viewModel: BatterySensorViewModel) {
+    Box(modifier = Modifier
+        .fillMaxWidth().height(75.dp),
+        contentAlignment = Alignment.Center) {
+        Card(
+            elevation = 24.dp,
+            modifier = Modifier
+                .width(width = 290.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                if (description != null) {
+                    Text(
+                        text = description,
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Left,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+                SixthBatteryInfoLabelGroupValue(value, viewModel)
+            }
+        }
+    }
+}
+
+@Composable
+fun SixthBatteryInfoLabelGroupValue(value: String?, viewModel: BatterySensorViewModel) {
+    val updatedString by viewModel.batteryPluggedLiveData.observeAsState()
+
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            elevation = 12.dp,
+            modifier = Modifier
+                .width(width = 145.dp)
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                if (value != null) {
+                    Text(
+                        text = updatedString.toString(),
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Center,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                    )
+                }
+            }
+        }
+    }
+}

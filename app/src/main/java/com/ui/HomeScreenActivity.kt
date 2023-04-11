@@ -80,6 +80,9 @@ class HomeScreenActivity : ComponentActivity() {
                     "5" -> {
                         BatteryIcon(this@HomeScreenActivity, R.drawable.ic_battery_icon_2)
                     }
+                    "6" -> {
+                        SystemIcon(this@HomeScreenActivity, R.drawable.ic_ram_icon_2)
+                    }
                     else -> {
                     Card(
                         modifier = Modifier
