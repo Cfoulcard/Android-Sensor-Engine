@@ -8,7 +8,9 @@ import androidx.lifecycle.ViewModel
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.text.DecimalFormat
 import javax.inject.Inject
+import kotlin.math.pow
 
 @HiltViewModel
 class PressureSensorViewModel @Inject constructor(
@@ -18,6 +20,7 @@ class PressureSensorViewModel @Inject constructor(
     val averagePressureLiveData = MutableLiveData<String>("0")
     val highestPressureLiveData = MutableLiveData<String>("0")
     val lowestPressureLiveData = MutableLiveData<String>("0")
+    val altitudeLiveData = MutableLiveData<String>("0")
 
     private var count = 0
     private var sum = 0
@@ -27,18 +30,33 @@ class PressureSensorViewModel @Inject constructor(
 
     var doesPressureSensorExist = pressureSensor.doesSensorExist
     var currentPressure by mutableStateOf("0")
+    var currentAltitude by mutableStateOf("0")
 
     fun startListening() {
         pressureSensor.startListening()
         pressureSensor.setOnSensorValuesChangedListener { values ->
             val pressure = values[0]
-            val formatedPressureValue = pressure.toInt() //"%.1f".format(pressure)
-            currentPressure = formatedPressureValue.toString()
+            val formattedPressureValue = pressure.toInt() //"%.1f".format(pressure)
+            currentPressure = formattedPressureValue.toString()
+            currentAltitude = calculateAltitude(pressure)
         }
     }
 
     fun stopListening() {
         pressureSensor.stopListening()
+    }
+
+    /** This formula uses the info from the following link:
+     * https://community.bosch-sensortec.com/t5/Question-and-answers/How-to-calculate-the-altitude-from-the-pressure-sensor-data/qaq-p/5702
+     */
+    private fun calculateAltitude(pressure: Float, seaLevelPressure: Float = 1013.25f): String {
+        if (pressure <= 0 || seaLevelPressure <= 0 || pressure >= 100000) {
+            return "N/A"
+        }
+
+        val altitude = 44330.0 * (1.0 - (pressure / seaLevelPressure).toDouble().pow(1.0 / 5.255))
+        val decimalFormat = DecimalFormat("#.##")
+        return decimalFormat.format(altitude)
     }
 
     fun averagePressureReading(): String {

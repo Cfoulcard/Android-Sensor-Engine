@@ -334,3 +334,76 @@ fun ThirdPressureInfoLabelGroupValue(value: String?, viewModel: PressureSensorVi
         }
     }
 }
+
+@Composable
+fun FourthPressureInfoLabelGroup(description: String?, value: String?, viewModel: PressureSensorViewModel) {
+    Box(modifier = Modifier
+        .fillMaxWidth().height(75.dp),
+        contentAlignment = Alignment.Center) {
+        Card(
+            elevation = 24.dp,
+            modifier = Modifier
+                .width(width = 190.dp)
+                .height(height = 44.dp)
+                .fillMaxWidth(1f)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween) {
+                if (description != null) {
+                    Text(
+                        text = description,
+                        color = Color(0xff292929),
+                        textAlign = TextAlign.Left,
+                        style = TextStyle(
+                            fontSize = 16.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        modifier = Modifier.padding(start = 16.dp)
+                    )
+                }
+                FourthPressureInfoLabelGroupValue(value, viewModel)
+            }
+        }
+    }
+}
+
+@Composable
+fun FourthPressureInfoLabelGroupValue(value: String?, viewModel: PressureSensorViewModel) {
+    val updatedString by viewModel.altitudeLiveData.observeAsState()
+
+    Box(
+        contentAlignment = Alignment.Center
+    ) {
+        Card(
+            elevation = 12.dp,
+            modifier = Modifier
+                .width(width = 90.dp)
+                .height(height = 44.dp)
+                .shadow(24.dp, clip = false),
+            shape = HomeScreenShapes.small,
+            backgroundColor = pureWhite,
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center,
+            ) {
+                if (value != null) {
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                        )
+                    }
+                }
+            }
+        }
+    }
+}

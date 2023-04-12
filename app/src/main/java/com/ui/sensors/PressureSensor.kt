@@ -54,6 +54,7 @@ class PressureSensor: BaseSensorActivity() {
                         FirstPressureInfoLabelGroup("Average Pressure", "0", viewModel)
                         SecondPressureInfoLabelGroup("Peak Pressure", "0", viewModel)
                         ThirdPressureInfoLabelGroup("Lowest Pressure", "0", viewModel)
+                        FourthPressureInfoLabelGroup("Altitude", "0", viewModel)
                     }
                     PowerButton()
                 }
@@ -78,6 +79,7 @@ class PressureSensor: BaseSensorActivity() {
         viewModel.averagePressureLiveData.postValue(viewModel.averagePressureReading())
         viewModel.highestPressureLiveData.postValue(viewModel.highestPressureReading())
         viewModel.lowestPressureLiveData.postValue(viewModel.lowestPressureReading())
+        viewModel.altitudeLiveData.postValue(viewModel.currentAltitude)
     }
 
 }
