@@ -1,7 +1,6 @@
 package com.utils
 
 import kotlinx.coroutines.*
-import java.util.*
 
 class UIUpdater() {
     private var uiUpdaterJob: Job? = null
@@ -20,15 +19,4 @@ class UIUpdater() {
         uiUpdaterJob = null
     }
 
-    fun startUpdatingUIWithTimer(callback: () -> Unit) {
-                val timer = Timer()
-
-                val uiTimer: TimerTask = object: TimerTask() {
-                    override fun run() {
-                        callback()
-                    }
-
-                }
-        timer.schedule(uiTimer, 1000, 1000)
-    }
 }

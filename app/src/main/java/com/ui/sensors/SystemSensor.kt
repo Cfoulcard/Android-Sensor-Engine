@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.lifecycleScope
 import com.BaseSensorActivity
 import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
@@ -18,11 +19,14 @@ import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.composables.*
 import com.ui.sensors.viewmodels.SystemSensorViewModel
+import com.utils.LifecycleUtils.startUpdatingUiWithMainCoroutine
 import com.utils.UIUpdater
+import kotlinx.coroutines.Job
 
 class SystemSensor : BaseSensorActivity() {
 
     private val viewModel: SystemSensorViewModel by viewModels()
+    private var updateJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,22 +64,27 @@ class SystemSensor : BaseSensorActivity() {
 
     }
 
+    override fun onStart() {
+        super.onStart()
 
+    }
 
     override fun onResume() {
         super.onResume()
-        viewModel.startPeriodicUpdates()
-        UIUpdater().startUpdatingUI(500) {
-            startLiveData()
+        if (updateJob?.isActive != true) {
+            updateJob = lifecycleScope.startUpdatingUiWithMainCoroutine(1000) { viewModel.updateUiWithMemoryInfo() }
         }
+        UIUpdater().startUpdatingUI(500) { startLiveData() }
     }
-
-
 
     override fun onPause() {
         super.onPause()
-        viewModel.cancelPeriodicUpdates()
+        updateJob?.cancel()
         UIUpdater().stopUpdatingUI()
+    }
+
+    override fun onStop() {
+        super.onStop()
     }
 
     private fun startLiveData() {
