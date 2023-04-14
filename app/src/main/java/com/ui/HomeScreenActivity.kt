@@ -83,6 +83,9 @@ class HomeScreenActivity : ComponentActivity() {
                     "6" -> {
                         SystemIcon(this@HomeScreenActivity, R.drawable.ic_ram_icon_2)
                     }
+                    "7" -> {
+                        HumidityIcon(this@HomeScreenActivity, R.drawable.ic_humidity_icon_2)
+                    }
                     else -> {
                     Card(
                         modifier = Modifier

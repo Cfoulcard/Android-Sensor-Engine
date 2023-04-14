@@ -51,6 +51,7 @@ object SensorModule {
 
     @Provides
     @Singleton
+    @HumiditySensor
     fun provideHumiditySensor(app: Application) : ObserveSensor {
         return HumiditySensor(app)
     }
