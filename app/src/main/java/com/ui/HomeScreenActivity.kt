@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -23,7 +28,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.androidsensorengine.ui.composables.*
+import com.androidsensorengine.ui.composables.AmbientTemperatureIcon
+import com.androidsensorengine.ui.composables.BatteryIcon
+import com.androidsensorengine.ui.composables.HalfCircleBackground
+import com.androidsensorengine.ui.composables.HumidityIcon
+import com.androidsensorengine.ui.composables.LightIcon
+import com.androidsensorengine.ui.composables.LocationIcon
+import com.androidsensorengine.ui.composables.MainGradientBackground
+import com.androidsensorengine.ui.composables.PressureIcon
+import com.androidsensorengine.ui.composables.SensorDiagnosisRow
+import com.androidsensorengine.ui.composables.SensorIcon
+import com.androidsensorengine.ui.composables.SystemIcon
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
@@ -56,7 +71,7 @@ class HomeScreenActivity : ComponentActivity() {
     @Composable
     fun HomeScreenSensorGrid() {
 
-        val data by remember { mutableStateOf(listOf("1", "2", "3", "4", "5", "6", "7", "8", "9")) }
+        val data by remember { mutableStateOf(listOf("1", "2", "3", "4", "5", "6", "7", "8",)) }
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 100.dp),
@@ -85,6 +100,9 @@ class HomeScreenActivity : ComponentActivity() {
                     }
                     "7" -> {
                         HumidityIcon(this@HomeScreenActivity, R.drawable.ic_humidity_icon_2)
+                    }
+                    "8" -> {
+                        LocationIcon(this@HomeScreenActivity, R.drawable.ic_speed_icon_2)
                     }
                     else -> {
                     Card(

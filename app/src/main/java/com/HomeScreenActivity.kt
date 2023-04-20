@@ -6,7 +6,14 @@ import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
-import com.androidsensorengine.sensors.*
+import com.androidsensorengine.sensors.SensorBatteryActivity
+import com.androidsensorengine.sensors.SensorHumidityActivity
+import com.androidsensorengine.sensors.SensorLightActivity
+import com.androidsensorengine.sensors.SensorPressureActivity
+import com.androidsensorengine.sensors.SensorRamActivity
+import com.androidsensorengine.sensors.SensorSoundActivity
+import com.androidsensorengine.sensors.SensorTemperatureActivity
+import com.androidsensorengine.sensors.SensorWalkActivity
 import com.christianfoulcard.android.androidsensorengine.R
 import com.christianfoulcard.android.androidsensorengine.databinding.ActivitySensorSelectionBinding
 
@@ -74,12 +81,12 @@ class HomeScreenActivity : AppCompatActivity() {
         this.startActivity(batteryIntent, transitionActivityOptions.toBundle())
     }
 
-    fun speedIconIntent(view: View?) {
-        val speedIntent = Intent(this, SensorAccelerometerActivity::class.java)
-        val transitionName = getString(R.string.speed_anim)
-        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.speedIcon, transitionName)
-        this.startActivity(speedIntent, transitionActivityOptions.toBundle())
-    }
+//    fun speedIconIntent(view: View?) {
+//        val speedIntent = Intent(this, SensorAccelerometerActivity::class.java)
+//        val transitionName = getString(R.string.speed_anim)
+//        val transitionActivityOptions = ActivityOptions.makeSceneTransitionAnimation(this@HomeScreenActivity, binding.speedIcon, transitionName)
+//        this.startActivity(speedIntent, transitionActivityOptions.toBundle())
+//    }
 
     fun humidityIconIntent(view: View?) {
         val humidityIntent = Intent(this, SensorHumidityActivity::class.java)

@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.application.AndroidSensorEngine.Companion.globalAppContext
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
+import com.utils.SensorError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.text.DecimalFormat
 import javax.inject.Inject
@@ -33,12 +35,16 @@ class PressureSensorViewModel @Inject constructor(
     var currentAltitude by mutableStateOf("0")
 
     fun startListening() {
-        pressureSensor.startListening()
-        pressureSensor.setOnSensorValuesChangedListener { values ->
-            val pressure = values[0]
-            val formattedPressureValue = pressure.toInt() //"%.1f".format(pressure)
-            currentPressure = formattedPressureValue.toString()
-            currentAltitude = calculateAltitude(pressure)
+        if (doesPressureSensorExist) {
+            pressureSensor.startListening()
+            pressureSensor.setOnSensorValuesChangedListener { values ->
+                val pressure = values[0]
+                val formattedPressureValue = pressure.toInt() //"%.1f".format(pressure)
+                currentPressure = formattedPressureValue.toString()
+                currentAltitude = calculateAltitude(pressure)
+            }
+        } else {
+            SensorError().showNoSensorToast(globalAppContext)
         }
     }
 

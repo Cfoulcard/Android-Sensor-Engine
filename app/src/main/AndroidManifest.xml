@@ -78,6 +78,11 @@
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
+        <activity android:name="com.ui.sensors.LocationSensor"
+            android:label=""
+            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:screenOrientation="portrait" />
+
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.application.AndroidSensorEngine.Companion.globalAppContext
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
+import com.utils.SensorError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,11 +31,15 @@ class LightSensorViewModel @Inject constructor(
     var currentLux by mutableStateOf("0")
 
     fun startListening() {
-        lightSensor.startListening()
-        lightSensor.setOnSensorValuesChangedListener { values ->
-            val lux = values[0]
-            val formatedLuxValue = lux.toInt() //"%.1f".format(lux)
-            currentLux = formatedLuxValue.toString()
+        if (doesLightSensorExist) {
+            lightSensor.startListening()
+            lightSensor.setOnSensorValuesChangedListener { values ->
+                val lux = values[0]
+                val formatedLuxValue = lux.toInt() //"%.1f".format(lux)
+                currentLux = formatedLuxValue.toString()
+            }
+        } else {
+            SensorError().showNoSensorToast(globalAppContext)
         }
     }
 

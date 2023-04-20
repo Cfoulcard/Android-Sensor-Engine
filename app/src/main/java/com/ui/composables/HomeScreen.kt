@@ -182,6 +182,29 @@ fun HumidityIcon(context: Context, drawable: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LocationIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToLocationSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize(),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
 fun navigateToSoundSensor(context: Context) {
     context.startActivity(Intent(context, SoundSensor::class.java))
     }
@@ -208,6 +231,10 @@ fun navigateToSystemSensor(context: Context) {
 
 fun navigateToHumiditySensor(context: Context) {
     context.startActivity(Intent(context, HumiditySensor::class.java))
+}
+
+fun navigateToLocationSensor(context: Context) {
+    context.startActivity(Intent(context, LocationSensor::class.java))
 }
 
 @Composable

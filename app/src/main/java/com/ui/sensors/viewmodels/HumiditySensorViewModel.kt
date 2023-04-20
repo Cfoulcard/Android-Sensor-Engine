@@ -5,8 +5,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.application.AndroidSensorEngine.Companion.globalAppContext
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
+import com.utils.SensorError
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
@@ -29,11 +31,15 @@ class HumiditySensorViewModel @Inject constructor(
     var currentHumidity by mutableStateOf("0")
 
     fun startListening() {
-        humiditySensor.startListening()
-        humiditySensor.setOnSensorValuesChangedListener { values ->
-            val lux = values[0]
-            val formattedHumidityValue = lux.toInt() //"%.1f".format(lux)
-            currentHumidity = formattedHumidityValue.toString()
+        if (doesHumiditySensorExist) {
+            humiditySensor.startListening()
+            humiditySensor.setOnSensorValuesChangedListener { values ->
+                val lux = values[0]
+                val formattedHumidityValue = lux.toInt() //"%.1f".format(lux)
+                currentHumidity = formattedHumidityValue.toString()
+            }
+        } else {
+            SensorError().showNoSensorToast(globalAppContext)
         }
     }
 
