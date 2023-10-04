@@ -5,10 +5,12 @@ import android.content.IntentFilter
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -20,10 +22,19 @@ import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
 import com.sensors.battery.BatteryInfoListener
 import com.sensors.battery.BatteryInfoReceiver
-import com.ui.composables.*
+import com.ui.composables.CentralBatteryGraphicSensorInfo
+import com.ui.composables.DisplaySensorTitle
+import com.ui.composables.FifthBatteryInfoLabelGroup
+import com.ui.composables.FirstBatteryInfoLabelGroup
+import com.ui.composables.FourthBatteryInfoLabelGroup
+import com.ui.composables.InfoIcon
+import com.ui.composables.PowerButton
+import com.ui.composables.SecondBatteryInfoLabelGroup
+import com.ui.composables.SixthBatteryInfoLabelGroup
+import com.ui.composables.ThirdBatteryInfoLabelGroup
 import com.ui.sensors.viewmodels.BatterySensorViewModel
 
-class BatterySensor: BaseSensorActivity(), BatteryInfoListener {
+class BatteryActivity: BaseSensorActivity(), BatteryInfoListener {
 
     private val viewModel: BatterySensorViewModel by viewModels()
     private lateinit var batteryInfoReceiver: BatteryInfoReceiver
@@ -43,10 +54,10 @@ class BatterySensor: BaseSensorActivity(), BatteryInfoListener {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Battery Sensor")
-                    InfoIcon(supportFragmentManager, this@BatterySensor, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@BatteryActivity, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralBatteryGraphicSensorInfo(
                             largeInfoString = "0",

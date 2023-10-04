@@ -3,10 +3,12 @@ package com.ui.sensors
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -17,13 +19,18 @@ import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.composables.*
+import com.ui.composables.CentralSystemGraphicSensorInfo
+import com.ui.composables.DisplaySensorTitle
+import com.ui.composables.FirstSystemInfoLabelGroup
+import com.ui.composables.InfoIcon
+import com.ui.composables.PowerButton
+import com.ui.composables.SecondSystemInfoLabelGroup
 import com.ui.sensors.viewmodels.SystemSensorViewModel
 import com.utils.LifecycleUtils.startUpdatingUiWithMainCoroutine
 import com.utils.UIUpdater
 import kotlinx.coroutines.Job
 
-class SystemSensor : BaseSensorActivity() {
+class SystemActivity : BaseSensorActivity() {
 
     private val viewModel: SystemSensorViewModel by viewModels()
     private var updateJob: Job? = null
@@ -42,10 +49,10 @@ class SystemSensor : BaseSensorActivity() {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("System Sensor")
-                    InfoIcon(supportFragmentManager, this@SystemSensor, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@SystemActivity, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralSystemGraphicSensorInfo(
                             largeInfoString = "0",

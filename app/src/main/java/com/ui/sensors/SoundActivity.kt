@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -19,12 +21,18 @@ import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.androidsensorengine.utils.Constants.AUDIO_PERMISSION_REQUEST_CODE
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.composables.*
+import com.ui.composables.CentralSoundGraphicSensorInfo
+import com.ui.composables.DisplaySensorTitle
+import com.ui.composables.FirstSoundInfoLabelGroup
+import com.ui.composables.InfoIcon
+import com.ui.composables.PowerButton
+import com.ui.composables.SecondSoundInfoLabelGroup
+import com.ui.composables.ThirdSoundInfoLabelGroup
 import com.ui.sensors.viewmodels.SoundSensorViewModel
 import com.utils.PermissionUtils.requestAudioPermission
 import com.utils.UIUpdater
 
-class SoundSensor: BaseSensorActivity() {
+class SoundActivity: BaseSensorActivity() {
 
     private val viewModel: SoundSensorViewModel by viewModels()
 
@@ -43,10 +51,10 @@ class SoundSensor: BaseSensorActivity() {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Sound Sensor")
-                    InfoIcon(supportFragmentManager, this@SoundSensor, R.string.sound_desc)
+                    InfoIcon(supportFragmentManager, this@SoundActivity, R.string.sound_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralSoundGraphicSensorInfo(
                             largeInfoString = "0",

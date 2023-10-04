@@ -151,6 +151,7 @@
     <string name="pin_shortcut_title">Quick Sensor Access</string>
     <string name="title_activity_new_home_screen">Sensor Engine</string>
     <string name="information">Information</string>
+    <string name="pressure_desc">Barometric pressure, also known as atmospheric pressure, refers to the force exerted on a surface by the weight of the atmosphere above it. It is measured in units such as millibars (mb), inches of mercury (inHg), or pascals (Pa), with the standard atmospheric pressure at sea level being approximately 1013.25 mb, 29.92 inHg, or 101,325 Pa. \n Barometric pressure varies with altitude, temperature, and weather conditions. As you ascend in altitude, atmospheric pressure decreases, since there is less air above you to exert force on a surface. Changes in barometric pressure can affect individuals in various ways. Some people are sensitive to changes in atmospheric pressure, experiencing symptoms such as headaches, migraines, joint pain, or sinus congestion. These symptoms can be more pronounced when the pressure changes rapidly, such as during a storm or when traveling to a different altitude.\n\nIn some cases, changes in barometric pressure can exacerbate existing medical conditions. For example, individuals with arthritis might experience increased joint pain during periods of low pressure. People with respiratory issues, such as asthma or COPD, might find it more difficult to breathe when the atmospheric pressure is low, as the reduced pressure can cause airways to constrict.</string>
 
 
 </resources>

@@ -3,9 +3,12 @@ package com.ui.composables
 import android.app.Activity
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -13,22 +16,14 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.fragment.app.FragmentManager
 import com.christianfoulcard.android.androidsensorengine.R
 import com.utils.CustomDialog.Companion.displayCustomDialog
 
 @Composable
 fun DisplaySensorTitle(text: String) {
-    Text(
-        text = text,
-        fontSize = 36.sp,
-        textAlign = TextAlign.Center,
-        modifier = Modifier.padding(top = 32.dp),
-        style = MaterialTheme.typography.h1
-    )
+    AutosizedTextTitle(text)
 }
 
 @Composable

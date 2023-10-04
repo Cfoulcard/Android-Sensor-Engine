@@ -62,6 +62,7 @@ class HomeScreenActivity : ComponentActivity() {
                 ) {
                     HomeScreenSensorGrid()
                     SensorDiagnosisView()
+
                 }
             }
         }
@@ -162,9 +163,12 @@ class HomeScreenActivity : ComponentActivity() {
                 SensorDiagnosisRow("Ram Sensor", R.drawable.green_circle)
                 SensorDiagnosisRow("Battery Temperature", R.drawable.red_circle)
                 SensorDiagnosisRow("Ambient Temperature", R.drawable.green_circle)
+
+
             }
 
         }
+
     }
 
     @Preview(showBackground = true)

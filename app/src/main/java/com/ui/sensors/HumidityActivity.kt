@@ -3,10 +3,12 @@ package com.ui.sensors
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,13 +18,19 @@ import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.composables.*
+import com.ui.composables.CentralHumidityGraphicSensorInfo
+import com.ui.composables.DisplaySensorTitle
+import com.ui.composables.FirstHumidityInfoLabelGroup
+import com.ui.composables.InfoIcon
+import com.ui.composables.PowerButton
+import com.ui.composables.SecondHumidityInfoLabelGroup
+import com.ui.composables.ThirdHumidityInfoLabelGroup
 import com.ui.sensors.viewmodels.HumiditySensorViewModel
 import com.utils.UIUpdater
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HumiditySensor: BaseSensorActivity() {
+class HumidityActivity: BaseSensorActivity() {
 
     private val viewModel: HumiditySensorViewModel by viewModels()
 
@@ -40,10 +48,10 @@ class HumiditySensor: BaseSensorActivity() {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Humidity Sensor")
-                    InfoIcon(supportFragmentManager, this@HumiditySensor, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@HumidityActivity, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralHumidityGraphicSensorInfo(
                             largeInfoString = "0",

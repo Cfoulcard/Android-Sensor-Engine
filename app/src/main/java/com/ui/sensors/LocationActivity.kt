@@ -5,10 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -21,16 +23,13 @@ import com.androidsensorengine.utils.Constants
 import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.composables.CentralLocationGraphicSensorInfo
 import com.ui.composables.DisplaySensorTitle
-import com.ui.composables.FirstLocationInfoLabelGroup
 import com.ui.composables.InfoIcon
 import com.ui.composables.PowerButton
-import com.ui.composables.SecondLocationInfoLabelGroup
-import com.ui.composables.ThirdLocationInfoLabelGroup
 import com.ui.sensors.viewmodels.LocationSensorViewModel
 import com.utils.PermissionUtils.requestLocationPermission
 import com.utils.UIUpdater
 
-class LocationSensor: BaseSensorActivity() {
+class LocationActivity: BaseSensorActivity() {
 
     private val viewModel: LocationSensorViewModel by viewModels()
 
@@ -48,20 +47,20 @@ class LocationSensor: BaseSensorActivity() {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Location Sensor")
-                    InfoIcon(supportFragmentManager, this@LocationSensor, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@LocationActivity, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralLocationGraphicSensorInfo(
                             largeInfoString = "0",
-                            superScript = "lux",
-                            description = "Brightness",
+                            superScript = "",
+                            description = "MPH",
                             viewModel
                         )
-                        FirstLocationInfoLabelGroup("Average Lux", "0", viewModel)
-                        SecondLocationInfoLabelGroup("Peak Lux", "0", viewModel)
-                        ThirdLocationInfoLabelGroup("Lowest Lux", "0", viewModel)
+//                        FirstLocationInfoLabelGroup("Average Lux", "0", viewModel)
+//                        SecondLocationInfoLabelGroup("Peak Lux", "0", viewModel)
+//                        ThirdLocationInfoLabelGroup("Lowest Lux", "0", viewModel)
                     }
                     PowerButton()
                 }
@@ -79,16 +78,12 @@ class LocationSensor: BaseSensorActivity() {
 
     override fun onResume() {
         super.onResume()
-       // viewModel.startListening()
         UIUpdater().startUpdatingUI(500) { startLiveData() }
-
     }
 
     override fun onPause() {
         super.onPause()
-    //    viewModel.stopListening()
         UIUpdater().stopUpdatingUI()
-
     }
 
     override fun onStop() {
@@ -97,9 +92,7 @@ class LocationSensor: BaseSensorActivity() {
     }
 
     private fun startLiveData() {
-//        viewModel.averageLocationLiveData.postValue(viewModel.averageLocationReading())
-//        viewModel.highestLocationLiveData.postValue(viewModel.highestLocationReading())
-//        viewModel.lowestLocationLiveData.postValue(viewModel.lowestLocationReading())
+        viewModel.speedDataLiveValue.postValue(viewModel.getCurrentSpeed())
     }
 
     override fun onRequestPermissionsResult(requestCode: Int,

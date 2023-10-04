@@ -3,10 +3,12 @@ package com.ui.sensors
 import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -16,15 +18,21 @@ import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.composables.*
-import com.ui.sensors.viewmodels.PressureSensorViewModel
+import com.ui.composables.CentralLightGraphicSensorInfo
+import com.ui.composables.DisplaySensorTitle
+import com.ui.composables.FirstLightInfoLabelGroup
+import com.ui.composables.InfoIcon
+import com.ui.composables.PowerButton
+import com.ui.composables.SecondLightInfoLabelGroup
+import com.ui.composables.ThirdLightInfoLabelGroup
+import com.ui.sensors.viewmodels.LightSensorViewModel
 import com.utils.UIUpdater
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PressureSensor: BaseSensorActivity() {
+class LightSensor: BaseSensorActivity() {
 
-    private val viewModel: PressureSensorViewModel by viewModels()
+    private val viewModel: LightSensorViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,21 +48,20 @@ class PressureSensor: BaseSensorActivity() {
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
-                    DisplaySensorTitle("Pressure Sensor")
-                    InfoIcon(supportFragmentManager, this@PressureSensor, R.string.light_desc)
+                    DisplaySensorTitle("Light Sensor")
+                    InfoIcon(supportFragmentManager, this@LightSensor, R.string.light_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
-                        CentralPressureGraphicSensorInfo(
+                        CentralLightGraphicSensorInfo(
                             largeInfoString = "0",
-                            superScript = "Pressure",
-                            description = "hPa",
+                            superScript = "lux",
+                            description = "Brightness",
                             viewModel
                         )
-                        FirstPressureInfoLabelGroup("Average Pressure", "0", viewModel)
-                        SecondPressureInfoLabelGroup("Peak Pressure", "0", viewModel)
-                        ThirdPressureInfoLabelGroup("Lowest Pressure", "0", viewModel)
-                        FourthPressureInfoLabelGroup("Altitude", "0", viewModel)
+                        FirstLightInfoLabelGroup("Average Lux", "0", viewModel)
+                        SecondLightInfoLabelGroup("Peak Lux", "0", viewModel)
+                        ThirdLightInfoLabelGroup("Lowest Lux", "0", viewModel)
                     }
                     PowerButton()
                 }
@@ -76,10 +83,9 @@ class PressureSensor: BaseSensorActivity() {
     }
 
     private fun startLiveData() {
-        viewModel.averagePressureLiveData.postValue(viewModel.averagePressureReading())
-        viewModel.highestPressureLiveData.postValue(viewModel.highestPressureReading())
-        viewModel.lowestPressureLiveData.postValue(viewModel.lowestPressureReading())
-        viewModel.altitudeLiveData.postValue(viewModel.currentAltitude)
+        viewModel.averageLightLiveData.postValue(viewModel.averageLightReading())
+        viewModel.highestLightLiveData.postValue(viewModel.highestLightReading())
+        viewModel.lowestLightLiveData.postValue(viewModel.lowestLightReading())
     }
 
 }

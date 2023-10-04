@@ -206,7 +206,7 @@ fun LocationIcon(context: Context, drawable: Int) {
 }
 
 fun navigateToSoundSensor(context: Context) {
-    context.startActivity(Intent(context, SoundSensor::class.java))
+    context.startActivity(Intent(context, SoundActivity::class.java))
     }
 
 fun navigateToLightSensor(context: Context) {
@@ -218,23 +218,23 @@ fun navigateToPressureSensor(context: Context) {
 }
 
 fun navigateToAmbientTemperatureSensor(context: Context) {
-    context.startActivity(Intent(context, AmbientTemperatureSensor::class.java))
+    context.startActivity(Intent(context, AmbientTemperatureActivity::class.java))
 }
 
 fun navigateToBatterySensor(context: Context) {
-    context.startActivity(Intent(context, BatterySensor::class.java))
+    context.startActivity(Intent(context, BatteryActivity::class.java))
 }
 
 fun navigateToSystemSensor(context: Context) {
-    context.startActivity(Intent(context, SystemSensor::class.java))
+    context.startActivity(Intent(context, SystemActivity::class.java))
 }
 
 fun navigateToHumiditySensor(context: Context) {
-    context.startActivity(Intent(context, HumiditySensor::class.java))
+    context.startActivity(Intent(context, HumidityActivity::class.java))
 }
 
 fun navigateToLocationSensor(context: Context) {
-    context.startActivity(Intent(context, LocationSensor::class.java))
+    context.startActivity(Intent(context, LocationActivity::class.java))
 }
 
 @Composable
@@ -275,9 +275,9 @@ fun SensorDiagnosisRow(text: String, drawable: Int) {
     ) {
         Text(
             text = text,
-            fontSize = 18.sp,
+            fontSize = 16.sp,
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(4.dp).weight(.85f),
             style = MaterialTheme.typography.h1,
         )
         Image(

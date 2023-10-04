@@ -40,7 +40,7 @@
         </activity>
 
         <activity
-            android:name="com.ui.sensors.SoundSensor"
+            android:name="com.ui.sensors.SoundActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
@@ -58,27 +58,27 @@
             android:screenOrientation="portrait" />
 
         <activity
-            android:name="com.ui.sensors.AmbientTemperatureSensor"
+            android:name="com.ui.sensors.AmbientTemperatureActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.ui.sensors.BatterySensor"
+        <activity android:name="com.ui.sensors.BatteryActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.ui.sensors.SystemSensor"
+        <activity android:name="com.ui.sensors.SystemActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.ui.sensors.HumiditySensor"
+        <activity android:name="com.ui.sensors.HumidityActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
-        <activity android:name="com.ui.sensors.LocationSensor"
+        <activity android:name="com.ui.sensors.LocationActivity"
             android:label=""
             android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />

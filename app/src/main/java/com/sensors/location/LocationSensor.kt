@@ -8,10 +8,10 @@ import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import com.androidsensorengine.utils.LogUtils.TAG
+import timber.log.Timber
 
 class LocationSensor(val context: Context) {
 
@@ -49,8 +49,17 @@ class LocationSensor(val context: Context) {
     fun createLocationListener(): LocationListener {
         return object : LocationListener {
             override fun onLocationChanged(p0: Location) {
-                Log.d(TAG, "onLocationChanged: ${((p0.speed * 3.2808).toInt())}")
-                speed = p0.speed.toInt()
+                speedMs = p0.speed.toInt() // This is the standard which returns meters per second.
+                speedMph = (p0.speed * 2.2369).toInt() // This is speed in mph
+                speedKm = (p0.speed * 3600 / 1000).toInt() // This is speed in km/h
+                speedFts = (p0.speed * 3.2808).toInt() // This is speed in Feet per second
+                speedKnot = (p0.speed * 1.9438).toInt() // This is speed in knots
+
+                Timber.tag(TAG).d("onLocationChanged: Mph: " + speedMph)
+                Timber.tag(TAG).d("onLocationChanged: M/S: " + speedMs)
+                Timber.tag(TAG).d("onLocationChanged: KH/H: " + speedKm)
+                Timber.tag(TAG).d("onLocationChanged: FT/S: " + speedFts)
+                Timber.tag(TAG).d("onLocationChanged: Knots: " + speedKnot)
             }
 
             override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
@@ -62,6 +71,10 @@ class LocationSensor(val context: Context) {
     }
 
     companion object {
-        var speed: Int? = null
+            var speedMs:  Int? = null
+            var speedMph: Int?  = null
+            var speedKm:  Int? = null
+            var speedFts: Int? = null
+            var speedKnot:  Int? = null
     }
 }
