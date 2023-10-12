@@ -7,8 +7,9 @@ ext {
 buildscript {
     val buildGradleVersion = "7.2.2"
     val composeVersion = "1.3.1"
-    val kotlinVersion = "1.6.10"
+    val kotlinVersion = "1.9.0"
     val googleServicesVersion = "4.3.13"
+
 
     repositories {
         google()
@@ -19,8 +20,14 @@ buildscript {
         classpath("com.android.tools.build:gradle:$buildGradleVersion")
         classpath("com.google.gms:google-services:$googleServicesVersion")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
-        classpath("com.google.dagger:hilt-android-gradle-plugin:2.44.2")
+        classpath("com.google.dagger:hilt-android-gradle-plugin:2.48.1")
     }
+
+
+}
+
+plugins {
+    id("com.google.dagger.hilt.android") version "2.48.1" apply false
 }
 
 allprojects {

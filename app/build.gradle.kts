@@ -1,8 +1,9 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("kotlin-kapt")
-    id("dagger.hilt.android.plugin")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+    id("com.apollographql.apollo3") version "4.0.0-beta.1"
 }
 
 android {
@@ -47,7 +48,7 @@ android {
 //        useIR = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.1.0"
+        kotlinCompilerExtensionVersion = "1.5.0"
         kotlinCompilerVersion = "1.7.0"
     }
     packagingOptions {
@@ -61,6 +62,12 @@ android {
     }
     kapt {
         correctErrorTypes = true
+    }
+}
+
+apollo {
+    service("service") {
+        packageName.set("com.androidsensorengine")
     }
 }
 
@@ -80,7 +87,7 @@ dependencies {
     val activityComposeVersion = "1.5.1"
     val animationComposeVersion = "1.2.1"
     val lifecycleViewModelComposeVersion = "2.5.1"
-    val hiltVersion = "2.44.2"
+    val hiltVersion = "2.48.1"
     val composeVersion = "1.3.1"
 
 
@@ -93,6 +100,8 @@ dependencies {
 
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:$lifecycleRuntimeKtxVersion")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:$lifecycleVersion")
+
+    implementation("com.apollographql.apollo3:apollo-runtime:4.0.0-beta.1")
 
 
     // Compose
@@ -134,7 +143,6 @@ dependencies {
 // Hilt
     implementation("com.google.dagger:hilt-android:$hiltVersion")
     kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
-// implementation("androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03")
     kapt("androidx.hilt:hilt-compiler:1.0.0")
 
 }
