@@ -4,15 +4,16 @@ plugins {
     kotlin("kapt")
     id("com.google.dagger.hilt.android")
     id("com.apollographql.apollo3") version "4.0.0-beta.1"
+    id("org.jetbrains.kotlin.android")
 }
 
 android {
     namespace = "com.christianfoulcard.android.androidsensorengine"
-    compileSdkVersion(33)
+    compileSdkVersion(34)
     defaultConfig {
         applicationId = "com.christianfoulcard.android.androidsensorengine"
         minSdkVersion(21) // Lollipop
-        targetSdkVersion(33)
+        targetSdkVersion(34)
         versionCode = 12
         versionName = "7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -73,6 +74,8 @@ apollo {
 
 dependencies {
 
+    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     val appCompatVersion = "1.5.1"
     val constraintLayoutVersion = "2.1.4"
     val materialVersion = "1.6.1"

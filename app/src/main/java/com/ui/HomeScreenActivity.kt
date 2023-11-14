@@ -1,6 +1,7 @@
 package com.androidsensorengine.ui
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.ScrollState
@@ -40,10 +41,14 @@ import com.androidsensorengine.ui.composables.SensorDiagnosisRow
 import com.androidsensorengine.ui.composables.SensorIcon
 import com.androidsensorengine.ui.composables.SystemIcon
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
-import com.androidsensorengine.ui.theme.HomeScreenShapes
-import com.androidsensorengine.ui.theme.pureWhite
+import com.androidsensorengine.utils.LogUtils.TAG
 import com.christianfoulcard.android.androidsensorengine.R
 import com.utils.SystemUi
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import com.androidsensorengine.ui.theme.HomeScreenShapes
+import com.androidsensorengine.ui.theme.pureWhite
 
 class HomeScreenActivity : ComponentActivity() {
 
@@ -85,13 +90,13 @@ class HomeScreenActivity : ComponentActivity() {
                         SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
                     }
                     "2" -> {
-                        LightIcon(this@HomeScreenActivity, R.drawable.brightness_icon)
+                        LightIcon(this@HomeScreenActivity, R.drawable.light_bulb_nature_icon)
                     }
                     "3" -> {
                         PressureIcon(this@HomeScreenActivity, R.drawable.ic_barometer_icon_2)
                     }
                     "4" -> {
-                        AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.ic_temp_icon_2)
+                        AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.temperature_icon)
                     }
                     "5" -> {
                         BatteryIcon(this@HomeScreenActivity, R.drawable.ic_battery_icon_2)

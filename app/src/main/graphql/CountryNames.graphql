@@ -1,0 +1,5 @@
+query CountryNames {
+    countries {
+        name
+    }
+}
