@@ -9,11 +9,11 @@ plugins {
 
 android {
     namespace = "com.christianfoulcard.android.androidsensorengine"
-    compileSdkVersion(34)
+    compileSdk = 35
     defaultConfig {
         applicationId = "com.christianfoulcard.android.androidsensorengine"
-        minSdkVersion(21) // Lollipop
-        targetSdkVersion(34)
+        minSdk = 24
+        targetSdk = 35
         versionCode = 12
         versionName = "7"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -49,8 +49,9 @@ android {
 //        useIR = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.0"
-        kotlinCompilerVersion = "1.7.0"
+        kotlinCompilerExtensionVersion = "1.5.15"
+
+       // kotlinCompilerVersion = "1.7.0"
     }
     packagingOptions {
         resources {
@@ -74,11 +75,10 @@ apollo {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:+")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
+
     val appCompatVersion = "1.5.1"
     val constraintLayoutVersion = "2.1.4"
-    val materialVersion = "1.6.1"
+    val materialVersion = "1.12.0"
     val ktxPreferenceVersion = "1.2.0"
     val lifecycleRuntimeKtxVersion = "2.5.1"
     val coreKtxVersion = "1.9.0"
@@ -91,12 +91,12 @@ dependencies {
     val animationComposeVersion = "1.2.1"
     val lifecycleViewModelComposeVersion = "2.5.1"
     val hiltVersion = "2.48.1"
-    val composeVersion = "1.3.1"
-
-
+    val composeVersion = "1.6.8"
 
     implementation(fileTree(mapOf("dir" to "libs", "include" to listOf("*.jar"))))
 
+    implementation("androidx.core:core-ktx:$coreKtxVersion")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0")
     implementation("androidx.appcompat:appcompat:$appCompatVersion")
     implementation("androidx.constraintlayout:constraintlayout:$constraintLayoutVersion")
     implementation("com.google.android.material:material:$materialVersion")

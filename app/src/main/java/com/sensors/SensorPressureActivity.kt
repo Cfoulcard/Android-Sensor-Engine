@@ -25,7 +25,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
-import androidx.viewbinding.BuildConfig
 import com.OneTimeAlertDialog
 import com.preferences.SettingsActivity
 import com.christianfoulcard.android.androidsensorengine.R
@@ -77,9 +76,9 @@ class SensorPressureActivity : AppCompatActivity(), SensorEventListener {
         // the relative pressure. If device does not support this sensor a toast message will
         // appear
         sensorManager = getSystemService(SENSOR_SERVICE) as SensorManager
-        if (BuildConfig.DEBUG && sensorManager == null) {
-            error("Assertion failed")
-        }
+//        if (BuildConfig.DEBUG && sensorManager == null) {
+//            error("Assertion failed")
+//        }
         if (sensorManager!!.getDefaultSensor(Sensor.TYPE_PRESSURE) == null) {
             Toast.makeText(this, R.string.unsupported_sensor, Toast.LENGTH_LONG).show()
         }

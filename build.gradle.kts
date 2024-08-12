@@ -5,9 +5,9 @@ ext {
 }
 
 buildscript {
-    val buildGradleVersion = "7.2.2"
+    val buildGradleVersion = "8.4.2"
     val composeVersion = "1.3.1"
-    val kotlinVersion = "1.9.0"
+    val kotlinVersion = "1.9.25"
     val googleServicesVersion = "4.3.13"
 
 
