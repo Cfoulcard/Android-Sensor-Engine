@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidsensorengine.utils.Constants.ATMOSPHERE_PREFS
 import com.application.AndroidSensorEngine.Companion.globalAppContext
+import com.preferences.AppSharedPrefs
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
 import com.utils.SensorError
@@ -36,6 +38,7 @@ class PressureSensorViewModel @Inject constructor(
 
     fun startListening() {
         if (doesPressureSensorExist) {
+            AppSharedPrefs().saveCondition(ATMOSPHERE_PREFS, true)
             pressureSensor.startListening()
             pressureSensor.setOnSensorValuesChangedListener { values ->
                 val pressure = values[0]

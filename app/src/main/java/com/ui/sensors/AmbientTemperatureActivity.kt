@@ -51,19 +51,19 @@ class AmbientTemperatureActivity: BaseSensorActivity() {
                         .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Temperature Sensor")
-                    InfoIcon(supportFragmentManager, this@AmbientTemperatureActivity, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@AmbientTemperatureActivity, R.string.temp_desc_1)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralTemperatureGraphicSensorInfo(
                             largeInfoString = "0",
                             superScript = "Temperature",
-                            description = "hPa",
+                            description = "Celsius",
                             viewModel
                         )
                         FirstTemperatureInfoLabelGroup("Average Temperature", "0", viewModel)
                         SecondTemperatureInfoLabelGroup("Peak Temperature", "0", viewModel)
                         ThirdTemperatureInfoLabelGroup("Lowest Temperature", "0", viewModel)
                     }
-                    PowerButton()
+                   // PowerButton()
                 }
             }
         }

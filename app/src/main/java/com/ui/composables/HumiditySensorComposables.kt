@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -63,6 +64,7 @@ fun CentralHumidityGraphicSensorInfo(largeInfoString: String?, superScript: Stri
             modifier = Modifier
                 .size(260.dp)
                 .blur(16.dp)
+                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
                 .alpha(.90f),
             alignment = Alignment.Center,
         )

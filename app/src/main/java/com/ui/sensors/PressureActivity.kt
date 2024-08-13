@@ -65,7 +65,7 @@ class PressureSensor: BaseSensorActivity() {
                         ThirdPressureInfoLabelGroup("Lowest Pressure", "0", viewModel)
                         FourthPressureInfoLabelGroup("Altitude", "0", viewModel)
                     }
-                    PowerButton()
+                  //  PowerButton()
                 }
             }
         }

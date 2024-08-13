@@ -6,6 +6,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidsensorengine.utils.Constants.AMBIENT_PREFS
+import com.preferences.AppSharedPrefs
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
 import com.utils.SensorError
@@ -34,6 +36,7 @@ class AmbientTemperatureViewModel @Inject constructor(
 
     fun startListening() {
         if (doesTemperatureSensorExist) {
+            AppSharedPrefs().saveCondition(AMBIENT_PREFS, true)
             temperatureSensor.startListening()
             temperatureSensor.setOnSensorValuesChangedListener { values ->
                 val temperature = values[0]

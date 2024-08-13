@@ -4,7 +4,9 @@ import android.app.Activity
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Environment
+import com.androidsensorengine.utils.Constants.SOUND_PREFS
 import com.androidsensorengine.utils.LogUtils.TAG
+import com.preferences.AppSharedPrefs
 import timber.log.Timber
 import java.io.File
 import java.io.IOException
@@ -41,6 +43,7 @@ class AudioRecorder {
             recorder?.apply {
                 prepare()
                 start()
+                AppSharedPrefs().saveCondition(SOUND_PREFS, true)
                 Timber.tag(TAG).d("Audio Recorder started")
             }
         } catch (e: IllegalStateException) {

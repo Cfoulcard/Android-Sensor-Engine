@@ -63,7 +63,7 @@ class LightSensor: BaseSensorActivity() {
                         SecondLightInfoLabelGroup("Peak Lux", "0", viewModel)
                         ThirdLightInfoLabelGroup("Lowest Lux", "0", viewModel)
                     }
-                    PowerButton()
+                   // PowerButton()
                 }
             }
         }

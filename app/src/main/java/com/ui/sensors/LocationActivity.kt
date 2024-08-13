@@ -50,7 +50,7 @@ class LocationActivity: BaseSensorActivity() {
                         .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Location Sensor")
-                    InfoIcon(supportFragmentManager, this@LocationActivity, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@LocationActivity, R.string.speed_desc_1)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralLocationGraphicSensorInfo(
                             largeInfoString = "0",
@@ -62,7 +62,7 @@ class LocationActivity: BaseSensorActivity() {
 //                        SecondLocationInfoLabelGroup("Peak Lux", "0", viewModel)
 //                        ThirdLocationInfoLabelGroup("Lowest Lux", "0", viewModel)
                     }
-                    PowerButton()
+                  //  PowerButton()
                 }
             }
         }

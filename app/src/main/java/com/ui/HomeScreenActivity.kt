@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -20,9 +21,12 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -38,6 +42,7 @@ import com.androidsensorengine.ui.composables.LocationIcon
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.PressureIcon
 import com.androidsensorengine.ui.composables.SensorDiagnosisRow
+import com.androidsensorengine.ui.composables.SensorDiagnosisStatusRow
 import com.androidsensorengine.ui.composables.SensorIcon
 import com.androidsensorengine.ui.composables.SystemIcon
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
@@ -49,10 +54,22 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
+import com.androidsensorengine.utils.Constants.AMBIENT_PREFS
+import com.androidsensorengine.utils.Constants.ATMOSPHERE_PREFS
+import com.androidsensorengine.utils.Constants.BATTERY_PREFS
+import com.androidsensorengine.utils.Constants.GPS_PREFS
+import com.androidsensorengine.utils.Constants.LIGHT_PREFS
+import com.androidsensorengine.utils.Constants.MOIST_HUMID_PREFS
+import com.androidsensorengine.utils.Constants.SOUND_PREFS
+import com.androidsensorengine.utils.Constants.SYSTEM_PREFS
+import com.preferences.AppSharedPrefs
+import com.ui.sensors.viewmodels.HomeScreenViewModel
 
 class HomeScreenActivity : ComponentActivity() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    private val viewModel: HomeScreenViewModel by viewModels()
+
+            override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SystemUi().hideSystemUIFull(this)
         setContent {
@@ -73,6 +90,10 @@ class HomeScreenActivity : ComponentActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.getNewPreferencesValues()
+    }
 
     @Composable
     fun HomeScreenSensorGrid() {
@@ -90,25 +111,25 @@ class HomeScreenActivity : ComponentActivity() {
                         SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
                     }
                     "2" -> {
-                        LightIcon(this@HomeScreenActivity, R.drawable.light_bulb_nature_icon)
+                        LightIcon(this@HomeScreenActivity, R.drawable.light_lightbulb_icon)
                     }
                     "3" -> {
-                        PressureIcon(this@HomeScreenActivity, R.drawable.ic_barometer_icon_2)
+                        PressureIcon(this@HomeScreenActivity, R.drawable.pressure_gauge_meter_icon)
                     }
                     "4" -> {
                         AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.temperature_icon)
                     }
                     "5" -> {
-                        BatteryIcon(this@HomeScreenActivity, R.drawable.ic_battery_icon_2)
+                        BatteryIcon(this@HomeScreenActivity, R.drawable.battery_charging_sign_icon)
                     }
                     "6" -> {
-                        SystemIcon(this@HomeScreenActivity, R.drawable.ic_ram_icon_2)
+                        SystemIcon(this@HomeScreenActivity, R.drawable.semiconductor_icon)
                     }
                     "7" -> {
-                        HumidityIcon(this@HomeScreenActivity, R.drawable.ic_humidity_icon_2)
+                        HumidityIcon(this@HomeScreenActivity, R.drawable.water_drop_teardrop_icon)
                     }
                     "8" -> {
-                        LocationIcon(this@HomeScreenActivity, R.drawable.ic_speed_icon_2)
+                        LocationIcon(this@HomeScreenActivity, R.drawable.gps_icon)
                     }
                     else -> {
                     Card(
@@ -136,6 +157,15 @@ class HomeScreenActivity : ComponentActivity() {
 
     @Composable
     fun SensorDiagnosisView() {
+        val soundCondition by viewModel.soundCondition.observeAsState(false)
+        val atmosphereCondition by viewModel.atmosphereCondition.observeAsState(false)
+        val moistHumidCondition by viewModel.moistHumidCondition.observeAsState(false)
+        val gpsCondition by viewModel.gpsCondition.observeAsState(false)
+        val lightCondition by viewModel.lightCondition.observeAsState(false)
+        val systemCondition by viewModel.systemCondition.observeAsState(false)
+        val batteryCondition by viewModel.batteryCondition.observeAsState(false)
+        val ambientCondition by viewModel.ambientCondition.observeAsState(false)
+
         Surface(
             modifier = Modifier
                 .padding(horizontal = 36.dp)
@@ -160,16 +190,15 @@ class HomeScreenActivity : ComponentActivity() {
                         .fillMaxWidth(),
                     style = MaterialTheme.typography.h1
                 )
-                SensorDiagnosisRow("Sound and Audio", R.drawable.green_circle)
-                SensorDiagnosisRow("Atmospheric Pressure", R.drawable.red_circle)
-                SensorDiagnosisRow("Moisture and Humidity", R.drawable.green_circle)
-                SensorDiagnosisRow("Accelerometer", R.drawable.green_circle)
-                SensorDiagnosisRow("Light Sensor", R.drawable.red_circle)
-                SensorDiagnosisRow("Ram Sensor", R.drawable.green_circle)
-                SensorDiagnosisRow("Battery Temperature", R.drawable.red_circle)
-                SensorDiagnosisRow("Ambient Temperature", R.drawable.green_circle)
 
-
+                SensorDiagnosisStatusRow("Sound and Audio", soundCondition)
+                SensorDiagnosisStatusRow("Atmospheric Pressure", atmosphereCondition)
+                SensorDiagnosisStatusRow("Moisture and Humidity", moistHumidCondition)
+                SensorDiagnosisStatusRow("Accelerometer", gpsCondition)
+                SensorDiagnosisStatusRow("Light Sensor", lightCondition)
+                SensorDiagnosisStatusRow("Ram Sensor", systemCondition)
+                SensorDiagnosisStatusRow("Battery Temperature", batteryCondition)
+                SensorDiagnosisStatusRow("Ambient Temperature", ambientCondition)
             }
 
         }

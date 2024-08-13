@@ -19,7 +19,9 @@ import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.SensorCometBackground
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
+import com.androidsensorengine.utils.Constants.BATTERY_PREFS
 import com.christianfoulcard.android.androidsensorengine.R
+import com.preferences.AppSharedPrefs
 import com.sensors.battery.BatteryInfoListener
 import com.sensors.battery.BatteryInfoReceiver
 import com.ui.composables.CentralBatteryGraphicSensorInfo
@@ -57,7 +59,7 @@ class BatteryActivity: BaseSensorActivity(), BatteryInfoListener {
                         .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Battery Sensor")
-                    InfoIcon(supportFragmentManager, this@BatteryActivity, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@BatteryActivity, R.string.battery_desc)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralBatteryGraphicSensorInfo(
                             largeInfoString = "0",
@@ -72,7 +74,7 @@ class BatteryActivity: BaseSensorActivity(), BatteryInfoListener {
                         SixthBatteryInfoLabelGroup("Plug Status", "Unknown", viewModel)
                         FifthBatteryInfoLabelGroup("Technology", "Unknown", viewModel)
                     }
-                    PowerButton()
+                   // PowerButton()
                 }
             }
         }
@@ -81,6 +83,7 @@ class BatteryActivity: BaseSensorActivity(), BatteryInfoListener {
     override fun onResume() {
         super.onResume()
         registerReceiver(batteryInfoReceiver, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        AppSharedPrefs().saveCondition(BATTERY_PREFS, true)
     }
 
     override fun onPause() {

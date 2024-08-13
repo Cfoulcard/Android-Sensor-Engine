@@ -52,7 +52,7 @@ class SystemActivity : BaseSensorActivity() {
                         .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("System Sensor")
-                    InfoIcon(supportFragmentManager, this@SystemActivity, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@SystemActivity, R.string.ram_desc_1)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralSystemGraphicSensorInfo(
                             largeInfoString = "0",
@@ -62,9 +62,8 @@ class SystemActivity : BaseSensorActivity() {
                         )
                         FirstSystemInfoLabelGroup("Total Ram", "0", viewModel)
                         SecondSystemInfoLabelGroup("Threshold", "0", viewModel)
-                     //   ThirdSystemInfoLabelGroup("Lowest Lux", "0", viewModel)
                     }
-                    PowerButton()
+                   // PowerButton()
                 }
             }
         }

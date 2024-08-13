@@ -2,6 +2,8 @@ package com.sensors.system
 
 import android.app.ActivityManager
 import android.content.Context
+import com.androidsensorengine.utils.Constants.SYSTEM_PREFS
+import com.preferences.AppSharedPrefs
 import timber.log.Timber
 import java.text.DecimalFormat
 
@@ -14,6 +16,7 @@ class SystemInfo(private val context: Context) {
     fun getMemoryInfo(): ActivityManager.MemoryInfo {
         val memoryInfo = ActivityManager.MemoryInfo()
         activityManager.getMemoryInfo(memoryInfo)
+        AppSharedPrefs().saveCondition(SYSTEM_PREFS, true)
         return memoryInfo
     }
 

@@ -60,13 +60,13 @@ class SoundActivity: BaseSensorActivity() {
                             largeInfoString = "0",
                             superScript = "db",
                             description = "Loudness",
-                            viewModel
+                            viewModel,
                         )
                         FirstSoundInfoLabelGroup("Average Decibel Reading", "0", viewModel)
                         SecondSoundInfoLabelGroup("Peak Loudness", "0", viewModel)
                         ThirdSoundInfoLabelGroup("Lowest Decibel", "0", viewModel)
                     }
-                    PowerButton()
+                    //PowerButton()
                 }
             }
         }

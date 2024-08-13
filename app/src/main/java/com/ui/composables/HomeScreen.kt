@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -60,7 +61,7 @@ fun LightIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
             alignment = Alignment.Center,
 
             )
@@ -83,7 +84,7 @@ fun PressureIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
             alignment = Alignment.Center,
 
             )
@@ -129,7 +130,7 @@ fun BatteryIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(16.dp),
             alignment = Alignment.Center,
 
             )
@@ -152,7 +153,7 @@ fun SystemIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(8.dp),
             alignment = Alignment.Center,
 
             )
@@ -175,7 +176,7 @@ fun HumidityIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(16.dp),
             alignment = Alignment.Center,
 
             )
@@ -198,7 +199,7 @@ fun LocationIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(16.dp).fillMaxSize(),
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
             alignment = Alignment.Center,
 
             )
@@ -289,6 +290,31 @@ fun SensorDiagnosisRow(text: String, drawable: Int) {
         )
     }
 }
+
+@Composable
+fun SensorDiagnosisStatusRow(text: String, condition: Boolean) {
+    val drawable = if (condition) R.drawable.green_circle else R.drawable.red_circle
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth(0.6f),
+    ) {
+        Text(
+            text = text,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.padding(4.dp).weight(.85f),
+            style = MaterialTheme.typography.h1,
+        )
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
+            alignment = Alignment.Center,
+        )
+    }
+}
+
 
 
     @Composable

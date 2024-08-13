@@ -5,7 +5,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidsensorengine.utils.Constants.LIGHT_PREFS
 import com.application.AndroidSensorEngine.Companion.globalAppContext
+import com.preferences.AppSharedPrefs
 import com.sensors.sensorMechanics.ObserveSensor
 import com.sensors.sensorMechanics.SensorModule
 import com.utils.SensorError
@@ -32,6 +34,7 @@ class LightSensorViewModel @Inject constructor(
 
     fun startListening() {
         if (doesLightSensorExist) {
+            AppSharedPrefs().saveCondition(LIGHT_PREFS, true)
             lightSensor.startListening()
             lightSensor.setOnSensorValuesChangedListener { values ->
                 val lux = values[0]

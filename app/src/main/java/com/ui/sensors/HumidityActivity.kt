@@ -51,7 +51,7 @@ class HumidityActivity: BaseSensorActivity() {
                         .fillMaxSize().verticalScroll(enabled = true, state = ScrollState(initial = -1))
                 ) {
                     DisplaySensorTitle("Humidity Sensor")
-                    InfoIcon(supportFragmentManager, this@HumidityActivity, R.string.light_desc)
+                    InfoIcon(supportFragmentManager, this@HumidityActivity, R.string.humidity_desc_1)
                     Column(modifier = Modifier.padding(top = 90.dp)) {
                         CentralHumidityGraphicSensorInfo(
                             largeInfoString = "0",
@@ -63,7 +63,7 @@ class HumidityActivity: BaseSensorActivity() {
                         SecondHumidityInfoLabelGroup("Peak Humidity", "0", viewModel)
                         ThirdHumidityInfoLabelGroup("Lowest Humidity", "0", viewModel)
                     }
-                    PowerButton()
+                   // PowerButton()
                 }
             }
         }

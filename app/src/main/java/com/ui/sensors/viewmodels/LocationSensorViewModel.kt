@@ -1,9 +1,12 @@
 package com.ui.sensors.viewmodels
 
 import android.location.LocationListener
+import android.telephony.CarrierConfigManager.Gps
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.androidsensorengine.utils.Constants.GPS_PREFS
 import com.application.AndroidSensorEngine.Companion.globalAppContext
+import com.preferences.AppSharedPrefs
 import com.sensors.location.LocationSensor
 import com.sensors.location.LocationSensor.Companion.speedMph
 
@@ -21,6 +24,7 @@ class LocationSensorViewModel: ViewModel() {
 
     fun requestLocationUpdates() {
         locationSensor.requestLocationUpdates(locationListener!!)
+        AppSharedPrefs().saveCondition(GPS_PREFS, true)
     }
 
     fun getCurrentSpeed() : Int {
