@@ -8,7 +8,7 @@ buildscript {
     val buildGradleVersion = "8.4.2"
     val composeVersion = "1.3.1"
     val kotlinVersion = "1.9.25"
-    val googleServicesVersion = "4.3.13"
+    val googleServicesVersion = "4.4.2"
 
 
     repositories {
@@ -28,6 +28,7 @@ buildscript {
 
 plugins {
     id("com.google.dagger.hilt.android") version "2.48.1" apply false
+    id("com.google.firebase.crashlytics") version "3.0.2" apply false
 }
 
 allprojects {

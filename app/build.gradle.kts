@@ -5,6 +5,7 @@ plugins {
     id("com.google.dagger.hilt.android")
     id("com.apollographql.apollo3") version "4.0.0-beta.1"
     id("org.jetbrains.kotlin.android")
+    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -106,6 +107,13 @@ dependencies {
 
     implementation("com.apollographql.apollo3:apollo-runtime:4.0.0-beta.1")
 
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:33.1.2"))
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics")
+    implementation("com.google.firebase:firebase-analytics")
 
     // Compose
     implementation("androidx.activity:activity-compose:$activityComposeVersion")

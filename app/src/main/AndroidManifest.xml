@@ -86,60 +86,6 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-<!--        Delete Below-->
-
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorSoundActivity"
-            android:exported="true"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" >
-        </activity> <!-- Temperature Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorTemperatureActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Light Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorLightActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Ram Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorRamActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Battery Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorBatteryActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Speed Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorAccelerometerActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Humidity Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorHumidityActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Pressure Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorPressureActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- Steps Sensor Activity -->
-        <activity
-            android:name="com.androidsensorengine.sensors.SensorWalkActivity"
-            android:label=""
-            android:parentActivityName="com.HomeScreenActivity"
-            android:screenOrientation="portrait" /> <!-- The following is for the menu items -->
-        <activity
-            android:name="com.preferences.SettingsActivity"
-            android:label="@string/preferences"
-            android:screenOrientation="portrait" />
-
     </application>
 
 </manifest>

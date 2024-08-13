@@ -1,7 +1,6 @@
 package com.androidsensorengine.ui
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -21,12 +20,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
@@ -41,35 +38,21 @@ import com.androidsensorengine.ui.composables.LightIcon
 import com.androidsensorengine.ui.composables.LocationIcon
 import com.androidsensorengine.ui.composables.MainGradientBackground
 import com.androidsensorengine.ui.composables.PressureIcon
-import com.androidsensorengine.ui.composables.SensorDiagnosisRow
 import com.androidsensorengine.ui.composables.SensorDiagnosisStatusRow
 import com.androidsensorengine.ui.composables.SensorIcon
 import com.androidsensorengine.ui.composables.SystemIcon
 import com.androidsensorengine.ui.theme.AndroidSensorEngineTheme
-import com.androidsensorengine.utils.LogUtils.TAG
-import com.christianfoulcard.android.androidsensorengine.R
-import com.utils.SystemUi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
-import com.androidsensorengine.utils.Constants.AMBIENT_PREFS
-import com.androidsensorengine.utils.Constants.ATMOSPHERE_PREFS
-import com.androidsensorengine.utils.Constants.BATTERY_PREFS
-import com.androidsensorengine.utils.Constants.GPS_PREFS
-import com.androidsensorengine.utils.Constants.LIGHT_PREFS
-import com.androidsensorengine.utils.Constants.MOIST_HUMID_PREFS
-import com.androidsensorengine.utils.Constants.SOUND_PREFS
-import com.androidsensorengine.utils.Constants.SYSTEM_PREFS
-import com.preferences.AppSharedPrefs
+import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.sensors.viewmodels.HomeScreenViewModel
+import com.utils.SystemUi
 
 class HomeScreenActivity : ComponentActivity() {
 
     private val viewModel: HomeScreenViewModel by viewModels()
 
-            override fun onCreate(savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         SystemUi().hideSystemUIFull(this)
         setContent {
@@ -79,12 +62,10 @@ class HomeScreenActivity : ComponentActivity() {
                 Column(
                     verticalArrangement = Arrangement.Top,
                     horizontalAlignment = Alignment.CenterHorizontally,
-                    modifier = Modifier
-                        .fillMaxSize()
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     HomeScreenSensorGrid()
                     SensorDiagnosisView()
-
                 }
             }
         }
@@ -98,7 +79,7 @@ class HomeScreenActivity : ComponentActivity() {
     @Composable
     fun HomeScreenSensorGrid() {
 
-        val data by remember { mutableStateOf(listOf("1", "2", "3", "4", "5", "6", "7", "8",)) }
+        val data by remember { mutableStateOf(listOf("1", "2", "3", "4", "5", "6", "7", "8")) }
 
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 100.dp),
@@ -110,47 +91,54 @@ class HomeScreenActivity : ComponentActivity() {
                     "1" -> {
                         SensorIcon(this@HomeScreenActivity, R.drawable.ic_sound_wave)
                     }
+
                     "2" -> {
                         LightIcon(this@HomeScreenActivity, R.drawable.light_lightbulb_icon)
                     }
+
                     "3" -> {
                         PressureIcon(this@HomeScreenActivity, R.drawable.pressure_gauge_meter_icon)
                     }
+
                     "4" -> {
                         AmbientTemperatureIcon(this@HomeScreenActivity, R.drawable.temperature_icon)
                     }
+
                     "5" -> {
                         BatteryIcon(this@HomeScreenActivity, R.drawable.battery_charging_sign_icon)
                     }
+
                     "6" -> {
                         SystemIcon(this@HomeScreenActivity, R.drawable.semiconductor_icon)
                     }
+
                     "7" -> {
                         HumidityIcon(this@HomeScreenActivity, R.drawable.water_drop_teardrop_icon)
                     }
+
                     "8" -> {
                         LocationIcon(this@HomeScreenActivity, R.drawable.gps_icon)
                     }
+
                     else -> {
-                    Card(
-                        modifier = Modifier
-                            .padding(16.dp)
-                            .size(100.dp),
-                        backgroundColor = pureWhite,
-                        shape = HomeScreenShapes.small,
-                        elevation = 12.dp,
-                    ) {
-                        Text(
-                            text = item,
-                            fontSize = 24.sp,
-                            textAlign = TextAlign.Center,
-                            modifier = Modifier.padding(32.dp),
-                            style = MaterialTheme.typography.h1
-                        )
+                        Card(
+                            modifier = Modifier
+                                .padding(16.dp)
+                                .size(100.dp),
+                            backgroundColor = pureWhite,
+                            shape = HomeScreenShapes.small,
+                            elevation = 12.dp,
+                        ) {
+                            Text(
+                                text = item,
+                                fontSize = 24.sp,
+                                textAlign = TextAlign.Center,
+                                modifier = Modifier.padding(32.dp),
+                                style = MaterialTheme.typography.h1
+                            )
+                        }
                     }
                 }
-                }
-
             }
         }
     }
@@ -179,8 +167,8 @@ class HomeScreenActivity : ComponentActivity() {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier
                     .padding(0.dp)
-                    .verticalScroll(enabled = true, state = ScrollState(initial = -1)))
-            {
+                    .verticalScroll(enabled = true, state = ScrollState(initial = -1))
+            ) {
                 Text(
                     text = "Sensor Diagnosis",
                     fontSize = 36.sp,
@@ -200,9 +188,7 @@ class HomeScreenActivity : ComponentActivity() {
                 SensorDiagnosisStatusRow("Battery Temperature", batteryCondition)
                 SensorDiagnosisStatusRow("Ambient Temperature", ambientCondition)
             }
-
         }
-
     }
 
     @Preview(showBackground = true)
@@ -214,8 +200,7 @@ class HomeScreenActivity : ComponentActivity() {
             Column(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier
-                    .padding(0.dp)
+                modifier = Modifier.padding(0.dp)
             ) {
                 HomeScreenSensorGrid()
                 SensorDiagnosisView()
