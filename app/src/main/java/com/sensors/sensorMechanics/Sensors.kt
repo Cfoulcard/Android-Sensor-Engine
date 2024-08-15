@@ -15,3 +15,15 @@ class PressureSensor(context: Context) : HardwareSensor(
     sensorFeature = PackageManager.FEATURE_SENSOR_BAROMETER,
     sensorType = Sensor.TYPE_PRESSURE
 )
+
+class AmbientTemperatureSensor(context: Context) : HardwareSensor(
+    context = context,
+    sensorFeature = PackageManager.FEATURE_SENSOR_AMBIENT_TEMPERATURE,
+    sensorType = Sensor.TYPE_AMBIENT_TEMPERATURE
+)
+
+class HumiditySensor(context: Context) : HardwareSensor(
+    context = context,
+    sensorFeature = PackageManager.FEATURE_SENSOR_RELATIVE_HUMIDITY,
+    sensorType = Sensor.TYPE_RELATIVE_HUMIDITY
+)

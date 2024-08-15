@@ -5,7 +5,6 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
-import android.util.Log
 import com.androidsensorengine.utils.LogUtils.TAG
 import timber.log.Timber
 
@@ -42,12 +41,13 @@ abstract class HardwareSensor(
 
     override fun onSensorChanged(event: SensorEvent?) {
         if (!doesSensorExist) {
+            Timber.tag("${event?.sensor?.type} does not exist!")
             return
         }
         if (event?.sensor?.type == sensorType) {
             onSensorValuesChanged?.invoke(event.values.toList())
         }
-        Timber.tag(TAG).d("Sensor changed")
+        //Timber.tag(TAG).d("Sensor changed") Enabled to observe sensor collection status
 
     }
 

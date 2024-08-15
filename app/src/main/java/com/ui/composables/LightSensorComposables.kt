@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -63,6 +64,7 @@ fun CentralLightGraphicSensorInfo(largeInfoString: String?, superScript: String?
             modifier = Modifier
                 .size(260.dp)
                 .blur(16.dp)
+                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
                 .alpha(.90f),
             alignment = Alignment.Center,
         )
@@ -224,6 +226,8 @@ fun SecondLightInfoLabelGroup(description: String?, value: String?, viewModel: L
 
 @Composable
 fun SecondLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
+    val updatedString by viewModel.highestLightLiveData.observeAsState()
+
     Box(
         contentAlignment = Alignment.Center
     ) {
@@ -242,18 +246,18 @@ fun SecondLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMod
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//
-//                            )
-//                    }
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+
+                            )
+                    }
                 }
             }
         }
@@ -297,8 +301,7 @@ fun ThirdLightInfoLabelGroup(description: String?, value: String?, viewModel: Li
 
 @Composable
 fun ThirdLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewModel) {
-
-   // val updatedString by viewModel.lowestDecibelLiveData.observeAsState()
+    val updatedString by viewModel.lowestLightLiveData.observeAsState()
 
     Box(
         contentAlignment = Alignment.Center
@@ -317,17 +320,17 @@ fun ThirdLightInfoLabelGroupValue(value: String?, viewModel: LightSensorViewMode
                 horizontalArrangement = Arrangement.Center,
             ) {
                 if (value != null) {
-//                    updatedString?.let {
-//                        Text(
-//                            text = it,
-//                            color = Color(0xff292929),
-//                            textAlign = TextAlign.Center,
-//                            style = TextStyle(
-//                                fontSize = 16.sp,
-//                                fontWeight = FontWeight.Bold
-//                            ),
-//                        )
-//                    }
+                    updatedString?.let {
+                        Text(
+                            text = it,
+                            color = Color(0xff292929),
+                            textAlign = TextAlign.Center,
+                            style = TextStyle(
+                                fontSize = 16.sp,
+                                fontWeight = FontWeight.Bold
+                            ),
+                        )
+                    }
                 }
             }
         }

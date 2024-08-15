@@ -14,6 +14,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.SpanStyle
@@ -65,6 +66,7 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
             modifier = Modifier
                 .size(260.dp)
                 .blur(16.dp)
+                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
                 .alpha(.90f),
             alignment = Alignment.Center,
         )
@@ -72,12 +74,16 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
             painter = painterResource(R.drawable.ic_top_circle),
             contentDescription = "topCircle",
             contentScale = ContentScale.Fit,
-            modifier = Modifier.size(250.dp),
+            modifier =
+            Modifier
+                .size(250.dp)
+                .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000)),
             alignment = Alignment.Center,
         )
         Column(
             modifier = Modifier.absoluteOffset(4.dp, (-4).dp)
         ) {
+
             Text(
 
                 text = buildAnnotatedString {
@@ -100,6 +106,7 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
                 },
                 textAlign = TextAlign.Center,
                 style = MaterialTheme.typography.h3,
+                modifier = Modifier.graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
 
                 )
             if (description != null) {
@@ -108,7 +115,9 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
                     fontSize = 14.sp,
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.h1,
-                    modifier = Modifier.absoluteOffset(y = (-26).dp)
+                    modifier = Modifier
+                        .absoluteOffset(y = (-26).dp)
+                        .graphicsLayer(translationY = addFloatingUpAndDownAnimation(3000))
                 )
             }
         }
@@ -119,7 +128,8 @@ fun CentralSoundGraphicSensorInfo(largeInfoString: String?, superScript: String?
 @Composable
 fun FirstSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth().height(75.dp),
+        .fillMaxWidth()
+        .height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 12.dp,
@@ -194,7 +204,8 @@ fun FirstSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMode
 @Composable
 fun SecondSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth().height(75.dp),
+        .fillMaxWidth()
+        .height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,
@@ -269,7 +280,8 @@ fun SecondSoundInfoLabelGroupValue(value: String?, viewModel: SoundSensorViewMod
 @Composable
 fun ThirdSoundInfoLabelGroup(description: String?, value: String?, viewModel: SoundSensorViewModel) {
     Box(modifier = Modifier
-        .fillMaxWidth().height(75.dp),
+        .fillMaxWidth()
+        .height(75.dp),
         contentAlignment = Alignment.Center) {
         Card(
             elevation = 24.dp,

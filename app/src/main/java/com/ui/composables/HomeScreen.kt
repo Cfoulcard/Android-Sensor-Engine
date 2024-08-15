@@ -7,6 +7,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -17,10 +18,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.ui.sensors.SoundSensor
 import com.androidsensorengine.ui.theme.*
 import com.christianfoulcard.android.androidsensorengine.R
-import com.ui.sensors.LightSensor
+import com.ui.sensors.*
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -61,6 +61,52 @@ fun LightIcon(context: Context, drawable: Int) {
             painter = painterResource(drawable),
             contentDescription = "sensorIcon",
             contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun PressureIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToPressureSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun AmbientTemperatureIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToAmbientTemperatureSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
             modifier = Modifier.size(16.dp).fillMaxSize(),
             alignment = Alignment.Center,
 
@@ -68,12 +114,128 @@ fun LightIcon(context: Context, drawable: Int) {
     }
 }
 
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun BatteryIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToBatterySensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(16.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun SystemIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToSystemSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(8.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun HumidityIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToHumiditySensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(16.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun LocationIcon(context: Context, drawable: Int) {
+    Card(
+        modifier = Modifier
+            .padding(16.dp)
+            .size(100.dp),
+        backgroundColor = pureWhite,
+        shape = HomeScreenShapes.small,
+        elevation = 12.dp,
+        onClick = { navigateToLocationSensor(context) }
+    ) {
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "sensorIcon",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).fillMaxSize().padding(12.dp),
+            alignment = Alignment.Center,
+
+            )
+    }
+}
+
 fun navigateToSoundSensor(context: Context) {
-    context.startActivity(Intent(context, SoundSensor::class.java))
+    context.startActivity(Intent(context, SoundActivity::class.java))
     }
 
 fun navigateToLightSensor(context: Context) {
     context.startActivity(Intent(context, LightSensor::class.java))
+}
+
+fun navigateToPressureSensor(context: Context) {
+    context.startActivity(Intent(context, PressureSensor::class.java))
+}
+
+fun navigateToAmbientTemperatureSensor(context: Context) {
+    context.startActivity(Intent(context, AmbientTemperatureActivity::class.java))
+}
+
+fun navigateToBatterySensor(context: Context) {
+    context.startActivity(Intent(context, BatteryActivity::class.java))
+}
+
+fun navigateToSystemSensor(context: Context) {
+    context.startActivity(Intent(context, SystemActivity::class.java))
+}
+
+fun navigateToHumiditySensor(context: Context) {
+    context.startActivity(Intent(context, HumidityActivity::class.java))
+}
+
+fun navigateToLocationSensor(context: Context) {
+    context.startActivity(Intent(context, LocationActivity::class.java))
 }
 
 @Composable
@@ -114,9 +276,9 @@ fun SensorDiagnosisRow(text: String, drawable: Int) {
     ) {
         Text(
             text = text,
-            fontSize = 18.sp,
+            fontSize = 16.sp,
             textAlign = TextAlign.Start,
-            modifier = Modifier.padding(4.dp),
+            modifier = Modifier.padding(4.dp).weight(.85f),
             style = MaterialTheme.typography.h1,
         )
         Image(
@@ -128,6 +290,31 @@ fun SensorDiagnosisRow(text: String, drawable: Int) {
         )
     }
 }
+
+@Composable
+fun SensorDiagnosisStatusRow(text: String, condition: Boolean) {
+    val drawable = if (condition) R.drawable.green_circle else R.drawable.red_circle
+    Row(
+        horizontalArrangement = Arrangement.SpaceBetween,
+        modifier = Modifier.fillMaxWidth(0.6f),
+    ) {
+        Text(
+            text = text,
+            fontSize = 16.sp,
+            textAlign = TextAlign.Start,
+            modifier = Modifier.padding(4.dp).weight(.85f),
+            style = MaterialTheme.typography.h1,
+        )
+        Image(
+            painter = painterResource(drawable),
+            contentDescription = "avatar",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier.size(16.dp).align(Alignment.CenterVertically),
+            alignment = Alignment.Center,
+        )
+    }
+}
+
 
 
     @Composable
