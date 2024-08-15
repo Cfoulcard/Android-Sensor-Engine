@@ -22,7 +22,6 @@ import com.ui.composables.CentralTemperatureGraphicSensorInfo
 import com.ui.composables.DisplaySensorTitle
 import com.ui.composables.FirstTemperatureInfoLabelGroup
 import com.ui.composables.InfoIcon
-import com.ui.composables.PowerButton
 import com.ui.composables.SecondTemperatureInfoLabelGroup
 import com.ui.composables.ThirdTemperatureInfoLabelGroup
 import com.ui.sensors.viewmodels.AmbientTemperatureViewModel

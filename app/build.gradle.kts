@@ -6,6 +6,8 @@ plugins {
     id("com.apollographql.apollo3") version "4.0.0-beta.1"
     id("org.jetbrains.kotlin.android")
     id("com.google.firebase.crashlytics")
+    id("com.google.gms.google-services")
+
 }
 
 android {
@@ -16,7 +18,7 @@ android {
         minSdk = 24
         targetSdk = 35
         versionCode = 12
-        versionName = "7"
+        versionName = "8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
             useSupportLibrary = true

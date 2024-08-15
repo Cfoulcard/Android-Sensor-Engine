@@ -1,4 +1,4 @@
-package com.androidsensorengine.ui
+package com.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -54,6 +54,7 @@ class HomeScreenActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
         SystemUi().hideSystemUIFull(this)
         setContent {
             AndroidSensorEngineTheme {

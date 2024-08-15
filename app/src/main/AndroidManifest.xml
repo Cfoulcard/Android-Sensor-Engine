@@ -28,7 +28,7 @@
 
 <!--        Home Screen and Launcher Name-->
         <activity
-            android:name="com.androidsensorengine.ui.HomeScreenActivity"
+            android:name="com.ui.HomeScreenActivity"
             android:exported="true"
             android:label="@string/title_activity_new_home_screen"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -41,45 +41,45 @@
         <activity
             android:name="com.ui.sensors.SoundActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.ui.sensors.LightSensor"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.ui.sensors.PressureSensor"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity
             android:name="com.ui.sensors.AmbientTemperatureActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.ui.sensors.BatteryActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.ui.sensors.SystemActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.ui.sensors.HumidityActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <activity android:name="com.ui.sensors.LocationActivity"
             android:label=""
-            android:parentActivityName="com.androidsensorengine.ui.HomeScreenActivity"
+            android:parentActivityName="com.ui.HomeScreenActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
