@@ -22,13 +22,15 @@ This is a project being developed and maintained for devices running on Android.
 
 - Kotlin
 - Java
+- Jetpack Compose
+- MVVM
 - Firebase
 - Hilt
 
 ## Tools Used
 
 - Android Studio
-- Afinity Designer
+- Affinity Designer
 - Figma
 - Typora
 
