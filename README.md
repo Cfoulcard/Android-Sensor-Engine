@@ -3,7 +3,7 @@
 
 [<img src="https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/google-play-badge.png">](https://play.google.com/store/apps/details?id=com.christianfoulcard.android.androidsensorengine)
 
-![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/featured_image_redone.png)
+![Sensor Select Screen](https://github.com/Cfoulcard/Sound-Tech-Sensors/blob/master/mockups/feature_image.png)
 
 📱 The Android Sensor Engine is an open source app designed and engineered to utilize your Android phone's sensors. 
 
@@ -22,15 +22,15 @@ This is a project being developed and maintained for devices running on Android.
 
 - Kotlin
 - Java
-- ViewBinding
 - Firebase
-- Pinned Shortcuts (For Android Home Screens)
+- Hilt
 
 ## Tools Used
 
 - Android Studio
-- Afinity Designer (Graphic + Vector Image Editing)
-- Typora (For Easy Markdown styling)
+- Afinity Designer
+- Figma
+- Typora
 
 ## Country Availability
 This app is currently available in 83 countries throughout the world
@@ -43,18 +43,6 @@ Support is included for the following languages:
 - Portuguese
 - Russian
 - Indonesian
-
-There will be future support for more languages beyond what's currently offered.
-
-## Future Plans
-- Add an elevation sensor
-- Service side notifications 
-- Custom notification sound alerts
-- A list of all currently available sensors on a device
-- Smooth animations and a more "vibrantly" lively experience
-- Performant Background processing to reduce battery usage
-- Connect with APIs for certain sensors that work only on specific devices
-- Localize throughout the world
 
 ## Contributing
 
