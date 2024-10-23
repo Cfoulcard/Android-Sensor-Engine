@@ -10,7 +10,6 @@
 - Convert Strings into another language
 - Upgrade dependencies (and run to make sure the app works!)
 - Go through list of TODOs in various places
-- Make XML activity files more responsive on various screen sizes/languages
 - Correct typos and formatting issues
 - Add features and document them
 
