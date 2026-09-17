@@ -106,7 +106,7 @@
 
     <!--humidity Sensor-->
     <string name="humidity_desc_1">This sensor calculates the relative humidity around you without the use of wifi or data. This information is given to you in the form of raw data.</string>
-    <string name="humidity_desc_2">Humidity is the amount of water vapor residing in the air. A value of 100% means the air is thoroughly saturated with water and cannot hold any more. Clouds form at this percentage! Though the temperature is also higher as a result. Low values can make us feel cooler than the actual temperature and gives way to dry air which in turn helps evaporate sweat!</string>
+    <string name="humidity_desc_2" formatted="false">Humidity is the amount of water vapor residing in the air. A value of 100% means the air is thoroughly saturated with water and cannot hold any more. Clouds form at this percentage! Though the temperature is also higher as a result. Low values can make us feel cooler than the actual temperature and gives way to dry air which in turn helps evaporate sweat!</string>
 
     <!--Step Sensor-->
     <string name="step_desc_1">The Step Counter is a simple tool to calculate the amount of steps you\'ve taken at any given time.</string>
