@@ -33,6 +33,8 @@ class LocationActivity: BaseSensorActivity() {
 
     private val viewModel: LocationSensorViewModel by viewModels()
 
+    private val uiUpdater = UIUpdater()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -78,12 +80,12 @@ class LocationActivity: BaseSensorActivity() {
 
     override fun onResume() {
         super.onResume()
-        UIUpdater().startUpdatingUI(500) { startLiveData() }
+        uiUpdater.startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
-        UIUpdater().stopUpdatingUI()
+        uiUpdater.stopUpdatingUI()
     }
 
     override fun onStop() {

@@ -1,5 +1,6 @@
 package com.ui.sensors
 
+import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.Toast
@@ -14,6 +15,8 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.core.content.ContextCompat
+import androidx.lifecycle.Lifecycle
 import com.BaseSensorActivity
 import com.androidsensorengine.ui.composables.HalfCircleBackgroundLonger
 import com.androidsensorengine.ui.composables.MainGradientBackground
@@ -35,10 +38,10 @@ import com.utils.UIUpdater
 class SoundActivity: BaseSensorActivity() {
 
     private val viewModel: SoundSensorViewModel by viewModels()
+    private val uiUpdater = UIUpdater()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.createRecorder(this)
 
         setContent {
 
@@ -74,30 +77,38 @@ class SoundActivity: BaseSensorActivity() {
 
     override fun onStart() {
         super.onStart()
-        requestAudioPermission(this)
-        viewModel.startRecorder()
+        if (hasAudioPermission()) {
+            viewModel.startMeasuring()
+        } else {
+            requestAudioPermission(this)
+        }
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.measureDecibels(this)
-        UIUpdater().startUpdatingUI(500) { startLiveData() }
+        uiUpdater.startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
-        UIUpdater().stopUpdatingUI()
+        uiUpdater.stopUpdatingUI()
     }
 
     override fun onStop() {
         super.onStop()
+        viewModel.stopMeasuring()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        viewModel.destroyRecorder()
-        viewModel.resetDecibelReading()
+        if (isFinishing) {
+            viewModel.resetDecibelReading()
+        }
     }
+
+    private fun hasAudioPermission() =
+        ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) ==
+                PackageManager.PERMISSION_GRANTED
 
     private fun startLiveData() {
         viewModel.decibelLiveData.postValue(viewModel.currentAudioDecibels())
@@ -115,6 +126,9 @@ class SoundActivity: BaseSensorActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.size > 0
                     && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    if (lifecycle.currentState.isAtLeast(Lifecycle.State.STARTED)) {
+                        viewModel.startMeasuring()
+                    }
                 } else {
                     Toast.makeText(this, "Audio permission must be granted to use this sensor", Toast.LENGTH_LONG).show()
                 }

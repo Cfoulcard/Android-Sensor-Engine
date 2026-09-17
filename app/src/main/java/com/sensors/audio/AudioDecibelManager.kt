@@ -1,18 +1,15 @@
 package com.sensors
 
-import android.media.MediaRecorder
-import android.util.Log
-import androidx.activity.ComponentActivity
 import com.androidsensorengine.utils.Constants.BASE_AUDIO_FILTER
-import com.androidsensorengine.utils.LogUtils.TAG
 import java.util.*
 import kotlin.math.log10
 
 /** Decibels are a way to measure how loud or quiet something is. This Contains the properties we
- * need to measure sound decibels. As long as a [MediaRecorder] is provided, we can measure
+ * need to measure sound decibels. As long as an amplitude source is provided, we can measure
  * decibels with no problem. */
 object AudioDecibelManager {
 
+    @Volatile
     var audioDecibels : Int? = null
     private var highestDecibel = Int.MIN_VALUE
     private var lowestDecibel = Int.MAX_VALUE
@@ -20,6 +17,7 @@ object AudioDecibelManager {
 
     private var audioTimerPeriod : Long = 100
     private var baseAudio = 0.0
+    private var timer: Timer? = null
 
     private var count = 0
     private var sum = 0
@@ -28,66 +26,44 @@ object AudioDecibelManager {
      * of 90 on most devices due to hardware and software limitations. There's a chance we may pick up
      * a negative Int value of -2147483648 upon first initiation - if this pops up we do not return
      * decibel data */
-    private fun parseDecibelReading(mediaRecorder: MediaRecorder?): Int {
-        try {
-            return if (mediaRecorder != null) {
-                val decibelLevel =
-                    (20 * log10(amplitudeAudioFilter(mediaRecorder).toDouble())).toInt()
-                if (decibelLevel >= 1) {
-                    decibelLevel
-                } else {
-                    0
-                }
-            } else {
-                0
-            }
-        } catch (e: IllegalStateException) {
-            Log.e(TAG, "parseDecibelReading: ${e.message}")
-        }
-        return 0
+    private fun parseDecibelReading(amplitude: Int): Int {
+        val decibelLevel = (20 * log10(amplitudeAudioFilter(amplitude).toDouble())).toInt()
+        return if (decibelLevel >= 1) decibelLevel else 0
     }
 
-    /** Implements a timer task which will update our decibel data */
-    fun listenForAudioDecibels(activity: ComponentActivity, mediaRecorder: MediaRecorder?) {
-        val timer = Timer()
+    /** Starts a timer task which will update our decibel data from [readAmplitude]. Any timer
+     * already running is replaced, so only one keeps polling. */
+    @Synchronized
+    fun listenForAudioDecibels(readAmplitude: () -> Int) {
+        stopListening()
+        val newTimer = Timer()
 
         val toggleAutoMuteTimer: TimerTask = object: TimerTask() {
             override fun run() {
-
-                if (activity.isDestroyed || activity.isFinishing) {
-                    timer.cancel()
-                    timer.purge()
-                } else if (isMuted) {
-                    timer.cancel()
-                    timer.purge()
-                } else if (!isMuted) {
-                  //  Timber.tag(TAG).d("current decibel:: %s", audioDecibels)
-                    audioDecibels = parseDecibelReading(mediaRecorder)
+                if (isMuted) {
+                    cancel()
+                } else {
+                    audioDecibels = parseDecibelReading(readAmplitude())
                 }
             }
         }
-        timer.scheduleAtFixedRate(toggleAutoMuteTimer, 0, audioTimerPeriod)
+        newTimer.scheduleAtFixedRate(toggleAutoMuteTimer, 0, audioTimerPeriod)
+        timer = newTimer
+    }
+
+    /** Stops the timer started by [listenForAudioDecibels] */
+    @Synchronized
+    fun stopListening() {
+        timer?.cancel()
+        timer?.purge()
+        timer = null
     }
 
     /** Runs the the audio through a filter to return data we can use to convert to a proper decibel
      * level */
-    private fun amplitudeAudioFilter(mediaRecorder: MediaRecorder) : Int {
-        val amp = getAudioAmplitude(mediaRecorder)
-        baseAudio = BASE_AUDIO_FILTER * amp + (1 - BASE_AUDIO_FILTER) * baseAudio
+    private fun amplitudeAudioFilter(amplitude: Int) : Int {
+        baseAudio = BASE_AUDIO_FILTER * amplitude + (1 - BASE_AUDIO_FILTER) * baseAudio
         return baseAudio.toInt()
-    }
-
-    /** Get our audio by measuring the media recorder sound wave data via amplitude. This data
-     * returns the strength of sound waves (loudness/volume)
-     */
-    private fun getAudioAmplitude(mediaRecorder: MediaRecorder) : Int {
-        return try {
-            mediaRecorder.maxAmplitude
-        } catch (e: IllegalStateException) {
-            Log.e("Media", "getAudioAmplitude: ${e.message}", )
-         //   Toast.makeText(T2DApplication.getAppContext(), "An error occurred while analyzing audio", Toast.LENGTH_SHORT).show()
-            0
-        }
     }
 
     /** Obtains the average decibel reading we've obtained so far by dividing the sum of our decibels
@@ -104,24 +80,16 @@ object AudioDecibelManager {
 
     /** Finds the highest decibel */
     fun highestDecibelReading(): String {
-        return if (highestDecibel == 0) {
-            highestDecibel = audioDecibels!!
-            highestDecibel.toString()
-        } else {
-            highestDecibel = audioDecibels?.let { Integer.max(highestDecibel, it) }!!
-            highestDecibel.toString()
-        }
+        val current = audioDecibels ?: return readingOrZero(highestDecibel)
+        highestDecibel = if (highestDecibel == 0) current else Integer.max(highestDecibel, current)
+        return highestDecibel.toString()
     }
 
     /** Finds the lowest decibel */
     fun lowestDecibelReading(): String {
-        return if (lowestDecibel == 0) {
-            lowestDecibel = audioDecibels!!
-            lowestDecibel.toString()
-        } else {
-            lowestDecibel = audioDecibels?.let { Integer.min(lowestDecibel, it) }!!
-            lowestDecibel.toString()
-        }
+        val current = audioDecibels ?: return readingOrZero(lowestDecibel)
+        lowestDecibel = if (lowestDecibel == 0) current else Integer.min(lowestDecibel, current)
+        return lowestDecibel.toString()
     }
 
     /** Helper to reset the variables used to make decibel reading work */
@@ -132,10 +100,12 @@ object AudioDecibelManager {
         count = 0
     }
 
+    private fun readingOrZero(reading: Int): String =
+        if (reading == Int.MIN_VALUE || reading == Int.MAX_VALUE) "0" else reading.toString()
+
     private fun addCurrentDecibel() {
-        if (audioDecibels != null) {
-            count++
-            sum += audioDecibels!!
-        }
+        val current = audioDecibels ?: return
+        count++
+        sum += current
     }
 }
