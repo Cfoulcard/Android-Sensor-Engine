@@ -2,7 +2,6 @@ import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
@@ -12,7 +11,7 @@ plugins {
 
 android {
     namespace = "com.christianfoulcard.android.androidsensorengine"
-    compileSdk = 35
+    compileSdk = 37
     defaultConfig {
         applicationId = "com.christianfoulcard.android.androidsensorengine"
         minSdk = 24
@@ -35,7 +34,6 @@ android {
         }
         debug {
             isMinifyEnabled = false
-            multiDexEnabled = true
         }
     }
     compileOptions {

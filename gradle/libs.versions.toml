@@ -1,10 +1,10 @@
 [versions]
-agp = "8.13.2"
-kotlin = "2.3.21"
+agp = "9.3.1"
+kotlin = "2.4.20"
 ksp = "2.3.12"
-hilt = "2.58"
-googleServices = "4.4.2"
-firebaseCrashlyticsPlugin = "3.0.2"
+hilt = "2.60.1"
+googleServices = "4.5.0"
+firebaseCrashlyticsPlugin = "3.0.8"
 firebaseBom = "33.1.2"
 coreKtx = "1.9.0"
 appcompat = "1.5.1"
@@ -49,10 +49,10 @@ timber = { group = "com.jakewharton.timber", name = "timber", version.ref = "tim
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-test-ext-junit = { group = "androidx.test.ext", name = "junit", version.ref = "androidxTestExtJunit" }
 androidx-test-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
