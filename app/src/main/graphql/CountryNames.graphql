@@ -1,5 +1,0 @@
-query CountryNames {
-    countries {
-        name
-    }
-}

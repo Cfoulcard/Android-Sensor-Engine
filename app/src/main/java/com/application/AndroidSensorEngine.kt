@@ -2,7 +2,6 @@ package com.application
 
 import android.app.Application
 import android.content.Context
-import apolloClient
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 
@@ -13,7 +12,6 @@ class AndroidSensorEngine: Application() {
         super.onCreate()
         globalAppContext = applicationContext
         initializeTimber()
-        apolloClient
     }
 
     /** Before the Timber library can be used, this must be started first */
