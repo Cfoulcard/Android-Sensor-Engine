@@ -14,8 +14,8 @@ android {
     compileSdk = 37
     defaultConfig {
         applicationId = "com.christianfoulcard.android.androidsensorengine"
-        minSdk = 24
-        targetSdk = 35
+        minSdk = 26
+        targetSdk = 37
         versionCode = 12
         versionName = "8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"

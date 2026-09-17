@@ -57,10 +57,8 @@ class AudioRecorder {
         if (isRecordingActive) {
             try {
                 recorder?.apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        pause()
-                        Timber.tag(TAG).d("Audio Recorder paused")
-                    }
+                    pause()
+                    Timber.tag(TAG).d("Audio Recorder paused")
                 }
             } catch (e: IllegalStateException) {
                 Timber.tag(TAG).e("pauseRecorder: %s", e.message)
@@ -74,10 +72,8 @@ class AudioRecorder {
         if (!isRecordingActive) {
             try {
                 recorder?.apply {
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                        resume()
-                        Timber.tag(TAG).d("Audio Recorder resumed")
-                    }
+                    resume()
+                    Timber.tag(TAG).d("Audio Recorder resumed")
                 }
             } catch (e: IllegalStateException) {
                 Timber.tag(TAG).e("pauseRecorder: " + e.message)

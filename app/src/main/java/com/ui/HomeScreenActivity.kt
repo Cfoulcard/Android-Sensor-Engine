@@ -3,6 +3,7 @@ package com.ui
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.layout.Arrangement
@@ -46,7 +47,6 @@ import com.androidsensorengine.ui.theme.HomeScreenShapes
 import com.androidsensorengine.ui.theme.pureWhite
 import com.christianfoulcard.android.androidsensorengine.R
 import com.ui.sensors.viewmodels.HomeScreenViewModel
-import com.utils.SystemUi
 
 class HomeScreenActivity : ComponentActivity() {
 
@@ -55,7 +55,7 @@ class HomeScreenActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        SystemUi().hideSystemUIFull(this)
+        enableEdgeToEdge()
         setContent {
             AndroidSensorEngineTheme {
                 MainGradientBackground()
