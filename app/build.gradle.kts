@@ -19,9 +19,6 @@ android {
         versionCode = 12
         versionName = "8"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
     }
     buildFeatures {
         viewBinding = true

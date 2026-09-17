@@ -11,10 +11,6 @@ class LocationSensor : LocationListener {
         return context.getSystemService(Context.LOCATION_SERVICE) as LocationManager
     }
 
-    private fun isLocationEnabled(context: Context) : Boolean {
-        return getLocationManager(context).isLocationEnabled
-    }
-
     fun requestLocationUpdates(context: Context) {
         getLocationManager(context).requestLocationUpdates(
             LocationManager.GPS_PROVIDER,

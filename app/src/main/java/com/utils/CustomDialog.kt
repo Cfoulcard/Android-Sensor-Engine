@@ -3,7 +3,6 @@ package com.utils
 import android.app.Activity
 import android.os.Bundle
 import android.text.Html
-import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -93,13 +92,17 @@ class CustomDialog : DialogFragment() {
         setBackButtonClickProperties()
     }
 
-    /** To help direct when the user presses the back button. */
+    /** To help direct when the user presses the back button.
+     *
+     * The dialog created by the default [androidx.fragment.app.DialogFragment.onCreateDialog]
+     * is a plain [android.app.Dialog], which does not expose an OnBackPressedDispatcher, so we
+     * use its cancel listener (invoked on back press while the dialog is cancelable, which it
+     * is by default) instead of a key listener, which predictive back no longer dispatches
+     * KEYCODE_BACK to.
+     */
     private fun setBackButtonClickProperties() {
-        dialog?.setOnKeyListener{dialog, keyCode, event->
-            if (keyCode == KeyEvent.KEYCODE_BACK) {
-                binding.okBtn.performClick()
-            }
-            true
+        dialog?.setOnCancelListener {
+            binding.okBtn.performClick()
         }
     }
 
