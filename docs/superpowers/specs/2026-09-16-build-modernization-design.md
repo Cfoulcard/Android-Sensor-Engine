@@ -2,7 +2,22 @@
 
 **Date:** 2026-09-16
 **Branch:** `modernize-build`
-**Status:** Approved in brainstorming; awaiting spec review
+**Status:** Approved; amended during planning (see Amendments — they override the sections below)
+
+## Amendments (2026-09-16, during planning)
+
+Compatibility research while planning invalidated parts of the original sequence. The user approved changes 1–2; 3–7 follow from them or from code inspection.
+
+1. **Bridge step on AGP 8.** AGP 9 requires Kotlin Gradle plugin ≥ 2.2.10 (built-in Kotlin), Kotlin 2 requires the Compose compiler plugin, and Hilt ≥ 2.59 requires AGP 9 — so original Steps 2 and 3 cannot be separate green commits. New order:
+   - Step 2 — *Kotlin 2 on AGP 8*: Gradle 8.14.5, AGP 8.13.2, Kotlin 2.3.21 + Compose compiler plugin, KSP 2.3.12 (kapt removed), Hilt 2.58, JVM target 17, `kotlinOptions` → `kotlin { compilerOptions }`, `packagingOptions` → `packaging`.
+   - Step 3 — *AGP 9*: Gradle 9.7.0, AGP 9.3.1 built-in Kotlin, Kotlin 2.4.20, Hilt 2.60.1, Crashlytics plugin 3.0.8, Google Services 4.5.0, `gradle.properties` changes, configuration cache, compileSdk 37.
+2. **Final toolchain versions:** AGP **9.3.1** (not 9.4.0) and Gradle **9.7.0** (not 9.7.1), to stay inside Kotlin 2.4.20's official compatibility range (AGP 8.5.2–9.3.1, Gradle 7.6.3–9.7.0). AGP 9.3 supports API 37.
+3. **compileSdk 37 moves to Step 3** (targetSdk stays 35 until Step 5). Current AndroidX releases require a recent compileSdk, so Step 4's library upgrades need it first. Changing compileSdk alone does not change runtime behavior.
+4. **Kotlin Gradle plugin version under AGP 9** is pinned via root `buildscript { dependencies { classpath(libs.kotlin.gradle.plugin) } }`, as documented by AGP 9 for using a KGP newer than its bundled minimum. This is the only `buildscript` content allowed.
+5. **`androidx.hilt:hilt-compiler` is removed, not migrated to KSP.** It only processes `@HiltWorker`; the app has no `@HiltWorker` and no `androidx.hilt` runtime artifacts.
+6. **`multiDexEnabled` is removed in Step 3** (Hilt 2.60 dropped multidex support), not Step 5.
+7. **`extras/PinShortcuts.kt` is entirely commented out** — no edit needed, and manual checklist item 6 (pin a shortcut) is dropped.
+8. **Command-line builds use JDK 21** (`C:\Users\Taterchip\.jdks\jbr-21.0.11`). Android Studio's bundled JBR 25 cannot run Gradle 8.x.
 
 ## Goal
 
