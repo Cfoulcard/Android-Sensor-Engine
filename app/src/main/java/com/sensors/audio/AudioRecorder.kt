@@ -1,121 +1,128 @@
 package com.sensors.audio
 
-import android.app.Activity
+import android.content.Context
 import android.media.MediaRecorder
 import android.os.Build
 import android.os.Environment
-import com.androidsensorengine.utils.Constants.SOUND_PREFS
 import com.androidsensorengine.utils.LogUtils.TAG
-import com.preferences.AppSharedPrefs
 import timber.log.Timber
 import java.io.File
-import java.io.IOException
 
-class AudioRecorder {
+/** A source of microphone audio the app can start, stop and read loudness from */
+interface SoundInput {
+    fun start()
+    fun stop()
+    fun release()
+    fun maxAmplitude(): Int
+}
 
-    //TODO work on file paths for different versions
-    //TODO work on pause/resume flow
+/** Owns at most one [SoundInput] at a time. Starting while recording and stopping while idle are
+ * both no-ops, and a stopped input is always released, so the recorder is safe to drive from
+ * activity lifecycle callbacks that can repeat.
+ *
+ * @param createInput Builds a fresh input for each recording session
+ * */
+class AudioRecorder(private val createInput: () -> SoundInput) {
 
-    private var isRecordingActive: Boolean = false
+    private var input: SoundInput? = null
 
-    /** Creates a [MediaRecorder] instance using the assigned [Activity]. Before we can use the
-     * media recorder and measure audio we must first call this.
-     * */
-    fun createRecorder(activity: Activity) {
-        try {
-            recorder = MediaRecorder().apply {
-                setAudioSource(MediaRecorder.AudioSource.MIC)
-                setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-                setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-                setOutputFile(createOutputFile(activity))
-                Timber.tag(TAG).d("Audio Recorder created")
-            }
-        } catch (e: IllegalStateException) {
-            Timber.tag(TAG).e("createRecorder: error configuring audio :: ${e.message}")
+    val isRecording: Boolean
+        get() = input != null
+
+    /** Starts measuring audio. Returns true if the recorder is recording afterwards */
+    fun start(): Boolean {
+        if (isRecording) return true
+        val newInput = try {
+            createInput()
         } catch (e: RuntimeException) {
-            Timber.tag(TAG).e("createRecorder: File output error :: ${e.message}")
+            Timber.tag(TAG).e("start: could not create audio input :: ${e.message}")
+            return false
+        }
+        return try {
+            newInput.start()
+            input = newInput
+            Timber.tag(TAG).d("Audio Recorder started")
+            true
+        } catch (e: RuntimeException) {
+            Timber.tag(TAG).e("start: %s", e.message)
+            newInput.release()
+            false
         }
     }
 
-    /** Measures the audio. Can only be called after te recorder has been created */
-    fun startRecorder() {
+    /** Stops measuring audio and releases the microphone */
+    fun stop() {
+        val current = input ?: return
+        input = null
         try {
-            recorder?.apply {
-                prepare()
-                start()
-                AppSharedPrefs().saveCondition(SOUND_PREFS, true)
-                Timber.tag(TAG).d("Audio Recorder started")
-            }
-        } catch (e: IllegalStateException) {
-            Timber.tag(TAG).e("startRecorder: %s", e.message)
-        } catch (e: IOException) {
-            Timber.tag(TAG).e("startRecorder: %s", e.message)
+            current.stop()
+        } catch (e: RuntimeException) {
+            Timber.tag(TAG).e("stop: %s", e.message)
+        } finally {
+            current.release()
+            Timber.tag(TAG).d("Audio Recorder stopped")
         }
     }
 
-    fun pauseRecorder() {
-        if (isRecordingActive) {
-            try {
-                recorder?.apply {
-                    pause()
-                    Timber.tag(TAG).d("Audio Recorder paused")
-                }
-            } catch (e: IllegalStateException) {
-                Timber.tag(TAG).e("pauseRecorder: %s", e.message)
-            } catch (e: IOException) {
-                Timber.tag(TAG).e("pauseRecorder: %s", e.message)
-            }
+    /** The loudest amplitude since the last call, or 0 when not recording */
+    fun maxAmplitude(): Int = try {
+        input?.maxAmplitude() ?: 0
+    } catch (e: RuntimeException) {
+        Timber.tag(TAG).e("maxAmplitude: %s", e.message)
+        0
+    }
+}
+
+/** A [SoundInput] backed by the device microphone through [MediaRecorder] */
+class MediaRecorderInput(context: Context) : SoundInput {
+
+    private val recorder: MediaRecorder = createMediaRecorder(context).apply {
+        try {
+            setAudioSource(MediaRecorder.AudioSource.MIC)
+            setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
+            setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
+            setOutputFile(createOutputFile(context))
+        } catch (e: RuntimeException) {
+            release()
+            throw e
         }
     }
 
-    fun resumeRecorder() {
-        if (!isRecordingActive) {
-            try {
-                recorder?.apply {
-                    resume()
-                    Timber.tag(TAG).d("Audio Recorder resumed")
-                }
-            } catch (e: IllegalStateException) {
-                Timber.tag(TAG).e("pauseRecorder: " + e.message)
-            } catch (e: IOException) {
-                Timber.tag(TAG).e("pauseRecorder: " + e.message)
-            }
-        }
+    override fun start() {
+        recorder.prepare()
+        recorder.start()
     }
 
-    /** Stops and releases the media recorder from measuring audio */
-    fun destroyRecorder()  {
-        recorder?.apply {
-            try {
-                stop()
-                release()
-                Timber.tag(TAG).d("Audio Recorder destroyed")
-            } catch (e: IllegalStateException) {
-                Timber.tag(TAG).e("destroyRecorder: " + e.message)
-            }
+    override fun stop() = recorder.stop()
+
+    override fun release() = recorder.release()
+
+    override fun maxAmplitude(): Int = recorder.maxAmplitude
+
+    private fun createMediaRecorder(context: Context): MediaRecorder =
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            MediaRecorder(context)
+        } else {
+            @Suppress("DEPRECATION")
+            MediaRecorder()
         }
-    }
 
     /** Returns an output file string we can use to tie into the media recorder
      *
-     * @param activity The activity we assign for access to the external files directory
+     * @param context The context we use for access to the external files directory
      * */
-    private fun createOutputFile(activity: Activity): String {
+    private fun createOutputFile(context: Context): String {
         val name = "audio.mp3"
-        Timber.tag(TAG).d("Output path is ${filePath(activity)?.absolutePath}/$name")
-        return "${filePath(activity)?.absolutePath}/$name"
+        Timber.tag(TAG).d("Output path is ${filePath(context)?.absolutePath}/$name")
+        return "${filePath(context)?.absolutePath}/$name"
     }
 
     /** Generates the file we need to tie into the output file */
-    private fun filePath(activity: Activity): File? {
-        return if (Build.VERSION.SDK_INT >=  Build.VERSION_CODES.S) {
-            activity.getExternalFilesDir(Environment.DIRECTORY_RECORDINGS)
+    private fun filePath(context: Context): File? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            context.getExternalFilesDir(Environment.DIRECTORY_RECORDINGS)
         } else {
-            activity.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
+            context.getExternalFilesDir(Environment.DIRECTORY_MUSIC)
         }
-    }
-
-    companion object {
-        var recorder: MediaRecorder? = null
     }
 }

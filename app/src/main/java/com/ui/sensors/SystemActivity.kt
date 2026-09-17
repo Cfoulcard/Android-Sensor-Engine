@@ -33,6 +33,8 @@ import kotlinx.coroutines.Job
 class SystemActivity : BaseSensorActivity() {
 
     private val viewModel: SystemSensorViewModel by viewModels()
+
+    private val uiUpdater = UIUpdater()
     private var updateJob: Job? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -80,13 +82,13 @@ class SystemActivity : BaseSensorActivity() {
         if (updateJob?.isActive != true) {
             updateJob = lifecycleScope.startUpdatingUiWithMainCoroutine(1000) { viewModel.updateUiWithMemoryInfo() }
         }
-        UIUpdater().startUpdatingUI(500) { startLiveData() }
+        uiUpdater.startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
         updateJob?.cancel()
-        UIUpdater().stopUpdatingUI()
+        uiUpdater.stopUpdatingUI()
     }
 
     override fun onStop() {

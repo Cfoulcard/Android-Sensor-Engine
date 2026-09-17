@@ -35,6 +35,8 @@ class PressureSensor: BaseSensorActivity() {
 
     private val viewModel: PressureSensorViewModel by viewModels()
 
+    private val uiUpdater = UIUpdater()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,13 +77,13 @@ class PressureSensor: BaseSensorActivity() {
     override fun onResume() {
         super.onResume()
         viewModel.startListening()
-        UIUpdater().startUpdatingUI(500) { startLiveData() }
+        uiUpdater.startUpdatingUI(500) { startLiveData() }
     }
 
     override fun onPause() {
         super.onPause()
         viewModel.stopListening()
-        UIUpdater().stopUpdatingUI()
+        uiUpdater.stopUpdatingUI()
     }
 
     private fun startLiveData() {
